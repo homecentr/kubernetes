@@ -1,0 +1,9 @@
+{
+  "name": "kubernetes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:homecentr/kubernetes.git",
+  "author": "Lukas Holota",
+  "license": "GPL",
+  "private": true
+}
