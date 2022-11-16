@@ -4,4 +4,6 @@ commonLabels:
   app.kubernetes.io/managed-by: fluxcd
 resources:
   - namespace.yml
-  - metallb-release.yml
+  - metallb/release.yml
+  - metallb/ip-address-pool-well-known.yml
+  - metallb/ip-address-pool-ad-hoc.yml

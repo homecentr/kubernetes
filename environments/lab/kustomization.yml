@@ -8,3 +8,6 @@ commonLabels:
 resources:
   - ../../sources
   - ../../services
+patchesStrategicMerge:
+  - ./metallb-system/ip-address-pool-ad-hoc.yml
+  - ./metallb-system/ip-address-pool-well-known.yml 

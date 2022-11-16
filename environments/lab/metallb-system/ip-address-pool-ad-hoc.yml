@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: ad-hoc
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.1.8.141-10.1.8.191

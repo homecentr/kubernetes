@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: well-known
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.1.8.128-10.1.8.140
