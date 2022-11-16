@@ -6,3 +6,5 @@ resources:
   - ./metallb-system
   - ./cloudflare
   - ./monitoring
+  - ./kube-public
+  - ./default
