@@ -5,5 +5,8 @@
   "repository": "git@github.com:homecentr/kubernetes.git",
   "author": "Lukas Holota",
   "license": "GPL",
-  "private": true
+  "private": true,
+  "scripts": {
+    "lab:build": "flux build ks homecentr-lab --kustomization-file ./environments/lab/kustomization.yml --path ./environments --verbose"
+  }
 }
