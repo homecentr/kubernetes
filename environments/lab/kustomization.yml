@@ -6,4 +6,5 @@ commonLabels:
   app.kubernetes.io/managed-by: fluxcd
   app.kubernetes.io/environment: lab
 resources:
+  - ../../sources
   - ../../services
