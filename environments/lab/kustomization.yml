@@ -11,4 +11,5 @@ resources:
   - ../../priority-classes
 patchesStrategicMerge:
   - ./metallb-system/ip-address-pool-ad-hoc.yml
-  - ./metallb-system/ip-address-pool-well-known.yml 
+  - ./metallb-system/ip-address-pool-well-known.yml
+  - ./kube-system/traefik/release.yml
