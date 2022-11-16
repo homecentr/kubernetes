@@ -3,6 +3,4 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/managed-by: fluxcd
 resources:
-  - ./metallb-system
-  - ./cloudflare
-  - ./monitoring
+  - namespace.yml
