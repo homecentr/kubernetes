@@ -5,5 +5,15 @@
   "repository": "git@github.com:homecentr/kubernetes.git",
   "author": "Lukas Holota",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "lab:secrets": "./scripts/secrets-edit.sh lab",
+    "lab:secrets:generate-key": "./scripts/secrets-generate-keys.sh lab",
+
+    "prod:secrets": "./scripts/secrets.sh prod"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
+  "dependencies": {}
 }
