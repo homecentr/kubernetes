@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dummy
+  namespace: argocd
+  finalizers:
+    # TODO: Comment destroyal process
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  source:
+    repoURL: https://github.com/homecentr/kubernetes.git  # Can point to either a Helm chart repo or a git repo.
+    targetRevision: feat/argo-init
+    path: apps/dummy
+
+    helm:
+      releaseName: dummy-app
+      
+      valueFiles:
+      - values-lab.yml
+      
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
