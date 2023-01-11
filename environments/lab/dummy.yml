@@ -20,6 +20,9 @@ spec:
 
     helm:
       releaseName: dummy-app
+
+      values:
+        var2: <kv:secrets-lab.yaml#test-secret>
       
       valueFiles:
       - values-lab.yml

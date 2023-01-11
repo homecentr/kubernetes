@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: dummy-config
 data:
-  key: {{ .Values.exampleVar }}
+  key1: {{ .Values.var1 }}
+  key2: {{ .Values.var2 }}
