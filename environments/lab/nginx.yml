@@ -16,7 +16,7 @@ spec:
   source:
     chart: nginx
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 1.23.3
+    targetRevision: 13.2.21
     path: apps/nginx
 
     helm:
