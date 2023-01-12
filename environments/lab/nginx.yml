@@ -16,7 +16,7 @@ spec:
   source:
     chart: nginx
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: feat/argo-init
+    targetRevision: 1.23.3
     path: apps/nginx
 
     helm:
