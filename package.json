@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "lab:secrets": "./scripts/secrets-edit.sh lab",
-    "lab:secrets:generate-key": "./scripts/secrets-generate-keys.sh lab",
+    "lab:key:generate": "./scripts/key-generate.sh lab",
+    "lab:key:show": "./scripts/key-show.sh lab",
 
     "prod:secrets": "./scripts/secrets.sh prod"
   },

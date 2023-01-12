@@ -26,6 +26,7 @@ spec:
       
       valueFiles:
       - values-lab.yml
+      - secrets+age-import://default?secrets-lab.yml
       
   syncPolicy:
     automated:
