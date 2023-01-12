@@ -17,7 +17,7 @@ spec:
 
   source:
     repoURL: https://github.com/homecentr/kubernetes.git  # Can point to either a Helm chart repo or a git repo.
-    targetRevision: feat/argo-init
+    targetRevision: HEAD
     path: apps/dummy
 
     helm:
