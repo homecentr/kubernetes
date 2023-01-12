@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dummy
+  name: reflector
   namespace: argo-cd
   finalizers:
     # Destroy resources when app deleted
@@ -13,19 +13,15 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: kube-system
 
   source:
-    repoURL: $ARGOCD_APP_SOURCE_REPO_URL
-    targetRevision: $ARGOCD_APP_SOURCE_TARGET_REVISION
-    path: apps/dummy
+    repoURL: https://github.com/homecentr/kubernetes.git  # Can point to either a Helm chart repo or a git repo.
+    targetRevision: HEAD
+    path: infrastructure/reflector
 
     helm:
-      releaseName: dummy-app
-      
-      valueFiles:
-      - values-lab.yml
-      - secrets+age-import://default?secrets-lab.yml
+      releaseName: reflector
       
   syncPolicy:
     automated:
