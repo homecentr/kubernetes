@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dummy
+  name: nginx
   namespace: argo-cd
   finalizers:
     # Destroy resources when app deleted
@@ -14,12 +14,13 @@ spec:
     namespace: default
 
   source:
-    repoURL: https://github.com/homecentr/kubernetes.git  # Can point to either a Helm chart repo or a git repo.
+    chart: nginx
+    repoURL: https://charts.bitnami.com/bitnami
     targetRevision: feat/argo-init
-    path: apps/dummy
+    path: apps/nginx
 
     helm:
-      releaseName: dummy-app
+      releaseName: nginx-app
       
       valueFiles:
       - values-lab.yml
