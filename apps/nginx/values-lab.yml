@@ -1,2 +1,3 @@
-podAnnotations:
-  test: value
+nginx:
+  podAnnotations:
+    test: value
