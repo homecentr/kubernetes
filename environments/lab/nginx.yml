@@ -14,17 +14,16 @@ spec:
     namespace: default
 
   source:
-    chart: nginx
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 13.2.21
+    repoURL: https://github.com/homecentr/kubernetes.git  # Can point to either a Helm chart repo or a git repo.
+    targetRevision: feat/argo-init
     path: apps/nginx
 
     helm:
       releaseName: nginx-app
       
       valueFiles:
-      - apps/nginx/values-lab.yml
-      - secrets+age-import://default?apps/nginx/secrets-lab.yml
+      - values-lab.yml
+      - secrets+age-import://default?secrets-lab.yml
       
   syncPolicy:
     automated:
