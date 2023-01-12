@@ -1,3 +1,5 @@
 nginx:
   podAnnotations:
     test: value
+  service:
+    type: ClusterIP
