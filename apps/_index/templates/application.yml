@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ required .name }}
+  name: {{ required "Application must have a 'name'" .name }}
   namespace: argo-cd
   {{ if eq (default true .deleteProtection) false }}
   annotations:
@@ -19,7 +19,7 @@ spec:
     server: https://kubernetes.default.svc
 
   source:
-    path: apps/{{ required .name }}
+    path: apps/{{ .name }}
     repoURL: {{ $.Values.source.repoUrl }}
     targetRevision: {{ $.Values.source.targetRevision }}
 
