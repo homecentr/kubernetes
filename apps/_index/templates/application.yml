@@ -20,8 +20,8 @@ spec:
 
   source:
     path: apps/{{ required .name }}
-    repoURL: {{ $.Values.gitRepoUrl }}
-    targetRevision: {{ $.Values.gitRef }}
+    repoURL: {{ $.Values.source.repoUrl }}
+    targetRevision: {{ $.Values.source.targetRevision }}
 
     helm:
       releaseName: {{ default .name .releaseName }}
