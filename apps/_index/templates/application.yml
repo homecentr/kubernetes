@@ -1,0 +1,38 @@
+{{- range .Values.applications }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ required .name }}
+  namespace: argo-cd
+  {{ if eq (default true .deleteProtection) false }}
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ .syncWave | quote }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{ end }}
+spec:
+  project: default
+
+  destination:
+    namespace: {{ default $.Values.defaultNamespace .namespace }}
+    server: https://kubernetes.default.svc
+
+  source:
+    path: apps/{{ required .name }}
+    repoURL: {{ $.Values.gitRepoUrl }}
+    targetRevision: {{ $.Values.gitRef }}
+
+    helm:
+      releaseName: {{ default .name .releaseName }}
+      
+      valueFiles:
+      {{- range .valueFiles }}
+      - {{ . | replace "$env" $.Values.environmentName }}
+      {{ end -}}
+
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
+{{- end }}
