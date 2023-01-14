@@ -20,4 +20,4 @@ ENVIRONMENT=$1
 AGE_KEYS=$(age-keygen)
 
 # Encrypt keys with GPG (YubiKey)
-echo "$AGE_KEYS" | gpg --armor --encrypt --always-trust --recipient 2D1D9C803F35BBC24014C3906601E1EB2454827F --output "./.keys/$ENVIRONMENT.gpg"
+echo "$AGE_KEYS" | gpg --armor --encrypt --always-trust --recipient 2D1D9C803F35BBC24014C3906601E1EB2454827F --output "./keys/$ENVIRONMENT.gpg"
