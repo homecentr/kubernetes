@@ -8,21 +8,22 @@ ipAddressPools:
     ranges:
       - "10.1.8.161-10.1.8.191"
 
-prometheus:
-  scrapeAnnotations: true
-controller:
-  resources:
-    requests:
-      cpu: 1m
-      memory: 1Mi
-    limits:
-      cpu: 1000m
-      memory: 512Mi
-speaker:
-  resources:
-    requests:
-      cpu: 1m
-      memory: 1Mi
-    limits:
-      cpu: 1000m
-      memory: 512Mi
+metallb:
+  prometheus:
+    scrapeAnnotations: true
+  controller:
+    resources:
+      requests:
+        cpu: 1m
+        memory: 1Mi
+      limits:
+        cpu: 1000m
+        memory: 512Mi
+  speaker:
+    resources:
+      requests:
+        cpu: 1m
+        memory: 1Mi
+      limits:
+        cpu: 1000m
+        memory: 512Mi
