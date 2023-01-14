@@ -27,8 +27,8 @@ spec:
       releaseName: {{ default .name .releaseName }}
       
       valueFiles:
-      {{ range .valueFiles }}
-      - {{ . | replace "$env" $.Values.environmentName }}
+      {{ range $file := .valueFiles }}
+      - {{ $file | replace "$env" $.Values.environmentName }}
       {{ end }}
 
   syncPolicy:
