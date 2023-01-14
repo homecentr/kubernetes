@@ -31,6 +31,8 @@ spec:
       - {{ $file | replace "$env" $.Values.environmentName }}
       {{ end -}}
 
+  ignoreDifferences: {{ toYaml .ignoreDifferences | nindent 8 }}
+
   syncPolicy:
     automated:
       selfHeal: true
