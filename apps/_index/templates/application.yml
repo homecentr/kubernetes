@@ -29,9 +29,9 @@ spec:
       valueFiles:
       {{- range $file := .valueFiles }}
       - {{ $file | replace "$env" $.Values.environmentName }}
-      {{ end -}}
+      {{- end }}
 
-  ignoreDifferences: {{ toYaml .ignoreDifferences | nindent 8 }}
+  ignoreDifferences: {{ .ignoreDifferences | toYaml | nindent 4 }}
 
   syncPolicy:
     automated:
