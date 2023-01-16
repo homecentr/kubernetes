@@ -1,0 +1,29 @@
+ipAddressPools:
+  - name: cluster-well-known
+    autoAssign: false
+    ranges:
+      - "10.1.2.128-10.1.2.160"
+  - name: cluster-ad-hoc
+    autoAssign: true
+    ranges:
+      - "10.1.2.161-10.1.2.191"
+
+metallb:
+  prometheus:
+    scrapeAnnotations: true
+  controller:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 128Mi
+      limits:
+        cpu: 1000m
+        memory: 512Mi
+  speaker:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 128Mi
+      limits:
+        cpu: 1000m
+        memory: 512Mi
