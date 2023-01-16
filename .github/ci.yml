@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Install npm dependencies
+        run: yarn
+
+      - name: Install helm dependencies
+        run: yarn deps:all
+
+      - name: Lint charts
+        run: yarn lint:all
+
+      - name: Render charts for Lab environment
+        run: yarn lab:render:all
+
+      - name: Render charts for Prod environment
+        run: yarn prod:render:all

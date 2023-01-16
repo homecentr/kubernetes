@@ -7,14 +7,27 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "lab:secrets": "./scripts/secrets-edit.sh lab",
-    "lab:key:generate": "./scripts/key-generate.sh lab",
-    "lab:key:show": "./scripts/key-show.sh lab",
+    "lab:secrets": "./tools/secrets-edit.sh lab",
+    "lab:key:generate": "./tools/key-generate.sh lab",
+    "lab:key:show": "./tools/key-show.sh lab",
+    "lab:render": "node -e \"require('./tools/applications.js').renderCurrentDirectory('lab')\"",
+    "lab:render:all": "node -e \"require('./tools/applications.js').renderAll('lab')\"",
 
-    "prod:secrets": "./scripts/secrets.sh prod"
+    "prod:secrets": "./tools/secrets.sh prod",
+    "prod:key:generate": "./tools/key-generate.sh prod",
+    "prod:key:show": "./tools/key-show.sh prod",
+    "prod:render": "node -e \"require('./tools/applications.js').renderCurrentDirectory('prod')\"",
+    "prod:render:all": "node -e \"require('./tools/applications.js').renderAll('prod')\"",
+
+    "lint": "node -e \"require('./tools/applications.js').lintCurrentDirectory()\"",
+    "lint:all": "node -e \"require('./tools/applications.js').lintAll()\"",
+
+    "deps": "node -e \"require('./tools/applications.js').installDependenciesCurrentDirectory()\"",
+    "deps:all": "node -e \"require('./tools/applications.js').installDependenciesAll()\""
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "js-yaml": "^4.1.0"
   },
   "dependencies": {}
 }

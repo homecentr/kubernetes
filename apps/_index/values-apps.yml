@@ -1,11 +1,17 @@
 applications:
 - name: metallb
+  syncWave: -100
   namespace: metallb-system
   valueFiles:
   - values-$env.yml
   ignoreDifferences:
-  # TODO: Configure for CA bundles etc.
   - group: "*"
     kind: CustomResourceDefinition
     jsonPointers:
       - /spec/conversion/webhook/clientConfig/caBundle
+
+- name: reflector
+  syncWave: -90
+  namespace: kube-system
+  valueFiles:
+  - values-$env.yml
