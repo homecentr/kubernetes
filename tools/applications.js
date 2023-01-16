@@ -63,7 +63,7 @@ const renderApp = (app, environmentName) => {
         valueFiles.push(valueFile.replace("$env", environmentName))
     })
 
-    renderHelmChart(`apps/${app.name}`, valueFiles, null)
+    return renderHelmChart(`apps/${app.name}`, valueFiles, null)
 }
 
 const renderAppIndex = (environmentName) => {
@@ -95,6 +95,8 @@ const lintHelmChart = (chartDirectory) => {
 
         const outputLines = err.stdout.toString().split('\n')
         outputLines.forEach(line => console.log(`   ${line}`));
+
+        process.exitCode = 2
     }
 }
 
@@ -124,6 +126,8 @@ const renderHelmChart = (chartDirectory, valueFiles, values) => {
 
         const outputLines = err.stderr.toString().split('\n')
         outputLines.forEach(line => console.log(`   ${line}`));
+
+        process.exitCode = 2
     }
 }
 
