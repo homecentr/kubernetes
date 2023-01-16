@@ -59,9 +59,11 @@ exports.installDependenciesAll = () => {
 const renderApp = (app, environmentName) => {
     const valueFiles = []
 
-    app.valueFiles.forEach(valueFile => {
-        valueFiles.push(valueFile.replace("$env", environmentName))
-    })
+    if (app.valueFiles) {
+        app.valueFiles.forEach(valueFile => {
+            valueFiles.push(valueFile.replace("$env", environmentName))
+        })
+    }
 
     return renderHelmChart(`apps/${app.name}`, valueFiles, null)
 }

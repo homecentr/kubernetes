@@ -3,7 +3,7 @@
 set -e
 
 # Load the age key
-. ./scripts/key-parse.sh $1
+. ./tools/key-parse.sh $1
 
 export EDITOR=nano
 

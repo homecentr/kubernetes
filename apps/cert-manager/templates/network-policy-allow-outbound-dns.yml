@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cert-manager-allow-outbound-dns
+spec:
+  egress:
+  - ports:
+    - port: {{ .Values.dnsPort }}
+      protocol: UDP
+    - port: {{ .Values.dnsPort }}
+      protocol: TCP
+    to:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: kube-dns
+      namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+  - ports: # Allow external DNS to allow checking the dns01 challenge
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+    to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+          - 10.0.0.0/8
+          - 172.16.0.0/12
+          - 192.168.0.0/16
+  podSelector: {}
+  policyTypes:
+  - Egress

@@ -2,7 +2,7 @@
 
 set -e
 
-. ./scripts/key-parse.sh $1
+. ./tools/key-parse.sh $1
 
 echo "Public key"
 echo "--------------------------------------------------"

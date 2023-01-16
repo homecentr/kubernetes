@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cert-manager-allow-inbound-webhook
+spec:
+  podSelector: 
+    matchLabels:
+      app: webhook
+  ingress:
+    - from: # Allow calls from Kube API
+        {{- range $node := .Values.kubeApiNodes }}
+        - ipBlock:
+            cidr: {{ $node }}/32
+        {{- end }}
+  policyTypes:
+  - Ingress

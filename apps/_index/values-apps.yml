@@ -15,3 +15,11 @@ applications:
   namespace: kube-system
   valueFiles:
   - values-$env.yml
+
+- name: cert-manager
+  syncWave: -80
+  namespace: cert-manager
+  valueFiles:
+  - values.yml
+  - values-$env.yml
+  # TODO: Secrets

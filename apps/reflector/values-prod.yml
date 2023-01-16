@@ -1,7 +1,7 @@
 reflector:
   nameOverride: reflector
 
-kubernetesNodes:
+kubeApiNodes:
 - 10.1.2.21
 - 10.1.2.22
 - 10.1.2.23
