@@ -31,6 +31,8 @@ spec:
       - {{ $file | replace "$env" $.Values.environmentName }}
       {{- end }}
 
+      # TODO: Add secrets
+
   ignoreDifferences: {{ .ignoreDifferences | toYaml | nindent 4 }}
 
   syncPolicy:

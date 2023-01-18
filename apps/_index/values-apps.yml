@@ -3,7 +3,7 @@ applications:
   syncWave: -100
   namespace: metallb-system
   valueFiles:
-  - values-$env.yml
+  - values.$env.yml
   ignoreDifferences:
   - group: "*"
     kind: CustomResourceDefinition
@@ -14,12 +14,12 @@ applications:
   syncWave: -90
   namespace: kube-system
   valueFiles:
-  - values-$env.yml
+  - values.$env.yml
 
 - name: cert-manager
   syncWave: -80
   namespace: cert-manager
   valueFiles:
-  - values.yml
-  - values-$env.yml
-  # TODO: Secrets
+  - values.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml

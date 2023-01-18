@@ -7,27 +7,21 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "lab:secrets": "./tools/secrets-edit.sh lab",
-    "lab:key:generate": "./tools/key-generate.sh lab",
-    "lab:key:show": "./tools/key-show.sh lab",
-    "lab:render": "node -e \"require('./tools/applications.js').renderCurrentDirectory('lab')\"",
-    "lab:render:all": "node -e \"require('./tools/applications.js').renderAll('lab')\"",
-
-    "prod:secrets": "./tools/secrets.sh prod",
-    "prod:key:generate": "./tools/key-generate.sh prod",
-    "prod:key:show": "./tools/key-show.sh prod",
-    "prod:render": "node -e \"require('./tools/applications.js').renderCurrentDirectory('prod')\"",
-    "prod:render:all": "node -e \"require('./tools/applications.js').renderAll('prod')\"",
-
-    "lint": "node -e \"require('./tools/applications.js').lintCurrentDirectory()\"",
-    "lint:all": "node -e \"require('./tools/applications.js').lintAll()\"",
-
-    "deps": "node -e \"require('./tools/applications.js').installDependenciesCurrentDirectory()\"",
-    "deps:all": "node -e \"require('./tools/applications.js').installDependenciesAll()\""
+    "render": "node ./tools/applications.js",
+    "render:all": "node ./tools/applications.js",
+    "lint": "node ./tools/applications.js",
+    "lint:all": "node ./tools/applications.js",
+    "deps": "node ./tools/applications.js",
+    "deps:all": "node ./tools/applications.js",
+    "setup": "run-script-os",
+    "setup:win32": "powershell -ExecutionPolicy Bypass ./tools/setup-windows.ps1",
+    "setup:linux": "bash ./tools/setup-linux.sh"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "run-script-os": "^1.1.6",
+    "util": "^0.12.5"
   },
   "dependencies": {}
 }

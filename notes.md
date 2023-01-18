@@ -1,10 +1,7 @@
-- Add age set up to the dev-setup
-    - Install age to windows
-    - Install age-yubikey-plugin (must be in path)
-    - Install age to wsl
-    - Split playbooks so it does not install everything immediately
-- Update kubernetes repository to use age directly
-    - Add helm_secrets plugin installation to yarn scripts
+- Update kubernetes repository to use pgp directly
+    - Add .sops.yaml config (?)
+    - Update github secret - use pgp key
+    + Add helm_secrets plugin installation to yarn scripts
     - Define per environment recipients list, each environment will have
         - Developer (same for all envs) - stored only in Yubikey
         - GitHub (same for all envs) - stored only in GitHub
@@ -19,11 +16,12 @@
             - Call age with the dumped identity file
     - Update readme.md
     - Update CI workflow
+        - generate a new key for github
         - install helm_secrets via yarn scripts
         - create identity file from a secret
         - !!! WAIT SOPS uses env vars !!!
 
-        
+
 - Cert manager chart
 
 
