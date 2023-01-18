@@ -13,20 +13,26 @@ jobs:
         run: yarn
 
       - name: Install helm plugins
-        run: yarn helm:plugins
+        run: sudo yarn setup
 
-      - name: Install helm dependencies
-        run: yarn deps:all
+      - name: Install helm secrets
+        run: helm plugin install https://github.com/jkroepke/helm-secrets && helm secrets patch unix
 
-      - name: Lint charts
-        run: yarn lint:all
+      - name: Import pgp key
+        run: |
+          echo "${{ secrets.SOPS_PGP_PUBLIC_KEY }}" > /tmp/pgp.pub
+          echo "${{ secrets.SOPS_PGP_PRIVATE_KEY }}" > /tmp/pgp.key
+          gpg --import /tmp/pgp.pub
+          gpg --import /tmp/pgp.key
 
-      - name: Render charts for Lab environment
-        run: yarn lab:render:all
-        env:
-          SOPS_AGE_KEY: ${{ sevrets.KUBERNETES_AGE_PRIVATE_KEY }}
+      - name: Lint charts (Lab environment)
+        run: yarn lint:all lab
 
-      - name: Render charts for Prod environment
-        run: yarn prod:render:all
-        env:
-          SOPS_AGE_KEY: ${{ sevrets.KUBERNETES_AGE_PRIVATE_KEY }}
+      - name: Lint charts (Prod environment)
+        run: yarn lint:all prod
+
+      - name: Render charts (Lab environment)
+        run: yarn render:all lab
+
+      - name: Render charts (Prod environment)
+        run: yarn render:all prod
