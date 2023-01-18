@@ -23,6 +23,10 @@ jobs:
           gpg --import /tmp/pgp.pub
           gpg --import /tmp/pgp.key
 
+
+      - name: Download helm chart dependencies
+        run: yarn deps:all
+
       - name: Lint charts (Lab environment)
         run: yarn lint:all lab
 
