@@ -13,7 +13,7 @@ jobs:
         run: |
           yarn
           helm plugin install https://github.com/jkroepke/helm-secrets && helm secrets patch unix
-          sudo wget https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64 -o /usr/bin/sops
+          sudo wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64
           sudo chmod a+x /usr/bin/sops
 
       - name: Import pgp key
