@@ -25,6 +25,6 @@ spec:
     - {{ $domain | quote }}
     {{- end }}
   issuerRef:
-    name: {{ .Release.Name }}-cloudflare
+    name: {{ $.Release.Name }}-cloudflare
     kind: Issuer
 {{ end }}
