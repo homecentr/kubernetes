@@ -5,9 +5,9 @@ kind: Application
 metadata:
   name: {{ required "Application must have a 'name'" .name }}
   namespace: argo-cd
-  {{ if eq (default true .deleteProtection) false }}
   annotations:
     argocd.argoproj.io/sync-wave: {{ .syncWave | quote }}
+  {{ if eq (default true .deleteProtection) false }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{ end }}

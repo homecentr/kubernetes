@@ -2,6 +2,7 @@ applications:
 - name: metallb
   syncWave: -100
   namespace: metallb-system
+  deleteProtection: true
   valueFiles:
   - values.$env.yml
   ignoreDifferences:
@@ -13,13 +14,15 @@ applications:
 - name: reflector
   syncWave: -90
   namespace: kube-system
+  deleteProtection: false
   valueFiles:
   - values.$env.yml
 
-# - name: cert-manager
-#   syncWave: -80
-#   namespace: cert-manager
-#   valueFiles:
-#   - values.$env.yml
-#   secretValueFiles:
-#   - secrets.$env.yml
+- name: cert-manager
+  syncWave: -80
+  namespace: cert-manager
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml
