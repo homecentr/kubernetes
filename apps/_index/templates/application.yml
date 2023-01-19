@@ -7,7 +7,7 @@ metadata:
   namespace: argo-cd
   annotations:
     argocd.argoproj.io/sync-wave: {{ .syncWave | quote }}
-  {{ if eq (default true .deleteProtection) false }}
+  {{ if eq (.deleteProtection | default false) false }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{ end }}
