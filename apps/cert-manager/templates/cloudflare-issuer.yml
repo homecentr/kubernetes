@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: {{ .Release.name }}-cloudflare
+  name: {{ .Release.Name }}-cloudflare
 spec:
   acme:
     email: {{ .Values.acme.email }}
