@@ -1,5 +1,7 @@
 cert-manager:
   installCRDs: true
+  networkPolicy:
+    enabled: true
   webhook:
     securePort: 10222
     podAnnotations:
