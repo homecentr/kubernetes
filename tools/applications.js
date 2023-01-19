@@ -41,20 +41,20 @@ class App {
     lint(environmentName) {
         const helmArgs = this.getHelmArgs(environmentName)
 
-        this.executeHelmCommand("lint", helmArgs, "stdout")
+        this.executeHelmCommand("lint", helmArgs)
     }
 
-    render(environmentName) {
-        const helmArgs = this.getHelmArgs(environmentName)
+    render(environmentName, showYaml) {
+        let helmArgs = this.getHelmArgs(environmentName)
 
-        this.executeHelmCommand("template", helmArgs, "stderr")
+        this.executeHelmCommand("template", helmArgs, showYaml)
     }
 
     installDependencies() {
-        this.executeHelmCommand("dependency update", "", "stderr")
+        this.executeHelmCommand("dependency update", "")
     }
 
-    async executeHelmCommand(commandName, args, failureOutput = 'stdout') {
+    async executeHelmCommand(commandName, args, showOutputOnSuccess = false, showOutputOnFailure = true) {
         const command = `helm ${commandName} ${this.getChartDirectory()} ${args}`
 
         const buffer = []
@@ -76,10 +76,16 @@ class App {
 
             if (exitCode == 0) {
                 console.log(`✔️  ${this.getChartDirectory()}`)
+
+                if (showOutputOnSuccess) {
+                    buffer.forEach(entry =>{
+                        entry.split('\n').forEach(line => console.log(`     ${line}`))
+                    });
+                }
             } else {
                 console.log(`❌ ${this.getChartDirectory()} has failed:`)
 
-                if (failureOutput) {
+                if (showOutputOnFailure) {
                     buffer.forEach(entry =>{
                         entry.split('\n').forEach(line => console.log(`     ${line}`))
                     });
@@ -123,7 +129,8 @@ class App {
 
 const commands = {
     "lint": () => getCurrentDirApp().lint(getEnvironmentFromArgs()),
-    "render": () => getCurrentDirApp().render(getEnvironmentFromArgs()),
+    "render": () => getCurrentDirApp().render(getEnvironmentFromArgs(), false),
+    "render:debug": () => getCurrentDirApp().render(getEnvironmentFromArgs(), true),
 
     "lint:all": () => {
         const environmentName = getEnvironmentFromArgs()
@@ -173,191 +180,3 @@ if (commandName in commands) {
     console.error(`Command ${command} does not exist`)
     process.exit(1)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// /*
-// renderCurrentDir
-//     -> findApp(dirName)
-//     -> getHelmArgs(app)
-//     -> renderHelmChart(app, args)         _index won't be found !!!
-// lintCurrentDir
-//     -> findApp(dirName)
-//     -> getHelmArgs(app)
-//     -> lintHelmChart(app, args)
-// */
-
-// const findApp = (appName) => {
-//     const app = getAllApps().find(app => app.name == dirName)
-
-//     if (!app) {
-//         console.error(`App '${dirName}' could not be found in the _index app.`)
-//         process.exit(1)
-//     }
-// }
-
-
-
-
-
-
-// exports.renderCurrentDirectory = (environmentName) => {
-//     const currentPath = process.env.INIT_CWD
-//     const dirName = path.basename(currentPath)
-
-//     if (dirName === "_index") {
-//         renderAppIndex(environmentName)
-//     } else {
-//         const app = findApp(dirName)
-
-//         renderApp(app, environmentName)
-//     }
-// }
-
-// exports.lintCurrentDirectory = (environmentName) => {
-//     const appName = path.basename(process.env.INIT_CWD)
-
-//     lintHelmChart(`apps/${appName}`, environmentName)
-// }
-
-// exports.renderAll = (environmentName) => {
-//     renderAppIndex(environmentName)
-
-//     getAllApps().forEach(app => {
-//         renderApp(app, getAppHelmArgs(app, environmentName))
-//     })
-// }
-
-// exports.lintAll = (environmentName) => {
-//     lintHelmChart("apps/_index")
-
-//     getAllApps().forEach(app => {
-//         lintHelmChart(`apps/${app.name}`, getAppHelmArgs(app, environmentName))
-//     })
-// }
-
-// exports.installDependenciesCurrentDirectory = () => {
-//     installHelmChartDependencies(process.env.INIT_CWD)
-// }
-
-// exports.installDependenciesAll = () => {
-//     getAllApps().forEach(app => {
-//         installHelmChartDependencies(`apps/${app.name}`)
-//     })
-// }
-
-
-// const getAppHelmArgs = (appName, environmentName) => {
-//     if(appName == "_index") {
-
-//     }
-//     else {
-
-//     }
-// }
-
-// const renderApp = (app, environmentName) => {
-//     const valueFiles = []
-
-//     if (app.valueFiles) {
-//         app.valueFiles.forEach(valueFile => {
-//             valueFiles.push(valueFile.replace("$env", environmentName))
-//         })
-//     }
-
-//     return renderHelmChart(`apps/${app.name}`, valueFiles, null)
-// }
-
-// const renderAppIndex = (environmentName) => {
-//     const values = {
-//         "source.repoUrl": "https://github.com/some-repo",
-//         "source.targetRevision": "some-branch",
-//         "environmentName": "lab"
-//     }
-
-//     const valueFiles = [
-//         `values-${environmentName}.yml`,
-//         "values-apps.yml"
-//     ]
-
-//     renderHelmChart("apps/_index", valueFiles, values)
-// }
-
-// const lintHelmChart = (chartDirectory) => {
-//     const command = `helm lint ${chartDirectory}`
-
-//     try {
-//         execSync(command, {
-//             stdio: 'pipe'
-//         })
-
-//         console.log(`✔️  ${chartDirectory} linted successfully`)
-//     } catch (err) {
-//         console.log(`❌ Linting ${chartDirectory} has failed:`)
-
-//         const outputLines = err.stdout.toString().split('\n')
-//         outputLines.forEach(line => console.log(`   ${line}`));
-
-//         process.exitCode = 2
-//     }
-// }
-
-// const renderHelmChart = (chartDirectory, valueFiles, values) => {
-//     let command = `helm template ${chartDirectory}`
-
-//     if (valueFiles) {
-//         valueFiles.forEach(valueFile => {
-//             command += ` -f \"${chartDirectory}/${valueFile}\"`
-//         })
-//     }
-
-//     if (values) {
-//         Object.keys(values).forEach(key => {
-//             command += ` --set \"${key}=${values[key]}\"`
-//         })
-//     }
-
-//     try {
-//         execSync(command, {
-//             stdio: 'pipe'
-//         })
-
-//         console.log(`✔️  ${chartDirectory} rendered successfully`)
-//     } catch (err) {
-//         console.log(`❌ Rendering ${chartDirectory} has failed:`)
-
-//         const outputLines = err.stderr.toString().split('\n')
-//         outputLines.forEach(line => console.log(`   ${line}`));
-
-//         process.exitCode = 2
-//     }
-// }
-
-// const installHelmChartDependencies = (chartDirectory) => {
-//     execSync(`helm dependency update ${chartDirectory}`)
-
-//     console.log(`✔️  ${chartDirectory} dependencies installed`)
-// }
-
-// const getAllApps = () => {
-//     const appIndex = yaml.load(fs.readFileSync("apps/_index/values-apps.yml"))
-
-//     return appIndex.applications
-// }

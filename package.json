@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "render": "node ./tools/applications.js",
+    "render:debug": "node ./tools/applications.js",
     "render:all": "node ./tools/applications.js",
     "lint": "node ./tools/applications.js",
     "lint:all": "node ./tools/applications.js",
