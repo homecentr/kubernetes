@@ -12,11 +12,11 @@ spec:
     {{- end }}
     # Secret resource that will be used to store the account's private key.
     privateKeySecretRef:
-      name: {{ .Release.name }}-cloudflare-issuer-account-key
+      name: {{ .Release.Name }}-cloudflare-issuer-account-key
     solvers:
     - dns01:
         cloudflare:
           email: {{ .Values.cloudflare.email }}
           apiTokenSecretRef:
-            name: {{ .Release.name }}-cloudflare-api-token
+            name: {{ .Release.Name }}-cloudflare-api-token
             key: api-token
