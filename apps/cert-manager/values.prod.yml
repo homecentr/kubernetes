@@ -1,4 +1,5 @@
-installCRDs: true
+cert-manager:
+  installCRDs: true
 kubeApiNodes:
 - 10.1.2.48
 - 10.1.2.49
