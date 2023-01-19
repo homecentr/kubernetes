@@ -16,10 +16,10 @@ applications:
   valueFiles:
   - values.$env.yml
 
-- name: cert-manager
-  syncWave: -80
-  namespace: cert-manager
-  valueFiles:
-  - values.$env.yml
-  secretValueFiles:
-  - secrets.$env.yml
+# - name: cert-manager
+#   syncWave: -80
+#   namespace: cert-manager
+#   valueFiles:
+#   - values.$env.yml
+#   secretValueFiles:
+#   - secrets.$env.yml
