@@ -1,6 +1,16 @@
 editor: code --wait
 creation_rules:
   - path_regex: "\\.lab\\.ya?ml$"
-    pgp: '2D1D9C803F35BBC24014C3906601E1EB2454827F,9AEBDA8E40EA9FD5C987B462D353886C014D4F8F,F9452831D285FCD04C6D4CB82E3C9E7C8BBF7995'
+    key_groups:
+    - pgp: 
+      - 2D1D9C803F35BBC24014C3906601E1EB2454827F # lholota
+    - age: 
+      - age1zw6c356patclh7q8cq5a99cghpzmnufgtwfaa0tmcg87a038d9ms4xpytn # GitHub
+      - age1thhmcq56csqrrd07eymtau54xl620yw6qkjykc8tvpyr975v03zqhq5uz4 # Kubernetes Lab         AGE-SECRET-KEY-1YUZNW7Z5WVZAFTSESCH2ZZ5UFT8D0ZJD3CZNPDFF5GU28L32K6QSACD7FT
   - path_regex: "\\.prod\\.ya?ml$"
-    pgp: '2D1D9C803F35BBC24014C3906601E1EB2454827F,9AEBDA8E40EA9FD5C987B462D353886C014D4F8F,0A1264F967877FD3F2B058A9A9E84FF4FDFACD88'
+    key_groups:
+    - pgp:
+      - 2D1D9C803F35BBC24014C3906601E1EB2454827F # lholota
+    - age:
+      - age1zw6c356patclh7q8cq5a99cghpzmnufgtwfaa0tmcg87a038d9ms4xpytn # GitHub                   
+      # TBA: Prod cluster key

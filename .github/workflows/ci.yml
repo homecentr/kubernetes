@@ -16,14 +16,6 @@ jobs:
           sudo wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64
           sudo chmod a+x /usr/bin/sops
 
-      - name: Import pgp key
-        run: |
-          echo "${{ secrets.SOPS_PGP_PUBLIC_KEY }}" > /tmp/pgp.pub
-          echo "${{ secrets.SOPS_PGP_PRIVATE_KEY }}" > /tmp/pgp.key
-          gpg --import /tmp/pgp.pub
-          gpg --import /tmp/pgp.key
-
-
       - name: Download helm chart dependencies
         run: yarn deps:all
 
@@ -35,6 +27,10 @@ jobs:
 
       - name: Render charts (Lab environment)
         run: yarn render:all lab
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
 
       - name: Render charts (Prod environment)
         run: yarn render:all prod
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
