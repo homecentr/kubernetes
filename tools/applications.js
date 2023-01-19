@@ -1,15 +1,10 @@
 const fs = require("fs")
 const path = require("path")
 const yaml = require("js-yaml")
-const readline = require('readline');
 
 const {
-    execSync,
     exec
 } = require("child_process");
-
-// const util = require('util');
-// const exec = util.promisify(require('child_process').exec);
 
 const environments = [
     'lab',
