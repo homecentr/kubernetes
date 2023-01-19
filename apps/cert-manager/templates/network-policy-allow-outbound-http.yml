@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: cert-manager-allow-outbound-http
+  name: {{ .Release.Name }}-allow-outbound-http
   # Required for HTTP calls of external APIs (e.g. Cloudflare)
 spec:
   egress:
