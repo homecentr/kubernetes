@@ -1,3 +1,4 @@
+installCRDs: true
 kubeApiNodes:
 - 10.1.8.21
 - 10.1.8.22
