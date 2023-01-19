@@ -9,6 +9,7 @@ cert-manager:
         cpu: 500m
         memory: 256Mi
       requests:
+        cpu: 1m
         memory: 1Mi
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -26,6 +27,7 @@ cert-manager:
         cpu: 500m
         memory: 256Mi
       requests:
+        cpu: 1m
         memory: 1Mi
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -42,6 +44,7 @@ cert-manager:
       cpu: 500m
       memory: 256Mi
     requests:
+      cpu: 1m
       memory: 1Mi
   containerSecurityContext:
     allowPrivilegeEscalation: false
