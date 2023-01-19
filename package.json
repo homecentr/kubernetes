@@ -19,6 +19,7 @@
     "setup:linux": "bash ./tools/setup-linux.sh"
   },
   "devDependencies": {
+    "commander": "^10.0.0",
     "cross-env": "^7.0.3",
     "js-yaml": "^4.1.0",
     "run-script-os": "^1.1.6",

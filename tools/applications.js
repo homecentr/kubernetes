@@ -160,6 +160,15 @@ const getCurrentDirApp = () => {
 
     return app
 }
+
+const getOptionalArg = (index) => {
+    if(process.argv.length < index + 1) {
+        return undefined
+    }
+
+    return process.argv[index]
+}
+
 const getEnvironmentFromArgs = () => {
     if (!process.argv ||
         process.argv.length < 3 ||
