@@ -33,3 +33,9 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
+
+- name: homepage
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml

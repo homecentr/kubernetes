@@ -7,7 +7,7 @@ Cluster
 ================================================
 Argo CD deployment from here
 ================================================
-- Ingress (traefik)
++ Ingress (traefik)
 - Homepage (use as a test case for Pomerium etc.)
 - Storage
 - Prometheus stack
