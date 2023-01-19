@@ -30,8 +30,9 @@ spec:
       {{- range $file := .valueFiles }}
       - {{ $file | replace "$env" $.Values.environmentName }}
       {{- end }}
-
-      # TODO: Add secrets
+      {{- range $file := .secretValueFiles }}
+      - secrets://{{ $file | replace "$env" $.Values.environmentName }}
+      {{- end }}
 
   ignoreDifferences: {{ .ignoreDifferences | toYaml | nindent 4 }}
 
