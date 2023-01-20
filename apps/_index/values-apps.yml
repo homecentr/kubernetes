@@ -39,3 +39,7 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
+
+- name: pomerium
+  namespace: pomerium
+  deleteProtection: false
