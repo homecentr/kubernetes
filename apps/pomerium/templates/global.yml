@@ -1,0 +1,14 @@
+apiVersion: ingress.pomerium.io/v1
+kind: Pomerium
+metadata:
+  name: global
+spec:
+  authenticate:
+    url: https://login.lab.homecentr.one
+  certificates:
+    - pomerium/lab-homecentr-one
+  identityProvider:
+    provider: azure
+    url: https://login.microsoftonline.com/36f0d3ea-3ee5-40f5-849b-8c3630c9637b/v2.0
+    secret: pomerium/idp-azuread
+  secrets: pomerium/bootstrap

@@ -43,3 +43,5 @@ applications:
 - name: pomerium
   namespace: pomerium
   deleteProtection: false
+  secretValueFiles:
+  - secrets.$env.yml
