@@ -4,7 +4,7 @@ metadata:
   name: homepage-via-pomerium
   annotations:
     ingress.pomerium.io/allow_public_unauthenticated_access: 'true'
-    ingress.pomerium.io/tcp_upstream: 'true'
+    # ingress.pomerium.io/tcp_upstream: 'true'
 spec:
   ingressClassName: pomerium
   rules:
