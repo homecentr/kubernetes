@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homepage-via-pomerium
+  annotations:
+    ingress.pomerium.io/allow_public_unauthenticated_access: 'true'
+    ingress.pomerium.io/tcp_upstream: 'true'
+spec:
+  ingressClassName: pomerium
+  rules:
+  - host: 'homepage2.lab.homecentr.one'
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          backend:
+            service:
+              name: homepage
+              port:
+                name: 3000
