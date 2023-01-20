@@ -16,4 +16,4 @@ spec:
             service:
               name: homepage
               port:
-                name: 3000
+                number: 3000
