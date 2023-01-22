@@ -45,3 +45,9 @@ applications:
   deleteProtection: false
   secretValueFiles:
   - secrets.$env.yml
+
+- name: value-test
+  namespace: default
+  deleteProtection: false
+  valueFiles:
+  - https://raw.githubusercontent.com/homecentr/values-test/master/values.yml
