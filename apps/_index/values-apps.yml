@@ -46,7 +46,7 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
-- name: value-test
+- name: values-test
   namespace: default
   deleteProtection: false
   valueFiles:
