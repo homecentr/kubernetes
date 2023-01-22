@@ -4,4 +4,4 @@ metadata:
   name: game-demo
 data:
   keyStatic: {{ .Values.test | quote }}
-  keyFromMap: {{ .Values.testMap['key1'] | quote }}
+  keyFromMap: {{ index 'key1' .Values.testMap | quote }}
