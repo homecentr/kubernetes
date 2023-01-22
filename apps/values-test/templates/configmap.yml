@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: game-demo
 data:
-  key: {{ .Values.test | quote }}
+  keyStatic: {{ .Values.test | quote }}
+  keyFromMap: {{ .Values.testMap['key1'] | quote }}
