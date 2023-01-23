@@ -34,21 +34,21 @@ applications:
   valueFiles:
   - values.$env.yml
 
-# - name: cert-manager-crd
-#   type: raw
-#   syncWave: -80
-#   namespace: cert-manager
-#   deleteProtection: false
+- name: cert-manager-crd
+  type: raw
+  syncWave: -80
+  namespace: cert-manager
+  deleteProtection: false
 
-# - name: cert-manager
-#   type: helm
-#   syncWave: -79
-#   namespace: cert-manager
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
-#   secretValueFiles:
-#   - secrets.$env.yml
+- name: cert-manager
+  type: helm
+  syncWave: -79
+  namespace: cert-manager
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml
 
 # # - name: ingress
 # #   syncWave: -70
