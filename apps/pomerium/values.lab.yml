@@ -4,9 +4,13 @@ hostname: login.lab.homecentr.one
 tlsCertificateName: lab-homecentr-one
 
 postgresql:
-  storageClass: local-path-provisioner-services
-  auth:
-    username: someuser
-    password: Heslo123
-    database: pomerium
-    # TODO: Storage
+  global:
+    storageClass: local-path-provisioner-services
+    auth:
+      username: someuser
+      password: Heslo123
+      database: pomerium
+  primary:
+    persistence:
+      accessModes:
+        - ReadWriteMany
