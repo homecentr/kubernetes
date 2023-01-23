@@ -9,6 +9,6 @@ spec:
     - {{ .Release.Namespace }}/{{ .Values.tlsCertificateName }}
   identityProvider:
     provider: azure
-    url: https://login.microsoftonline.com/{{ aad_tenant_id }}/v2.0
+    url: https://login.microsoftonline.com/{{ .Values.aad_tenant_id }}/v2.0
     secret: {{ .Release.Namespace }}/{{ .Release.Name }}-azuread
   secrets: {{ .Release.Namespace }}/bootstrap
