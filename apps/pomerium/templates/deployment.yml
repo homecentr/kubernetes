@@ -291,7 +291,7 @@ metadata:
   labels:
     app.kubernetes.io/name: pomerium
   annotations:
-    ingressclass.kubernetes.io/is-default-class: {{ .Values.defaultIngressClass | default false | toYaml | quote }}
+    ingressclass.kubernetes.io/is-default-class: {{ .Values.isDefaultIngressClass | default false | quote }}
   name: pomerium
 spec:
   controller: pomerium.io/ingress-controller

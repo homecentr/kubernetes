@@ -1,5 +1,7 @@
-defaultIngressClass: true
+isDefaultIngressClass: true
 replicas: 2
+hostname: login.lab.homecentr.one
+tlsCertificateName: lab-homecentr-one
 
 postgresql:
   auth:
