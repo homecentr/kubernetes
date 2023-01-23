@@ -50,22 +50,20 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
-# # - name: ingress
-# #   syncWave: -70
-# #   namespace: kube-system
-# #   deleteProtection: false
-# #   valueFiles:
-# #   - values.$env.yml
-
-# # TODO: pomerium-postresql
-
-# - name: pomerium-crd
-#   type: raw
-#   syncWave: -60
-#   namespace: pomerium
+# - name: ingress
+#   syncWave: -70
+#   namespace: kube-system
 #   deleteProtection: false
-#   secretValueFiles:
-#   - secrets.$env.yml
+#   valueFiles:
+#   - values.$env.yml
+
+- name: pomerium-crd
+  type: raw
+  syncWave: -60
+  namespace: pomerium
+  deleteProtection: false
+  secretValueFiles:
+  - secrets.$env.yml
 
 # - name: pomerium
 #   type: helm
