@@ -4,7 +4,7 @@ kubeApiNodes:
 - 10.1.8.23
 
 cert-manager:
-  installCRDs: true
+  installCRDs: false
   networkPolicy:
     enabled: true
   webhook:

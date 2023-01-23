@@ -23,8 +23,10 @@ spec:
     repoURL: {{ $.Values.source.repoUrl }}
     targetRevision: {{ $.Values.source.targetRevision }}
 
+    {{- if eq .type "helm" }}
     helm:
-      releaseName: {{ default .name .releaseName }}
+      releaseName: {{ .releaseName | default .name }}
+      skipCrds: {{ .skipCrds | default true }}
       
       valueFiles:
       {{- range $file := .valueFiles }}
@@ -33,6 +35,9 @@ spec:
       {{- range $file := .secretValueFiles }}
       - secrets://{{ $file | replace "$env" $.Values.environmentName }}
       {{- end }}
+    {{ else }}
+    directory:
+    {{ end }}
 
   ignoreDifferences: {{ .ignoreDifferences | toYaml | nindent 4 }}
 

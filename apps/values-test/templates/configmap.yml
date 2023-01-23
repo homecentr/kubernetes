@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: game-demo
-data:
-  keyStatic: {{ .Values.test | quote }}
-  keyFromMap: {{ index .Values.testMap "key1" | quote }}

@@ -37,6 +37,10 @@ const getApps = () => {
     return apps
 }
 
+const getHelmApps = () => {
+    return getApps().filter(app => app.type == "helm")
+}
+
 class App {
     lint(environmentName) {
         const helmArgs = this.getHelmArgs(environmentName)
@@ -56,6 +60,8 @@ class App {
 
     async executeHelmCommand(commandName, args, showOutputOnSuccess = false, showOutputOnFailure = true) {
         const command = `helm ${commandName} ${this.getChartDirectory()} ${args}`
+
+        console.log(command)
 
         const buffer = []
 
@@ -134,11 +140,11 @@ const commands = {
 
     "lint:all": () => {
         const environmentName = getEnvironmentFromArgs()
-        getApps().forEach(app => app.lint(environmentName))
+        getHelmApps().forEach(app => { console.log(app); app.lint(environmentName) })
     },
     "render:all": () => {
         const environmentName = getEnvironmentFromArgs()
-        getApps().forEach(app => app.render(environmentName))
+        getHelmApps().forEach(app => app.render(environmentName))
     },
 
     "deps": () => getCurrentDirApp().installDependencies(),
@@ -159,14 +165,6 @@ const getCurrentDirApp = () => {
     }
 
     return app
-}
-
-const getOptionalArg = (index) => {
-    if(process.argv.length < index + 1) {
-        return undefined
-    }
-
-    return process.argv[index]
 }
 
 const getEnvironmentFromArgs = () => {

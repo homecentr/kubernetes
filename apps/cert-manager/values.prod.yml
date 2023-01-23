@@ -1,5 +1,10 @@
+kubeApiNodes:
+- 10.1.2.48
+- 10.1.2.49
+- 10.1.2.50
+
 cert-manager:
-  installCRDs: true
+  installCRDs: false
   networkPolicy:
     enabled: true
   webhook:
@@ -59,7 +64,3 @@ cert-manager:
     capabilities:
         drop:
         - all
-kubeApiNodes:
-- 10.1.2.48
-- 10.1.2.49
-- 10.1.2.50

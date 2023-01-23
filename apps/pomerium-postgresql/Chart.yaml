@@ -1,0 +1,8 @@
+apiVersion: v2
+name: pomerium-postresql
+version: 1.0.0
+
+dependencies:
+- name: postgresql-ha
+  repository: https://charts.bitnami.com/bitnami
+  version: 15.1.0

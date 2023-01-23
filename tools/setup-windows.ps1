@@ -13,7 +13,7 @@ if($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administr
 . helm plugin install https://github.com/jkroepke/helm-secrets
 
 # Import GPG keys
-Get-ChildItem "$PSScriptRoot\..\keys" -Filter *.asc | 
+Get-ChildItem "$PSScriptRoot\keys" -Filter *.asc | 
 Foreach-Object {
     . gpg --import $_.FullName
 }

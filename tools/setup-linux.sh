@@ -7,4 +7,4 @@ apt-get install -y helm sops gpg
 
 helm plugin install https://github.com/jkroepke/helm-secrets
 
-gpg --import ./keys/*.asc
+gpg --import ./tools/keys/*.asc
