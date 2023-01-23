@@ -18,13 +18,21 @@ applications:
   valueFiles:
   - values.$env.yml
 
-# - name: reflector
-#   type: helm
-#   syncWave: -90
-#   namespace: kube-system
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
+- name: reflector
+  type: helm
+  syncWave: -90
+  namespace: kube-system
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
+- name: storage
+  type: helm
+  syncWave: -89
+  namespace: kube-system
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
 
 # - name: cert-manager-crd
 #   type: raw
@@ -41,14 +49,6 @@ applications:
 #   - values.$env.yml
 #   secretValueFiles:
 #   - secrets.$env.yml
-
-# - name: storage
-#   type: helm
-#   syncWave: -65
-#   namespace: kube-system
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
 
 # # - name: ingress
 # #   syncWave: -70
