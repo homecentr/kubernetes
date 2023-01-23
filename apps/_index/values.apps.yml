@@ -65,15 +65,15 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
-# - name: pomerium
-#   type: helm
-#   syncWave: -59
-#   namespace: pomerium
-#   deleteProtection: false
-#   valuesFiles:
-#   - values.$env.yml
-#   secretValueFiles:
-#   - secrets.$env.yml
+- name: pomerium
+  type: helm
+  syncWave: -59
+  namespace: pomerium
+  deleteProtection: false
+  valuesFiles:
+  - values.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml
 
 # - name: homepage
 #   type: helm
