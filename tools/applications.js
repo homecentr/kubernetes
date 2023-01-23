@@ -12,7 +12,7 @@ const environments = [
 ]
 
 const getApps = () => {
-    const index = yaml.load(fs.readFileSync("apps/_index/values-apps.yml"))
+    const index = yaml.load(fs.readFileSync("apps/_index/values.apps.yml"))
 
     index.applications.push({
         name: "_index",
@@ -48,20 +48,22 @@ class App {
         this.executeHelmCommand("lint", helmArgs)
     }
 
-    render(environmentName, showYaml) {
+    render(environmentName, showYaml, showCommand) {
         let helmArgs = this.getHelmArgs(environmentName)
 
-        this.executeHelmCommand("template", helmArgs, showYaml)
+        this.executeHelmCommand("template", helmArgs, showYaml, true, showCommand)
     }
 
     installDependencies() {
         this.executeHelmCommand("dependency update", "")
     }
 
-    async executeHelmCommand(commandName, args, showOutputOnSuccess = false, showOutputOnFailure = true) {
+    async executeHelmCommand(commandName, args, showOutputOnSuccess = false, showOutputOnFailure = true, showCommand = false) {
         const command = `helm ${commandName} ${this.getChartDirectory()} ${args}`
 
-        console.log(command)
+        if (showCommand) {
+            console.log(command)
+        }
 
         const buffer = []
 
@@ -84,7 +86,7 @@ class App {
                 console.log(`✔️  ${this.getChartDirectory()}`)
 
                 if (showOutputOnSuccess) {
-                    buffer.forEach(entry =>{
+                    buffer.forEach(entry => {
                         entry.split('\n').forEach(line => console.log(`     ${line}`))
                     });
                 }
@@ -92,7 +94,7 @@ class App {
                 console.log(`❌ ${this.getChartDirectory()} has failed:`)
 
                 if (showOutputOnFailure) {
-                    buffer.forEach(entry =>{
+                    buffer.forEach(entry => {
                         entry.split('\n').forEach(line => console.log(`     ${line}`))
                     });
                 }
@@ -135,12 +137,12 @@ class App {
 
 const commands = {
     "lint": () => getCurrentDirApp().lint(getEnvironmentFromArgs()),
-    "render": () => getCurrentDirApp().render(getEnvironmentFromArgs(), false),
-    "render:debug": () => getCurrentDirApp().render(getEnvironmentFromArgs(), true),
+    "render": () => getCurrentDirApp().render(getEnvironmentFromArgs(), false, true),
+    "render:debug": () => getCurrentDirApp().render(getEnvironmentFromArgs(), true, true),
 
     "lint:all": () => {
         const environmentName = getEnvironmentFromArgs()
-        getHelmApps().forEach(app => { console.log(app); app.lint(environmentName) })
+        getHelmApps().forEach(app => app.lint(environmentName))
     },
     "render:all": () => {
         const environmentName = getEnvironmentFromArgs()

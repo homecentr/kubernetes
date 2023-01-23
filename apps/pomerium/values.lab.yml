@@ -1,1 +1,8 @@
 defaultIngressClass: true
+replicas: 2
+
+postgresql:
+  auth:
+    username: someuser
+    password: Heslo123
+    database: pomerium
