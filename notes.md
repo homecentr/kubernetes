@@ -9,6 +9,7 @@ Argo CD deployment from here
 ================================================
 + Ingress (traefik, CRD) - will this be needed if we have pomerium ???
 * Pomerium (CRD)
+    - TODO: Labels
     - TODO: HA storage - Postgres !!!
     - TODO: Switch to app created by terraform
 - Homepage (use as a test case for Pomerium etc.)

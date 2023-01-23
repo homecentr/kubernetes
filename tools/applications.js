@@ -150,7 +150,7 @@ const commands = {
     },
 
     "deps": () => getCurrentDirApp().installDependencies(),
-    "deps:all": () => getApps().forEach(app => app.installDependencies()),
+    "deps:all": () => getHelmApps().forEach(app => app.installDependencies()),
 }
 
 

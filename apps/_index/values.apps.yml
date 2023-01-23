@@ -62,15 +62,13 @@ applications:
   syncWave: -60
   namespace: pomerium
   deleteProtection: false
-  secretValueFiles:
-  - secrets.$env.yml
 
 - name: pomerium
   type: helm
   syncWave: -59
   namespace: pomerium
   deleteProtection: false
-  valuesFiles:
+  valueFiles:
   - values.$env.yml
   secretValueFiles:
   - secrets.$env.yml
