@@ -9,9 +9,10 @@ Argo CD deployment from here
 ================================================
 + Ingress (traefik, CRD) - will this be needed if we have pomerium ???
 * Pomerium (CRD)
+    - TODO: Replica storage -> Use postgres in Pomerium CR
+    - TODO: Network policy for Postgres and Pomerium
+    - TODO: Switch to app created by terraform (when the re-deployed app works)
     - TODO: Labels
-    - TODO: HA storage - Postgres !!!
-    - TODO: Switch to app created by terraform
 - Homepage (use as a test case for Pomerium etc.)
     - Live + Ready checks
     - Config map
