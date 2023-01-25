@@ -11,20 +11,3 @@ postgresql:
       storageClass: local-path-provisioner-services
       accessModes:
         - ReadWriteMany
-
-  networkPolicy:
-    enabled: true
-    metrics:
-      enabled: true
-      namespaceSelector:
-        kubernetes.io/metadata.name: monitoring
-      podSelector: 
-        app.kubernetes.io/name: prometheus
-    ingressRules:
-      primaryAccessOnlyFrom:
-        enabled: true
-        podSelector:
-          app.kubernetes.io/name: pomerium
-          app.kubernetes.io/instance: pomerium
-    egressRules:
-      denyConnectionsToExternal: true
