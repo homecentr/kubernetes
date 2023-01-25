@@ -14,7 +14,7 @@ spec:
       containers:
       - args:
         - gen-secrets
-        - --secrets=$(POD_NAMESPACE)/bootstrap
+        - --secrets=$(POD_NAMESPACE)/pomerium-bootstrap
         env:
         - name: POD_NAMESPACE
           valueFrom:
