@@ -66,6 +66,11 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
+- name: argocd-ingress
+  type: helm
+  namespace: argo-cd
+  deleteProtection: false
+
 - name: homepage
   type: helm
   namespace: apps
