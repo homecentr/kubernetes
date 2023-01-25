@@ -17,17 +17,14 @@ postgresql:
     metrics:
       enabled: true
       namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: monitoring
+        kubernetes.io/metadata.name: monitoring
       podSelector: 
-        matchLabels:
-          app.kubernetes.io/name: prometheus
+        app.kubernetes.io/name: prometheus
     ingressRules:
       primaryAccessOnlyFrom:
         enabled: true
         podSelector:
-          matchLabels:
-            app.kubernetes.io/name: pomerium
-            app.kubernetes.io/instance: pomerium
+          app.kubernetes.io/name: pomerium
+          app.kubernetes.io/instance: pomerium
     egressRules:
       denyConnectionsToExternal: true
