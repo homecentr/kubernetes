@@ -3,9 +3,6 @@ kind: Service
 metadata:
   labels:
     {{- include "common-labels" . | indent 4 }}
-  annotations:
-      metallb.universe.tf/allow-shared-ip: {{ .Release.Name }}
-      metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIp }}
   name: pomerium-metrics
   namespace: pomerium
 spec:
@@ -24,6 +21,9 @@ kind: Service
 metadata:
   labels:
     {{- include "common-labels" . | indent 4 }}
+  annotations:
+    metallb.universe.tf/allow-shared-ip: {{ .Release.Name }}
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIp }}
   name: pomerium-proxy
   namespace: pomerium
 spec:
