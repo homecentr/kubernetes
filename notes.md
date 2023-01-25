@@ -7,15 +7,28 @@ Cluster
 ================================================
 Argo CD deployment from here
 ================================================
-+ Ingress (traefik, CRD) - will this be needed if we have pomerium ???
+- Metallb - CRD ignore list
 * Pomerium (CRD)
-    - TODO: Replica storage -> Use postgres in Pomerium CR
-    - TODO: Network policy for Postgres and Pomerium
-    - TODO: Switch to app created by terraform (when the re-deployed app works)
-    - TODO: Labels
+    - Network policy for Postgres
+        - Ingress
+            - Accept only from Pomerium, standard PSQL port
+        - Egress - None
+    - Network policy for Pomerium
+        - Ingress
+            - Kubernetes API
+        - Egress
+            - DNS
+            - Kubernetes API
+            - Internet (i.e. no local networks)
+            - Any pod in any namespace
+    - Readiness check at /healthz
 - Homepage (use as a test case for Pomerium etc.)
-    - Live + Ready checks
+    - Live + Ready checks (check the root page itself)
     - Config map
+
+
+
+
 - Prometheus stack (many CRDs)
 - Node monitoring
 - Grafana configuration
@@ -25,6 +38,6 @@ Argo CD deployment from here
 ================================================
 Apps
 ================================================
+- External DNS !!!
 - Frigate
-- External DNS
 - ...

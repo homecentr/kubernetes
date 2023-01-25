@@ -8,7 +8,7 @@ applications:
   - group: "*"
     kind: CustomResourceDefinition
     jsonPointers:
-      - /spec/conversion/webhook/clientConfig/caBundle
+      - /spec/conversion/webhook
 
 - name: metallb
   type: helm
