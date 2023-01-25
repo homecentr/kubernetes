@@ -18,4 +18,4 @@ spec:
               name: argo-cd-argocd-server
               port:
                 name: webui
-                number: 443
+                number: 80
