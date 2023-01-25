@@ -73,9 +73,9 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
-# - name: homepage
-#   type: helm
-#   namespace: apps
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
+- name: homepage
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
