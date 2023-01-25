@@ -14,4 +14,4 @@ spec:
   storage:
     postgres:
       secret: {{ .Release.Namespace }}/{{ .Release.Name }}-postgresql-connection
-  secrets: {{ .Release.Namespace }}/bootstrap
+  secrets: {{ .Release.Namespace }}/pomerium-bootstrap
