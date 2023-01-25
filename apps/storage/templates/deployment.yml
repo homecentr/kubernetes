@@ -7,7 +7,8 @@ metadata:
   name: local-path-provisioner-{{ $volume.name | required "volumes.<volume>.name is required" }}
   labels:
     {{- include "common-labels-volume" $volumeData | indent 4 }}
-    checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}  
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
 spec:
   replicas: 1
   selector:
