@@ -9,7 +9,7 @@ metadata:
     ingress.pomerium.io/allow_public_unauthenticated_access: 'true'
 spec:
   rules:
-  - host: 'argocd.lab.homecentr.one'
+  - host: 'argocd.lab.homecentr.one' # TODO: Values !!!
     http:
       paths:
         - pathType: ImplementationSpecific
@@ -17,4 +17,5 @@ spec:
             service:
               name: argo-cd-argocd-server
               port:
+                name: webui
                 number: 443
