@@ -50,13 +50,6 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
-# - name: ingress
-#   syncWave: -70
-#   namespace: kube-system
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
-
 - name: pomerium-crd
   type: raw
   syncWave: -60

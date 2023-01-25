@@ -5,12 +5,6 @@ tlsCertificateName: lab-homecentr-one
 loadBalancerIp: 10.1.8.132
 
 postgresql:
-  global:
-    postgresql:
-      auth:
-        username: someuser
-        password: Heslo123
-        database: pomerium
   primary:
     persistence:
       size: 10Gi
