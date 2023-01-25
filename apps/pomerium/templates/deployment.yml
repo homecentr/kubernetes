@@ -41,6 +41,7 @@ spec:
         name: pomerium
         readinessProbe:
           httpGet:
+            scheme: HTTPS
             path: /healthz
             port: 8443
           initialDelaySeconds: 15
