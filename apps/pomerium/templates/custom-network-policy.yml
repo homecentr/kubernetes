@@ -30,8 +30,8 @@ spec:
     
     # Allow communication to all pods in all namespaces for ingress proxy (includes DNS)
     - to:
-        namespaceSelector: {}
-        podSelector: {}
+        - namespaceSelector: {}
+          podSelector: {}
 
     # Internet access
     - to:
