@@ -2,6 +2,7 @@ isDefaultIngressClass: true
 replicas: 2
 hostname: login.lab.homecentr.one
 tlsCertificateName: lab-homecentr-one
+loadBalancerIp: 10.1.8.132
 
 postgresql:
   global:
