@@ -3,8 +3,6 @@ name: pomerium
 version: 1.0.0
 appVersion: sha-cdc389c
 
-icon: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
-
 dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami

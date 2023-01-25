@@ -9,10 +9,6 @@ Argo CD deployment from here
 ================================================
 - Metallb - CRD ignore list
 * Pomerium (CRD)
-    - Network policy for Postgres
-        - Ingress
-            - Accept only from Pomerium, standard PSQL port
-        - Egress - None
     - Network policy for Pomerium
         - Ingress
             - Kubernetes API

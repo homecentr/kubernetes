@@ -4,6 +4,11 @@ hostname: login.lab.homecentr.one
 tlsCertificateName: lab-homecentr-one
 loadBalancerIp: 10.1.8.132
 
+kubeApiNodes:
+- 10.1.8.21
+- 10.1.8.22
+- 10.1.8.23
+
 postgresql:
   primary:
     persistence:
