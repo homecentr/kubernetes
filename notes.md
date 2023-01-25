@@ -21,7 +21,6 @@ Argo CD deployment from here
             - Kubernetes API
             - Internet (i.e. no local networks)
             - Any pod in any namespace
-    - Readiness check at /healthz
 - Homepage (use as a test case for Pomerium etc.)
     - Live + Ready checks (check the root page itself)
     - Config map
