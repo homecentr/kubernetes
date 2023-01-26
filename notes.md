@@ -10,7 +10,6 @@ Argo CD deployment from here
 - Metallb - CRD update diff ignore list
 - Argocd - move ingress to ansible?
 - Homepage - Config TBA
-    - Network policy
 - External DNS
     - Network policy
     - Figure static records (e.g. PVE multi answer)

@@ -12,9 +12,17 @@ coredns:
     annotations:
       metallb.universe.tf/allow-shared-ip: external-dns-primary
       metallb.universe.tf/loadBalancerIPs: 10.1.8.128
+  extraVolumes:
+    - name: node-hosts
+      hostPath:
+        path: /etc/hosts
+        type: File
+        readOnly: true
+  extraVolumeMounts:
+    - name: node-hosts
+      mountPath: /etc/node-hosts
   servers:
     - port: 53
-      # TODO: Port 1053
       zones:
       - zone: .
       plugins:
@@ -24,6 +32,20 @@ coredns:
         configBlock: |-
           lameduck 5s
       - name: ready  # Serves a /ready endpoint on :8181, required for readinessProbe
+
+      - name: hosts
+        parameters: /etc/node-hosts
+        configBlock: |-
+          fallthrough
+
+          
+      #     10.1.8.11 lab-pve1.lab.homecentr.one
+      #     10.1.8.12 lab-pve2.lab.homecentr.one
+      #     10.1.8.13 lab-pve3.lab.homecentr.one
+      #     10.1.8.21 lab-kube1.lab.homecentr.one
+      #     10.1.8.22 lab-kube2.lab.homecentr.one
+      #     10.1.8.23 lab-kube3.lab.homecentr.one
+          
 
       # TODO: template for custom records
       # Hosts for static a records for given hosts
