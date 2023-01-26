@@ -16,18 +16,6 @@ spec:
     - Ingress
     - Egress
   ingress:
-    # Kubernetes
-    - from:
-        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
-        - ipBlock:
-            cidr: {{ $node }}/32
-        {{- end }}
-
-      ports:
-        - protocol: TCP
-          port: 53
-        - protocol: UDP
-          port: 53
     # Clients traffic
     - ports:
       - protocol: TCP
