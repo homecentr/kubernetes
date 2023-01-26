@@ -11,6 +11,5 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    app.kubernetes.io/name: homepage
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "pod-labels" . | indent 4 }}
   type: ClusterIP

@@ -9,14 +9,13 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app.kubernetes.io/name: homepage
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "pod-labels" . | indent 6 }}
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        {{- include "common-labels" . | indent 4 }}
+        {{- include "pod-labels" . | indent 8 }}
     spec:
       automountServiceAccountToken: true
       containers:
