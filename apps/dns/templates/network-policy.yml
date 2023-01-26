@@ -28,19 +28,6 @@ spec:
           port: 53
         - protocol: UDP
           port: 53
-    # Clients traffic
-    - ports:
-      - protocol: TCP
-        port: 53
-      - protocol: UDP
-        port: 53
-      from:
-        # - ipBlock:
-        #     cidr: 172.16.0.0/16
-        # {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
-        # - ipBlock:
-        #     cidr: {{ $cidr }}
-        # {{- end }}
   egress:
     # Kubernetes API
     - to:
