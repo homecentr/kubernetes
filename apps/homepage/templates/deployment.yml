@@ -4,6 +4,8 @@ metadata:
   name: {{ .Release.Name }}
   labels:
     {{- include "common-labels" . | indent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
 spec:
   replicas: 1
   revisionHistoryLimit: 3
