@@ -38,19 +38,19 @@ homepage:
       - search:
           provider: google
           target: _blank
-      # Uncomment to enable Kubernetes integration
-      - kubernetes:
-          cluster:
-            show: true
-            cpu: true
-            memory: true
-            showLabel: true
-            label: "cluster"
-          nodes:
-            show: true
-            cpu: true
-            memory: true
-            showLabel: true
+      # # Uncomment to enable Kubernetes integration
+      # - kubernetes:
+      #     cluster:
+      #       show: true
+      #       cpu: true
+      #       memory: true
+      #       showLabel: true
+      #       label: "cluster"
+      #     nodes:
+      #       show: true
+      #       cpu: true
+      #       memory: true
+      #       showLabel: true
     kubernetes:
       # change mode to 'cluster' to use RBAC service account
       mode: cluster
