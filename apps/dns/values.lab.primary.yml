@@ -17,10 +17,10 @@ coredns:
       hostPath:
         path: /etc/hosts
         type: File
-        readOnly: true
   extraVolumeMounts:
     - name: node-hosts
       mountPath: /etc/node-hosts
+      readOnly: true
   servers:
     - port: 53
       zones:
@@ -38,7 +38,7 @@ coredns:
         configBlock: |-
           fallthrough
 
-          
+
       #     10.1.8.11 lab-pve1.lab.homecentr.one
       #     10.1.8.12 lab-pve2.lab.homecentr.one
       #     10.1.8.13 lab-pve3.lab.homecentr.one
