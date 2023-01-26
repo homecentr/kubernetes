@@ -19,7 +19,11 @@ spec:
     server: https://kubernetes.default.svc
 
   source:
+    {{- if .path }}
+    path: {{ .path }}
+    {{- else }}
     path: apps/{{ .name }}
+    {{- end }}
     repoURL: {{ $.Values.source.repoUrl }}
     targetRevision: {{ $.Values.source.targetRevision }}
 

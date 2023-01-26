@@ -103,6 +103,10 @@ class App {
     }
 
     getChartDirectory() {
+        if(this.path) {
+            return this.path
+        }
+
         return `apps/${this.name}`
     }
 
@@ -158,7 +162,11 @@ const getCurrentDirApp = () => {
     const currentPath = process.env.INIT_CWD
     const dirName = path.basename(currentPath)
 
-    const app = getApps().find(app => app.name == dirName)
+    let app = getApps().find(app => app.name == dirName)
+
+    if(!app) {
+        app = getApps().find(app => app.path == "apps/" + dirName)
+    }
 
     if (!app) {
         console.error(`Directory ${dirName} is not an app or it's not registered in _index app.`)

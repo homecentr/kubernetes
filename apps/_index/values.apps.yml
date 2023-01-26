@@ -67,6 +67,14 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
+- name: dns-primary
+  type: helm
+  path: apps/dns
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.primary.yml
+
 - name: argocd-ingress
   type: helm
   namespace: argo-cd
