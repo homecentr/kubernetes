@@ -38,17 +38,13 @@ coredns:
         configBlock: |-
           fallthrough
 
+      # In production this handles additional static hosts like printers, idrac etc.
+      - name: hosts
+        configBlock: |-
+          10.1.8.1  test.lab.homecentr.one
+          fallthrough
 
-      #     10.1.8.11 lab-pve1.lab.homecentr.one
-      #     10.1.8.12 lab-pve2.lab.homecentr.one
-      #     10.1.8.13 lab-pve3.lab.homecentr.one
-      #     10.1.8.21 lab-kube1.lab.homecentr.one
-      #     10.1.8.22 lab-kube2.lab.homecentr.one
-      #     10.1.8.23 lab-kube3.lab.homecentr.one
-          
-
-      # TODO: template for custom records
-      # Hosts for static a records for given hosts
+      - name: template
 
       - name: k8s_gateway
         parameters: lab.homecentr.one
