@@ -9,10 +9,12 @@ Argo CD deployment from here
 ================================================
 - Metallb - CRD update diff ignore list
 - Argocd - move ingress to ansible?
-- Homepage
-    
-    - Live + Ready checks (check the root page itself) if the chart does not contain them already
-    - Test auto discovery/configuration
+- Homepage - Config TBA
+- External DNS
+    - Network policy
+    - Figure static records (e.g. PVE multi answer)
+    - Labels
+    - Fix RBAC
 
 
 

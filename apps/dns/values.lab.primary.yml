@@ -6,6 +6,8 @@ coredns:
   serviceType: LoadBalancer
   serviceAccount:
     create: true
+  rbac:
+    create: false
   service:
     annotations:
       metallb.universe.tf/allow-shared-ip: external-dns-primary
