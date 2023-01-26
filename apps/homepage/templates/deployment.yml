@@ -49,11 +49,15 @@ spec:
             timeoutSeconds: 1
           volumeMounts:
             - mountPath: /app/config
-              name: {{ .Release.Name }}-config
+              name: config
+            - mountPath: /app/config/logs
+              name: logs
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       serviceAccountName: {{ .Release.Name }}
       volumes:
-        - configMap:
+        - name: config
+          configMap:
             name: {{ .Release.Name }}
-          name: {{ .Release.Name }}-config
+        - name: logs
+          emptyDir:

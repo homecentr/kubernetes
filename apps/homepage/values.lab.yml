@@ -1,5 +1,5 @@
 hostname: homepage.lab.homecentr.one
-imageTag: v0.6.3
+imageTag: v0.6.0
   
 config:
   # To use an existing ConfigMap uncomment this line and specify the name
