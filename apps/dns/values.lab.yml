@@ -32,13 +32,15 @@ coredns:
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-          - key: app.kubernetes.io/name
-            operator: In
-            values:
-            - dns
-        topologyKey: dns-affinity
+      - weight: 1000
+        podAffinityTerm:
+          topologyKey: dns-affinity
+          labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - dns
   servers:
     - port: 53
       zones:
