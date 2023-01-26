@@ -5,21 +5,6 @@ homepage:
   serviceAccount:
     create: true
 
-  ingress:
-    enabled: false
-    annotations:
-      ingress.pomerium.io/allow_any_authenticated_user: 'true'
-    hosts:
-      - host: {{ .Values.hostname | quote }}
-        http:
-          paths:
-            - pathType: ImplementationSpecific
-              backend:
-                service:
-                  name: homepage
-                  port:
-                    number: 3000
-
   config:
     # To use an existing ConfigMap uncomment this line and specify the name
     # useExistingConfigMap: existing-homepage-configmap
@@ -46,31 +31,29 @@ homepage:
     widgets:
       - resources:
           # change backend to 'kubernetes' to use Kubernetes integration. Requires RBAC.
-          backend: resources
+          backend: kubernetes
           expanded: true
           cpu: true
           memory: true
       - search:
-          provider: duckduckgo
+          provider: google
           target: _blank
-      ## Uncomment to enable Kubernetes integration
-      # - kubernetes:
-      #     cluster:
-      #       show: true
-      #       cpu: true
-      #       memory: true
-      #       showLabel: true
-      #       label: "cluster"
-      #     nodes:
-      #       show: true
-      #       cpu: true
-      #       memory: true
-      #       showLabel: true
+      # Uncomment to enable Kubernetes integration
+      - kubernetes:
+          cluster:
+            show: true
+            cpu: true
+            memory: true
+            showLabel: true
+            label: "cluster"
+          nodes:
+            show: true
+            cpu: true
+            memory: true
+            showLabel: true
     kubernetes:
       # change mode to 'cluster' to use RBAC service account
-      mode: disable
-    docker:
-    settings:
+      mode: cluster
 
 persistence:
   logs:
