@@ -18,10 +18,10 @@ spec:
   ingress:
     # Clients traffic
     - ports:
-      - protocol: TCP
-        port: 53
-      - protocol: UDP
-        port: 53
+      # - protocol: TCP
+      #   port: 53
+      # - protocol: UDP
+      #   port: 53
       from:
         {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
         - ipBlock:
