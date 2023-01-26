@@ -27,7 +27,7 @@ spec:
     - from:
         {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
         - ipBlock:
-            cidr: {{ $cidr }}/32 
+            cidr: {{ $cidr }}
         {{- end }}
       ports:
         - protocol: TCP
