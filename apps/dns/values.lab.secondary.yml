@@ -3,5 +3,5 @@ coredns:
   nameOverride: dns-secondary
   service:
     annotations:
-      metallb.universe.tf/loadBalancerIPs: 10.1.8.128
+      metallb.universe.tf/loadBalancerIPs: 10.1.8.129
   
