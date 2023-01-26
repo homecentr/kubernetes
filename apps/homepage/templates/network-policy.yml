@@ -2,14 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: {{ .Release.Name }}
+  labels:
+    {{- include "common-labels" . | indent 4 }}
 spec:
   podSelector:
     matchLabels:
-      {{- include "common-labels" . | indent 4 }}
+      {{- include "pod-labels" . | indent 8 }}
   policyTypes:
     - Ingress
     - Egress
-  ingress: {}
+  ingress:
   egress:
     # Kubernetes API
     - to:
