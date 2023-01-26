@@ -29,15 +29,15 @@ coredns:
     - name: node-hosts
       mountPath: /etc/node-hosts
       readOnly: true
-  # affinity:
-  #   podAntiAffinity:
-  #     preferredDuringSchedulingIgnoredDuringExecution:
-  #     - labelSelector:
-  #         matchExpressions:
-  #         - key: app.kubernetes.io/name=dns-secondary
-  #           operator: In
-  #           values:
-  #           - dns
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - dns
   servers:
     - port: 53
       zones:
