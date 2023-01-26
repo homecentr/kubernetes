@@ -1,3 +1,0 @@
-ingress:
-  hostname: homepage.homecentr.one
-  tlsCertificateName: homecentr-one
