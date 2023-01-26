@@ -3,7 +3,7 @@ kind: ClusterRole
 metadata:
   name: {{ printf "%s-coredns" .Release.Name | trunc 63 | trimSuffix "-" }}
   labels:
-    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/name: coredns
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"

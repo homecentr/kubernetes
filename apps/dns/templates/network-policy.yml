@@ -1,0 +1,50 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ printf "%s-coredns" .Release.Name | trunc 63 | trimSuffix "-" }}
+  labels:
+    app.kubernetes.io/name: coredns
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: coredns
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+      - protocol: TCP
+        port: 53
+      - protocol: UDP
+        port: 53
+      from:
+        {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
+        - ipBlock:
+            cidr: {{ $cidr }}
+        {{- end }}
+  egress:
+    # Kubernetes API
+    - to:
+        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
+        - ipBlock:
+            cidr: {{ $node }}/32
+        {{- end }}
+      ports:
+        - protocol: TCP
+          port: 6443
+    # DNS forwarding
+    - to: 
+        {{- range $node := .Values.networkPolicy.forwarders }}
+        - ipBlock:
+            cidr: {{ $node }}/32
+        {{- end }}
+      ports:
+        - protocol: TCP
+          port: 853 # DNS over TLS
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
