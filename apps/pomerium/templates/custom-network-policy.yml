@@ -17,6 +17,10 @@ spec:
         - ipBlock:
             cidr: {{ $node }}/32
         {{- end }}
+
+    - from:
+        - ipBlock:
+          cidr: 172.16.0.0/16
   egress:
     # Kubernetes API
     - to:
