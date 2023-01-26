@@ -1,0 +1,47 @@
+coredns:
+  image:
+    repository: quay.io/oriedge/k8s_gateway
+    tag: v0.3.3
+  isClusterService: false
+  serviceType: LoadBalancer
+  serviceAccount:
+    create: true
+  service:
+    annotations:
+      metallb.universe.tf/allow-shared-ip: external-dns-primary
+      metallb.universe.tf/loadBalancerIPs: 10.1.8.128
+  servers:
+    - port: 53
+      # TODO: Port 1053
+      zones:
+      - zone: .
+      plugins:
+      - name: log
+      - name: errors
+      - name: health  # Serves a /health endpoint on :8080, required for livenessProbe
+        configBlock: |-
+          lameduck 5s
+      - name: ready  # Serves a /ready endpoint on :8181, required for readinessProbe
+
+      # TODO: template for custom records
+      # Hosts for static a records for given hosts
+
+      - name: k8s_gateway
+        parameters: lab.homecentr.one
+      
+      - name: forward
+        parameters: . tls://1.1.1.1 tls://1.0.0.1
+        configBlock: |-
+          tls_servername cloudflare-dns.com
+          max_concurrent 1000
+
+      # Serves a /metrics endpoint on :9153, required for serviceMonitor
+      - name: prometheus
+        parameters: 0.0.0.0:9153
+
+      - name: cache
+        parameters: 30
+
+      - name: loop
+      - name: reload
+      - name: loadbalance
