@@ -1,6 +1,6 @@
 coredns:
-  fullnameOverride: dns-primary
-  nameOverride: dns-primary
+  fullnameOverride: dns-secondary
+  nameOverride: dns-secondary
   service:
     annotations:
       metallb.universe.tf/loadBalancerIPs: 10.1.8.128

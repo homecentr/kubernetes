@@ -9,6 +9,7 @@ applications:
     kind: CustomResourceDefinition
     jsonPointers:
       - /spec/conversion/webhook
+      - /spec/conversion/strategy
 
 - name: metallb
   type: helm

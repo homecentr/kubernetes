@@ -11,8 +11,7 @@ Argo CD deployment from here
 - Argocd - move ingress to ansible?
 - Homepage - Config TBA
 - External DNS
-    - Network policy
-    - Labels
+    - Put the instances on separate nodes when possible
 
 
 
