@@ -8,11 +8,9 @@ Cluster
 Argo CD deployment from here
 ================================================
 - Metallb - CRD update diff ignore list
-- Pomerium - fix policy ?
-- Argocd
-    - move ingress to ansible?
+- Argocd - move ingress to ansible?
 - Homepage
-    - Use external helm chart (https://github.com/jameswynn/helm-charts/tree/main/charts/homepage)
+    
     - Live + Ready checks (check the root page itself) if the chart does not contain them already
     - Test auto discovery/configuration
 

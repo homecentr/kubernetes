@@ -80,3 +80,4 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
+  - values.config.yml
