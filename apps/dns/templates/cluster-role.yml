@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ .Values.coredns.fullNameOverride | trunc 63 | trimSuffix "-" }}
+  name: {{ .Values.coredns.fullnameOverride | trunc 63 | trimSuffix "-" }}
   labels:
     app.kubernetes.io/name: {{ .Values.coredns.nameOverride | trunc 63 | trimSuffix "-" }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
