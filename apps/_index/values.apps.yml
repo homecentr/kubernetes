@@ -73,7 +73,17 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
+  - values.$env.yml
   - values.$env.primary.yml
+
+- name: dns-secondary
+  type: helm
+  path: apps/dns
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.$env.secondary.yml
 
 - name: argocd-ingress
   type: helm
