@@ -15,9 +15,18 @@ spec:
     - from:
         {{- range $node := .Values.kubeApiNodes }}
         - ipBlock:
-            cidr: {{ $node }}/32
+            cidr: {{ $node }}/32  # TODO: PORT
         {{- end }}
-        
+
+    - from:
+        - ipBlock:
+            cidr: {{ .Values.acceptedExternalTrafficCidr }}
+      ports:
+        - protocol: TCP
+          port: 8080
+        - protocol: TCP
+          port: 8443
+
   egress:
     # Kubernetes API
     - to:
