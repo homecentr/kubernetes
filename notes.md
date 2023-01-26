@@ -12,12 +12,11 @@ Argo CD deployment from here
 - Homepage - Config TBA
 - External DNS
     - Network policy
-    - Figure static records (e.g. PVE multi answer)
     - Labels
-    - Fix RBAC
 
 
-- Cypress tests !!!
+
+- Cypress tests
 
 
 - Prometheus stack (many CRDs)

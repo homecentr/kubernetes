@@ -36,11 +36,6 @@ coredns:
       - name: hosts
         parameters: /etc/node-hosts
         configBlock: |-
-          fallthrough
-
-      # In production this handles additional static hosts like printers, idrac etc.
-      - name: hosts
-        configBlock: |-
           10.1.8.1  test.lab.homecentr.one
           fallthrough
 
