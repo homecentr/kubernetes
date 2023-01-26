@@ -5,11 +5,11 @@ metadata:
   labels:
     {{- include "common-labels" . | indent 4 }}
   annotations:
-    # ingress.pomerium.io/allow_public_unauthenticated_access: 'true'
+    # ArgoCD has custom authentication logic
     ingress.pomerium.io/allow_any_authenticated_user: 'true'
 spec:
   rules:
-  - host: 'homepage.lab.homecentr.one'
+  - host: {{ .Values.hostname | quote }}
     http:
       paths:
         - pathType: ImplementationSpecific

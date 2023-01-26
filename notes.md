@@ -7,19 +7,14 @@ Cluster
 ================================================
 Argo CD deployment from here
 ================================================
-- Metallb - CRD ignore list
-* Pomerium (CRD)
-    - Network policy for Pomerium
-        - Ingress
-            - Kubernetes API
-        - Egress
-            - DNS
-            - Kubernetes API
-            - Internet (i.e. no local networks)
-            - Any pod in any namespace
-- Homepage (use as a test case for Pomerium etc.)
-    - Live + Ready checks (check the root page itself)
-    - Config map
+- Metallb - CRD update diff ignore list
+- Pomerium - fix policy ?
+- Argocd
+    - move ingress to ansible?
+- Homepage
+    - Use external helm chart (https://github.com/jameswynn/helm-charts/tree/main/charts/homepage)
+    - Live + Ready checks (check the root page itself) if the chart does not contain them already
+    - Test auto discovery/configuration
 
 
 
