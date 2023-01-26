@@ -12,6 +12,16 @@ spec:
     - Ingress
     - Egress
   ingress:
+    - from: # Ingress
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: pomerium
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/name: pomerium
+      ports:
+        - protocol: TCP
+          port: 3000
   egress:
     # Kubernetes API
     - to:
