@@ -32,7 +32,7 @@ coredns:
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 1000
+      - weight: 100
         podAffinityTerm:
           topologyKey: dns-affinity
           labelSelector:
