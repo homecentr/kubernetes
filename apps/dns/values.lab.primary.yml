@@ -44,8 +44,6 @@ coredns:
           10.1.8.1  test.lab.homecentr.one
           fallthrough
 
-      - name: template
-
       - name: k8s_gateway
         parameters: lab.homecentr.one
       
