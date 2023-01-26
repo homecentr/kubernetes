@@ -12,7 +12,8 @@ spec:
     - Ingress
     - Egress
   ingress:
-    - from: # Ingress
+    # Pomerium Ingress controller
+    - from:
       - namespaceSelector:
           matchLabels:
             kubernetes.io/metadata.name: pomerium
