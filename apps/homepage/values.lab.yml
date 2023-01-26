@@ -1,3 +1,9 @@
 domain: "lab.homecentr.one"
 hostname: homepage.lab.homecentr.one
 imageTag: v0.6.3
+
+networkPolicy:
+  kubeApiNodes:
+    - 10.1.8.21
+    - 10.1.8.22
+    - 10.1.8.23
