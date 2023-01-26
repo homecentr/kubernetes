@@ -35,8 +35,8 @@ spec:
       - protocol: UDP
         port: 53
       from:
-        # - ipBlock:
-        #     cidr: 172.16.0.0/16
+        - ipBlock:
+            cidr: 172.16.0.0/16
         {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
         - ipBlock:
             cidr: {{ $cidr }}
