@@ -13,14 +13,22 @@ spec:
   ingress:
     # Kubernetes API
     - from:
-        {{- range $node := .Values.kubeApiNodes }}
+        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
         - ipBlock:
-            cidr: {{ $node }}/32  # TODO: PORT
+            cidr: {{ $node }}/32
         {{- end }}
 
+      ports:
+        - protocol: TCP
+          port: 8080
+        - protocol: TCP
+          port: 8443
+
     - from:
+        {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
         - ipBlock:
-            cidr: {{ .Values.acceptedExternalTrafficCidr }}
+            cidr: {{ $cidr }}/32 
+        {{- end }}
       ports:
         - protocol: TCP
           port: 8080
@@ -30,7 +38,7 @@ spec:
   egress:
     # Kubernetes API
     - to:
-        {{- range $node := .Values.kubeApiNodes }}
+        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
         - ipBlock:
             cidr: {{ $node }}/32
         {{- end }}

@@ -3,7 +3,11 @@ replicas: 2
 hostname: login.lab.homecentr.one
 tlsCertificateName: lab-homecentr-one
 loadBalancerIp: 10.1.8.132
-acceptedExternalTrafficCidr: 10.1.8.0/24
+
+networkPolicy:
+  externalIngressIpBlocks:
+  - 10.1.8.0/24
+  - 10.1.3.0/24
 
 kubeApiNodes:
 - 10.1.8.21
