@@ -11,6 +11,8 @@ networkPolicy:
     - 1.0.0.1
 
 coredns:
+  fullnameOverride: dns-primary
+  nameOverride: dns-primary
   image:
     repository: quay.io/oriedge/k8s_gateway
     tag: v0.3.3

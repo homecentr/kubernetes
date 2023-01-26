@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ printf "%s-coredns" .Release.Name | trunc 63 | trimSuffix "-" }}
+  name: {{ .Values.coredns.fullNameOverride | trunc 63 | trimSuffix "-" }}
   labels:
-    app.kubernetes.io/name: coredns
+    app.kubernetes.io/name: {{ .Values.coredns.nameOverride | trunc 63 | trimSuffix "-" }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
