@@ -38,6 +38,7 @@ coredns:
             operator: In
             values:
             - dns
+    topologyKey: dns-affinity
   servers:
     - port: 53
       zones:
