@@ -1,8 +1,0 @@
-hostname: pve.lab.homecentr.one
-pveNodes:
-  - name: lab-pve1
-    hostname: lab-pve1.lab.homecentr.one
-  - name: lab-pve2
-    hostname: lab-pve2.lab.homecentr.one
-  - name: lab-pve3
-    hostname: lab-pve3.lab.homecentr.one
