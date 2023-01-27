@@ -58,7 +58,11 @@ config:
             href: https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview
             description: User management
 
-        # Pager Duty (Bookmarks ??)
+        # Backblaze (???)
+        # Cloudflare
+        # Pager Duty
+        # SendGrid (???)
+        # Dynadot
   widgets:
     - resources:
         # change backend to 'kubernetes' to use Kubernetes integration. Requires RBAC.

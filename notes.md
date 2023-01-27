@@ -1,36 +1,32 @@
-================================================
-Cluster
-================================================
-- Namespaces - for now skip, add via helm hooks only when specific namespace annotations/labels are required
-- Priority classes - add at the end, go through all apps
+# Roadmap
 
-================================================
-Argo CD deployment from here
-================================================
-- Metallb - CRD update diff ignore list
-
-- Homepage - Config
-    - Infrastructure
-        - Argo CD
-        - Azure AD
-        - Backblaze B2
-    - Bookmarks below
-        - github/homecentr
-
-- Proxmox ingress
-    - Ingress with multiple backends (with health check, use the GET /api2/json/version API endpoint, still requires a token...)
-    - Endpoints for external instances
-
-- Unifi controller (needs storage)
-
+## v1 - make it work
 - Frigate
-- Prometheus stack (many CRDs)
-- Node monitoring
+- MQTT
+- Unifi controller
+- qBittorrent
 
-================================ First release here
-
-- Kubernetes dashboard
-- Grafana configuration
-- Node problem detector
-- Kubescape
+## v2 - protect against regression
 - Cypress tests
+
+## v3 - make it monitored
+- Loki (with SSO)
+- Prometheus stack (CRDs in separate app)
+- Prometheus configuration
+    - create prometheus instance
+    - expose prometheus via protected ingress route
+    - expose Grafana with SSO
+    - monitor physical nodes
+    - gluster monitoring
+
+note: app naming convention for monitoring only apps monitoring-<area>, e.g. monitoring-nuts, monitoring-nodes, monitoring-proxmox etc.
+
+## v4 - make it secure
+- Kubescape scan of the code via GitHub actions
+- Install Kubescape to the cluster
+
+## v5 - protect data
+- rClone with Backblaze
+
+## v6 - remote access
+- Cloudflared
