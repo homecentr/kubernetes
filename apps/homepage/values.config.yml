@@ -2,26 +2,41 @@ config:
   # To use an existing ConfigMap uncomment this line and specify the name
   # useExistingConfigMap: existing-homepage-configmap
   bookmarks:
-    - Developer:
-        - Github:
-            - abbr: GH
-              href: https://github.com/
-    - Another:
-        - Test:
-            - abbf: TT
-              href: https://hello.com
+    - Homelab:
+        - "Homecentr Docs":
+            - href: https://homecentr.one
+
+        - "Homecentr on Github":
+            - icon: github
+              href: https://github.com/homecentr/
+        # /homelab on Reddit
+    
+    - "Cloud tools":
+        # Cloud tools - OneDrive, Gmail etc.
+        - OneDrive:
+            - icon: onedrive
+              href: https://onedrive.com
+
+        - Gmail:
+            - icon: gmail
+              href: https://gmail.com
   services:
     - My First Group:
         - My First Service:
             href: http://test.$DOMAIN/
             description: Homepage is awesome
 
-    - My Second Group:
+    - Tools:
+        # Nextcloud
+        # Snipe IT
+        # ...
         - My Second Service:
             href: http://localhost/
             description: Homepage is the best
 
     - Infrastructure:
+        # Grafana
+
         - "Argo CD":
             icon: argocd
             href: https://argocd.$DOMAIN/
@@ -33,10 +48,17 @@ config:
             href: https://pve.$DOMAIN
             description: Virtual servers management
 
+        - "Unifi Controller":
+            icon: ubiquiti
+            href: https://unifi.$DOMAIN
+            description: Network management
+
         - "Azure AD":
             icon: azure
             href: https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview
             description: User management
+
+        # Pager Duty (Bookmarks ??)
   widgets:
     - resources:
         # change backend to 'kubernetes' to use Kubernetes integration. Requires RBAC.

@@ -21,6 +21,8 @@ Argo CD deployment from here
     - Ingress with multiple backends (with health check, use the GET /api2/json/version API endpoint, still requires a token...)
     - Endpoints for external instances
 
+- Unifi controller (needs storage)
+
 - Frigate
 - Prometheus stack (many CRDs)
 - Node monitoring

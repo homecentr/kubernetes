@@ -100,3 +100,10 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.config.yml
+
+- name: proxmox-ingress
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
