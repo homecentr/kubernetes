@@ -10,7 +10,7 @@ metadata:
     ingress.pomerium.io/allow_websockets: 'true'
     ingress.pomerium.io/allow_any_authenticated_user: 'true'
     ingress.pomerium.io/allow_spdy: 'true'
-    ingress.pomerium.io/kubernetes_service_account_token_secret: {{ .Values.dashboard.fullnameOverride }}-token
+    ingress.pomerium.io/kubernetes_service_account_token_secret: {{ .Values.dashboard.fullnameOverride }}-impersonate
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
