@@ -1,12 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kubernetes-dashboard
+  name: {{ .Values.dashboard.fullnameOverride }}
   labels:
     {{- include "common-labels" . | indent 4 }}
   annotations:
     ingress.pomerium.io/tls_skip_verify: 'true'
     ingress.pomerium.io/secure_upstream: 'true'
+    ingress.pomerium.io/allow_websockets: 'true'
     ingress.pomerium.io/allow_any_authenticated_user: 'true'
     ingress.pomerium.io/allow_spdy: 'true'
     ingress.pomerium.io/kubernetes_service_account_token_secret: {{ .Values.dashboard.fullnameOverride }}-token
