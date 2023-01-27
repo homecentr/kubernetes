@@ -24,9 +24,14 @@ config:
     - Infrastructure:
         - "Argo CD":
             icon: argocd
-            href: https://argcd.$DOMAIN/
-            ping: https://argcd.$DOMAIN/
+            href: https://argocd.$DOMAIN/
+            ping: https://argocd.$DOMAIN/
             description: Kubernetes deployment
+
+        - "Azure AD":
+            icon: azure
+            href: https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview
+            description: User management
   widgets:
     - resources:
         # change backend to 'kubernetes' to use Kubernetes integration. Requires RBAC.
