@@ -68,6 +68,11 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
+- name: prometheus-crd
+  type: directory
+  syncWave: -50
+  deleteProtection: false
+
 - name: dns-primary
   type: helm
   path: apps/dns
