@@ -12,6 +12,8 @@ networkPolicy:
   - 10.1.8.21
   - 10.1.8.22
   - 10.1.8.23
+  externalHttpEgressIpBlocks:
+  - 10.1.8.0/24
 
 postgresql:
   primary:
