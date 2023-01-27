@@ -10,5 +10,5 @@ subjects:
 {{- range $userName := .Values.adminUsers }}
   - apiGroup: rbac.authorization.k8s.io
     kind: User
-    name: $userName
+    name: {{ $userName }}
 {{- end }}
