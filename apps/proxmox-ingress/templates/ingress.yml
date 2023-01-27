@@ -14,9 +14,10 @@ spec:
   - host: {{ .Values.hostname | quote }}
     http:
       paths:
-        - pathType: ImplementationSpecific
+        - path: /
+          pathType: Prefix
           backend:
             service:
               name: proxmox
               port:
-                number: 443
+                name: webui
