@@ -8,7 +8,7 @@ metadata:
     ingress.pomerium.io/tls_skip_verify: 'true'
     ingress.pomerium.io/allow_any_authenticated_user: 'true'
     ingress.pomerium.io/allow_spdy: 'true'
-    ingress.pomerium.io/kubernetes_service_account_token_secret: {{ .Values.dashboard.fullnameOverride }}
+    ingress.pomerium.io/kubernetes_service_account_token_secret: {{ .Values.dashboard.fullnameOverride }}-token
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
