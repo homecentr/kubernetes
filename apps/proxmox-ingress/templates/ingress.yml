@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "common-labels" . | indent 4 }}
   annotations:
+    ingress.pomerium.io/secure_upstream: 'true'
     # Proxmox has custom authentication logic
     ingress.pomerium.io/allow_public_unauthenticated_access: 'true'
 spec:
