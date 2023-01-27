@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: proxmox
+  labels:
+    {{- include "common-labels" . | indent 4 }}
+  annotations:
+    # Proxmox has custom authentication logic
+    ingress.pomerium.io/allow_public_unauthenticated_access: 'true'
+spec:
+  rules:
+  - host: {{ .Values.hostname | quote }}
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          backend:
+            service:
+              name: proxmox
+              port:
+                number: 443
