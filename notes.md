@@ -8,25 +8,27 @@ Cluster
 Argo CD deployment from here
 ================================================
 - Metallb - CRD update diff ignore list
-- Argocd - move ingress to ansible?
-- Homepage - Config TBA
-- External DNS
-    - Put the instances on separate nodes when possible
 
+- Homepage - Config
+    - Infrastructure
+        - Argo CD
+        - Azure AD
+        - Backblaze B2
+    - Bookmarks below
+        - github/homecentr
 
+- Proxmox ingress
+    - Ingress with multiple backends (with health check, use the GET /api2/json/version API endpoint, still requires a token...)
+    - Endpoints for external instances
 
-- Cypress tests
-
-
+- Frigate
 - Prometheus stack (many CRDs)
 - Node monitoring
+
+================================ First release here
+
+- Kubernetes dashboard
 - Grafana configuration
 - Node problem detector
 - Kubescape
-
-================================================
-Apps
-================================================
-- External DNS !!!
-- Frigate
-- ...
+- Cypress tests

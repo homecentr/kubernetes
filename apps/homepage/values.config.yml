@@ -6,6 +6,10 @@ config:
         - Github:
             - abbr: GH
               href: https://github.com/
+    - Another:
+        - Test:
+            - abbf: TT
+              href: https://hello.com
   services:
     - My First Group:
         - My First Service:
@@ -17,10 +21,12 @@ config:
             href: http://localhost/
             description: Homepage is the best
 
-    - My Third Group:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
+    - Infrastructure:
+        - "Argo CD":
+            icon: argocd
+            href: https://argcd.$DOMAIN/
+            ping: https://argcd.$DOMAIN/
+            description: Kubernetes deployment
   widgets:
     - resources:
         # change backend to 'kubernetes' to use Kubernetes integration. Requires RBAC.
