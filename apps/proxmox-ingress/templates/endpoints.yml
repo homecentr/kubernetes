@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: proxmox
+  labels:
+    {{- include "common-labels" . | indent 4 }}
+subsets:
+  - addresses:
+    - ip: 10.1.8.11
+    - ip: 10.1.8.12
+    - ip: 10.1.8.13
+    ports:
+      - name: webui
+        port: 443
+        protocol: TCP

@@ -7,6 +7,7 @@ metadata:
   annotations:
     ingress.pomerium.io/secure_upstream: 'true'
     ingress.pomerium.io/tls_skip_verify: 'true'
+    ingress.pomerium.io/lb_policy: 'ROUND_ROBIN'
     # Proxmox has custom authentication logic
     ingress.pomerium.io/allow_public_unauthenticated_access: 'true'
 spec:
