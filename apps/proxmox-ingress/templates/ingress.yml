@@ -22,10 +22,3 @@ spec:
               name: proxmox
               port:
                 name: webui
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: proxmox2
-              port:
-                name: webui
