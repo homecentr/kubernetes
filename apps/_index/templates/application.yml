@@ -51,4 +51,7 @@ spec:
       prune: true
     syncOptions:
     - CreateNamespace=true
+    {{ if eq (.serverSideApply | default false) true }}
+    - ServerSideApply=true
+    {{ end }}
 {{- end }}

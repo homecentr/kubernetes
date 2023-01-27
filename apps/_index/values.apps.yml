@@ -72,6 +72,7 @@ applications:
   type: directory
   syncWave: -50
   deleteProtection: false
+  serverSideApply: true
 
 - name: dns-primary
   type: helm
