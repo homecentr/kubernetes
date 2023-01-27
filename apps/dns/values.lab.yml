@@ -62,7 +62,7 @@ coredns:
         - name: template
           parameters: IN A lab.homecentr.one
           configBlock: |-
-            match "^pve\.lab\.homecentr\.one$"
+            match "^pve\.lab\.homecentr\.one\.$"
             answer "{{ .Name }} 60 IN A 10.1.8.11"
             answer "{{ .Name }} 60 IN A 10.1.8.12"
             answer "{{ .Name }} 60 IN A 10.1.8.13"
