@@ -28,6 +28,11 @@ config:
             ping: https://argocd.$DOMAIN/
             description: Kubernetes deployment
 
+        - "Proxmox VE":
+            icon: proxmox
+            href: https://pve.$DOMAIN
+            description: Virtual servers management
+
         - "Azure AD":
             icon: azure
             href: https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview
