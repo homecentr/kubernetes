@@ -1,6 +1,6 @@
 hostname: k8s.lab.homecentr.one
 
-kubernetes-dashboard:
+dashboard:
   fullnameOverride: kubernetes-dashboard
   serviceAccount:
     create: false
