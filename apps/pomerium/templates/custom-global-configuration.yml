@@ -2,6 +2,8 @@ apiVersion: ingress.pomerium.io/v1
 kind: Pomerium
 metadata:
   name: global
+  labels:
+    {{- include "common-labels" . | indent 4 }}
 spec:
   authenticate:
     url: https://{{ .Values.hostname }}

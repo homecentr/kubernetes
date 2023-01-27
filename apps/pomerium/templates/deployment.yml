@@ -4,7 +4,6 @@ metadata:
   labels:
     {{- include "common-labels" . | indent 4 }}
   name: pomerium
-  namespace: pomerium
 spec:
   replicas: {{ .Values.replicas | default 1 }}
   selector:

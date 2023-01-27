@@ -4,7 +4,6 @@ metadata:
   labels:
     {{- include "common-labels" . | indent 4 }}
   name: pomerium-metrics
-  namespace: pomerium
 spec:
   ports:
   - name: metrics
@@ -25,7 +24,6 @@ metadata:
     metallb.universe.tf/allow-shared-ip: {{ .Release.Name }}
     metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIp }}
   name: pomerium-proxy
-  namespace: pomerium
 spec:
   ports:
   - name: https
