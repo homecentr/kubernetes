@@ -3,4 +3,3 @@ networkPolicy:
     - 10.1.8.21
     - 10.1.8.22
     - 10.1.8.23
-    - 10.1.8.24 # Fake for testing

@@ -43,6 +43,12 @@ config:
             ping: https://argocd.$DOMAIN/
             description: Kubernetes deployment
 
+        - "Kubernetes Dashboard":
+            icon: kubernetes-dashboard
+            href: https://k8s.$DOMAIN/
+            ping: https://k8s.$DOMAIN/
+            description: Kubernetes resource management
+
         - "Proxmox VE":
             icon: proxmox
             href: https://pve.$DOMAIN
