@@ -16,6 +16,12 @@ keys/
     └── *.asc                 # Public keys of all consumers of the secrets
 ```
 
+## Local set up
+Working with this repository requires installation of several command line tools, please use the [dev-setup](https://github.com/lholota/dev-setup) repo and apply the playbook with following tags:
+- sops
+- kubernetes
+- yubikey (optional)
+
 ## Environments
 
 - **Lab** - test environment used to develop the Helm charts and test apps running locally inside of HyperV on a developer's workstation (see the [platform](https://github.com/homecentr/platform) repo on how to create the environment).

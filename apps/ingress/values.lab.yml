@@ -1,5 +1,0 @@
-traefik:
-  service:
-    annotations:
-      metallb.universe.tf/allow-shared-ip: traefik
-      metallb.universe.tf/loadBalancerIPs: 10.1.8.131

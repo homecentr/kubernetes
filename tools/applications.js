@@ -1,29 +1,24 @@
 const fs = require("fs")
-const path = require("path")
 const yaml = require("js-yaml")
 
 const {
     exec
-} = require("child_process");
+} = require("./process")
 
-const environments = [
-    'lab',
-    'prod'
-]
-
-const getApps = () => {
+exports.getAllApps = () => {
     const index = yaml.load(fs.readFileSync("apps/_index/values.apps.yml"))
 
     index.applications.push({
         name: "_index",
+        type: "helm",
         values: {
             "source.repoUrl": "https://github.com/some-repo",
             "source.targetRevision": "some-branch",
             "environmentName": "lab"
         },
         valueFiles: [
-            "values-$env.yml",
-            "values-apps.yml"
+            "values.$env.yml",
+            "values.apps.yml"
         ]
     })
 
@@ -37,73 +32,61 @@ const getApps = () => {
     return apps
 }
 
-const getHelmApps = () => {
-    return getApps().filter(app => app.type == "helm")
-}
-
 class App {
-    lint(environmentName) {
-        const helmArgs = this.getHelmArgs(environmentName)
+    async lint(environmentName) {
+        const args = this.getHelmArgs(environmentName)
+        const command = `helm lint ${this.getAppDirectory()} ${args}`
 
-        this.executeHelmCommand("lint", helmArgs)
+        const result = await exec(command)
+
+        if (result.exitCode == 0) {
+            console.log(`✔️  ${this.getAppDirectory()}`)
+        } else {
+            console.log(`❌ ${this.getAppDirectory()} has following errors:`)
+            console.log(result.stdcombined.getIndented())
+        }
     }
 
-    render(environmentName, showYaml, showCommand) {
-        let helmArgs = this.getHelmArgs(environmentName)
+    async render(environmentName, options = {
+        debug: false,
+        showYaml: false
+    }) {
+        let args = this.getHelmArgs(environmentName)
 
-        this.executeHelmCommand("template", helmArgs, showYaml, true, showCommand)
-    }
-
-    installDependencies() {
-        this.executeHelmCommand("dependency update", "")
-    }
-
-    async executeHelmCommand(commandName, args, showOutputOnSuccess = false, showOutputOnFailure = true, showCommand = false) {
-        const command = `helm ${commandName} ${this.getChartDirectory()} ${args}`
-
-        if (showCommand) {
-            console.log(command)
+        if (options.debug) {
+            args += " --debug"
         }
 
-        const buffer = []
+        const command = `helm template ${this.getAppDirectory()} ${args}`
+        const result = await exec(command)
 
-        const execution = exec(command, {
-            stdio: ['pipe']
-        })
+        if (result.exitCode == 0) {
+            console.log(`✔️  ${this.getAppDirectory()}`)
 
-        execution.stdout.on('data', (data) => {
-            buffer.push(data)
-        })
-
-        execution.stderr.on('data', (data) => {
-            buffer.push(data)
-        })
-
-        execution.on('exit', (exitCode) => {
-            process.exitCode = exitCode
-
-            if (exitCode == 0) {
-                console.log(`✔️  ${this.getChartDirectory()}`)
-
-                if (showOutputOnSuccess) {
-                    buffer.forEach(entry => {
-                        entry.split('\n').forEach(line => console.log(`     ${line}`))
-                    });
-                }
-            } else {
-                console.log(`❌ ${this.getChartDirectory()} has failed:`)
-
-                if (showOutputOnFailure) {
-                    buffer.forEach(entry => {
-                        entry.split('\n').forEach(line => console.log(`     ${line}`))
-                    });
-                }
+            if (options.showYaml) {
+                console.log(result.stdout.getIndented())
             }
-        })
+        } else {
+            console.log(`❌ ${this.getAppDirectory()} has following errors:`)
+            console.log(result.stdcombined.getIndented())
+        }
     }
 
-    getChartDirectory() {
-        if(this.path) {
+    async installDependencies() {
+        const command = `helm dependency update ${this.getAppDirectory()}`
+        
+        const result = await exec(command)
+
+        if (result.exitCode == 0) {
+            console.log(`✔️  ${this.getAppDirectory()}`)
+        } else {
+            console.log(`❌ ${this.getAppDirectory()} has following errors:`)
+            console.log(result.stdcombined.getIndented())
+        }
+    }
+
+    getAppDirectory() {
+        if (this.path) {
             return this.path
         }
 
@@ -117,7 +100,7 @@ class App {
             this.valueFiles.forEach(valueFile => {
                 const resolveValueFile = valueFile.replace("$env", environmentName)
 
-                args += ` -f \"${this.getChartDirectory()}/${resolveValueFile}\"`
+                args += ` -f \"${this.getAppDirectory()}/${resolveValueFile}\"`
             })
         }
 
@@ -125,7 +108,7 @@ class App {
             this.secretValueFiles.forEach(valueFile => {
                 const resolveValueFile = valueFile.replace("$env", environmentName)
 
-                args += ` -f \"secrets://${this.getChartDirectory()}/${resolveValueFile}\"`
+                args += ` -f \"secrets://${this.getAppDirectory()}/${resolveValueFile}\"`
             })
         }
 
@@ -137,63 +120,4 @@ class App {
 
         return args
     }
-}
-
-const commands = {
-    "lint": () => getCurrentDirApp().lint(getEnvironmentFromArgs()),
-    "render": () => getCurrentDirApp().render(getEnvironmentFromArgs(), false, true),
-    "render:debug": () => getCurrentDirApp().render(getEnvironmentFromArgs(), true, true),
-
-    "lint:all": () => {
-        const environmentName = getEnvironmentFromArgs()
-        getHelmApps().forEach(app => app.lint(environmentName))
-    },
-    "render:all": () => {
-        const environmentName = getEnvironmentFromArgs()
-        getHelmApps().forEach(app => app.render(environmentName))
-    },
-
-    "deps": () => getCurrentDirApp().installDependencies(),
-    "deps:all": () => getHelmApps().forEach(app => app.installDependencies()),
-}
-
-
-const getCurrentDirApp = () => {
-    const currentPath = process.env.INIT_CWD
-    const dirName = path.basename(currentPath)
-
-    let app = getApps().find(app => app.name == dirName)
-
-    if(!app) {
-        app = getApps().find(app => app.path == "apps/" + dirName)
-    }
-
-    if (!app) {
-        console.error(`Directory ${dirName} is not an app or it's not registered in _index app.`)
-
-        process.exit(1)
-    }
-
-    return app
-}
-
-const getEnvironmentFromArgs = () => {
-    if (!process.argv ||
-        process.argv.length < 3 ||
-        !environments.includes(process.argv[2])) {
-
-        console.error(`Missing argument - please specify one of the following environments: ${environments.join(',')}`)
-        process.exit(1)
-    }
-
-    return process.argv[2]
-}
-
-const commandName = process.env.npm_lifecycle_event
-
-if (commandName in commands) {
-    commands[commandName]()
-} else {
-    console.error(`Command ${command} does not exist`)
-    process.exit(1)
 }

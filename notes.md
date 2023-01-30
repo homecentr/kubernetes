@@ -1,6 +1,18 @@
 # Roadmap
 
 ## v1 - make it work
+- Js tooling
+    - Allow specifying app name instead of directory
+    - Switch to commander
+- Globals
+    - Add to application template
+    - Add to js tooling
+- Kubernetes dashboard
+    - Network policy
+- Prometheus
+    - Set up storage - first define the storage within lab - new gfs volumes required
+    - Stack installation
+    - Network policy
 - Frigate
 - MQTT
 - Unifi controller

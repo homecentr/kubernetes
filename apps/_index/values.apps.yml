@@ -106,6 +106,7 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.config.yml
+  - ../globals.lab.yml
 
 - name: kubernetes-dashboard
   type: helm

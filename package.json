@@ -7,16 +7,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "render": "node ./tools/applications.js",
-    "render:debug": "node ./tools/applications.js",
-    "render:all": "node ./tools/applications.js",
-    "lint": "node ./tools/applications.js",
-    "lint:all": "node ./tools/applications.js",
-    "deps": "node ./tools/applications.js",
-    "deps:all": "node ./tools/applications.js",
-    "setup": "run-script-os",
-    "setup:win32": "powershell -ExecutionPolicy Bypass ./tools/setup-windows.ps1",
-    "setup:linux": "bash ./tools/setup-linux.sh"
+    "render": "node ./tools/cli.js",
+    "render:all": "node ./tools/cli.js",
+    "lint": "node ./tools/cli.js",
+    "lint:all": "node ./tools/cli.js",
+    "deps": "node ./tools/cli.js",
+    "deps:all": "node ./tools/cli.js"
   },
   "devDependencies": {
     "commander": "^10.0.0",
