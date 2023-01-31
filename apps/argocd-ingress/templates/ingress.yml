@@ -12,6 +12,8 @@ metadata:
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: argocd
     gethomepage.dev/name: "Argo CD"
+    gethomepage.dev/href: "https://google.com"
+    gethomepage.dev/ping: "https://google.com"
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
