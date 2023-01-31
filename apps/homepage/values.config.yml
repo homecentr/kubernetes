@@ -1,6 +1,15 @@
 config:
   # To use an existing ConfigMap uncomment this line and specify the name
   # useExistingConfigMap: existing-homepage-configmap
+  settings:
+    title: Homecentr
+    favicon: /icons/favicon.ico
+    background: /images/background.webp
+    backgroundOpacity: 0.3
+    theme: dark
+    color: neutral
+    headerStyle: clean
+    
   bookmarks:
     - Homelab:
         - "Homecentr Docs":
