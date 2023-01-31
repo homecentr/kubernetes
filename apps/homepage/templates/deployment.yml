@@ -52,6 +52,10 @@ spec:
           volumeMounts:
             - mountPath: /app/config
               name: config
+            - mountPath: /app/public/icons
+              name: icons
+            - mountPath: /app/public/images
+              name: images
             - mountPath: /app/config/logs
               name: logs
       dnsPolicy: ClusterFirst
@@ -61,5 +65,11 @@ spec:
         - name: config
           configMap:
             name: {{ .Release.Name }}
+        - name: images
+          configMap:
+            name: {{ .Release.Name }}-images
+        - name: icons
+          configMap:
+            name: {{ .Release.Name }}-icons
         - name: logs
           emptyDir:

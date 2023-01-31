@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    {{- include "common-labels" . | indent 4 }}
+  name: {{ .Release.Name }}-images
+binaryData:
+{{- range $path, $_ := $.Files.Glob  "images/*.*" }}
+    {{ base $path | quote }}: {{ $.Files.Get $path | b64enc }}
+{{- end }}
