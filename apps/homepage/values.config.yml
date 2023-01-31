@@ -4,7 +4,7 @@ config:
   settings:
     title: Homecentr
     favicon: /icons/favicon.ico
-    background: /images/background.webp
+    background: https://images.unsplash.com/photo-1519681393784-d120267933ba
     backgroundOpacity: 0.3
     theme: dark
     color: neutral
