@@ -4,10 +4,11 @@ config:
   bookmarks:
     - Homelab:
         - "Homecentr Docs":
+              # icon TBA  
             - href: https://homecentr.one
 
         - "Homecentr on Github":
-            - icon: github
+            - icon: github-light
               href: https://github.com/homecentr/
         # /homelab on Reddit
     
@@ -20,6 +21,7 @@ config:
         - Gmail:
             - icon: gmail
               href: https://gmail.com
+              
   services:
     - My First Group:
         - My First Service:
@@ -37,11 +39,11 @@ config:
     - Infrastructure:
         # Grafana
 
-        - "Argo CD":
-            icon: argocd
-            href: https://argocd.$DOMAIN/
-            ping: https://argocd.$DOMAIN/
-            description: Kubernetes deployment
+        # - "Argo CD":
+        #     icon: argocd
+        #     href: https://argocd.$DOMAIN/
+        #     ping: https://argocd.$DOMAIN/
+        #     description: Kubernetes deployment
 
         - "Kubernetes Dashboard":
             icon: kubernetes-dashboard
@@ -70,15 +72,19 @@ config:
         # SendGrid (???)
         # Dynadot
   widgets:
-    - resources:
-        # change backend to 'kubernetes' to use Kubernetes integration. Requires RBAC.
-        backend: kubernetes
-        expanded: true
-        cpu: true
-        memory: true
+    # TBA: When prometheus is available
+    # - resources:
+    #     # change backend to 'kubernetes' to use Kubernetes integration. Requires RBAC.
+    #     backend: kubernetes
+    #     expanded: true
+    #     cpu: true
+    #     memory: true
+
     - search:
         provider: google
         target: _blank
+
+    # TBA: When prometheus is available
     # # Uncomment to enable Kubernetes integration
     # - kubernetes:
     #     cluster:
@@ -93,5 +99,4 @@ config:
     #       memory: true
     #       showLabel: true
   kubernetes:
-    # change mode to 'cluster' to use RBAC service account
     mode: cluster
