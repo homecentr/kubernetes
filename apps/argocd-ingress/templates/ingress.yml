@@ -8,12 +8,12 @@ metadata:
     # ArgoCD has custom authentication logic
     ingress.pomerium.io/allow_public_unauthenticated_access: "true"
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: Dynamically Detected Homepage
+    gethomepage.dev/description: Kubernetes deployment
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: argocd
     gethomepage.dev/name: "Argo CD"
     gethomepage.dev/href: "https://{{ .Values.hostname }}"
-    gethomepage.dev/ping: "http://argo-cd-argocd-server.{{ .Release.Namespace }}.svc.cluster.local"
+    gethomepage.dev/widget: "{ \"type\":\"emby\", \"url\": \"http://emby.home/\", \"key\": \"apikeyapikeyapikeyapikeyapikey\" }"
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
