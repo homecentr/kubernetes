@@ -30,6 +30,31 @@ config:
         - Gmail:
             - icon: gmail
               href: https://gmail.com
+
+    - "Cloud infrastructure":
+        - PagerDuty:
+            - icon: pagerduty
+              href: https://pagerduty.com
+
+        - Cloudflare:
+            - icon: cloudflare
+              href: https://cloudflare.com
+
+        - Azure:
+            - icon: azure
+              href: https://portal.azure.com
+
+        - Backblaze:
+            - icon: backblaze
+              href: https://www.backblaze.com/b2/cloud-storage.html
+
+        - SendGrid:
+            - icon: /icons/sendgrid.png
+              href: https://sendgrid.com
+
+        - Dynadot:
+            - icon: /icons/dynadot.png
+              href: https://dynadot.com
               
   services:
     - My First Group:
