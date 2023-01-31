@@ -24,7 +24,7 @@ config:
     - "Cloud tools":
         # Cloud tools - OneDrive, Gmail etc.
         - OneDrive:
-            - icon: onedrive
+            - icon: /icons/onedrive.png
               href: https://onedrive.com
 
         - Gmail:
