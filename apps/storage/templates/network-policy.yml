@@ -11,7 +11,7 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
   egress:
     - to: # Kubernetes API
-{{- range $nodeIp := .Values.kubeApiNodes }}
+{{- range $nodeIp := .Values.networkPolicy.kubeApiNodes }}
         - ipBlock:
             cidr: {{ $nodeIp }}/32
 {{- end }}
@@ -20,7 +20,7 @@ spec:
           port: 6443
   ingress:
     - from: # Allow webhook calls from Kube API
-{{- range $nodeIp := .Values.kubeApiNodes }}
+{{- range $nodeIp := .Values.networkPolicy.kubeApiNodes }}
         - ipBlock:
             cidr: {{ $nodeIp }}/32
 {{- end }}

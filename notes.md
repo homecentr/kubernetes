@@ -1,9 +1,6 @@
 # Roadmap
 
 ## v1 - make it work
-- Js tooling
-    - Allow specifying app name instead of directory
-    - Switch to commander
 - Globals
     - Add to application template
     - Add to js tooling

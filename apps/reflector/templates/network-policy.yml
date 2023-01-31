@@ -11,7 +11,7 @@ spec:
     - Egress
   egress:
     - to:
-        {{- range $node := .Values.kubeApiNodes }}
+        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
         - ipBlock:
             cidr: {{ $node }}/32
         {{- end }}

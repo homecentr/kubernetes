@@ -25,7 +25,8 @@ applications:
   namespace: kube-system
   deleteProtection: false
   valueFiles:
-  - values.$env.yml
+  - values.yml
+  - ../globals.$env.yml
 
 - name: storage
   type: helm
@@ -34,6 +35,7 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
+  - ../globals.$env.yml
 
 - name: cert-manager-crd
   type: raw
@@ -106,7 +108,7 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.config.yml
-  - ../globals.lab.yml
+  - ../globals.$env.yml
 
 - name: kubernetes-dashboard
   type: helm
@@ -114,5 +116,6 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
+  - ../globals.$env.yml
   secretValueFiles:
   - secrets.$env.yml

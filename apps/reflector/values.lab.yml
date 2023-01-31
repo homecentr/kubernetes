@@ -1,7 +1,0 @@
-reflector:
-  nameOverride: reflector
-
-kubeApiNodes:
-- 10.1.8.21
-- 10.1.8.22
-- 10.1.8.23
