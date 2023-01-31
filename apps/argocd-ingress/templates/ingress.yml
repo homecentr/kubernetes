@@ -6,7 +6,12 @@ metadata:
     {{- include "common-labels" . | indent 4 }}
   annotations:
     # ArgoCD has custom authentication logic
-    ingress.pomerium.io/allow_public_unauthenticated_access: 'true'
+    ingress.pomerium.io/allow_public_unauthenticated_access: "true"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Dynamically Detected Homepage
+    gethomepage.dev/group: Infrastructure
+    gethomepage.dev/icon: argocd
+    gethomepage.dev/name: "Argo CD"
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
