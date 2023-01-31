@@ -12,7 +12,7 @@ metadata:
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: argocd
     gethomepage.dev/name: "Argo CD"
-    gethomepage.dev/href: "https://{{ .Values.hostname | quote }}"
+    gethomepage.dev/href: "https://{{ .Values.hostname }}"
     gethomepage.dev/ping: "http://argo-cd-argocd-server.{{ .Release.Namespace }}.svc.cluster.local"
 spec:
   rules:
