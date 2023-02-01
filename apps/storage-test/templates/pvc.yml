@@ -2,12 +2,10 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: local-volume-pvc
-  annotations:
-    volumeType: local
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: local-path-provisioner-services
   resources:
     requests:
       storage: 128Mi
