@@ -37,6 +37,12 @@ applications:
   - values.$env.yml
   - ../globals.$env.yml
 
+- name: storage-test
+  type: helm
+  syncWave: -85
+  namespace: default
+  deleteProtection: false
+
 - name: cert-manager-crd
   type: raw
   syncWave: -80
