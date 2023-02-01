@@ -27,7 +27,9 @@ spec:
       serviceAccountName: local-path-provisioner
       securityContext:
         allowPrivilegeEscalation: false
-        runAsNonRoot: true
+        runAsNonRoot: false # Required to manipulate directory permissions on host
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: local-path-provisioner
           image: rancher/local-path-provisioner:{{ $.Values.imageVersion | required ".Values.imageVersion is required" }}
@@ -55,7 +57,9 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
-            runAsNonRoot: true
+            runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
       volumes:
         - name: config-volume
           configMap:

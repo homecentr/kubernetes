@@ -41,6 +41,8 @@ spec:
       {{- end }}
     {{ else }}
     directory:
+      exclude:
+        - .kubescape.yml
     {{ end }}
 
   ignoreDifferences: {{ .ignoreDifferences | toYaml | nindent 4 }}

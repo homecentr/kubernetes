@@ -95,6 +95,7 @@ class App {
         let scanDirectory
 
         const appTmpDir = this.createAppTempDir(environmentName)
+        const exceptionsFile = path.join(this.getAppDirectory(), ".kubescape-exceptions.yml")
 
         if (this.type == "helm") {
             // Render helm chart
@@ -117,6 +118,10 @@ class App {
         
         if(options.htmlOutput) {
             kubescapeArgs += ` --format html --output ${reportFile}`
+        }
+
+        if(fs.existsSync(exceptionsFile)) {
+            kubescapeArgs += ` --exceptions \"${exceptionsFile}\"`
         }
 
         const command = `kubescape scan ${scanDirectory} ${kubescapeArgs}`
