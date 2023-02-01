@@ -24,7 +24,7 @@ spec:
         app.kubernetes.io/instance: {{ $.Release.Name }}
         homecentr.one/volume: {{ $volume.name }}
     spec:
-      automountServiceAccountToken: false
+      automountServiceAccountToken: true
       serviceAccountName: local-path-provisioner
       securityContext:
         runAsNonRoot: false # Required to manipulate directory permissions on host
