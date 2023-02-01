@@ -27,7 +27,8 @@ spec:
       automountServiceAccountToken: true
       serviceAccountName: local-path-provisioner
       securityContext:
-        runAsNonRoot: false # Required to manipulate directory permissions on host
+        runAsNonRoot: true
+        runAsUser: 1000
         seccompProfile:
           type: RuntimeDefault
         seLinuxOptions:
@@ -62,7 +63,8 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
-            runAsNonRoot: false
+            runAsNonRoot: true
+            runAsUser: 1000
             seccompProfile:
               type: RuntimeDefault
             capabilities:
