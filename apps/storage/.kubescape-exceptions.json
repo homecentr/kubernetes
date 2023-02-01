@@ -1,2 +1,34 @@
 [
+    {
+        "name": "runAsNonRoot",
+        "policyType": "postureExceptionPolicy",
+        "actions": [
+            "alertOnly"
+        ],
+        "resources": [
+            {
+                "designatorType": "Attributes",
+                "attributes": {
+                    "kind": ".*"
+                }
+            }
+        ],
+        "posturePolicies": [
+            {
+                "controlId": "C-0076"
+            },
+            {
+                "controlId": "C-0056"
+            },
+            {
+                "controlId": "C-0018"
+            },
+            {
+                "controlId": "C-0211"
+            },
+            {
+                "controlId": "C-0013"
+            }
+        ]
+    }
 ]

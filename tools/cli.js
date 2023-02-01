@@ -92,13 +92,15 @@ program
     .addArgument(environmentArg)
     .addArgument(appNameArg)
     .option("-o, --output", "Shows rendered yaml in case of both success and failure")
+    .option("-d, --debug", "Shows the executed kubescape command")
     .option("--html", "Shows scan report as an html for better readability")
     .action(async (environment, appName, options) => {
         const app = getAppByName(appName)
 
         await app.scan(environment, {
             showResults: options.output,
-            htmlOutput: options.html
+            htmlOutput: options.html,
+            debug: options.debug
         })
     })
 

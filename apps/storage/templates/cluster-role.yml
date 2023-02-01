@@ -9,7 +9,10 @@ rules:
     resources: [ "nodes", "persistentvolumeclaims", "configmaps" ]
     verbs: [ "get", "list", "watch" ]
   - apiGroups: [ "" ]
-    resources: [ "endpoints", "persistentvolumes", "pods" ] # pods should be just read ???
+    resources: [ "endpoints", "pods" ] # pods should be just read ???
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: [ "" ]
+    resources: [ "persistentvolumes" ] 
     verbs: [ "*" ]
   - apiGroups: [ "" ]
     resources: [ "events" ]

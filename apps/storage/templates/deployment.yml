@@ -24,11 +24,17 @@ spec:
         app.kubernetes.io/instance: {{ $.Release.Name }}
         homecentr.one/volume: {{ $volume.name }}
     spec:
+      automountServiceAccountToken: false
       serviceAccountName: local-path-provisioner
       securityContext:
         runAsNonRoot: false # Required to manipulate directory permissions on host
         seccompProfile:
           type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
       containers:
         - name: local-path-provisioner
           image: rancher/local-path-provisioner:{{ $.Values.imageVersion | required ".Values.imageVersion is required" }}
@@ -59,6 +65,9 @@ spec:
             runAsNonRoot: false
             seccompProfile:
               type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
       volumes:
         - name: config-volume
           configMap:

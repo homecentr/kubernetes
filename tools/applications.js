@@ -90,16 +90,16 @@ class App {
 
     async scan(environmentName, options = {
         showResults: false,
-        htmlOutput: false
+        htmlOutput: false,
+        debug: false
     }) {
         let scanDirectory
 
         const appTmpDir = this.createAppTempDir(environmentName)
-        const exceptionsFile = path.join(this.getAppDirectory(), ".kubescape-exceptions.yml")
+        const exceptionsFile = path.join(this.getAppDirectory(), ".kubescape-exceptions.json")
 
         if (this.type == "helm") {
             // Render helm chart
-
             await this.render(environmentName, {
                 outputDir: appTmpDir
             })
@@ -125,10 +125,15 @@ class App {
         }
 
         const command = `kubescape scan ${scanDirectory} ${kubescapeArgs}`
+
+        if(options.debug) {
+            console.log(command)
+        }
+
         const result = await exec(command)
 
         if (result.exitCode == 0) {
-            console.log(`✔️  ${this.getAppDirectory()}`)
+            console.log(`✔️  ${this.getAppDirectory()} (kubescape)`)
 
             if (options.showResults) {
                 console.log(result.stdout.getRaw())

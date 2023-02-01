@@ -3,7 +3,9 @@
     "cpu_limit_min": [],
     "cpu_request_max": [],
     "cpu_request_min": [],
-    "imageRepositoryAllowList": [],
+    "imageRepositoryAllowList": [
+      "rancher/*"
+    ],
     "insecureCapabilities": [
       "SETPCAP",
       "NET_ADMIN",

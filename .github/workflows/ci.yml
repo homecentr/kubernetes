@@ -8,6 +8,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [lab, prod]
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -22,14 +25,11 @@ jobs:
       - name: Download helm chart dependencies
         run: yarn deps:all
 
-      - name: Lint charts (Lab environment)
-        run: yarn lint:all lab
+      - name: Lint charts
+        run: yarn lint:all ${{ matrix.environment }}
 
-      - name: Lint charts (Prod environment)
-        run: yarn lint:all prod
+      - name: Render charts
+        run: yarn render:all ${{ matrix.environment }}
 
-      - name: Render charts (Lab environment)
-        run: yarn render:all lab
-
-      - name: Render charts (Prod environment)
-        run: yarn render:all prod
+      - name: Scan all charts for vulnerabilities
+        run: yarn scan:all ${{ matrix.environment }}
