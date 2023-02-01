@@ -9,10 +9,7 @@ rules:
     resources: [ "nodes", "persistentvolumeclaims", "configmaps" ]
     verbs: [ "get", "list", "watch" ]
   - apiGroups: [ "" ]
-    resources: [ "endpoints", "pods" ] # pods should be just read ???
-    verbs: [ "get", "list", "watch" ]
-  - apiGroups: [ "" ]
-    resources: [ "persistentvolumes" ] 
+    resources: [ "endpoints", "persistentvolumes", "pods" ] # Pods are required because the provisioner creates an init pod when it creates a new volume
     verbs: [ "*" ]
   - apiGroups: [ "" ]
     resources: [ "events" ]
