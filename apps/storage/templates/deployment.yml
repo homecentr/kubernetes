@@ -15,12 +15,14 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: local-path-provisioner
-      app.kubernetes.io/instance: local-path-provisioner-{{ $volume.name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      homecentr.one/volume: {{ $volume.name }}
   template:
     metadata:
       labels:
         app.kubernetes.io/name: local-path-provisioner
-        app.kubernetes.io/instance: local-path-provisioner-{{ $volume.name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        homecentr.one/volume: {{ $volume.name }}
     spec:
       serviceAccountName: local-path-provisioner
       containers:
