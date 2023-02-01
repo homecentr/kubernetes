@@ -26,7 +26,6 @@ spec:
     spec:
       serviceAccountName: local-path-provisioner
       securityContext:
-        allowPrivilegeEscalation: false
         runAsNonRoot: false # Required to manipulate directory permissions on host
         seccompProfile:
           type: RuntimeDefault
