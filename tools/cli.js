@@ -9,16 +9,22 @@ const {
     getAllApps
 } = require("./applications")
 
-const environments = ["lab", "prog"]
+const environments = ["lab", "prod"]
 const getCurrentDirName = () => path.basename(process.env.INIT_CWD)
 
-const getHelmAppByName = appName => {
+const getAppByName = appName => {
     const app = getAllApps().find(app => app.name == appName)
 
     if (!app) {
         console.error(`Application '${appName}' could not be found in the index.`)
         process.exit(1)
     }
+
+    return app
+}
+
+const getHelmAppByName = appName => {
+    const app = getAppByName(appName)
 
     if (app.type != "helm") {
         console.error(`Only apps of type 'helm' may be used with this command. The app '${appName}' is of type '${app.type}'.`)
@@ -78,6 +84,32 @@ program
 
         await allApps.forEach(async (app) => {
             await app.render(environment)
+        })
+    })
+
+program
+    .command("scan")
+    .addArgument(environmentArg)
+    .addArgument(appNameArg)
+    .option("-o, --output", "Shows rendered yaml in case of both success and failure")
+    .option("--html", "Shows scan report as an html for better readability")
+    .action(async (environment, appName, options) => {
+        const app = getAppByName(appName)
+
+        await app.scan(environment, {
+            showResults: options.output,
+            htmlOutput: options.html
+        })
+    })
+
+program
+    .command("scan:all")
+    .addArgument(environmentArg)
+    .action(async (environment) => {
+        const allApps = getAllApps()
+
+        await allApps.forEach(async (app) => {
+            await app.scan(environment)
         })
     })
 

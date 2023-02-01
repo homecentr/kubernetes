@@ -1,5 +1,13 @@
 imageVersion: v0.0.23
 
+resources:
+  requests:
+    cpu: 1m
+    memory: 10Mi
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+
 volumes:
 - name: services
   path: /mnt/gfs/k3s-services

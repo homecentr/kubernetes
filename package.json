@@ -11,6 +11,8 @@
     "render:all": "node ./tools/cli.js",
     "lint": "node ./tools/cli.js",
     "lint:all": "node ./tools/cli.js",
+    "scan": "node ./tools/cli.js",
+    "scan:all": "node ./tools/cli.js",
     "deps": "node ./tools/cli.js",
     "deps:all": "node ./tools/cli.js"
   },

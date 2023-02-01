@@ -46,7 +46,7 @@ config:
 
         - Backblaze:
             - icon: backblaze
-              href: https://www.backblaze.com/b2/cloud-storage.html
+              href: https://backblaze.com/b2/cloud-storage.html
 
         - SendGrid:
             - icon: /icons/sendgrid.png

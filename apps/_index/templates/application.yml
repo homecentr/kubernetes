@@ -15,7 +15,7 @@ spec:
   project: default
 
   destination:
-    namespace: {{ default $.Values.defaultNamespace .namespace }}
+    namespace: {{ .namespace }}
     server: https://kubernetes.default.svc
 
   source:

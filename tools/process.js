@@ -9,6 +9,14 @@ class Output {
         this.buffer.push(value)
     }
 
+    getRaw() {
+        let result = ""
+
+        this.buffer.forEach(part => result += part)
+
+        return result
+    }
+
     getIndented() {
         const result = []
 
