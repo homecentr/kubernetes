@@ -25,6 +25,9 @@ spec:
         homecentr.one/volume: {{ $volume.name }}
     spec:
       serviceAccountName: local-path-provisioner
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
       containers:
         - name: local-path-provisioner
           image: rancher/local-path-provisioner:{{ $.Values.imageVersion | required ".Values.imageVersion is required" }}
@@ -51,6 +54,8 @@ spec:
             {{- $.Values.resources | toYaml | nindent 12 }}
           securityContext:
             readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
       volumes:
         - name: config-volume
           configMap:
