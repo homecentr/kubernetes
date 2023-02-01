@@ -55,12 +55,17 @@ class App {
 
     async render(environmentName, options = {
         debug: false,
-        showYaml: false
+        showYaml: false,
+        outputDir: undefined
     }) {
         let args = this.getHelmArgs(environmentName)
 
         if (options.debug) {
             args += " --debug"
+        }
+
+        if(options.outputDir) {
+            args += ` --output-dir \"${options.outputDir}\"`
         }
 
         const command = `helm template ${this.getAppDirectory()} ${args}`
@@ -72,13 +77,13 @@ class App {
         const result = await exec(command)
 
         if (result.exitCode == 0) {
-            console.log(`✔️  ${this.getAppDirectory()}`)
+            console.log(`✔️  ${this.getAppDirectory()} (helm render)`)
 
             if (options.showYaml) {
                 console.log(result.stdout.getIndented())
             }
         } else {
-            console.log(`❌ ${this.getAppDirectory()} has following errors:`)
+            console.log(`❌ ${this.getAppDirectory()} (helm render) has failed:`)
             console.log(result.stdcombined.getIndented())
         }
     }
@@ -93,19 +98,14 @@ class App {
 
         if (this.type == "helm") {
             // Render helm chart
-            const helmArgs = this.getHelmArgs(environmentName) + ` --output-dir \"${appTmpDir}\"`
-            const command = `helm template ${this.getAppDirectory()} ${helmArgs}`
-            const result = await exec(command)
 
-            if (result.exitCode != 0) {
-                console.log(`❌ Rendering app '${this.name}' has failed. Fix rendering before scanning for security vulnerabilities.`)
-                console.log(result.stdcombined.getIndented())
-                process.exit(3)
-            }
+            await this.render(environmentName, {
+                outputDir: appTmpDir
+            })
 
-            const chartName = fs.readdirSync(appTmpDir)[0];
+            const chartNameSubdir = fs.readdirSync(appTmpDir)[0];
 
-            scanDirectory = path.join(appTmpDir, chartName, "templates")
+            scanDirectory = path.join(appTmpDir, chartNameSubdir, "templates")
 
         } else {
             scanDirectory = this.getAppDirectory()
@@ -120,8 +120,6 @@ class App {
         }
 
         const command = `kubescape scan ${scanDirectory} ${kubescapeArgs}`
-        console.log(command)
-
         const result = await exec(command)
 
         if (result.exitCode == 0) {
