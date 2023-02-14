@@ -73,6 +73,7 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.yml
+  - globals.$env.yml
   secretValueFiles:
   - secrets.$env.yml
 

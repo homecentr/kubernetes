@@ -27,3 +27,8 @@ metallb:
       limits:
         cpu: 1000m
         memory: 512Mi
+    tolerations:
+      - key: homecentr.one/critical-only
+        operator: Equal
+        value: true
+        effect: NoSchedule
