@@ -14,7 +14,7 @@ coredns:
   tolerations:
     - key: homecentr.one/critical-only
       operator: Equal
-      value: true
+      value: "true"
       effect: NoSchedule
   image:
     repository: quay.io/oriedge/k8s_gateway

@@ -30,5 +30,5 @@ metallb:
     tolerations:
       - key: homecentr.one/critical-only
         operator: Equal
-        value: true
+        value: "true"
         effect: NoSchedule
