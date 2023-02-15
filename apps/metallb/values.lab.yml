@@ -9,6 +9,8 @@ ipAddressPools:
       - "10.1.8.161-10.1.8.191"
 
 metallb:
+  crds:
+    enabled: false
   prometheus:
     scrapeAnnotations: true
   controller:
