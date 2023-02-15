@@ -83,6 +83,7 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
+  - ../globals.$env.yml
   - values.$env.yml
   - values.$env.primary.yml
 
@@ -92,6 +93,7 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
+  - ../globals.$env.yml
   - values.$env.yml
   - values.$env.secondary.yml
 
