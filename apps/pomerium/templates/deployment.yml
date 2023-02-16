@@ -4,6 +4,7 @@ metadata:
   labels:
     {{- include "common-labels" . | indent 4 }}
   name: pomerium
+  namespace: {{ $.Release.Namespace }}
 spec:
   replicas: {{ .Values.replicas | default 1 }}
   selector:
@@ -35,7 +36,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-        image: pomerium/ingress-controller:sha-cdc389c
+        image: pomerium/ingress-controller:{{ .Values.imageTag }}
         imagePullPolicy: IfNotPresent
         name: pomerium
         readinessProbe:
@@ -68,6 +69,8 @@ spec:
           runAsGroup: 1000
           runAsNonRoot: true
           runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /tmp
           name: tmp

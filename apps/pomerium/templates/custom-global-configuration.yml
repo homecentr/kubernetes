@@ -2,6 +2,7 @@ apiVersion: ingress.pomerium.io/v1
 kind: Pomerium
 metadata:
   name: global
+  namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "common-labels" . | indent 4 }}
 spec:

@@ -1,0 +1,38 @@
+[
+    {
+        "name": "runAsNonRoot",
+        "policyType": "postureExceptionPolicy",
+        "actions": [
+            "alertOnly"
+        ],
+        "resources": [
+            {
+                "designatorType": "Attributes",
+                "attributes": {
+                    "kind": ".*"
+                }
+            }
+        ],
+        "posturePolicies": [
+            {
+                "controlName": "Consider external secret storage"
+            },
+            {
+                "controlName": "Label usage for resources",
+                "reason": "Not applicable - we use the labels defined in C-0077"
+            },
+            {
+                "controlName": "Ensure that Service Account Tokens are only mounted where necessary",
+                "reason": "Pomerium needs a service account to control ingresses"
+            },
+            {
+                "controlName": "Automatic mapping of service account",
+                "reason": "Pomerium needs a service account to control ingresses"
+            },
+            {
+                "controlName": "Access container service account",
+                "reason": "Pomerium needs a service account to control ingresses"
+            }
+        ]
+    }
+]

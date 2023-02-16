@@ -5,7 +5,8 @@
     "cpu_request_min": [],
     "imageRepositoryAllowList": [
       "rancher/*",
-      "ghcr.io/benphelps/*"
+      "ghcr.io/benphelps/*",
+      "pomerium/"
     ],
     "insecureCapabilities": [
       "SETPCAP",
