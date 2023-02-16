@@ -134,24 +134,24 @@ class App {
             console.log(command)
         }
 
-        const result = await exec(command)
+        // const result = await exec(command)
 
-        if (result.exitCode == 0) {
-            console.log(`✔️  ${this.getAppDirectory()} (kubescape)`)
+        // if (result.exitCode == 0) {
+        //     console.log(`✔️  ${this.getAppDirectory()} (kubescape)`)
 
-            if (options.showResults) {
-                console.log(result.stdout.getRaw())
-            }
-        } else {
-            if(options.htmlOutput) {
-                console.log(`❌ ${this.getAppDirectory()} has failed, see the opened html file for details`)
-                execSync(reportFile)
-            }
-            else {
-                console.log(`❌ ${this.getAppDirectory()} has following errors:`)
-                console.log(result.stdout.getRaw())
-            }
-        }
+        //     if (options.showResults) {
+        //         console.log(result.stdout.getRaw())
+        //     }
+        // } else {
+        //     if(options.htmlOutput) {
+        //         console.log(`❌ ${this.getAppDirectory()} has failed, see the opened html file for details`)
+        //         execSync(reportFile)
+        //     }
+        //     else {
+        //         console.log(`❌ ${this.getAppDirectory()} has following errors:`)
+        //         console.log(result.stdout.getRaw())
+        //     }
+        // }
 
         return result.exitCode == 0
     }
