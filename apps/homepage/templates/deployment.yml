@@ -33,7 +33,6 @@ spec:
           imagePullPolicy: null
           livenessProbe:
             failureThreshold: 3
-            initialDelaySeconds: 0
             periodSeconds: 10
             tcpSocket:
               port: 3000
@@ -45,14 +44,12 @@ spec:
               protocol: TCP
           readinessProbe:
             failureThreshold: 3
-            initialDelaySeconds: 0
             periodSeconds: 10
             tcpSocket:
               port: 3000
             timeoutSeconds: 1
           startupProbe:
             failureThreshold: 30
-            initialDelaySeconds: 0
             periodSeconds: 5
             tcpSocket:
               port: 3000
@@ -72,11 +69,10 @@ spec:
             runAsUser: 1000
             runAsGroup: 1000
             seLinuxOptions:
-              seLinuxOptions:
-                user: system_u
-                role: system_r
-                type: container_t
-                level: s0:c829,c861
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
             capabilities:
               drop:
                 - ALL
