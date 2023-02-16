@@ -33,5 +33,5 @@ jobs:
 
       - name: Scan all charts for vulnerabilities
         run: |
-          yarn scan pomerium ${{ matrix.environment }}
+          yarn scan ${{ matrix.environment }} pomerium
           yarn scan:all ${{ matrix.environment }}
