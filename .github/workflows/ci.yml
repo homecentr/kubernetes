@@ -20,7 +20,9 @@ jobs:
           yarn
           helm plugin install https://github.com/jkroepke/helm-secrets && helm secrets patch unix
           sudo wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64
+          sudo wget -O /usr/bin/kubescape https://github.com/kubescape/kubescape/releases/latest/download/kubescape-ubuntu-latest
           sudo chmod a+x /usr/bin/sops
+          sudo chmod a+x /usr/bin/kubescape
 
       - name: Download helm chart dependencies
         run: yarn deps:all
