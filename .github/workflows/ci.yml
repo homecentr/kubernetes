@@ -1,0 +1,39 @@
+name: CI
+on:
+  push:
+
+env:
+  SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [lab, prod]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Install pre-requisites
+        run: |
+          yarn
+          helm plugin install https://github.com/jkroepke/helm-secrets && helm secrets patch unix
+          sudo wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64
+          sudo wget -O /usr/bin/kubescape https://github.com/kubescape/kubescape/releases/latest/download/kubescape-ubuntu-latest
+          sudo chmod a+x /usr/bin/sops
+          sudo chmod a+x /usr/bin/kubescape
+
+      - name: Download helm chart dependencies
+        run: yarn deps:all
+
+      - name: Lint charts
+        run: yarn lint:all ${{ matrix.environment }}
+
+      - name: Render charts
+        run: yarn render:all ${{ matrix.environment }}
+
+      - name: Scan all charts for vulnerabilities
+        run: |         
+          yarn scan ${{ matrix.environment }} homepage -d
+          yarn scan:all ${{ matrix.environment }}

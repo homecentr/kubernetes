@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "common-labels" . | indent 4 }}
+  name: pomerium
+  namespace: {{ $.Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pomerium
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        {{- include "common-labels" . | indent 8 }}
+    spec:
+      containers:
+      - args:
+        - all-in-one
+        - --pomerium-config=global
+        - --update-status-from-service=$(POMERIUM_NAMESPACE)/pomerium-proxy
+        - --metrics-bind-address=$(POD_IP):9090
+        env:
+        - name: TMPDIR
+          value: /tmp
+        - name: XDG_CACHE_HOME
+          value: /tmp
+        - name: POMERIUM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        image: pomerium/ingress-controller:{{ .Values.imageTag }}
+        imagePullPolicy: IfNotPresent
+        name: pomerium
+        readinessProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /healthz
+            port: 8443
+          initialDelaySeconds: 15
+          periodSeconds: 5
+        ports:
+        - containerPort: 8443
+          name: https
+          protocol: TCP
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        resources: {{ .Values.resources | toYaml | nindent 10 }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsGroup: 1000
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+      nodeSelector:
+        kubernetes.io/os: linux
+      securityContext:
+        runAsNonRoot: true
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
+      serviceAccountName: pomerium-controller
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - emptyDir: {}
+        name: tmp

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: kubernetes-dashboard
+version: 1.0.0
+appVersion: 2.7.0
+
+dependencies:
+  - name: kubernetes-dashboard
+    alias: dashboard
+    repository: https://kubernetes.github.io/dashboard/
+    version: 6.0.0

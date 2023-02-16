@@ -1,0 +1,58 @@
+{{- range .Values.applications }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ required "Application must have a 'name'" .name }}
+  namespace: argo-cd
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ .syncWave | quote }}
+  {{ if eq (.deleteProtection | default false) false }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{ end }}
+spec:
+  project: default
+
+  destination:
+    namespace: {{ .namespace }}
+    server: https://kubernetes.default.svc
+
+  source:
+    {{- if .path }}
+    path: {{ .path }}
+    {{- else }}
+    path: apps/{{ .name }}
+    {{- end }}
+    repoURL: {{ $.Values.source.repoUrl }}
+    targetRevision: {{ $.Values.source.targetRevision }}
+
+    {{- if eq .type "helm" }}
+    helm:
+      releaseName: {{ .releaseName | default .name }}
+      skipCrds: {{ .skipCrds | default true }}
+      
+      valueFiles:
+      {{- range $file := .valueFiles }}
+      - {{ $file | replace "$env" $.Values.environmentName }}
+      {{- end }}
+      {{- range $file := .secretValueFiles }}
+      - secrets://{{ $file | replace "$env" $.Values.environmentName }}
+      {{- end }}
+    {{ else }}
+    directory:
+      exclude: .kubescape-exceptions.json
+    {{ end }}
+
+  ignoreDifferences: {{ .ignoreDifferences | toYaml | nindent 4 }}
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+    {{ if eq (.serverSideApply | default false) true }}
+    - ServerSideApply=true
+    {{ end }}
+{{- end }}

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common-labels" . | indent 4 }}
+  annotations:
+    # ArgoCD has custom authentication logic
+    ingress.pomerium.io/allow_any_authenticated_user: 'true'
+spec:
+  rules:
+  - host: {{ .Values.hostname | quote }}
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          backend:
+            service:
+              name: {{ .Release.Name }}
+              port:
+                number: 3000
