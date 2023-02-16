@@ -15,19 +15,27 @@
         ],
         "posturePolicies": [
             {
-                "controlId": "C-0076"
+                "controlName": "Label usage for resources",
+                "reason": "Not applicable - we use the labels defined in C-0077"
             },
             {
-                "controlId": "C-0056"
+                "controlName": "Configured liveness probe",
+                "reason": "Not applicable - service does not expose any endpoint"
             },
             {
-                "controlId": "C-0018"
+                "controlName": "Configured readiness probe",
+                "reason": "Not applicable - service does not expose any endpoint"
             },
             {
-                "controlId": "C-0211"
+                "controlName": "Consider external secret storage"
             },
             {
-                "controlId": "C-0013"
+                "controlName": "Data Destruction",
+                "reason": "Provisioner delete access to delete PVCs, PVs and helper pods."
+            },
+            {
+                "controlName": "Minimize access to create pods",
+                "reason": "Provisioner needs access to create helper pods which physically create the directories."
             }
         ]
     }

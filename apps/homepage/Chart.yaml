@@ -1,4 +1,4 @@
 apiVersion: v2
-name: homepage-aa
+name: homepage
 version: 1.0.0
 appVersion: v0.6.3

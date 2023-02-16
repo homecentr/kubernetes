@@ -4,7 +4,8 @@
     "cpu_request_max": [],
     "cpu_request_min": [],
     "imageRepositoryAllowList": [
-      "rancher/*"
+      "rancher/*",
+      "ghcr.io/benphelps/*"
     ],
     "insecureCapabilities": [
       "SETPCAP",

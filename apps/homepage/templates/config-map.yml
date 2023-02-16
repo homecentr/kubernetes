@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "common-labels" . | indent 4 }}
-  name: {{ .Release.Name }}
 data:
   bookmarks.yaml: {{- if .Values.config.bookmarks }} |
 {{- .Values.config.bookmarks | toYaml | replace "$DOMAIN" $.Values.domain | nindent 4}}

@@ -57,7 +57,11 @@ program
         const allApps = getAllApps().filter(app => app.type == "helm")
 
         await allApps.forEach(async (app) => {
-            await app.lint(environment)
+            const success = await app.lint(environment)
+
+            if(!success) {
+                process.exitCode = 2
+            }
         })
     })
 
@@ -83,7 +87,11 @@ program
         const allApps = getAllApps().filter(app => app.type == "helm")
 
         await allApps.forEach(async (app) => {
-            await app.render(environment)
+            const success = await app.render(environment)
+
+            if(!success) {
+                process.exitCode = 2
+            }
         })
     })
 
@@ -111,7 +119,11 @@ program
         const allApps = getAllApps()
 
         await allApps.forEach(async (app) => {
-            await app.scan(environment)
+            const success = await app.scan(environment)
+
+            if(!success) {
+                process.exitCode = 2
+            }
         })
     })
 

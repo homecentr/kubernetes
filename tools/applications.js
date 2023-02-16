@@ -51,6 +51,8 @@ class App {
             console.log(`❌ ${this.getAppDirectory()} has following errors:`)
             console.log(result.stdcombined.getIndented())
         }
+
+        return result.exitCode == 0
     }
 
     async render(environmentName, options = {
@@ -86,6 +88,8 @@ class App {
             console.log(`❌ ${this.getAppDirectory()} (helm render) has failed:`)
             console.log(result.stdcombined.getIndented())
         }
+
+        return result.exitCode == 0
     }
 
     async scan(environmentName, options = {
@@ -148,6 +152,8 @@ class App {
                 console.log(result.stdout.getRaw())
             }
         }
+
+        return result.exitCode == 0
     }
 
     async installDependencies() {
