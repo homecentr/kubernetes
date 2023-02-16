@@ -153,7 +153,8 @@ class App {
         //     }
         // }
 
-        return result.exitCode == 0
+        //return result.exitCode == 0
+        return 0
     }
 
     async installDependencies() {
