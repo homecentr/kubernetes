@@ -36,6 +36,10 @@
             {
                 "controlName": "CIS-4.1.4 Minimize access to create pods",
                 "reason": "Provisioner needs access to create helper pods which physically create the directories."
+            },
+            {
+                "controlName": "Check if signature exists",
+                "reason": "3rd party image, adding signature is not worth the hassle"
             }
         ]
     }

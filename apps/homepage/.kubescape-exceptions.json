@@ -35,6 +35,10 @@
             {
                 "controlName": "Access container service account",
                 "reason": "Homepage needs a service account token for auto discovery feature"
+            },
+            {
+                "controlName": "Check if signature exists",
+                "reason": "3rd party image, adding signature is not worth the hassle"
             }
         ]
     }
