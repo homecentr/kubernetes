@@ -32,6 +32,14 @@
             {
                 "controlName": "Access container service account",
                 "reason": "Pomerium needs a service account to control ingresses"
+            },
+            {
+                "controlName": "Configured liveness probe",
+                "reason": "Pomerium does not provide separate probes for readiness and liveness"
+            },
+            {
+                "controlName": "Encrypt traffic to HTTPS load balancers with TLS certificates",
+                "reason": "Not applicable - we are not running Pomerium in cloud"
             }
         ]
     }
