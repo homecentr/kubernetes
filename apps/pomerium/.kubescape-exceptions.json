@@ -15,14 +15,14 @@
         ],
         "posturePolicies": [
             {
-                "controlName": "Consider external secret storage"
+                "controlName": "CIS-4.4.2 Consider external secret storage"
             },
             {
                 "controlName": "Label usage for resources",
                 "reason": "Not applicable - we use the labels defined in C-0077"
             },
             {
-                "controlName": "Ensure that Service Account Tokens are only mounted where necessary",
+                "controlName": "CIS-4.1.6 Ensure that Service Account Tokens are only mounted where necessary",
                 "reason": "Pomerium needs a service account to control ingresses"
             },
             {
@@ -38,7 +38,7 @@
                 "reason": "Pomerium does not provide separate probes for readiness and liveness"
             },
             {
-                "controlName": "Encrypt traffic to HTTPS load balancers with TLS certificates",
+                "controlName": "CIS-5.4.5 Encrypt traffic to HTTPS load balancers with TLS certificates",
                 "reason": "Not applicable - we are not running Pomerium in cloud"
             },
             {
@@ -46,7 +46,7 @@
                 "reason": "Pomerium requires this access because SSL certificates are stored as secrets"
             },
             {
-                "controlName": "Minimize access to secrets",
+                "controlName": "CIS-4.1.2 Minimize access to secrets",
                 "reason": "Pomerium requires this access because SSL certificates are stored as secrets"
             }
         ]

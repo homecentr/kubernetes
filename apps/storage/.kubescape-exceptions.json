@@ -27,14 +27,14 @@
                 "reason": "Not applicable - service does not expose any endpoint"
             },
             {
-                "controlName": "Consider external secret storage"
+                "controlName": "CIS-4.4.2 Consider external secret storage"
             },
             {
                 "controlName": "Data Destruction",
                 "reason": "Provisioner delete access to delete PVCs, PVs and helper pods."
             },
             {
-                "controlName": "Minimize access to create pods",
+                "controlName": "CIS-4.1.4 Minimize access to create pods",
                 "reason": "Provisioner needs access to create helper pods which physically create the directories."
             }
         ]
