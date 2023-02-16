@@ -40,6 +40,14 @@
             {
                 "controlName": "Encrypt traffic to HTTPS load balancers with TLS certificates",
                 "reason": "Not applicable - we are not running Pomerium in cloud"
+            },
+            {
+                "controlName": "List Kubernetes secrets",
+                "reason": "Pomerium requires this access because SSL certificates are stored as secrets"
+            },
+            {
+                "controlName": "Minimize access to secrets",
+                "reason": "Pomerium requires this access because SSL certificates are stored as secrets"
             }
         ]
     }
