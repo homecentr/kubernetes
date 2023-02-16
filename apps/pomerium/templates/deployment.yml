@@ -65,6 +65,9 @@ spec:
           runAsUser: 1000
           seccompProfile:
             type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
         volumeMounts:
         - mountPath: /tmp
           name: tmp
@@ -77,9 +80,6 @@ spec:
           role: system_r
           type: container_t
           level: s0:c829,c861
-        capabilities:
-          drop:
-            - ALL
       serviceAccountName: pomerium-controller
       terminationGracePeriodSeconds: 10
       volumes:
