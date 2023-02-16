@@ -5,6 +5,14 @@ tlsCertificateName: homecentr-one
 loadBalancerIp: 10.1.2.132
 imageTag: sha-cdc389c
 
+resources:
+  requests:
+    cpu: 1500m
+    memory: 512Mi
+  limits:
+    cpu: 4000m
+    memory: 2048Mi
+
 networkPolicy:
   externalIngressIpBlocks:
   - 10.1.2.0/24
