@@ -1,0 +1,21 @@
+isDefaultIngressClass: true
+replicas: 2
+hostname: login.homecentr.one
+tlsCertificateName: homecentr-one
+loadBalancerIp: 10.1.2.132
+
+networkPolicy:
+  externalIngressIpBlocks:
+  - 10.1.2.0/24
+  - 10.1.3.0/24
+  - 172.16.0.0/16
+  externalHttpEgressIpBlocks:
+  - 10.1.2.0/24
+
+postgresql:
+  primary:
+    persistence:
+      size: 10Gi
+      storageClass: local-path-provisioner-services
+      accessModes:
+        - ReadWriteMany
