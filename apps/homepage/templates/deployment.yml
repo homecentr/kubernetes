@@ -21,8 +21,6 @@ spec:
         {{- include "pod-labels" . | indent 8 }}
     spec:
       securityContext:
-        readOnlyRootFilesystem : true
-        allowPrivilegeEscalation: false
         seccompProfile:
           type: RuntimeDefault
         runAsUser: 1000
