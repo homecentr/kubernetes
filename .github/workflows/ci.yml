@@ -34,9 +34,5 @@ jobs:
         run: yarn render:all ${{ matrix.environment }}
 
       - name: Scan all charts for vulnerabilities
-        run: |
-          yarn scan ${{ matrix.environment }} pomerium -o -d
-          
-          kubescape scan /tmp/app-pomerium-prod/pomerium/templates --keep-local --fail-threshold 0 --controls-config "./kubescape.inputs.json" --exceptions "apps/pomerium/.kubescape-exceptions.json"
-          
+        run: |         
           yarn scan:all ${{ matrix.environment }}
