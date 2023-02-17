@@ -30,6 +30,9 @@ spec:
       containers:
         - image: 'cloudflare/cloudflare:{{ .Values.imageTag }}'
           name: cloudflared
+          command:
+            - tunnel
+            - run
           volumeMounts:
             - mountPath: /etc/cloudflared
               name: config
