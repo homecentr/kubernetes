@@ -1,0 +1,83 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common-labels" . | indent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "pod-labels" . | indent 8 }}
+  policyTypes:
+    - Egress
+    # - Ingress
+#   ingress:
+#     # DNS
+#     - ports:
+#       - protocol: TCP
+#         port: 53
+#       - protocol: UDP
+#         port: 53
+#       from:
+#         - namespaceSelector:
+#             matchLabels:
+#               kubernetes.io/metadata.name: kube-system
+#           # podSelector: 
+#           #   matchLabels:
+#           #     app.kubernetes.io/name: coredns
+#           #     app.kubernetes.io/instance: kube-dns
+  egress:
+    # DNS
+    - ports:
+      - protocol: TCP
+        port: 53
+      - protocol: UDP
+        port: 53
+      - protocol: TCP
+        port: 5353
+      - protocol: UDP
+        port: 5353
+      to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: kube-dns
+
+    # Allow connection to Cloudflare Edge
+    - ports:
+        - protocol: TCP
+          port: 7844
+        - protocol: UDP
+          port: 7844
+        - protocol: TCP
+          port: 443
+      to:
+      {{- range $cidr := .Values.cloudflare.ipAddresses }}
+        - ipBlock:
+            cidr: {{ $cidr }}
+      {{- end }}
+
+    # In-cluster services
+    {{- range $route := .Values.routes.kubernetes }}
+    - ports:  
+        - protocol: {{ $route.protocol | default "TCP" }}
+          port: {{ $route.port }}
+      to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $route.namespace }}
+          podSelector: {{ $route.podSelector | toYaml | nindent 12 }}
+    {{- end }}
+
+    # Out-of-cluster services
+    {{- range $route := .Values.routes.external }}
+    - ports:  
+        - protocol: {{ $route.protocol | default "TCP" }}
+          port: {{ $route.port }}
+      to:
+        - ipBlock:
+            cidr: {{ $route.backendIp }}/32
+    {{- end }}
