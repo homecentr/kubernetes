@@ -29,6 +29,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - image: 'cloudflare/cloudflare:{{ .Values.imageTag }}'
+          imagePullPolicy: IfNotPresent
           name: cloudflared
           command:
             - tunnel
