@@ -16,8 +16,12 @@ spec:
   egress:
     # Allow connection to Cloudflare Edge
     - ports:
-        - protocol:
-          port:
+        - protocol: TCP
+          port: 7844
+        - protocol: UDP
+          port: 7844
+        - protocol: TCP
+          port: 443
       to:
       {{- range $cidr := .Values.cloudflare.ipAddresses }}
         - ipBlock:
