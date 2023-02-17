@@ -122,3 +122,12 @@ applications:
   - ../globals.$env.yml
   secretValueFiles:
   - secrets.$env.yml
+
+- name: cloudflared
+  type: helm
+  namespace: clouflare
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml
