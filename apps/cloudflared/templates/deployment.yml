@@ -32,6 +32,7 @@ spec:
           imagePullPolicy: IfNotPresent
           name: cloudflared
           command:
+            - cloudflared
             - tunnel
             - run
           volumeMounts:
