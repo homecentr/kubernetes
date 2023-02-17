@@ -1,0 +1,21 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+data:
+    cloudflared: |
+        tunnel: "{{ .Values.cloudflare.tunnelId }}"
+        credentials-file: /etc/cloudflared-tunnel-credentials
+
+        ingress:
+          {{- range $route := .Values.routes.kubernetes }}
+          - hostname: {{ $route.hostname }}
+            service: {{ $route.scheme | default "http" }}://{{ $route.service }}.{{ $route.namespace }}.svc.cluster.local:{{ $route.port }}
+          {{- end }}
+
+          {{- range $route := .Values.routes.external }}
+          - hostname: {{ $route.hostname }}
+            service: {{ $route.backend }}
+          {{- end }}
+          - service: http_status:404
