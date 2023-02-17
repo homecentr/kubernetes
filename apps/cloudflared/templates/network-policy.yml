@@ -38,7 +38,7 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: kube-system
-          # podSelector: 
+          # podSelector:
           #   matchLabels:
           #     app.kubernetes.io/name: coredns
           #     app.kubernetes.io/instance: kube-dns
