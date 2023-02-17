@@ -10,7 +10,6 @@ spec:
     matchLabels:
       {{- include "pod-labels" . | indent 8 }}
   policyTypes:
-    - Ingress
     - Egress
   egress:
     # DNS
@@ -25,6 +24,7 @@ spec:
               kubernetes.io/metadata.name: kube-system
           podSelector: 
             matchLabels:
+              app.kubernetes.io/name: coredns
               app.kubernetes.io/instance: kube-dns
 
     # Allow connection to Cloudflare Edge
