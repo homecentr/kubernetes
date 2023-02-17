@@ -34,9 +34,9 @@ spec:
           command:
             - cloudflared
             - tunnel
-            - run
             - --config
             - /etc/cloudflared
+            - run
           volumeMounts:
             - mountPath: /etc/cloudflared
               name: config
