@@ -16,6 +16,6 @@ data:
 
           {{- range $route := .Values.routes.external }}
           - hostname: {{ $route.hostname }}
-            service: {{ $route.backend }}
+            service: {{ $route.scheme | default "http" }}://{{ $route.backendIp }}:{{ $route.port }}
           {{- end }}
           - service: http_status:404
