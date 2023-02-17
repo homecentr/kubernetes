@@ -31,10 +31,12 @@ spec:
         - image: 'cloudflare/cloudflare:{{ .Values.imageTag }}'
           name: cloudflared
           volumeMounts:
-            - mountPath: /etc
+            - mountPath: /etc/cloudflared
               name: config
-            - mountPath: /etc
+              subPath: cloudflared
+            - mountPath: /etc/cloudflared-tunnel-credentials
               name: credentials
+              subPath: cloudflared-tunnel-credentials
           securityContext:
             readOnlyRootFilesystem : true
             allowPrivilegeEscalation: false
