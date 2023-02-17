@@ -26,9 +26,9 @@ spec:
           type: RuntimeDefault
         runAsUser: 1000
         runAsGroup: 1000
-        sysctls:
-          - name: net.core.rmem_max
-            value: '2500000'
+        # sysctls:
+        #   - name: net.core.rmem_max
+        #     value: '2500000'
       automountServiceAccountToken: false
       containers:
         - image: 'cloudflare/cloudflared:{{ .Values.imageTag }}'
