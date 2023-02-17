@@ -61,7 +61,7 @@ spec:
       volumes:
         - name: credentials
           secret:
-            secretName: {{ .Release.Name }}-config
+            secretName: {{ .Release.Name }}
             optional: false
         - name: config
           configMap:
