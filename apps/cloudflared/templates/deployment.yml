@@ -26,7 +26,7 @@ spec:
           type: RuntimeDefault
         runAsUser: 1000
         runAsGroup: 1000
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       containers:
         - image: 'cloudflare/cloudflare:{{ .Values.imageTag }}'
           name: cloudflared
@@ -55,7 +55,6 @@ spec:
           resources: {{ .Values.resources | toYaml | nindent 14 }}
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
-      serviceAccountName: {{ .Release.Name }}
       volumes:
         - name: credentials
           secret:
