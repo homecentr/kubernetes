@@ -10,6 +10,6 @@ data:
 
         ingress:
           - hostname: homepage-lab.homecentr.one
-            service: https://pomerium-proxy.pomerium.svc.cluster.local:443
+            service: https://172.17.48.33:443
             noTLSVerify: true
           - service: http_status:404
