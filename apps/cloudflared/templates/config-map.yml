@@ -9,13 +9,6 @@ data:
         credentials-file: /etc/cloudflared-tunnel-credentials
 
         ingress:
-          {{- range $route := .Values.routes.kubernetes }}
-          - hostname: {{ $route.hostname }}
-            service: {{ $route.scheme | default "http" }}://{{ $route.service }}.{{ $route.namespace }}.svc.cluster.local:{{ $route.port }}
-          {{- end }}
-
-          {{- range $route := .Values.routes.external }}
-          - hostname: {{ $route.hostname }}
-            service: {{ $route.scheme | default "http" }}://{{ $route.backendIp }}:{{ $route.port }}
-          {{- end }}
+          - hostname: homepage-lab.homecentr.one
+            service: https://10.1.8.132:443
           - service: http_status:404
