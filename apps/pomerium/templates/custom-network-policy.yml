@@ -38,6 +38,11 @@ spec:
         - protocol: TCP
           port: 8443
 
+    # Cloudflared testing
+    - from:
+        - namespaceSelector: {}
+          podSelector: {}
+
   egress:
     # Kubernetes API
     - to:
