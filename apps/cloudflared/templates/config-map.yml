@@ -13,5 +13,4 @@ data:
             service: https://172.17.48.33:443
             originRequest:
               noTLSVerify: true
-              httpHostHeader: homepage.lab.homecentr.one
           - service: http_status:404
