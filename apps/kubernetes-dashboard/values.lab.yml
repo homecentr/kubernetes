@@ -1,4 +1,4 @@
-hostname: k8s.lab.homecentr.one
+hostname: k8s-lab.homecentr.one
 
 dashboard:
   fullnameOverride: kubernetes-dashboard

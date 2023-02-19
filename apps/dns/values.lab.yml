@@ -56,7 +56,7 @@ coredns:
           parameters: /etc/node-hosts
           # Hardcoded records will be used for printers, idrac etc.
           configBlock: |-
-            10.1.8.1  test.lab.homecentr.one
+            10.1.8.1  test-lab.homecentr.one
             fallthrough
 
         - name: template
