@@ -7,8 +7,8 @@ metadata:
     {{- include "common-labels" . | indent 4 }}
   annotations:
     # ArgoCD has custom authentication logic
-    #ingress.pomerium.io/allow_any_authenticated_user: 'true'
-    ingress.pomerium.io/allow_public_unauthenticated_access: "true"
+    ingress.pomerium.io/allow_any_authenticated_user: 'true'
+    # ingress.pomerium.io/allow_public_unauthenticated_access: "true"
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
