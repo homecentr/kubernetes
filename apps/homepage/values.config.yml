@@ -82,7 +82,7 @@ config:
             icon: proxmox
             href: https://argocd$DOMAIN
             description: Argo test
-            ping: https://argocd$DOMAIN
+            ping: https://argo-cd-argocd-server.argo-cd.svc.cluster.local
 
         - "Proxmox VE":
             icon: proxmox
