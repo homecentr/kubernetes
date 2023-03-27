@@ -1,6 +1,4 @@
 config:
-  # To use an existing ConfigMap uncomment this line and specify the name
-  # useExistingConfigMap: existing-homepage-configmap
   settings:
     title: Homecentr
     favicon: /icons/favicon.ico
@@ -13,7 +11,7 @@ config:
   bookmarks:
     - Homelab:
         - "Homecentr Docs":
-              # icon TBA  
+              # icon TBA
             - href: https://homecentr.one
 
         - "Homecentr on Github":
@@ -22,7 +20,6 @@ config:
         # /homelab on Reddit
     
     - "Cloud tools":
-        # Cloud tools - OneDrive, Gmail etc.
         - OneDrive:
             - icon: /icons/onedrive.png
               href: https://onedrive.com
@@ -32,21 +29,17 @@ config:
               href: https://gmail.com
 
     - "Cloud infrastructure":
-        - PagerDuty:
-            - icon: pagerduty
-              href: https://pagerduty.com
+        - Azure:
+            - icon: azure
+              href: https://portal.azure.com
 
         - Cloudflare:
             - icon: cloudflare
               href: https://cloudflare.com
 
-        - Azure:
-            - icon: azure
-              href: https://portal.azure.com
-
-        - Backblaze:
-            - icon: backblaze
-              href: https://backblaze.com/b2/cloud-storage.html
+        - PagerDuty:
+            - icon: pagerduty
+              href: https://pagerduty.com
 
         - SendGrid:
             - icon: /icons/sendgrid.png
@@ -57,7 +50,7 @@ config:
               href: https://dynadot.com
               
   services:
-    - My First Group:
+    - App:
         - My First Service:
             href: http://test.$DOMAIN/
             description: Homepage is awesome
@@ -87,19 +80,10 @@ config:
 
         - "Proxmox VE":
             icon: proxmox
-            href: https://pve.$DOMAIN
+            href: https://pve$DOMAIN
             description: Virtual servers management
+            # TODO: Ping
 
-        - "Azure AD":
-            icon: azure
-            href: https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview
-            description: User management
-
-        # Backblaze (???)
-        # Cloudflare
-        # Pager Duty
-        # SendGrid (???)
-        # Dynadot
   widgets:
     # TBA: When prometheus is available
     # - resources:
