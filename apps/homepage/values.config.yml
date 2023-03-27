@@ -78,6 +78,12 @@ config:
         #     ping: https://k8s.$DOMAIN/
         #     description: Kubernetes resource management
 
+        - "ARGO2":
+            icon: proxmox
+            href: https://argocd$DOMAIN
+            description: Argo test
+            ping: https://argocd$DOMAIN
+
         - "Proxmox VE":
             icon: proxmox
             href: https://pve$DOMAIN
