@@ -1,0 +1,47 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Values.coredns.fullnameOverride | trunc 63 | trimSuffix "-" }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.coredns.nameOverride | trunc 63 | trimSuffix "-" }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+rules:
+  - apiGroups:
+    - ""
+    resources:
+    - endpoints
+    - services
+    - pods
+    - namespaces
+    verbs:
+    - list
+    - watch
+  - apiGroups:
+    - discovery.k8s.io
+    resources:
+    - endpointslices
+    verbs:
+    - list
+    - watch
+  - apiGroups:
+    - networking.k8s.io
+    - extensions
+    resources:
+    - ingresses
+    verbs:
+    - list
+    - get
+    - watch
+  - apiGroups: ["gateway.networking.k8s.io"]
+    resources: ["*"]
+    verbs:
+    - watch
+    - list
+  - apiGroups:
+    - k8s.nginx.org
+    resources: ["*"]
+    verbs:
+      - watch
+      - list

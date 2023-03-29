@@ -1,0 +1,30 @@
+isDefaultIngressClass: true
+replicas: 2
+hostname: login-lab.homecentr.one
+tlsCertificateName: wildcard-homecentr-one
+loadBalancerIp: 10.1.8.132
+imageTag: 0-21-0
+
+resources:
+  requests:
+    cpu: 1m
+    memory: 1Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+networkPolicy:
+  externalIngressIpBlocks:
+  - 10.1.8.0/24
+  - 10.1.3.0/24
+  - 172.16.0.0/16
+  externalHttpEgressIpBlocks:
+  - 10.1.8.0/24
+
+postgresql:
+  primary:
+    persistence:
+      size: 10Gi
+      storageClass: local-path-provisioner-services
+      accessModes:
+        - ReadWriteMany

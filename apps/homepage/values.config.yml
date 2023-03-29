@@ -1,0 +1,121 @@
+config:
+  settings:
+    title: Homecentr
+    favicon: /icons/favicon.ico
+    background: https://images.unsplash.com/photo-1519681393784-d120267933ba
+    backgroundOpacity: 0.3
+    theme: dark
+    color: neutral
+    headerStyle: clean
+    
+  bookmarks:
+    - Homelab:
+        - "Homecentr Docs":
+              # icon TBA
+            - href: https://homecentr.one
+
+        - "Homecentr on Github":
+            - icon: github-light
+              href: https://github.com/homecentr/
+        # /homelab on Reddit
+    
+    - "Cloud tools":
+        - OneDrive:
+            - icon: /icons/onedrive.png
+              href: https://onedrive.com
+
+        - Gmail:
+            - icon: gmail
+              href: https://gmail.com
+
+    - "Cloud infrastructure":
+        - Azure:
+            - icon: azure
+              href: https://portal.azure.com
+
+        - Cloudflare:
+            - icon: cloudflare
+              href: https://cloudflare.com
+
+        - PagerDuty:
+            - icon: pagerduty
+              href: https://pagerduty.com
+
+        - SendGrid:
+            - icon: /icons/sendgrid.png
+              href: https://sendgrid.com
+
+        - Dynadot:
+            - icon: /icons/dynadot.png
+              href: https://dynadot.com
+              
+  services:
+    - App:
+        - My First Service:
+            href: http://test.$DOMAIN/
+            description: Homepage is awesome
+
+    - Tools:
+        # Nextcloud
+        # Snipe IT
+        # ...
+        - My Second Service:
+            href: http://localhost/
+            description: Homepage is the best
+
+    - Infrastructure:
+        # Grafana
+
+        # - "Argo CD":
+        #     icon: argocd
+        #     href: https://argocd.$DOMAIN/
+        #     ping: https://argocd.$DOMAIN/
+        #     description: Kubernetes deployment
+
+        # - "Kubernetes Dashboard":
+        #     icon: kubernetes-dashboard
+        #     href: https://k8s.$DOMAIN/
+        #     ping: https://k8s.$DOMAIN/
+        #     description: Kubernetes resource management
+
+        - "ARGO2":
+            icon: proxmox
+            href: https://argocd$DOMAIN
+            description: Argo test
+            ping: https://argo-cd-argocd-server.argo-cd.svc.cluster.local
+
+        - "Proxmox VE":
+            icon: proxmox
+            href: https://pve$DOMAIN
+            description: Virtual servers management
+            # TODO: Ping
+
+  widgets:
+    # TBA: When prometheus is available
+    # - resources:
+    #     # change backend to 'kubernetes' to use Kubernetes integration. Requires RBAC.
+    #     backend: kubernetes
+    #     expanded: true
+    #     cpu: true
+    #     memory: true
+
+    - search:
+        provider: google
+        target: _blank
+
+    # TBA: When prometheus is available
+    # # Uncomment to enable Kubernetes integration
+    # - kubernetes:
+    #     cluster:
+    #       show: true
+    #       cpu: true
+    #       memory: true
+    #       showLabel: true
+    #       label: "cluster"
+    #     nodes:
+    #       show: true
+    #       cpu: true
+    #       memory: true
+    #       showLabel: true
+  kubernetes:
+    mode: cluster

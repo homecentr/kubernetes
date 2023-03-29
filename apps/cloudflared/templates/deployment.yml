@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common-labels" . | indent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
+    checksum/credentials: {{ include (print $.Template.BasePath "/secret-credentials.yml") $ | sha256sum }}
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "pod-labels" . | indent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "pod-labels" . | indent 8 }}
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        runAsUser: 1000
+        runAsGroup: 1000
+        # TBC: Must be enabled on kubelet level
+        # sysctls:
+        #   - name: net.core.rmem_max
+        #     value: '2500000'
+      automountServiceAccountToken: false
+      containers:
+        - image: 'cloudflare/cloudflared:{{ .Values.imageTag }}'
+          imagePullPolicy: IfNotPresent
+          name: cloudflared
+          command:
+            - cloudflared
+            - tunnel
+            - --config
+            - /etc/cloudflared
+            - run
+          volumeMounts:
+            - mountPath: /etc/cloudflared
+              name: config
+              subPath: cloudflared
+            - mountPath: /etc/cloudflared-tunnel-credentials
+              name: credentials
+              subPath: cloudflared-tunnel-credentials
+          securityContext:
+            readOnlyRootFilesystem : true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            runAsUser: 1000
+            runAsGroup: 1000
+            seLinuxOptions:
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
+            # capabilities:
+            #   drop:
+            #     - ALL
+          resources: {{ .Values.resources | toYaml | nindent 14 }}
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      volumes:
+        - name: credentials
+          secret:
+            secretName: {{ .Release.Name }}
+            optional: false
+        - name: config
+          configMap:
+            name: {{ .Release.Name }}

@@ -1,0 +1,12 @@
+creation_rules:
+  - path_regex: "\\.lab\\.ya?ml$"
+    # Workaround for https://github.com/mozilla/sops/issues/1103 where sops does not currently work correctly with age via YubiKey
+    pgp: 2D1D9C803F35BBC24014C3906601E1EB2454827F # lholota
+    age: > # GitHub, Kubernetes Lab
+      age1zw6c356patclh7q8cq5a99cghpzmnufgtwfaa0tmcg87a038d9ms4xpytn,
+      age1thhmcq56csqrrd07eymtau54xl620yw6qkjykc8tvpyr975v03zqhq5uz4
+  - path_regex: "\\.prod\\.ya?ml$"
+    pgp: 2D1D9C803F35BBC24014C3906601E1EB2454827F # lholota
+    age: >  # GitHub, Kubernetes Prod
+      age1zw6c356patclh7q8cq5a99cghpzmnufgtwfaa0tmcg87a038d9ms4xpytn,
+      age1jaxd6qpsycvekhveuvqs6v80hn235zye2s0uj0rlm4nety646ahsfp2u6e

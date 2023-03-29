@@ -4,9 +4,24 @@
   "main": "index.js",
   "repository": "git@github.com:homecentr/kubernetes.git",
   "author": "Lukas Holota",
-  "license": "GPL",
+  "license": "MIT",
   "private": true,
   "scripts": {
-    "lab:build": "flux build ks homecentr-lab --kustomization-file ./environments/lab/kustomization.yml --path ./environments --verbose"
-  }
+    "render": "node ./tools/cli.js",
+    "render:all": "node ./tools/cli.js",
+    "lint": "node ./tools/cli.js",
+    "lint:all": "node ./tools/cli.js",
+    "scan": "node ./tools/cli.js",
+    "scan:all": "node ./tools/cli.js",
+    "deps": "node ./tools/cli.js",
+    "deps:all": "node ./tools/cli.js"
+  },
+  "devDependencies": {
+    "commander": "^10.0.0",
+    "cross-env": "^7.0.3",
+    "js-yaml": "^4.1.0",
+    "run-script-os": "^1.1.6",
+    "util": "^0.12.5"
+  },
+  "dependencies": {}
 }

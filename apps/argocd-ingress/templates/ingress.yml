@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd
+  labels:
+    {{- include "common-labels" . | indent 4 }}
+  annotations:
+    # ArgoCD has custom authentication logic
+    ingress.pomerium.io/allow_public_unauthenticated_access: "true"
+
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Kubernetes deployment
+    gethomepage.dev/group: Infrastructure
+    gethomepage.dev/icon: argocd
+    gethomepage.dev/name: "Argo CD"
+    gethomepage.dev/href: "https://{{ .Values.hostname }}"
+    gethomepage.dev/ping: "https://www.google.com"
+spec:
+  rules:
+  - host: {{ .Values.hostname | quote }}
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          backend:
+            service:
+              name: argo-cd-argocd-server
+              port:
+                number: 80
