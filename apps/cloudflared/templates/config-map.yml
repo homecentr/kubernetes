@@ -11,13 +11,13 @@ data:
         ingress:
           # Kubernetes services
           {{ range .Values.routes.kubernetes }}
-          - hostname: {{ .hostname }}XX
+          - hostname: {{ .hostname }}
             service: https://pomerium-proxy.pomerium.svc.cluster.local:443
             originRequest:
               noTLSVerify: true
           {{- end }}
 
-          #### External routes
+          # External routes
           {{ range .Values.routes.external }}
           - hostname: {{ .hostname }}
             service: {{ .scheme }}://{{ .backendIp }}:{{ .port }}
