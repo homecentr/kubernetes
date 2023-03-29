@@ -21,6 +21,8 @@ data:
           {{ range .Values.routes.external }}
           - hostname: {{ .hostname }}
             service: {{ .scheme }}://{{ .backendIp }}:{{ .port }}
+            originRequest:
+              noTLSVerify: true
           {{- end }}
 
           - service: http_status:404
