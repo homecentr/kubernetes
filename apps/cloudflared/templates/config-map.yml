@@ -17,15 +17,10 @@ data:
               noTLSVerify: true
           {{- end }}
 
-          # - hostname: homepage-lab.homecentr.one
-          #   service: https://pomerium-proxy.pomerium.svc.cluster.local:443
-          #   originRequest:
-          #     noTLSVerify: true
-
-          # - hostname: login-lab.homecentr.one
-          #   service: https://pomerium-proxy.pomerium.svc.cluster.local:443
-          #   originRequest:
-          #     noTLSVerify: true
-
           # External routes
+          {{ range .Values.routes.external }}
+          - hostname: {{ .hostname }}
+            service: {{ .scheme }}://{{ .backendIp }}:{{ .port }}
+          {{- end }}
+
           - service: http_status:404
