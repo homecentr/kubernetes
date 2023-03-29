@@ -71,6 +71,8 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp
+        - mountPath: /.local
+          name: local
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
@@ -85,3 +87,5 @@ spec:
       volumes:
       - emptyDir: {}
         name: tmp
+      - emptyDir: {}
+        name: local
