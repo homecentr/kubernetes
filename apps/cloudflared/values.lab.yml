@@ -1,7 +1,7 @@
 imageTag: 2023.2.1
 
-cloudflare:
-  ipAddresses:
+networkPolicy:
+  cloudflare:
     - 173.245.48.0/20
     - 103.21.244.0/22
     - 103.22.200.0/22
@@ -21,12 +21,7 @@ cloudflare:
 routes:
   kubernetes:
     - hostname: homepage-lab.homecentr.one
-      namespace: apps
-      service: homepage
-      port: 3000
-      podSelector:
-        matchLabels:
-          app.kubernetes.io/name: homepage
+    - hostname: login-lab.homecentr.one
 
   external:
     - hostname: pve1-lab.homecentr.one

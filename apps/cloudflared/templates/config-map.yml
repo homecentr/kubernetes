@@ -9,12 +9,23 @@ data:
         credentials-file: /etc/cloudflared-tunnel-credentials
 
         ingress:
-          - hostname: homepage-lab.homecentr.one
+          # Kubernetes services
+          {{ range .Values.routes.kubernetes }}
+          - hostname: {{ .hostname }}
             service: https://pomerium-proxy.pomerium.svc.cluster.local:443
             originRequest:
               noTLSVerify: true
-          - hostname: login-lab.homecentr.one
-            service: https://pomerium-proxy.pomerium.svc.cluster.local:443
-            originRequest:
-              noTLSVerify: true
+          {{- end }}
+
+          # - hostname: homepage-lab.homecentr.one
+          #   service: https://pomerium-proxy.pomerium.svc.cluster.local:443
+          #   originRequest:
+          #     noTLSVerify: true
+
+          # - hostname: login-lab.homecentr.one
+          #   service: https://pomerium-proxy.pomerium.svc.cluster.local:443
+          #   originRequest:
+          #     noTLSVerify: true
+
+          # External routes
           - service: http_status:404
