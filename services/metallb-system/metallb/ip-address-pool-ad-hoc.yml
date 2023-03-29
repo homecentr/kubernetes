@@ -1,7 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: ad-hoc
-  namespace: metallb-system
-spec:
-  autoAssign: true
