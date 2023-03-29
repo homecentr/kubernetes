@@ -34,10 +34,10 @@ coredns:
       preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 100
         podAffinityTerm:
-          topologyKey: dns-affinity
+          topologyKey: kubernetes.io/hostname
           labelSelector:
             matchExpressions:
-            - key: app.kubernetes.io/name
+            - key: homecentr.one/antiaffinity
               operator: In
               values:
               - dns
