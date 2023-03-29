@@ -17,7 +17,7 @@ data:
               noTLSVerify: true
           {{- end }}
 
-          # External routes
+          #### External routes
           {{ range .Values.routes.external }}
           - hostname: {{ .hostname }}
             service: {{ .scheme }}://{{ .backendIp }}:{{ .port }}
