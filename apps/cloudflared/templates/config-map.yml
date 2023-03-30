@@ -20,9 +20,7 @@ data:
           # External routes
           {{ range .Values.routes.external }}
           - hostname: {{ .hostname }}
-            service: {{ .scheme }}://{{ .backendIp }}:{{ .port }}
-            originRequest:
-              noTLSVerify: true
+            service: {{ .backend }}
           {{- end }}
 
           - service: http_status:404

@@ -1,4 +1,4 @@
-imageTag: 2023.2.1
+imageTag: 2023.3.1
 
 networkPolicy:
   cloudflare:
@@ -25,6 +25,4 @@ routes:
 
   external:
     - hostname: pve1-lab.homecentr.one
-      backendIp: 10.1.8.11
-      scheme: ssh
-      port: 22
+      backend: ssh://10.1.8.11:22
