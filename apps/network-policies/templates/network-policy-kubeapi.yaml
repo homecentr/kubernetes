@@ -13,6 +13,13 @@ spec:
   egress:
     # Kubernetes API
     - to:
+        - ipBlock:
+            cidr: 172.17.0.1/32
+      ports:
+        - protocol: TCP
+          port: 443
+
+    - to:
         {{- range $node := .Values.networkPolicy.kubeApiNodes }}
         - ipBlock:
             cidr: {{ $node }}/32
