@@ -1,8 +1,26 @@
 applications:
+- name: network-policies-default
+  namespace: default
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: true
+  valueFiles:
+  - values.$env.yml
+
+- name: network-policies-kube-system
+  namespace: kube-system
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: true
+  valueFiles:
+  - values.$env.yml
+
 - name: metallb-crd
+  namespace: metallb-system
   type: raw
   syncWave: -100
-  namespace: metallb-system
   deleteProtection: true
   ignoreDifferences:
   - group: "*"
@@ -28,106 +46,106 @@ applications:
   - values.yml
   - ../globals.$env.yml
 
-- name: storage
-  type: helm
-  syncWave: -89
-  namespace: kube-system
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
-  - ../globals.$env.yml
+# - name: storage
+#   type: helm
+#   syncWave: -89
+#   namespace: kube-system
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   - ../globals.$env.yml
 
-- name: cert-manager-crd
-  type: raw
-  syncWave: -80
-  namespace: cert-manager
-  deleteProtection: false
+# - name: cert-manager-crd
+#   type: raw
+#   syncWave: -80
+#   namespace: cert-manager
+#   deleteProtection: false
 
-- name: cert-manager
-  type: helm
-  syncWave: -79
-  namespace: cert-manager
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
-  secretValueFiles:
-  - secrets.$env.yml
+# - name: cert-manager
+#   type: helm
+#   syncWave: -79
+#   namespace: cert-manager
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   secretValueFiles:
+#   - secrets.$env.yml
 
-- name: pomerium-crd
-  type: raw
-  syncWave: -60
-  namespace: pomerium
-  deleteProtection: false
+# - name: pomerium-crd
+#   type: raw
+#   syncWave: -60
+#   namespace: pomerium
+#   deleteProtection: false
 
-- name: pomerium
-  type: helm
-  syncWave: -59
-  namespace: pomerium
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
-  - values.yml
-  - ../globals.$env.yml
-  secretValueFiles:
-  - secrets.$env.yml
+# - name: pomerium
+#   type: helm
+#   syncWave: -59
+#   namespace: pomerium
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   - values.yml
+#   - ../globals.$env.yml
+#   secretValueFiles:
+#   - secrets.$env.yml
 
-- name: prometheus-crd
-  type: directory
-  syncWave: -50
-  deleteProtection: false
-  serverSideApply: true
+# - name: prometheus-crd
+#   type: directory
+#   syncWave: -50
+#   deleteProtection: false
+#   serverSideApply: true
 
-- name: dns-primary
-  type: helm
-  path: apps/dns
-  namespace: apps
-  deleteProtection: false
-  valueFiles:
-  - ../globals.$env.yml
-  - values.$env.yml
-  - values.$env.primary.yml
+# - name: dns-primary
+#   type: helm
+#   path: apps/dns
+#   namespace: apps
+#   deleteProtection: false
+#   valueFiles:
+#   - ../globals.$env.yml
+#   - values.$env.yml
+#   - values.$env.primary.yml
 
-- name: dns-secondary
-  type: helm
-  path: apps/dns
-  namespace: apps
-  deleteProtection: false
-  valueFiles:
-  - ../globals.$env.yml
-  - values.$env.yml
-  - values.$env.secondary.yml
+# - name: dns-secondary
+#   type: helm
+#   path: apps/dns
+#   namespace: apps
+#   deleteProtection: false
+#   valueFiles:
+#   - ../globals.$env.yml
+#   - values.$env.yml
+#   - values.$env.secondary.yml
 
-- name: argocd-ingress
-  type: helm
-  namespace: argo-cd
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
+# - name: argocd-ingress
+#   type: helm
+#   namespace: argo-cd
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
 
-- name: homepage
-  type: helm
-  namespace: apps
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
-  - values.config.yml
-  - ../globals.$env.yml
+# - name: homepage
+#   type: helm
+#   namespace: apps
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   - values.config.yml
+#   - ../globals.$env.yml
 
-- name: kubernetes-dashboard
-  type: helm
-  namespace: apps
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
-  - ../globals.$env.yml
-  secretValueFiles:
-  - secrets.$env.yml
+# - name: kubernetes-dashboard
+#   type: helm
+#   namespace: apps
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   - ../globals.$env.yml
+#   secretValueFiles:
+#   - secrets.$env.yml
 
-- name: cloudflared
-  type: helm
-  namespace: clouflare
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
-  secretValueFiles:
-  - secrets.$env.yml
+# - name: cloudflared
+#   type: helm
+#   namespace: clouflare
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   secretValueFiles:
+#   - secrets.$env.yml
