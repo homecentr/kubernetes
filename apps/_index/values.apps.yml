@@ -61,33 +61,33 @@ applications:
   namespace: cert-manager
   deleteProtection: false
 
-# - name: cert-manager
-#   type: helm
-#   syncWave: -79
-#   namespace: cert-manager
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
-#   secretValueFiles:
-#   - secrets.$env.yml
+- name: cert-manager
+  type: helm
+  syncWave: -79
+  namespace: cert-manager
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml
 
-# - name: pomerium-crd
-#   type: raw
-#   syncWave: -60
-#   namespace: pomerium
-#   deleteProtection: false
+- name: pomerium-crd
+  type: raw
+  syncWave: -60
+  namespace: pomerium
+  deleteProtection: false
 
-# - name: pomerium
-#   type: helm
-#   syncWave: -59
-#   namespace: pomerium
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
-#   - values.yml
-#   - ../globals.$env.yml
-#   secretValueFiles:
-#   - secrets.$env.yml
+- name: pomerium
+  type: helm
+  syncWave: -59
+  namespace: pomerium
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
+  - ../globals.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml
 
 # - name: prometheus-crd
 #   type: directory
