@@ -38,9 +38,9 @@
 - to:
   - ipBlock:
       cidr: {{ .Values.networkPolicy.kubeApiService }}/32
-    ports:
-    - protocol: TCP
-      port: 443
+  ports:
+  - protocol: TCP
+    port: 443
 {{- end }}
 
 {{- define "common.egress-dns" }}
