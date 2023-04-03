@@ -33,7 +33,7 @@ spec:
       skipCrds: {{ .skipCrds | default true }}
       
       valueFiles:
-      - ../_common/{{ printf "values.$env.yaml" | replace "$env" $.Values.environmentName }}.yaml
+      - ../_common/{{ printf "values.$env.yaml" | replace "$env" $.Values.environmentName }}
       {{- range $file := .valueFiles }}
       - {{ $file | replace "$env" $.Values.environmentName }}
       {{- end }}
