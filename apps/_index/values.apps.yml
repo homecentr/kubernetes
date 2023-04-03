@@ -110,12 +110,12 @@ applications:
 #   - values.$env.yml
 #   - values.$env.secondary.yml
 
-# - name: argocd-ingress
-#   type: helm
-#   namespace: argo-cd
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
+- name: argocd-ingress
+  type: helm
+  namespace: argo-cd
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
 
 # - name: homepage
 #   type: helm
