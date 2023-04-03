@@ -10,4 +10,4 @@ spec:
   policyTypes:
     - Egress
   egress:
-    {{- include "common.common.egress-kubeapi" . | nindent 4 }}
+    {{- include "common.egress-kubeapi" . | nindent 4 }}
