@@ -1,0 +1,4 @@
+apiVersion: v2
+name: _common
+type: library
+version: 1.0.0

@@ -10,11 +10,4 @@ spec:
   policyTypes:
     - Egress
   egress:
-    - to:
-        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
-        - ipBlock:
-            cidr: {{ $node }}/32
-        {{- end }}
-      ports:
-        - protocol: TCP
-          port: 6443
+    {{- include "common.common.egress-kubeapi" . | nindent 4 }}

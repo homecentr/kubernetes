@@ -1,21 +1,21 @@
 applications:
-- name: network-policies-default
-  namespace: default
-  path: apps/network-policies
-  type: helm
-  syncWave: -100
-  deleteProtection: true
-  valueFiles:
-  - values.$env.yml
+# - name: network-policies-default
+#   namespace: default
+#   path: apps/network-policies
+#   type: helm
+#   syncWave: -100
+#   deleteProtection: true
+#   valueFiles:
+#   - values.$env.yml
 
-- name: network-policies-kube-system
-  namespace: kube-system
-  path: apps/network-policies
-  type: helm
-  syncWave: -100
-  deleteProtection: true
-  valueFiles:
-  - values.$env.yml
+# - name: network-policies-kube-system
+#   namespace: kube-system
+#   path: apps/network-policies
+#   type: helm
+#   syncWave: -100
+#   deleteProtection: true
+#   valueFiles:
+#   - values.$env.yml
 
 - name: metallb-crd
   namespace: metallb-system
@@ -44,7 +44,6 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.yml
-  - ../globals.$env.yml
 
 - name: storage
   type: helm
@@ -53,7 +52,6 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
-  - ../globals.$env.yml
 
 - name: cert-manager-crd
   type: raw
@@ -85,7 +83,6 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.yml
-  - ../globals.$env.yml
   secretValueFiles:
   - secrets.$env.yml
 
@@ -101,7 +98,6 @@ applications:
 #   namespace: apps
 #   deleteProtection: false
 #   valueFiles:
-#   - ../globals.$env.yml
 #   - values.$env.yml
 #   - values.$env.primary.yml
 
@@ -111,7 +107,6 @@ applications:
 #   namespace: apps
 #   deleteProtection: false
 #   valueFiles:
-#   - ../globals.$env.yml
 #   - values.$env.yml
 #   - values.$env.secondary.yml
 
@@ -129,7 +124,6 @@ applications:
 #   valueFiles:
 #   - values.$env.yml
 #   - values.config.yml
-#   - ../globals.$env.yml
 
 # - name: kubernetes-dashboard
 #   type: helm
@@ -137,7 +131,6 @@ applications:
 #   deleteProtection: false
 #   valueFiles:
 #   - values.$env.yml
-#   - ../globals.$env.yml
 #   secretValueFiles:
 #   - secrets.$env.yml
 
