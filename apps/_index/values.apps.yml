@@ -17,6 +17,8 @@ applications:
   valueFiles:
   - values.$env.yml
 
+# TODO: Network policies argo
+
 - name: metallb-crd
   namespace: metallb-system
   type: raw
@@ -110,7 +112,7 @@ applications:
 #   - values.$env.yml
 #   - values.$env.secondary.yml
 
-- name: argocd-ingress
+- name: argocd
   type: helm
   namespace: argo-cd
   deleteProtection: false

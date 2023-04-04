@@ -1,0 +1,5 @@
+# ArgoCD itself is deployed by ansible. This chart only owns auxiliary resources.
+apiVersion: v2
+name: argocd-ingress
+version: 1.0.0
+appVersion: 0.0.0
