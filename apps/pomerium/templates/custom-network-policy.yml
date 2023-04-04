@@ -16,7 +16,7 @@ spec:
   ingress:
     # Kubernetes API
     - from:
-        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
+        {{- range $node := $.Values.networkPolicy.kubeApiNodes }}
         - ipBlock:
             cidr: {{ $node }}/32
         {{- end }}
@@ -40,7 +40,6 @@ spec:
 
   egress:
     {{- include "common.egress-kubeapi" . | nindent 4 }}
-    {{- include "common.egress-internet" . | nindent 4 }}
     {{- include "common.egress-internet" . | nindent 4 }}
     
     # Allow communication to all pods in all namespaces for ingress proxy (includes DNS)
