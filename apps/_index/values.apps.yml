@@ -1,21 +1,21 @@
 applications:
-# - name: network-policies-default
-#   namespace: default
-#   path: apps/network-policies
-#   type: helm
-#   syncWave: -100
-#   deleteProtection: true
-#   valueFiles:
-#   - values.$env.yml
+- name: network-policies-default
+  namespace: default
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: true
+  valueFiles:
+  - values.$env.yml
 
-# - name: network-policies-kube-system
-#   namespace: kube-system
-#   path: apps/network-policies
-#   type: helm
-#   syncWave: -100
-#   deleteProtection: true
-#   valueFiles:
-#   - values.$env.yml
+- name: network-policies-kube-system
+  namespace: kube-system
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: true
+  valueFiles:
+  - values.$env.yml
 
 - name: metallb-crd
   namespace: metallb-system

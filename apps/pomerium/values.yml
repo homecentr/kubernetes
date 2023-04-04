@@ -1,3 +1,9 @@
+networkPolicy:
+  consumers:
+    exposedPorts:
+      - port: 8080
+      - port: 8443
+
 postgresql:
   networkPolicy:
     enabled: true

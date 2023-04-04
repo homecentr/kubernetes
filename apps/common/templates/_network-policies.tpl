@@ -11,10 +11,6 @@
         app.kubernetes.io/name: pomerium
 {{- end }}
 
-{{- define "common.ingress-homepage" }}
-# TBA
-{{- end }}
-
 {{- define "common.egress-internet" }}
 - to:
     - ipBlock:
@@ -43,21 +39,26 @@
     port: 443
 {{- end }}
 
-{{- define "common.egress-dns" }}
-- ports:
-  - protocol: TCP
-    port: 53
-  - protocol: UDP
-    port: 53
-  - protocol: TCP
-    port: 5353
-  - protocol: UDP
-    port: 5353
-  to:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-      podSelector:
-        matchLabels:
-          app.kubernetes.io/instance: kube-dns
+{{- define "common.all-pods-across-all-namespaces" }}
+- to:
+    - namespaceSelector: {}
+      podSelector: {}
+{{- end }}
+
+{{- define "common.ingress-consumers" }}
+- from:
+  {{- range $cidr := $.Values.networkPolicy.consumers.allowedCidrs }}
+  - ipBlock:
+      cidr: {{ $cidr }}
+  {{- end }}
+  ports:
+  {{- include "common.ports" $.Values.networkPolicy.consumers.exposedPorts | nindent 4 }}
+{{- end }}
+
+{{- define "common.ports" }}
+ports:
+  {{- range $port := . }}
+  - protocol: {{ $port.protocol | default "TCP" }}
+    port: {{ $port.port }}
+  {{- end }}
 {{- end }}

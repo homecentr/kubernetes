@@ -4,6 +4,9 @@ version: 1.0.0
 appVersion: sha-cdc389c
 
 dependencies:
-- name: postgresql
-  repository: https://charts.bitnami.com/bitnami
-  version: 12.1.9
+  - name: common
+    version: 1.0.0
+    repository: file://../common
+  - name: postgresql
+    repository: https://charts.bitnami.com/bitnami
+    version: 12.1.9

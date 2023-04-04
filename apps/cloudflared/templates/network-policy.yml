@@ -13,6 +13,10 @@ spec:
   - {}
   egress:
   - {}
+    # Cloudflare external IPs
+    
+    # OR all pods across all namespaces (and the relevant ones will accept traffic from this one on a specific port)
+    # Pods with labels (?)
   policyTypes:
   - Ingress
   - Egress
