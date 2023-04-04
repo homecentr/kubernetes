@@ -14,19 +14,18 @@ spec:
     - Ingress
     - Egress
   ingress:
-  
-    # # Kubernetes API
-    # - from:
-    #     {{- range $node := .Values.networkPolicy.kubeApiNodes }}
-    #     - ipBlock:
-    #         cidr: {{ $node }}/32
-    #     {{- end }}
+    # Kubernetes API
+    - from:
+        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
+        - ipBlock:
+            cidr: {{ $node }}/32
+        {{- end }}
 
-    #   ports:
-    #     - protocol: TCP
-    #       port: 8080
-    #     - protocol: TCP
-    #       port: 8443
+      ports:
+        - protocol: TCP
+          port: 8080
+        - protocol: TCP
+          port: 8443
 
     {{- include "common.ingress-consumers" . | nindent 4 }}
 
