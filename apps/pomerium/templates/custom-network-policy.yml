@@ -27,9 +27,12 @@ spec:
         - protocol: TCP
           port: 8443
 
+    # Accept traffic from consumers
     - from:
+      {{- range $cidr := .Values.networkPolicy.consumerCidrs }} # ???
       - ipBlock:
-          cidr: {{ .Values.networkPolicy.servicesSubnetCidr }}
+          cidr: {{ $cidr }}
+      {{- end }}
       ports:
         - protocol: TCP
           port: 8080
