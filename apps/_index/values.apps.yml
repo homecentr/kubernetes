@@ -1,4 +1,12 @@
 applications:
+- name: argocd
+  type: helm
+  namespace: argo-cd
+  syncWave: -110
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
 - name: network-policies-default
   namespace: default
   path: apps/network-policies
@@ -26,7 +34,14 @@ applications:
   valueFiles:
   - values.$env.yml
 
-# TODO: Network policies argo
+- name: network-policies-argo-cd
+  namespace: argo-cd
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: true
+  valueFiles:
+  - values.$env.yml
 
 - name: metallb-crd
   namespace: metallb-system
@@ -120,13 +135,6 @@ applications:
 #   valueFiles:
 #   - values.$env.yml
 #   - values.$env.secondary.yml
-
-- name: argocd
-  type: helm
-  namespace: argo-cd
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 # - name: homepage
 #   type: helm
