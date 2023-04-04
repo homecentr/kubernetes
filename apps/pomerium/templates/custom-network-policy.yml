@@ -50,7 +50,7 @@ spec:
     {{- include "common.egress-internet" . | nindent 4 }}
     
     # Allow communication to all pods in all namespaces for ingress proxy (includes DNS)
-    {{- include "common.all-pods-across-all-namespaces" . | nindent 4 }}
+    {{- include "common.egress-all-pods-across-all-namespaces" . | nindent 4 }}
     
     # Allow communication to other hosts in the subnet to allow proxying external services
     - ports:

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-server
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-server
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # TODO: Pomerium ingress
+    {{- include "common.ingress-pomerium" . | nindent 4 }}
+  egress:
+    {{- include "common.egress-kubeapi" . | nindent 4 }}
+    {{- include "common.egress-internet" . | nindent 4 }}

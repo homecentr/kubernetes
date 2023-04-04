@@ -39,7 +39,7 @@
     port: 443
 {{- end }}
 
-{{- define "common.all-pods-across-all-namespaces" }}
+{{- define "common.egress-all-pods-across-all-namespaces" }}
 - to:
     - namespaceSelector: {}
       podSelector: {}
