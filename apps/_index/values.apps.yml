@@ -17,6 +17,15 @@ applications:
   valueFiles:
   - values.$env.yml
 
+- name: network-policies-pomerium
+  namespace: pomerium
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: true
+  valueFiles:
+  - values.$env.yml
+
 # TODO: Network policies argo
 
 - name: metallb-crd
