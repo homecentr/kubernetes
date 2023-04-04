@@ -16,7 +16,7 @@ spec:
   ingress:
     # Kubernetes API
     - from:
-        {{- range $node := $.Values.networkPolicy.kubeApiNodes }}
+        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
         - ipBlock:
             cidr: {{ $node }}/32
         {{- end }}
@@ -27,7 +27,14 @@ spec:
         - protocol: TCP
           port: 8443
 
-    {{- include "common.ingress-consumers" . | nindent 4 }}
+    - from:
+      - ipBlock:
+          cidr: {{ .Values.networkPolicy.servicesSubnetCidr }}
+      ports:
+        - protocol: TCP
+          port: 8080
+        - protocol: TCP
+          port: 8443
 
     # Cloudflared
     - from:

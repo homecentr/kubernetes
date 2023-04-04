@@ -45,16 +45,6 @@
       podSelector: {}
 {{- end }}
 
-{{- define "common.ingress-consumers" }}
-- from:
-  {{- range $cidr := $.Values.networkPolicy.consumers.allowedCidrs }}
-  - ipBlock:
-      cidr: {{ $cidr }}
-  {{- end }}
-  ports:
-  {{- include "common.ports" $.Values.networkPolicy.consumers.exposedPorts | nindent 4 }}
-{{- end }}
-
 {{- define "common.ports" }}
 ports:
   {{- range $port := . }}
