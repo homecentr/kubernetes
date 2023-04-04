@@ -1,0 +1,46 @@
+[
+    {
+        "name": "runAsNonRoot",
+        "policyType": "postureExceptionPolicy",
+        "actions": [
+            "alertOnly"
+        ],
+        "resources": [
+            {
+                "designatorType": "Attributes",
+                "attributes": {
+                    "kind": ".*"
+                }
+            }
+        ],
+        "posturePolicies": [
+            {
+                "controlName": "Label usage for resources",
+                "reason": "Not applicable - we use the labels defined in C-0077"
+            },
+            {
+                "controlName": "Configured liveness probe",
+                "reason": "Not applicable - service does not expose any endpoint"
+            },
+            {
+                "controlName": "Configured readiness probe",
+                "reason": "Not applicable - service does not expose any endpoint"
+            },
+            {
+                "controlName": "CIS-4.4.2 Consider external secret storage"
+            },
+            {
+                "controlName": "Data Destruction",
+                "reason": "Provisioner delete access to delete PVCs, PVs and helper pods."
+            },
+            {
+                "controlName": "CIS-4.1.4 Minimize access to create pods",
+                "reason": "Provisioner needs access to create helper pods which physically create the directories."
+            },
+            {
+                "controlName": "Check if signature exists",
+                "reason": "3rd party image, adding signature is not worth the hassle"
+            }
+        ]
+    }
+]

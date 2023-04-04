@@ -56,7 +56,7 @@ applications:
   valueFiles:
   - values.yml
 
-- name: storage
+- name: local-path-provisioner
   type: helm
   syncWave: -89
   namespace: kube-system
