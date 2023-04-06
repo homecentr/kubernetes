@@ -42,7 +42,7 @@ spec:
         port: {{ $route.port }}
     to:
       - ipBlock:
-          cidr: {{ $route.ip }}/32
+          cidr: {{ $route.backendIp }}/32
   {{- end }}
   policyTypes:
   - Ingress
