@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: argocd
   labels:
-    {{- include "common-labels" . | indent 4 }}
+    {{- include "common.resource-labels" . | indent 4 }}
   annotations:
     # ArgoCD has custom authentication logic
     ingress.pomerium.io/allow_public_unauthenticated_access: "true"
