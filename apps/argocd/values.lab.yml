@@ -1,5 +1,1 @@
 hostname: argocd-lab.homecentr.one
-
-networkPolicy:
-  pomeriumIngress:
-    port: 80

@@ -13,26 +13,8 @@ spec:
     - Ingress
     - Egress
   ingress:
-    - from:
-      # Pomerium Ingress controller
-      - namespaceSelector:
-          matchLabels:
-            kubernetes.io/metadata.name: pomerium
-        podSelector:
-          matchLabels:
-            app.kubernetes.io/name: pomerium
-    
-      # 
-      - namespaceSelector:
-          matchLabels:
-            kubernetes.io/metadata.name: apps
-        podSelector:
-          matchLabels:
-            app.kubernetes.io/name: homepage
-
-      ports:
-        - protocol: TCP
-          port: 443
+    {{- include "common.ingress-pomerium" (dict "port" 443) | nindent 4 }}
+    {{- include "common.ingress-homepage-healthcheck" (dict "port" 443) | nindent 4 }}
 
   egress:
     {{- include "common.egress-kubeapi" . | indent 4 }}

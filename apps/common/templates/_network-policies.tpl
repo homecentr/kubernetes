@@ -1,7 +1,7 @@
 {{- define "common.ingress-pomerium" }}
 - ports:
-    - protocol: {{ .Values.networkPolicy.pomeriumIngress.protocol | default "TCP" }}
-      port: {{ .Values.networkPolicy.pomeriumIngress.port }}
+    - protocol: {{ .protocol | default "TCP" }}
+      port: {{ .port }}
   from:
   - namespaceSelector:
       matchLabels:
@@ -9,6 +9,19 @@
     podSelector:
       matchLabels:
         app.kubernetes.io/name: pomerium
+{{- end }}
+
+{{- define "common.ingress-pomerium" }}
+- ports:
+    - protocol: {{ .protocol | default "TCP" }}
+      port: {{ .port }}
+  from:
+  - namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: apps
+    podSelector:
+      matchLabels:
+        app.kubernetes.io/name: homepage
 {{- end }}
 
 {{- define "common.egress-internet" }}
