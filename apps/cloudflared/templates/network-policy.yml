@@ -38,7 +38,7 @@ spec:
   # SSH
   - to:
     {{- range $route := .Values.routes.external }}
-    {{- if $route.protocol eq "ssh" }}
+    {{- if eq $route.protocol "ssh" }}
       - ipBlock:
           cidr: {{ $route.ip }}/32
     {{- end }}
