@@ -31,4 +31,11 @@ spec:
     - to:
       - namespaceSelector: {}
         podSelector: {}
-    
+
+    # Allow homepage to talk to external services to healthcheck them (e.g. Proxmox UI)
+    - to:
+      - ipBlock:
+          cidr: {{ servicesSubnetCidr }}
+      ports:
+        - protocol: TCP
+          port: 443
