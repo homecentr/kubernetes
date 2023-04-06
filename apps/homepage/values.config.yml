@@ -10,9 +10,9 @@ config:
     
   bookmarks:
     - Homelab:
-        - "Homecentr Docs":
+        - "Homecentr documentation":
             - icon: /icons/homecentr.png
-              href: https://homecentr.one
+              href: https://docs.homecentr.one
 
         - "Homecentr on Github":
             - icon: github-light
