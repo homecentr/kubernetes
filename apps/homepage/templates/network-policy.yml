@@ -35,7 +35,7 @@ spec:
     # Allow homepage to talk to external services to healthcheck them (e.g. Proxmox UI)
     - to:
       - ipBlock:
-          cidr: {{ servicesSubnetCidr }}
+          cidr: {{ .Values.networkPolicy.servicesSubnetCidr }}
       ports:
         - protocol: TCP
           port: 443
