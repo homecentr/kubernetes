@@ -164,7 +164,7 @@ applications:
 
 - name: cloudflared
   type: helm
-  namespace: clouflare
+  namespace: cloudflare
   deleteProtection: false
   valueFiles:
   - values.$env.yml
