@@ -4,11 +4,11 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "common-labels" . | indent 4 }}
+    {{- include "common.resource-labels" . | indent 4 }}
 spec:
   podSelector:
     matchLabels:
-      {{- include "pod-labels" . | indent 8 }}
+      {{- include "common.pod-labels" . | indent 8 }}
   policyTypes:
     - Ingress
     - Egress
@@ -25,30 +25,5 @@ spec:
         - protocol: TCP
           port: 3000
   egress:
-    # DNS
-    - ports:
-      - protocol: TCP
-        port: 53
-      - protocol: UDP
-        port: 53
-      - protocol: TCP
-        port: 5353
-      - protocol: UDP
-        port: 5353
-      to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-          podSelector:
-            matchLabels:
-              app.kubernetes.io/instance: kube-dns
-
-    # Kubernetes API
-    - to:
-        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
-        - ipBlock:
-            cidr: {{ $node }}/32
-        {{- end }}
-      ports:
-        - protocol: TCP
-          port: 6443
+    {{- include "common.egress-kubeapi" . | indent 4 }}
+    
