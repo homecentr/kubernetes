@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-server
+  name: argocd-server # the name must match the name of the service otherwise homepage healthcheck doesn't work
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
   annotations:
@@ -12,7 +12,7 @@ metadata:
     gethomepage.dev/description: Kubernetes deployment
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: argocd
-    gethomepage.dev/name: "Argo CD test"
+    gethomepage.dev/name: "Argo CD"
     gethomepage.dev/href: "https://{{ .Values.hostname }}"
 spec:
   rules:

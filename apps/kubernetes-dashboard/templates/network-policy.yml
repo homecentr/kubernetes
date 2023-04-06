@@ -13,8 +13,8 @@ spec:
     - Ingress
     - Egress
   ingress:
-    {{- include "common.ingress-pomerium" (dict "port" 443) | nindent 4 }}
-    {{- include "common.ingress-homepage-healthcheck" (dict "port" 443) | nindent 4 }}
+    {{- include "common.ingress-pomerium" (dict "port" 8443) | nindent 4 }}
+    {{- include "common.ingress-homepage-healthcheck" (dict "port" 8443) | nindent 4 }}
 
   egress:
     {{- include "common.egress-kubeapi" . | indent 4 }}
