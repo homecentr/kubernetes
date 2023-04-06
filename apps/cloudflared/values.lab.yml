@@ -25,4 +25,5 @@ routes:
 
   external:
     - hostname: pve1-lab.homecentr.one
-      backend: ssh://10.1.8.11:22
+      protocol: ssh
+      ip: 10.1.8.11
