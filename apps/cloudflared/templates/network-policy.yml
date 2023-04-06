@@ -35,14 +35,15 @@ spec:
           matchLabels:
             app.kubernetes.io/name: pomerium
 
-  # SSH
-  - to:
-    {{- range $route := .Values.routes.external }}
-    {{- if eq $route.protocol "ssh" }}
+  # External services
+  {{- range $route := .Values.routes.external }}
+  - ports:
+      - protocol: TCP
+        port: {{ $route.port }}
+    to:
       - ipBlock:
           cidr: {{ $route.ip }}/32
-    {{- end }}
-    {{- end }}
+  {{- end }}
   policyTypes:
   - Ingress
   - Egress

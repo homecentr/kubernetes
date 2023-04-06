@@ -26,4 +26,5 @@ routes:
   external:
     - hostname: pve1-lab.homecentr.one
       protocol: ssh
-      ip: 10.1.8.11
+      backendIp: 10.1.8.11
+      port: 22

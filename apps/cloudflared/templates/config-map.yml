@@ -22,7 +22,7 @@ data:
           # External routes
           {{ range .Values.routes.external }}
           - hostname: {{ .hostname }}
-            service: {{ .protocol }}://{{ .backend }}:{{ .port }}
+            service: {{ .protocol }}://{{ .backendIp }}:{{ .port }}
           {{- end }}
 
           - service: http_status:404
