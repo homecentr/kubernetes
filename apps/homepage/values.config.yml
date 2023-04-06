@@ -69,7 +69,7 @@ config:
             icon: proxmox
             href: https://pve$DOMAIN
             description: Virtual servers management
-            ping: https://pve$DOMAIN
+            # ping: https://pve$DOMAIN
 
   widgets:
     # TBA: When prometheus is available
