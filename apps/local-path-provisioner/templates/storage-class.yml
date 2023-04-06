@@ -5,7 +5,7 @@ kind: StorageClass
 metadata:
   name: local-path-provisioner-{{ $volume.name }}
   labels:
-    {{- include "common.resource-labels" $. | indent 4 }}
+    {{- include "common.resource-labels" $ | indent 4 }}
 provisioner: rancher.io/local-path
 volumeBindingMode: {{ $volume.bindingMode | default "WaitForFirstConsumer" }}
 reclaimPolicy: {{ $volume.reclaimPolicy | default "Retain" }}
