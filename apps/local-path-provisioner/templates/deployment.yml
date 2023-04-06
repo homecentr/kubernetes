@@ -1,5 +1,4 @@
 {{- range $volume := $.Values.volumes -}}
-{{- $volumeData := dict "volume" $volume "Release" $.Release "Chart" $.Chart -}}
 ---
 apiVersion: apps/v1
 kind: Deployment

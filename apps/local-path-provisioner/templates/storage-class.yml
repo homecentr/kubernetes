@@ -1,5 +1,4 @@
-{{- range $volume := .Values.volumes -}}
-{{ $volumeData := dict "volume" $volume "Release" $.Release "Chart" $.Chart }}
+{{- range $volume := $.Values.volumes -}}
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass

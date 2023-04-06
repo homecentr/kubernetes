@@ -1,5 +1,4 @@
-{{- range $volume := .Values.volumes -}}
-{{- $volumeData := dict "volume" $volume "Release" $.Release "Chart" $.Chart -}}
+{{- range $volume := $.Values.volumes -}}
 ---
 kind: ConfigMap
 apiVersion: v1
