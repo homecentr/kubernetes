@@ -12,7 +12,7 @@ applications:
   path: apps/network-policies
   type: helm
   syncWave: -100
-  deleteProtection: true
+  deleteProtection: false
   valueFiles:
   - values.$env.yml
 
@@ -21,7 +21,7 @@ applications:
   path: apps/network-policies
   type: helm
   syncWave: -100
-  deleteProtection: true
+  deleteProtection: false
   valueFiles:
   - values.$env.yml
 
@@ -30,7 +30,7 @@ applications:
   path: apps/network-policies
   type: helm
   syncWave: -100
-  deleteProtection: true
+  deleteProtection: false
   valueFiles:
   - values.$env.yml
 
@@ -39,7 +39,7 @@ applications:
   path: apps/network-policies
   type: helm
   syncWave: -100
-  deleteProtection: true
+  deleteProtection: false
   valueFiles:
   - values.$env.yml
 

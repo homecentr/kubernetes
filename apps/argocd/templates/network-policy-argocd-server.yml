@@ -18,3 +18,8 @@ spec:
   egress:
     {{- include "common.egress-kubeapi" . | nindent 4 }}
     {{- include "common.egress-internet" . | nindent 4 }}
+    # Other argo cd pods in the namespace
+    - to:
+        - podSelector:
+            matchLabels:
+                app.kubernetes.io/part-of: argocd
