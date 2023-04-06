@@ -18,6 +18,7 @@ metadata:
     gethomepage.dev/icon: kubernetes-dashboard
     gethomepage.dev/name: "Kubernetes Dashboard"
     gethomepage.dev/href: "https://{{ .Values.hostname }}"
+    gethomepage.dev/ping: "https://kubernetes-dashboard.apps.svc.cluster.local"
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
