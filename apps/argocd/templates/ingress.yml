@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd
+  name: argocd-server
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
   annotations:
@@ -12,9 +12,8 @@ metadata:
     gethomepage.dev/description: Kubernetes deployment
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: argocd
-    gethomepage.dev/name: "Argo CD"
+    gethomepage.dev/name: "Argo CD test"
     gethomepage.dev/href: "https://{{ .Values.hostname }}"
-    gethomepage.dev/ping: "http://argo-cd-argocd-server.argo-cd.svc.cluster.local"
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
