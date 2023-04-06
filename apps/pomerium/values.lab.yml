@@ -13,12 +13,6 @@ resources:
     cpu: 500m
     memory: 512Mi
 
-networkPolicy:
-  consumerCidrs:
-    - 10.1.8.0/24
-    - 10.1.3.0/24
-    - 172.16.0.0/16
-
 postgresql:
   primary:
     persistence:

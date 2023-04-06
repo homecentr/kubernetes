@@ -23,27 +23,19 @@ spec:
       - protocol: UDP
         port: 53
       from:
+        # Accept internal traffic (?)
         - ipBlock:
             cidr: 172.16.0.0/16
-        {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
+        {{- range $cidr := .Values.networkPolicy.consumerCidrs }}
         - ipBlock:
             cidr: {{ $cidr }}
         {{- end }}
   egress:
-    # Kubernetes API
-    - to:
-        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
-        - ipBlock:
-            cidr: {{ $node }}/32
-        {{- end }}
-      ports:
-        - protocol: TCP
-          port: 6443
-    # DNS forwarding
+    {{- include "common.egress-kubeapi" . | nindent 4 }}
     - to: 
-        {{- range $node := .Values.networkPolicy.forwarders }}
+        {{- range $forwarder := .Values.networkPolicy.forwarders }}
         - ipBlock:
-            cidr: {{ $node }}/32
+            cidr: {{ $forwarder }}/32
         {{- end }}
       ports:
         - protocol: TCP
