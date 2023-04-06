@@ -43,6 +43,15 @@ applications:
   valueFiles:
   - values.$env.yml
 
+- name: network-policies-cloudflare
+  namespace: cloudflare
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
 - name: metallb-crd
   namespace: metallb-system
   type: raw
