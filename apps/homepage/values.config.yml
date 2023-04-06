@@ -11,13 +11,12 @@ config:
   bookmarks:
     - Homelab:
         - "Homecentr Docs":
-              # icon TBA
-            - href: https://homecentr.one
+            - icon: /icons/homecentr.png
+              href: https://homecentr.one
 
         - "Homecentr on Github":
             - icon: github-light
               href: https://github.com/homecentr/
-        # /homelab on Reddit
     
     - "Cloud tools":
         - OneDrive:
@@ -77,12 +76,6 @@ config:
         #     href: https://k8s.$DOMAIN/
         #     ping: https://k8s.$DOMAIN/
         #     description: Kubernetes resource management
-
-        - "ARGO2":
-            icon: proxmox
-            href: https://argocd$DOMAIN
-            description: Argo test
-            ping: https://argo-cd-argocd-server.argo-cd.svc.cluster.local
 
         - "Proxmox VE":
             icon: proxmox
