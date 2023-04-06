@@ -64,24 +64,12 @@ config:
 
     - Infrastructure:
         # Grafana
-
-        # - "Argo CD":
-        #     icon: argocd
-        #     href: https://argocd.$DOMAIN/
-        #     ping: https://argocd.$DOMAIN/
-        #     description: Kubernetes deployment
-
-        # - "Kubernetes Dashboard":
-        #     icon: kubernetes-dashboard
-        #     href: https://k8s.$DOMAIN/
-        #     ping: https://k8s.$DOMAIN/
-        #     description: Kubernetes resource management
-
+        
         - "Proxmox VE":
             icon: proxmox
             href: https://pve$DOMAIN
             description: Virtual servers management
-            # TODO: Ping
+            ping: https://pve$DOMAIN
 
   widgets:
     # TBA: When prometheus is available
