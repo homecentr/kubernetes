@@ -11,7 +11,7 @@
         app.kubernetes.io/name: pomerium
 {{- end }}
 
-{{- define "common.ingress-pomerium" }}
+{{- define "common.ingress-homepage-healthcheck" }}
 - ports:
     - protocol: {{ .protocol | default "TCP" }}
       port: {{ .port }}
