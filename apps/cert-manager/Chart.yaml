@@ -3,6 +3,9 @@ name: cert-manager
 version: 1.0.0
 
 dependencies:
+  - name: common
+    version: 1.0.0
+    repository: file://../common
   - name: cert-manager
     repository: https://charts.jetstack.io
     version: v1.11.0

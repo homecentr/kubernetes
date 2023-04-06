@@ -4,6 +4,8 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: {{ $certificate.name }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
 spec:
   secretName: {{ $certificate.name }}
   secretTemplate:
