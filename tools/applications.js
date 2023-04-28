@@ -227,7 +227,7 @@ class App {
     }
 
     getHelmArgs(environmentName) {
-        let args = ""
+        let args = ` -f \"apps/common/values.${environmentName}.yml\"`
 
         if (this.valueFiles) {
             this.valueFiles.forEach(valueFile => {

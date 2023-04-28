@@ -59,20 +59,20 @@
 {{- end }}
 
 {{- define "common.egress-dns" }}
-  - ports:
-    - protocol: TCP
-      port: 53
-    - protocol: UDP
-      port: 53
-    - protocol: TCP
-      port: 5353
-    - protocol: UDP
-      port: 5353
-    to:
-      - namespaceSelector:
-          matchLabels:
-            kubernetes.io/metadata.name: kube-system
-        podSelector:
-          matchLabels:
-            app.kubernetes.io/instance: kube-dns
+- ports:
+  - protocol: TCP
+    port: 53
+  - protocol: UDP
+    port: 53
+  - protocol: TCP
+    port: 5353
+  - protocol: UDP
+    port: 5353
+  to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: kube-dns
 {{- end }}
