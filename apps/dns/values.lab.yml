@@ -61,14 +61,14 @@ coredns:
             10.1.8.1  test-lab.homecentr.one
             fallthrough
 
-        - name: template
-          parameters: IN A homecentr.one
-          configBlock: |-
-            match "^pve-lab\.homecentr\.one\.$"
-            answer "{{ .Name }} 60 IN A 10.1.8.11"
-            answer "{{ .Name }} 60 IN A 10.1.8.12"
-            answer "{{ .Name }} 60 IN A 10.1.8.13"
-            fallthrough
+        # - name: template
+        #   parameters: IN A homecentr.one
+        #   configBlock: |-
+        #     match "^pve-lab\.homecentr\.one\.$"
+        #     answer "{{ .Name }} 60 IN A 10.1.8.11"
+        #     answer "{{ .Name }} 60 IN A 10.1.8.12"
+        #     answer "{{ .Name }} 60 IN A 10.1.8.13"
+        #     fallthrough
 
         - name: k8s_gateway
           parameters: homecentr.one

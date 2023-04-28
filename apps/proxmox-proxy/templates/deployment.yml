@@ -1,0 +1,100 @@
+# customLabels:
+#     homecentr.one/antiaffinity: proxmox-proxy
+#   tolerations:
+#     - key: homecentr.one/critical-only
+#       operator: Exists
+#       effect: NoSchedule
+
+  # affinity:
+  #   podAntiAffinity:
+  #     preferredDuringSchedulingIgnoredDuringExecution:
+  #     - weight: 100
+  #       podAffinityTerm:
+  #         topologyKey: kubernetes.io/hostname
+  #         labelSelector:
+  #           matchExpressions:
+  #           - key: homecentr.one/antiaffinity
+  #             operator: In
+  #             values:
+  #             - proxmox-proxy
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "common.pod-labels" . | indent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "common.pod-labels" . | indent 8 }}
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        runAsUser: 1000
+        runAsGroup: 1000
+      automountServiceAccountToken: true
+      containers:
+        - image: 'nginx'
+          imagePullPolicy: null
+          livenessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            tcpSocket:
+              port: 3000
+            timeoutSeconds: 1
+          name: nginx
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          # readinessProbe:
+          #   failureThreshold: 3
+          #   periodSeconds: 10
+          #   tcpSocket:
+          #     port: 3000
+          #   timeoutSeconds: 1
+          # startupProbe:
+          #   failureThreshold: 30
+          #   periodSeconds: 5
+          #   tcpSocket:
+          #     port: 3000
+          #   timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /app/config
+              name: config
+          securityContext:
+            readOnlyRootFilesystem : false # true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            runAsUser: 1000
+            runAsGroup: 1000
+            seLinuxOptions:
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
+            capabilities:
+              drop:
+                - ALL
+          resources: {{ .Values.resources | toYaml | nindent 14 }}
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      serviceAccountName: {{ .Release.Name }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Release.Name }}

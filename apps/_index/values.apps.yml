@@ -162,6 +162,12 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
+- name: proxmox-proxy
+  type: helm
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
 - name: cloudflared
   type: helm
   namespace: cloudflare
