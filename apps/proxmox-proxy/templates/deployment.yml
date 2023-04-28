@@ -45,7 +45,7 @@ spec:
           type: RuntimeDefault
         runAsUser: 1000
         runAsGroup: 1000
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       containers:
         - image: 'nginx'
           imagePullPolicy: null
@@ -92,8 +92,6 @@ spec:
                 - ALL
           resources: {{ .Values.resources | toYaml | nindent 14 }}
       dnsPolicy: ClusterFirst
-      enableServiceLinks: true
-      serviceAccountName: {{ .Release.Name }}
       volumes:
         - name: config
           configMap:
