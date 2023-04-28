@@ -164,6 +164,7 @@ applications:
 
 - name: proxmox-proxy
   type: helm
+  namespace: apps
   deleteProtection: false
   valueFiles:
   - values.$env.yml
