@@ -80,6 +80,8 @@ spec:
               name: cache
             - mountPath: /tmp/nginx
               name: tmp
+            - mountPath: /var/run
+              name: run
           securityContext:
             readOnlyRootFilesystem : false # true
             allowPrivilegeEscalation: false
@@ -104,4 +106,6 @@ spec:
         - name: cache
           tmpDir: {}
         - name: tmp
+          tmpDir: {}
+        - name: run
           tmpDir: {}
