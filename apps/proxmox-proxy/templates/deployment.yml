@@ -1,9 +1,5 @@
 # customLabels:
 #     homecentr.one/antiaffinity: proxmox-proxy
-#   tolerations:
-#     - key: homecentr.one/critical-only
-#       operator: Exists
-#       effect: NoSchedule
 
   # affinity:
   #   podAntiAffinity:
@@ -28,7 +24,7 @@ metadata:
   annotations:
     checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -39,6 +35,7 @@ spec:
     metadata:
       labels:
         {{- include "common.pod-labels" . | indent 8 }}
+        homecentr.one/antiaffinity: proxmox-proxy
     spec:
       securityContext:
         seccompProfile:
@@ -46,6 +43,23 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       automountServiceAccountToken: false
+      # Allow running on any node
+      tolerations:
+        - key: homecentr.one/critical-only
+          operator: Exists
+          effect: NoSchedule
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchExpressions:
+                - key: homecentr.one/antiaffinity
+                  operator: In
+                  values:
+                  - proxmox-proxy
       containers:
         - image: 'nginx'
           imagePullPolicy: null
@@ -60,18 +74,6 @@ spec:
             - containerPort: 80
               name: http
               protocol: TCP
-          # readinessProbe:
-          #   failureThreshold: 3
-          #   periodSeconds: 10
-          #   tcpSocket:
-          #     port: 3000
-          #   timeoutSeconds: 1
-          # startupProbe:
-          #   failureThreshold: 30
-          #   periodSeconds: 5
-          #   tcpSocket:
-          #     port: 3000
-          #   timeoutSeconds: 1
           volumeMounts:
             - mountPath: /etc/nginx/nginx.conf
               name: config
