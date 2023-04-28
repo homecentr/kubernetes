@@ -24,7 +24,7 @@ routes:
     - hostname: login-lab.homecentr.one
     - hostname: k8s-lab.homecentr.one
     - hostname: argocd-lab.homecentr.one
-    # TODO: Use nginx as in-cluster load balancer for pve nodes
+    - hostname: pve-lab.homecentr.one
 
   external:
     - hostname: pve1-lab.homecentr.one
