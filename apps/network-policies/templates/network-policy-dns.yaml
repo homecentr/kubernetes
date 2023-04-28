@@ -3,7 +3,7 @@ kind: NetworkPolicy
 metadata:
   name: dns
   labels:
-    {{- include "common.labels" . | indent 4 }}
+    {{- include "common.resource-labels" . | indent 4 }}
 spec:
   podSelector: {}
   policyTypes:
