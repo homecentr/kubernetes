@@ -1,3 +1,4 @@
+# The ingress is added so that DNS picks up the DNS record automatically
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

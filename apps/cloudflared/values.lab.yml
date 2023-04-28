@@ -22,9 +22,20 @@ routes:
   kubernetes:
     - hostname: homepage-lab.homecentr.one
     - hostname: login-lab.homecentr.one
+    - hostname: k8s-lab.homecentr.one
+    - hostname: argocd-lab.homecentr.one
+    # TODO: Use nginx as in-cluster load balancer for pve nodes
 
   external:
     - hostname: pve1-lab.homecentr.one
       protocol: ssh
       backendIp: 10.1.8.11
+      port: 22
+    - hostname: pve2-lab.homecentr.one
+      protocol: ssh
+      backendIp: 10.1.8.12
+      port: 22
+    - hostname: pve3-lab.homecentr.one
+      protocol: ssh
+      backendIp: 10.1.8.13
       port: 22
