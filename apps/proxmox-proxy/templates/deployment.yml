@@ -73,8 +73,11 @@ spec:
           #     port: 3000
           #   timeoutSeconds: 1
           volumeMounts:
-            - mountPath: /app/config
+            - mountPath: /etc/nginx/nginx.conf
               name: config
+              subPath: nginx.conf
+            - mountPath: /var/cache/nginx/client_temp
+              name: cache
           securityContext:
             readOnlyRootFilesystem : false # true
             allowPrivilegeEscalation: false
@@ -96,3 +99,5 @@ spec:
         - name: config
           configMap:
             name: {{ .Release.Name }}
+        - name: cache
+          tmpDir: {}
