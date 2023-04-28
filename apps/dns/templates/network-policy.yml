@@ -28,7 +28,7 @@ spec:
             cidr: {{ $cidr }}
         {{- end }}
   egress:
-    {{- include "common.egress-kubeapi" . | nindent 4 }}
+    {{- include "common.egress-kubeapi" . | indent 4 }}
     - to: 
         {{- range $forwarder := .Values.networkPolicy.forwarders }}
         - ipBlock:
