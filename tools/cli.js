@@ -9,6 +9,10 @@ const {
     getAllApps
 } = require("./applications")
 
+const {
+    exec
+} = require("./process")
+
 const environments = ["lab", "prod"]
 const getCurrentDirName = () => path.basename(process.env.INIT_CWD)
 
@@ -59,7 +63,7 @@ program
         await allApps.forEach(async (app) => {
             const success = await app.lint(environment)
 
-            if(!success) {
+            if (!success) {
                 process.exitCode = 2
             }
         })
@@ -89,7 +93,7 @@ program
         await allApps.forEach(async (app) => {
             const success = await app.render(environment)
 
-            if(!success) {
+            if (!success) {
                 process.exitCode = 2
             }
         })
@@ -121,7 +125,7 @@ program
         await allApps.forEach(async (app) => {
             const success = await app.scan(environment)
 
-            if(!success) {
+            if (!success) {
                 process.exitCode = 2
             }
         })
@@ -151,6 +155,61 @@ program
                 processedDirectories.push(app.getAppDirectory())
             }
         })
+    })
+
+program
+    .command("validate-values")
+    .addArgument(appNameArg)
+    .action(async (appName) => {
+        const app = getHelmAppByName(appName)
+
+        const success = await app.validateValues()
+
+        if (!success) {
+            process.exitCode = 2
+        }
+    })
+
+program
+    .command("validate-values:all")
+    .action(async () => {
+        const allApps = getAllApps().filter(app => app.type == "helm")
+
+        await allApps.forEach(async (app) => {
+            const success = await app.validateValues()
+
+            if (!success) {
+                process.exitCode = 2
+            }
+        })
+    })
+
+
+program
+    .command("test:open")
+    .addArgument(environmentArg)
+    .action(async (environment) => {
+        const command = `cypress open --config-file ./cypress/${environment}.config.js`
+        const result = await exec(command)
+
+        if (result.exitCode != 0) {
+            console.log(result.stdcombined.getIndented())
+        }
+
+        // const cypress = require('cypress')
+
+        // cypress.run({
+        //     reporter: 'junit',
+        //     browser: 'chrome',
+        //     configFile: `./cypress/${environment}.config.js`
+        // })
+    })
+
+program
+    .command("test:all")
+    .addArgument(environmentArg)
+    .action(async () => {
+        // Run all tests, pass the right config
     })
 
 const argv = JSON.parse(process.env.npm_config_argv)

@@ -3,26 +3,11 @@ kind: NetworkPolicy
 metadata:
   name: dns
   labels:
-    {{- include "common-labels" . | indent 4 }}
+    {{- include "common.labels" . | indent 4 }}
 spec:
   podSelector: {}
   policyTypes:
     - Egress
   egress:
-    # DNS
-    - ports:
-      - protocol: TCP
-        port: 53
-      - protocol: UDP
-        port: 53
-      - protocol: TCP
-        port: 5353
-      - protocol: UDP
-        port: 5353
-      to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-          podSelector:
-            matchLabels:
-              app.kubernetes.io/instance: kube-dns
+    {{- include "common.egress-dns" . | indent 4 }}
+    

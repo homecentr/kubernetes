@@ -12,6 +12,8 @@ spec:
   policyTypes:
     - Egress
   egress:
+    # DNS is explicitly added to Argo to avoid circular dependency when initiating a new cluster
+    {{- include "common.egress-dns" . | indent 4 }}
     {{- include "common.egress-kubeapi" . | nindent 4 }}
     # Other argo cd pods in the namespace
     - to:

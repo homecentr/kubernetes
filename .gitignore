@@ -1,3 +1,6 @@
 node_modules
 **/charts
 Chart.lock
+
+cypress/videos
+cypress/screenshots

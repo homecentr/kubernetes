@@ -27,6 +27,9 @@ jobs:
       - name: Download helm chart dependencies
         run: yarn deps:all
 
+      - name: Validate values
+        run: yarn validate-values:all
+
       - name: Lint charts
         run: yarn lint:all ${{ matrix.environment }}
 
