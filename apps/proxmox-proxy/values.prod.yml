@@ -4,3 +4,10 @@ pveNodes:
   - 10.1.2.11
   - 10.1.2.12
   - 10.1.2.13
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
