@@ -28,5 +28,9 @@ data:
         location / {
           proxy_pass https://pve;
         }
+
+        location /health {
+          return 200 'Healhy';
+        }
       }
     }
