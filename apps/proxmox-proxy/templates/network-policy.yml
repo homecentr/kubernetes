@@ -13,7 +13,7 @@ spec:
     - Ingress
     - Egress
   ingress:
-    {{- include "common.ingress-pomerium" (dict "port" 8443) | nindent 4 }}
+    {{- include "common.ingress-pomerium" (dict "port" 80) | nindent 4 }}
 
   egress:
     - ports:
