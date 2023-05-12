@@ -63,13 +63,6 @@ config:
             description: Homepage is the best
 
     - Infrastructure:
-        # Grafana
-        
-        - "Proxmox VE":
-            icon: proxmox
-            href: https://pve$DOMAIN
-            description: Virtual servers management
-            # ping: https://pve$DOMAIN
 
   widgets:
     # TBA: When prometheus is available
