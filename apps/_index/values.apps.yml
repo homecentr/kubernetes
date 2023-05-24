@@ -1,5 +1,5 @@
 applications:
-- name: argocd
+- name: argocd 
   type: helm
   namespace: argo-cd
   syncWave: -110
