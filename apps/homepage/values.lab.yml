@@ -1,7 +1,6 @@
 domain: "-lab.homecentr.one"
 hostname: homepage-lab.homecentr.one
 imageTag: v0.6.3
-//*
 
 resources:
   requests:
