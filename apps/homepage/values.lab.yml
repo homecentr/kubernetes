@@ -1,11 +1,11 @@
 domain: "-lab.homecentr.one"
 hostname: homepage-lab.homecentr.one
-imageTag: v0.6.3  
+imageTag: v0.6.3
 
 resources:
   requests:
     cpu: 1m
-    memory: 20Mi
+    memory: 21Mi
   limits:
     cpu: 500m 
     memory: 512Mi
