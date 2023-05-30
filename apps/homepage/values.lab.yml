@@ -5,7 +5,7 @@ imageTag: v0.6.3
 resources:
   requests:
     cpu: 1m
-    memory: 35Mi
+    memory: 36Mi
   limits:
     cpu: 500m 
     memory: 512Mi
