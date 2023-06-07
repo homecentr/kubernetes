@@ -10,7 +10,6 @@ spec:
     matchLabels:
       app.kubernetes.io/name: local-path-provisioner
       app.kubernetes.io/instance: {{ .Release.Name }}
-  ingress: {}
   egress:
     {{- include "common.egress-kubeapi" . | nindent 4 }}
   policyTypes:
