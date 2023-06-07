@@ -38,6 +38,7 @@ spec:
           command:
             - cloudflared
             - tunnel
+            - run
           args:
             - --config=/etc/cloudflared
           livenessProbe:
