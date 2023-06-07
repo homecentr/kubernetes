@@ -9,14 +9,6 @@ spec:
   podSelector:
     matchLabels:
       {{- include "common.pod-labels" . | indent 8 }}
-  ingress: {}
-  # - {}
-  # - from:
-  #     - ipBlock:
-  #         cidr: 0.0.0.0/0
-  #   ports:
-  #     - protocol: TCP
-  #       port: 3333
   egress:
   # Cloudflare
   - to:
@@ -51,5 +43,4 @@ spec:
           cidr: {{ $route.backendIp }}/32
   {{- end }}
   policyTypes:
-  - Ingress
   - Egress
