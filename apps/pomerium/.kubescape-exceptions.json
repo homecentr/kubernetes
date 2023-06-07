@@ -67,6 +67,10 @@
             {
                 "controlName": "Encrypt traffic to HTTPS load balancers with TLS certificates",
                 "reason": "Applicable only in AWS"
+            },
+            {
+                "controlName": "Apply Security Context to Your Pods and Containers",
+                "reason": "Complying with this check requires explicity setting empty/default values which break argo cd sync"
             }
         ]
     }
