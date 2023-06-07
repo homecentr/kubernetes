@@ -9,10 +9,6 @@ const {
     getAllApps
 } = require("./applications")
 
-const {
-    exec
-} = require("./process")
-
 const environments = ["lab", "prod"]
 const getCurrentDirName = () => path.basename(process.env.INIT_CWD)
 

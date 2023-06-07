@@ -39,6 +39,10 @@
             {
                 "controlName": "Check if signature exists",
                 "reason": "3rd party image, adding signature is not worth the hassle"
+            },
+            {
+                "controlName": "Apply Security Context to Your Pods and Containers",
+                "reason": "Complying with this check requires explicity setting empty/default values which break argo cd sync"
             }
         ]
     }

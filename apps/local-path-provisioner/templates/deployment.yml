@@ -26,15 +26,17 @@ spec:
       automountServiceAccountToken: true
       serviceAccountName: local-path-provisioner
       securityContext:
-        runAsNonRoot: true
         runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
         seccompProfile:
           type: RuntimeDefault
         seLinuxOptions:
           user: system_u
           role: system_r
           type: container_t
-          level: s0:c829,c861
       containers:
         - name: local-path-provisioner
           image: rancher/local-path-provisioner:{{ $.Values.imageVersion | required ".Values.imageVersion is required" }}
@@ -60,15 +62,23 @@ spec:
           resources:
             {{- $.Values.resources | toYaml | nindent 12 }}
           securityContext:
-            readOnlyRootFilesystem: true
-            allowPrivilegeEscalation: false
-            runAsNonRoot: true
             runAsUser: 1000
-            seccompProfile:
-              type: RuntimeDefault
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
+            seccompProfile:
+              type: RuntimeDefault
+            seLinuxOptions:
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
       volumes:
         - name: config-volume
           configMap:
