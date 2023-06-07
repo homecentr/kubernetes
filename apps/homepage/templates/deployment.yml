@@ -59,6 +59,8 @@ spec:
               name: icons
             - mountPath: /app/config/logs
               name: logs
+            - mountPath: /app/.next
+              name: cache
           securityContext:
             readOnlyRootFilesystem : true
             allowPrivilegeEscalation: false
@@ -87,3 +89,14 @@ spec:
             name: {{ .Release.Name }}-icons
         - name: logs
           emptyDir:
+        - name: cache
+          emptyDir:
+      initContainers:
+        - name: cache-prep
+          image: 'ghcr.io/benphelps/homepage:{{ .Values.imageTag }}'
+          command: [sh, -ec]
+          volumeMounts:
+            - mountPath: /.next
+              name: cache
+          args: |
+            cp -R /app/.next/* /.next
