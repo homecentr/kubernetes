@@ -38,9 +38,15 @@ spec:
           command:
             - cloudflared
             - tunnel
+            - --config
+            - /etc/cloudflared
+            - --metrics
+            - localhost:3333
             - run
-          args:
-            - --config=/etc/cloudflared
+          ports:
+            - containerPort: 3333
+              name: metrics
+              protocol: TCP
           livenessProbe:
             httpGet:
               path: /ready
