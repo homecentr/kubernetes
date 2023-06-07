@@ -86,9 +86,9 @@ spec:
               role: system_r
               type: container_t
               level: s0:c829,c861
-            # capabilities:
-            #   drop:
-            #     - ALL
+            capabilities:
+              drop:
+                - ALL
           resources: {{ .Values.resources | toYaml | nindent 14 }}
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
