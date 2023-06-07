@@ -1,5 +1,6 @@
 node_modules
 **/charts
+**/tmpcharts
 Chart.lock
 
 cypress/videos
