@@ -1,3 +1,4 @@
+replicas: 2
 hostname: pve.homecentr.one
 port: 8006
 pveNodes:
@@ -7,7 +8,7 @@ pveNodes:
 resources:
   limits:
     cpu: 500m
-    memory: 256Mi
+    memory: 512Mi
   requests:
     cpu: 50m
     memory: 128Mi

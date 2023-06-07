@@ -1,0 +1,21 @@
+routes:
+  kubernetes:
+    - hostname: homepage.homecentr.one
+    - hostname: login.homecentr.one
+    - hostname: k8s.homecentr.one
+    - hostname: argocd.homecentr.one
+    - hostname: pve.homecentr.one
+
+  external:
+    - hostname: pve1.homecentr.one
+      protocol: ssh
+      backendIp: 10.1.2.11
+      port: 22
+    - hostname: pve2.homecentr.one
+      protocol: ssh
+      backendIp: 10.1.2.12
+      port: 22
+    - hostname: pve3.homecentr.one
+      protocol: ssh
+      backendIp: 10.1.2.13
+      port: 22

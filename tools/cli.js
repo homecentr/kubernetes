@@ -60,13 +60,13 @@ program
     .action(async (environment) => {
         const allApps = getAllApps().filter(app => app.type == "helm")
 
-        await allApps.forEach(async (app) => {
+        for (const app of allApps) {
             const success = await app.lint(environment)
 
             if (!success) {
                 process.exitCode = 2
             }
-        })
+        }
     })
 
 program
@@ -90,13 +90,13 @@ program
     .action(async (environment) => {
         const allApps = getAllApps().filter(app => app.type == "helm")
 
-        await allApps.forEach(async (app) => {
+        for (const app of allApps) {
             const success = await app.render(environment)
 
             if (!success) {
                 process.exitCode = 2
             }
-        })
+        }
     })
 
 program
@@ -122,13 +122,13 @@ program
     .action(async (environment) => {
         const allApps = getAllApps()
 
-        await allApps.forEach(async (app) => {
+        for (const app of allApps) {
             const success = await app.scan(environment)
 
             if (!success) {
                 process.exitCode = 2
             }
-        })
+        }
     })
 
 program
@@ -148,13 +148,15 @@ program
         const allApps = getAllApps().filter(app => app.type == "helm")
         const processedDirectories = []
 
-        await allApps.forEach(async (app) => {
-            if (!processedDirectories.includes(app.getAppDirectory())) {
+        for (const app of allApps) {
+            const appDirectory = app.getAppDirectory()
+
+            if (!processedDirectories.includes(appDirectory)) {
                 await app.installDependencies()
 
-                processedDirectories.push(app.getAppDirectory())
+                processedDirectories.push(appDirectory)
             }
-        })
+        }
     })
 
 program
@@ -175,41 +177,13 @@ program
     .action(async () => {
         const allApps = getAllApps().filter(app => app.type == "helm")
 
-        await allApps.forEach(async (app) => {
+        for (const app of allApps) {
             const success = await app.validateValues()
 
             if (!success) {
                 process.exitCode = 2
             }
-        })
-    })
-
-
-program
-    .command("test:open")
-    .addArgument(environmentArg)
-    .action(async (environment) => {
-        const command = `cypress open --config-file ./cypress/${environment}.config.js`
-        const result = await exec(command)
-
-        if (result.exitCode != 0) {
-            console.log(result.stdcombined.getIndented())
         }
-
-        // const cypress = require('cypress')
-
-        // cypress.run({
-        //     reporter: 'junit',
-        //     browser: 'chrome',
-        //     configFile: `./cypress/${environment}.config.js`
-        // })
-    })
-
-program
-    .command("test:all")
-    .addArgument(environmentArg)
-    .action(async () => {
-        // Run all tests, pass the right config
     })
 
 const argv = JSON.parse(process.env.npm_config_argv)
