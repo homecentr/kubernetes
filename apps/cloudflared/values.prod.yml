@@ -19,3 +19,11 @@ routes:
       protocol: ssh
       backendIp: 10.1.2.13
       port: 22
+
+resources:
+  requests:
+    cpu: 300m
+    memory: 256Mi
+  limits:
+    cpu: 2000m
+    memory: 1Gi

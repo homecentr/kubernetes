@@ -65,6 +65,8 @@ spec:
               scheme: HTTP
             failureThreshold: 60
             periodSeconds: 5
+          resources:
+            {{- $.Values.resources | toYaml | nindent 12 }}
           volumeMounts:
             - mountPath: /etc/cloudflared
               name: config
