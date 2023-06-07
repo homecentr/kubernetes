@@ -98,5 +98,5 @@ spec:
           volumeMounts:
             - mountPath: /.next
               name: cache
-          args: |
-            cp -R /app/.next/* /.next
+          args:
+            - cp -R /app/.next/* /.next
