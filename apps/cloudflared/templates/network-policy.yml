@@ -18,6 +18,7 @@ spec:
       - protocol: TCP
         port: 3333
   egress:
+  - {}
   # Cloudflare
   - to:
     {{- range $cidr := .Values.networkPolicy.cloudflare }}
