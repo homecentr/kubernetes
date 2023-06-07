@@ -21,10 +21,18 @@ spec:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
       securityContext:
-        seccompProfile:
-          type: RuntimeDefault
         runAsUser: 1000
         runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        seccompProfile:
+          type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
       automountServiceAccountToken: true
       containers:
         - image: 'ghcr.io/benphelps/homepage:{{ .Values.imageTag }}'
@@ -62,20 +70,23 @@ spec:
             - mountPath: /app/.next
               name: cache
           securityContext:
-            readOnlyRootFilesystem : true
-            allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
             runAsUser: 1000
             runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
             seLinuxOptions:
               user: system_u
               role: system_r
               type: container_t
               level: s0:c829,c861
-            capabilities:
-              drop:
-                - ALL
           resources: {{ .Values.resources | toYaml | nindent 14 }}
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
