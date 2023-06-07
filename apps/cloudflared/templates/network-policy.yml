@@ -9,8 +9,8 @@ spec:
   podSelector:
     matchLabels:
       {{- include "common.pod-labels" . | indent 8 }}
-  ingress:
-  - {}
+  # ingress:
+  # - {}
   egress:
   # Cloudflare
   - to:
@@ -45,5 +45,5 @@ spec:
           cidr: {{ $route.backendIp }}/32
   {{- end }}
   policyTypes:
-  - Ingress
+  #- Ingress
   - Egress

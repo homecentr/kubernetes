@@ -64,7 +64,7 @@ spec:
               port: 3333
               scheme: HTTP
             failureThreshold: 60
-            periodSeconds: 10
+            periodSeconds: 5
           volumeMounts:
             - mountPath: /etc/cloudflared
               name: config
