@@ -59,8 +59,8 @@ spec:
               name: icons
             - mountPath: /app/config/logs
               name: logs
-            # - mountPath: /app/.next
-            #   name: cache
+            - mountPath: /app/.next
+              name: cache
           securityContext:
             readOnlyRootFilesystem : true
             allowPrivilegeEscalation: false
