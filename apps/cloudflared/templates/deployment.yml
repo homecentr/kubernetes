@@ -42,6 +42,7 @@ spec:
             - /etc/cloudflared
             - --metrics
             - localhost:3333
+            - --no-autoupdate
             - run
           ports:
             - containerPort: 3333
