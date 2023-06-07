@@ -10,6 +10,7 @@ spec:
     matchLabels:
       {{- include "common.pod-labels" . | indent 8 }}
   ingress:
+  - {}
   - from:
       - ipBlock:
           cidr: 0.0.0.0/0
