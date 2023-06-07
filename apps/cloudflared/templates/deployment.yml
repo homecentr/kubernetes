@@ -41,7 +41,7 @@ spec:
             - --config
             - /etc/cloudflared
             - --metrics
-            - localhost:3333
+            - 0.0.0.0:3333
             - --no-autoupdate
             - run
           ports:
