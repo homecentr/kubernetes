@@ -25,7 +25,6 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         runAsNonRoot: true
-        supplementalGroups: []
         fsGroup: 1000
         fsGroupChangePolicy: Always
         seccompProfile:
@@ -35,7 +34,6 @@ spec:
           role: system_r
           type: container_t
           level: s0:c829,c861
-        systctls: 1
       automountServiceAccountToken: false
       containers:
         - image: 'cloudflare/cloudflared:{{ .Values.imageTag }}'
