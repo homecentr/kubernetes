@@ -45,7 +45,7 @@ spec:
                   values:
                   - proxmox-proxy
       containers:
-        - image: nginx:stable
+        - image: library/nginx:stable
           imagePullPolicy: null
           livenessProbe:
             failureThreshold: 3
@@ -72,7 +72,7 @@ spec:
             - mountPath: /docker-entrypoint.d/
               name: docker-entrypoint
           securityContext:
-            readOnlyRootFilesystem : false # true
+            readOnlyRootFilesystem : true
             allowPrivilegeEscalation: false
             seccompProfile:
               type: RuntimeDefault
