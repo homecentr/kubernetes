@@ -55,14 +55,11 @@ config:
             description: Homepage is awesome
 
     - Tools:
-        # Nextcloud
-        # Snipe IT
-        # ...
         - My Second Service:
             href: http://localhost/
             description: Homepage is the best
 
-    - Infrastructure:
+    - Infrastructure: []
 
   widgets:
     # TBA: When prometheus is available
