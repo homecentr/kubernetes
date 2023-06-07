@@ -38,9 +38,25 @@ spec:
           command:
             - cloudflared
             - tunnel
-            - --config
-            - /etc/cloudflared
-            - run
+          args:
+            - --config=/etc/cloudflared
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: 3333
+              scheme: HTTP
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3333
+              scheme: HTTP
+          startupProbe:
+            httpGet:
+              path: /ready
+              port: 3333
+              scheme: HTTP
+            failureThreshold: 60
+            periodSeconds: 10
           volumeMounts:
             - mountPath: /etc/cloudflared
               name: config
