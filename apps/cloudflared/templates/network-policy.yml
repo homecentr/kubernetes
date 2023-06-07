@@ -9,7 +9,6 @@ spec:
   podSelector:
     matchLabels:
       {{- include "common.pod-labels" . | indent 8 }}
-  ingress: {}
   egress:
   # Cloudflare
   - to:
