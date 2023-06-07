@@ -22,15 +22,20 @@ spec:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
       securityContext:
-        seccompProfile:
-          type: RuntimeDefault
         runAsUser: 1000
         runAsGroup: 1000
-        fsGroupChangePolicy: always
-        # TBC: Must be enabled on kubelet level
-        # sysctls:
-        #   - name: net.core.rmem_max
-        #     value: '2500000'
+        runAsNonRoot: true
+        supplementalGroups: []
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        seccompProfile:
+          type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
+        systctls: 1
       automountServiceAccountToken: false
       containers:
         - image: 'cloudflare/cloudflared:{{ .Values.imageTag }}'
@@ -76,20 +81,23 @@ spec:
               name: credentials
               subPath: cloudflared-tunnel-credentials
           securityContext:
-            readOnlyRootFilesystem : true
-            allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
             runAsUser: 1000
             runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
             seLinuxOptions:
               user: system_u
               role: system_r
               type: container_t
               level: s0:c829,c861
-            capabilities:
-              drop:
-                - ALL
           resources: {{ .Values.resources | toYaml | nindent 14 }}
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
