@@ -1,9 +1,6 @@
 name: CI
 on:
-  push:
-
-env:
-  SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
+  pull_request:
 
 jobs:
   validate:
@@ -11,6 +8,8 @@ jobs:
     strategy:
       matrix:
         environment: [lab, prod]
+    env:
+      SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -39,3 +38,25 @@ jobs:
       - name: Scan all charts for vulnerabilities
         run: |
           yarn scan:all ${{ matrix.environment }}
+
+  e2e-lab-local:
+    uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
+    needs:
+      - deploy-lab
+    with:
+      environment: lab
+      client: local
+      gitref: refs/heads/feat/v1 # TBA: Switch to master
+    secrets:
+      sops_age_key: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
+
+  e2e-lab-remote:
+    uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
+    needs:
+      - deploy-lab
+    with:
+      environment: lab
+      client: remote
+      gitref: refs/heads/feat/v1 # TBA: Switch to master
+    secrets:
+      sops_age_key: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
