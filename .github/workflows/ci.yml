@@ -42,7 +42,7 @@ jobs:
   e2e-lab-local:
     uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
     needs:
-      - deploy-lab
+      - validate
     with:
       environment: lab
       client: local
@@ -53,7 +53,7 @@ jobs:
   e2e-lab-remote:
     uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
     needs:
-      - deploy-lab
+      - validate
     with:
       environment: lab
       client: remote
