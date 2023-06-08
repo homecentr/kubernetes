@@ -6,7 +6,7 @@ env:
   SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     strategy:
       matrix:
