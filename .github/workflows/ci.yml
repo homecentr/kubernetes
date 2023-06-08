@@ -37,6 +37,5 @@ jobs:
         run: yarn render:all ${{ matrix.environment }}
 
       - name: Scan all charts for vulnerabilities
-        run: |         
-          yarn scan ${{ matrix.environment }} homepage -d
+        run: |
           yarn scan:all ${{ matrix.environment }}

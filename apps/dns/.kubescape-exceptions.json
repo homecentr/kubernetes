@@ -1,0 +1,23 @@
+[
+    {
+        "name": "runAsNonRoot",
+        "policyType": "postureExceptionPolicy",
+        "actions": [
+            "alertOnly"
+        ],
+        "resources": [
+            {
+                "designatorType": "Attributes",
+                "attributes": {
+                    "kind": ".*"
+                }
+            }
+        ],
+        "posturePolicies": [
+            {
+                "contolId": "C-0053",
+                "reason": "Access container service account - SA required to get ingresses' hostnames"
+            }
+        ]
+    }
+]
