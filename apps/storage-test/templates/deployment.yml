@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: storage-test
   namespace: {{ $.Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: storage-test
+    app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   replicas: 1
   selector:
