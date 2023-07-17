@@ -60,7 +60,7 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: data
-        - mountPath: /var/cache
+        - mountPath: /var/cache/nginx
           name: cache
       nodeSelector:
         kubernetes.io/os: linux
