@@ -14,9 +14,11 @@ resources:
     memory: 512Mi
 
 postgresql:
+  image:
+    tag: 15.3.0-debian-11-r24
+  volumePermissions:
+    enabled: true
   primary:
-    image:
-      tag: 15.3.0-debian-11-r24
     livenessProbe:
       initialDelaySeconds: 120
     persistence:
