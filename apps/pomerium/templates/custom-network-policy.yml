@@ -27,33 +27,34 @@ spec:
         - protocol: TCP
           port: 8443
 
+    # Accept traffic from consumers
     - from:
-        {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
-        - ipBlock:
-            cidr: {{ $cidr }}
-        {{- end }}
+      {{- range $cidr := .Values.networkPolicy.consumerCidrs }} # ???
+      - ipBlock:
+          cidr: {{ $cidr }}
+      {{- end }}
       ports:
         - protocol: TCP
           port: 8080
         - protocol: TCP
           port: 8443
 
+    # Cloudflared
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: cloudflare
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: cloudflared
+
   egress:
-    # Kubernetes API
-    - to:
-        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
-        - ipBlock:
-            cidr: {{ $node }}/32
-        {{- end }}
-      ports:
-        - protocol: TCP
-          port: 6443
+    {{- include "common.egress-kubeapi" . | nindent 4 }}
+    {{- include "common.egress-internet" . | nindent 4 }}
     
     # Allow communication to all pods in all namespaces for ingress proxy (includes DNS)
-    - to:
-        - namespaceSelector: {}
-          podSelector: {}
-
+    {{- include "common.egress-all-pods-across-all-namespaces" . | nindent 4 }}
+    
     # Allow communication to other hosts in the subnet to allow proxying external services
     - ports:
         - protocol: TCP
@@ -61,16 +62,5 @@ spec:
         - protocol: TCP
           port: 80
       to:
-        {{- range $cidr := .Values.networkPolicy.externalHttpEgressIpBlocks }}
         - ipBlock:
-            cidr: {{ $cidr }}
-        {{- end }}
-
-    # Internet access
-    - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-            except:
-              - 10.0.0.0/8
-              - 172.16.0.0/12
-              - 192.168.0.0/16
+            cidr: {{ .Values.networkPolicy.servicesSubnetCidr }}

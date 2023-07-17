@@ -2,14 +2,23 @@ const os = require("os");
 const fs = require("fs")
 const path = require("path")
 const yaml = require("js-yaml")
+const {
+    diffFiles,
+    diffSopsFiles
+} = require("@homecentr/yaml-diff")
+
+const {
+    execSync
+} = require("child_process")
 
 const {
     exec
 } = require("./process")
 
 const {
-    execSync
-} = require("child_process")
+    validateValuesFile,
+    validateSecretFile
+} = require("./yaml")
 
 exports.getAllApps = () => {
     const index = yaml.load(fs.readFileSync("apps/_index/values.apps.yml"))
@@ -66,13 +75,13 @@ class App {
             args += " --debug"
         }
 
-        if(options.outputDir) {
+        if (options.outputDir) {
             args += ` --output-dir \"${options.outputDir}\"`
         }
 
         const command = `helm template ${this.getAppDirectory()} ${args}`
 
-        if(options.debug) {
+        if (options.debug) {
             console.log(`"Helm command: '${command}'`)
         }
 
@@ -119,18 +128,18 @@ class App {
         let kubescapeArgs = "--keep-local --fail-threshold 0 --controls-config \"./kubescape.inputs.json\""
 
         const reportFile = path.join(appTmpDir, "report.html")
-        
-        if(options.htmlOutput) {
+
+        if (options.htmlOutput) {
             kubescapeArgs += ` --format html --output ${reportFile}`
         }
 
-        if(fs.existsSync(exceptionsFile)) {
+        if (fs.existsSync(exceptionsFile)) {
             kubescapeArgs += ` --exceptions \"${exceptionsFile}\"`
         }
 
         const command = `kubescape scan ${scanDirectory} ${kubescapeArgs}`
 
-        if(options.debug) {
+        if (options.debug) {
             console.log(command)
         }
 
@@ -143,11 +152,10 @@ class App {
                 console.log(result.stdout.getRaw())
             }
         } else {
-            if(options.htmlOutput) {
+            if (options.htmlOutput) {
                 console.log(`❌ ${this.getAppDirectory()} has failed, see the opened html file for details`)
                 execSync(reportFile)
-            }
-            else {
+            } else {
                 console.log(`❌ ${this.getAppDirectory()} has following errors:`)
                 console.log(result.stdout.getRaw())
             }
@@ -169,6 +177,47 @@ class App {
         }
     }
 
+    async validateValues() {
+        let success = true
+
+        const validateFiles = (fileName, validateOrdinaryFileFunc, diffEnvironmentFilesFunc) => {
+            if (!fileName.includes("$env")) {
+                // Ordinary file name
+                validateOrdinaryFileFunc(path.join(this.getAppDirectory(), fileName))
+            } else {
+                const labFileName = path.join(this.getAppDirectory(), fileName.replace("$env", "lab"))
+                const prodFileName = path.join(this.getAppDirectory(), fileName.replace("$env", "prod"))
+
+                // TODO: Get ignore list from app files
+                const differences = diffEnvironmentFilesFunc(labFileName, prodFileName)
+
+                if (differences.length == 0) {
+                    console.log(`✔️  ${path.join(this.getAppDirectory(), fileName)} have matching structures`)
+                } else {
+                    success = false
+
+                    differences.forEach(diff => {
+                        console.log(`❌ ${diff.message}`)
+                    })
+                }
+            }
+        }
+
+        if (this.valueFiles) {
+            this.valueFiles.forEach(valueFile => {
+                return validateFiles(valueFile, validateValuesFile, diffFiles)
+            })
+        }
+
+        if (this.secretValueFiles) {
+            this.secretValueFiles.forEach(secretFile => {
+                return validateFiles(secretFile, validateSecretFile, diffSopsFiles)
+            })
+        }
+
+        return success
+    }
+
     getAppDirectory() {
         if (this.path) {
             return this.path
@@ -178,7 +227,7 @@ class App {
     }
 
     getHelmArgs(environmentName) {
-        let args = ""
+        let args = ` -f \"apps/common/values.${environmentName}.yml\"`
 
         if (this.valueFiles) {
             this.valueFiles.forEach(valueFile => {

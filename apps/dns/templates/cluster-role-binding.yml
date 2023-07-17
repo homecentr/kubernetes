@@ -3,10 +3,7 @@ kind: ClusterRoleBinding
 metadata:
   name: {{ .Values.coredns.fullnameOverride | trunc 63 | trimSuffix "-" }}
   labels:
-    app.kubernetes.io/name: {{ .Values.coredns.nameOverride | trunc 63 | trimSuffix "-" }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    {{- include "common.resource-labels" . | indent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

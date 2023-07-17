@@ -1,0 +1,28 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+data:
+    cloudflared: |
+        tunnel: "{{ .Values.cloudflare.tunnelId }}"
+        credentials-file: /etc/cloudflared-tunnel-credentials
+
+        ingress:
+          # Kubernetes services
+          {{ range .Values.routes.kubernetes }}
+          - hostname: {{ .hostname }}
+            service: https://pomerium-proxy.pomerium.svc.cluster.local:443
+            originRequest:
+              noTLSVerify: true
+          {{- end }}
+
+          # External routes
+          {{ range .Values.routes.external }}
+          - hostname: {{ .hostname }}
+            service: {{ .protocol }}://{{ .backendIp }}:{{ .port }}
+          {{- end }}
+
+          - service: http_status:404

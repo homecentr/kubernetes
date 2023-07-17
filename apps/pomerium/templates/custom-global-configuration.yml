@@ -14,6 +14,8 @@ spec:
     provider: azure
     url: https://login.microsoftonline.com/{{ .Values.azuread.tenantId }}/v2.0
     secret: {{ .Release.Namespace }}/{{ .Release.Name }}-azuread
+    requestParams:
+      prompt: ""
   storage:
     postgres:
       secret: {{ .Release.Namespace }}/{{ .Release.Name }}-postgresql-connection

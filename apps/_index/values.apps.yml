@@ -1,8 +1,61 @@
 applications:
+- name: argocd 
+  type: helm
+  namespace: argo-cd
+  syncWave: -110
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
+- name: network-policies-default
+  namespace: default
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
+- name: network-policies-kube-system
+  namespace: kube-system
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
+- name: network-policies-pomerium
+  namespace: pomerium
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
+- name: network-policies-argo-cd
+  namespace: argo-cd
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
+- name: network-policies-cloudflare
+  namespace: cloudflare
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
 - name: metallb-crd
+  namespace: metallb-system
   type: raw
   syncWave: -100
-  namespace: metallb-system
   deleteProtection: true
   ignoreDifferences:
   - group: "*"
@@ -26,16 +79,14 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.yml
-  - ../globals.$env.yml
 
-- name: storage
+- name: local-path-provisioner
   type: helm
   syncWave: -89
   namespace: kube-system
   deleteProtection: false
   valueFiles:
   - values.$env.yml
-  - ../globals.$env.yml
 
 - name: cert-manager-crd
   type: raw
@@ -67,15 +118,14 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.yml
-  - ../globals.$env.yml
   secretValueFiles:
   - secrets.$env.yml
 
-- name: prometheus-crd
-  type: directory
-  syncWave: -50
-  deleteProtection: false
-  serverSideApply: true
+# - name: prometheus-crd
+#   type: directory
+#   syncWave: -50
+#   deleteProtection: false
+#   serverSideApply: true
 
 - name: dns-primary
   type: helm
@@ -83,7 +133,6 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
-  - ../globals.$env.yml
   - values.$env.yml
   - values.$env.primary.yml
 
@@ -93,16 +142,8 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
-  - ../globals.$env.yml
   - values.$env.yml
   - values.$env.secondary.yml
-
-- name: argocd-ingress
-  type: helm
-  namespace: argo-cd
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: homepage
   type: helm
@@ -111,7 +152,6 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.config.yml
-  - ../globals.$env.yml
 
 - name: kubernetes-dashboard
   type: helm
@@ -119,6 +159,22 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
-  - ../globals.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml
+
+- name: proxmox-proxy
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
+- name: cloudflared
+  type: helm
+  namespace: cloudflare
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
   secretValueFiles:
   - secrets.$env.yml

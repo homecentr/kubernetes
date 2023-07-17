@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $.Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+  annotations:
+    # Proxmox has custom authentication logic
+    ingress.pomerium.io/allow_public_unauthenticated_access: "true"
+
+    ingress.pomerium.io/allow_websockets: 'true'
+    # ingress.pomerium.io/allow_spdy: 'true'
+
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Proxmox VE
+    gethomepage.dev/group: Infrastructure
+    gethomepage.dev/icon: proxmox
+    gethomepage.dev/name: "Proxmox VE"
+    gethomepage.dev/href: "https://{{ .Values.hostname }}"
+spec:
+  rules:
+  - host: {{ .Values.hostname | quote }}
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          backend:
+            service:
+              name: {{ $.Release.Name }}
+              port:
+                name: http

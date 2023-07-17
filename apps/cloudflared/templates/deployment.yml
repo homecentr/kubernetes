@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
+    checksum/credentials: {{ include (print $.Template.BasePath "/secret-credentials.yml") $ | sha256sum }}
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "common.pod-labels" . | indent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "common.pod-labels" . | indent 8 }}
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        seccompProfile:
+          type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
+      automountServiceAccountToken: false
+      containers:
+        - image: 'cloudflare/cloudflared:{{ .Values.imageTag }}'
+          imagePullPolicy: IfNotPresent
+          name: cloudflared
+          command:
+            - cloudflared
+            - tunnel
+            - --config
+            - /etc/cloudflared
+            - --metrics
+            - 0.0.0.0:3333
+            - --no-autoupdate
+            - run
+          ports:
+            - containerPort: 3333
+              name: metrics
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: 3333
+              scheme: HTTP
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3333
+              scheme: HTTP
+          startupProbe:
+            httpGet:
+              path: /ready
+              port: 3333
+              scheme: HTTP
+            failureThreshold: 60
+            periodSeconds: 5
+          resources:
+            {{- $.Values.resources | toYaml | nindent 12 }}
+          volumeMounts:
+            - mountPath: /etc/cloudflared
+              name: config
+              subPath: cloudflared
+            - mountPath: /etc/cloudflared-tunnel-credentials
+              name: credentials
+              subPath: cloudflared-tunnel-credentials
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+            seLinuxOptions:
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
+          resources: {{ .Values.resources | toYaml | nindent 14 }}
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      volumes:
+        - name: credentials
+          secret:
+            secretName: {{ .Release.Name }}
+            optional: false
+        - name: config
+          configMap:
+            name: {{ .Release.Name }}

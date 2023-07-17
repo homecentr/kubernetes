@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}-icons
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "common-labels" . | indent 4 }}
+    {{- include "common.resource-labels" . | indent 4 }}
 binaryData:
 {{- range $path, $_ := $.Files.Glob  "icons/*.*" }}
     {{ base $path | quote }}: {{ $.Files.Get $path | b64enc }}

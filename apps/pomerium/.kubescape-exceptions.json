@@ -18,6 +18,9 @@
                 "controlName": "CIS-4.4.2 Consider external secret storage"
             },
             {
+                "controlName": "Consider external secret storage"
+            },
+            {
                 "controlName": "Label usage for resources",
                 "reason": "Not applicable - we use the labels defined in C-0077"
             },
@@ -46,12 +49,28 @@
                 "reason": "Pomerium requires this access because SSL certificates are stored as secrets"
             },
             {
+                "controlName": "Minimize access to secrets",
+                "reason": "Pomerium requires this access because SSL certificates are stored as secrets"
+            },
+            {
                 "controlName": "CIS-4.1.2 Minimize access to secrets",
                 "reason": "Pomerium requires this access because SSL certificates are stored as secrets"
             },
             {
                 "controlName": "Check if signature exists",
                 "reason": "3rd party image, adding signature is not worth the hassle"
+            },
+            {
+                "controlName": "Ensure that Service Account Tokens are only mounted where necessary",
+                "reason": "Pomerium needs SA to communicate with Kubernetes API to monitor ingress configuration"
+            },
+            {
+                "controlName": "Encrypt traffic to HTTPS load balancers with TLS certificates",
+                "reason": "Applicable only in AWS"
+            },
+            {
+                "controlName": "Apply Security Context to Your Pods and Containers",
+                "reason": "Complying with this check requires explicity setting empty/default values which break argo cd sync"
             }
         ]
     }

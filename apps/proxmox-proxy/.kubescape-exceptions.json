@@ -1,0 +1,31 @@
+[
+    {
+        "name": "runAsNonRoot",
+        "policyType": "postureExceptionPolicy",
+        "actions": [
+            "alertOnly"
+        ],
+        "resources": [
+            {
+                "designatorType": "Attributes",
+                "attributes": {
+                    "kind": ".*"
+                }
+            }
+        ],
+        "posturePolicies": [
+            {
+                "controlName": "Label usage for resources",
+                "reason": "Not applicable - we use the labels defined in C-0077"
+            },
+            {
+                "controlName": "Consider external secret storage",
+                "reason": "Not applicable, we are not running in cloud"
+            },
+            {
+                "controlName": "Apply Security Context to Your Pods and Containers",
+                "reason": "Complying with this check requires explicity setting empty/default values which break argo cd sync"
+            }
+        ]
+    }
+]

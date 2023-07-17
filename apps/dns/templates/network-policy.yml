@@ -3,10 +3,7 @@ kind: NetworkPolicy
 metadata:
   name: {{ .Values.coredns.fullnameOverride | trunc 63 | trimSuffix "-" }}
   labels:
-    app.kubernetes.io/name: {{ .Values.coredns.nameOverride | trunc 63 | trimSuffix "-" }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    {{- include "common.resource-labels" . | indent 4 }}
 spec:
   podSelector:
     matchLabels:
@@ -23,27 +20,19 @@ spec:
       - protocol: UDP
         port: 53
       from:
+        # Accept internal traffic (?)
         - ipBlock:
             cidr: 172.16.0.0/16
-        {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
+        {{- range $cidr := .Values.networkPolicy.consumerCidrs }}
         - ipBlock:
             cidr: {{ $cidr }}
         {{- end }}
   egress:
-    # Kubernetes API
-    - to:
-        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
-        - ipBlock:
-            cidr: {{ $node }}/32
-        {{- end }}
-      ports:
-        - protocol: TCP
-          port: 6443
-    # DNS forwarding
+    {{- include "common.egress-kubeapi" . | indent 4 }}
     - to: 
-        {{- range $node := .Values.networkPolicy.forwarders }}
+        {{- range $forwarder := .Values.networkPolicy.forwarders }}
         - ipBlock:
-            cidr: {{ $node }}/32
+            cidr: {{ $forwarder }}/32
         {{- end }}
       ports:
         - protocol: TCP

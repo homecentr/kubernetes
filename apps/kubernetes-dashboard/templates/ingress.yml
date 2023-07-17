@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: {{ .Values.dashboard.fullnameOverride }}
   labels:
-    {{- include "common-labels" . | indent 4 }}
+    {{- include "common.resource-labels" . | indent 4 }}
   annotations:
     ingress.pomerium.io/tls_skip_verify: 'true'
     ingress.pomerium.io/secure_upstream: 'true'

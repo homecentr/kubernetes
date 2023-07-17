@@ -4,11 +4,11 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "common-labels" . | indent 4 }}
+    {{- include "common.resource-labels" . | indent 4 }}
 spec:
   podSelector:
     matchLabels:
-      {{- include "pod-labels" . | indent 8 }}
+      {{- include "common.pod-labels" . | indent 8 }}
   policyTypes:
     - Ingress
     - Egress
@@ -25,12 +25,10 @@ spec:
         - protocol: TCP
           port: 3000
   egress:
-    # Kubernetes API
+    {{- include "common.egress-kubeapi" . | indent 4 }}
+    {{- include "common.egress-internet" . | indent 4 }}
+    
+    # Allow homepage to talk to any pod in the cluster, the pod has to accept it in its ingress
     - to:
-        {{- range $node := .Values.networkPolicy.kubeApiNodes }}
-        - ipBlock:
-            cidr: {{ $node }}/32
-        {{- end }}
-      ports:
-        - protocol: TCP
-          port: 6443
+      - namespaceSelector: {}
+        podSelector: {}

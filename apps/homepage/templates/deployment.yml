@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "common-labels" . | indent 4 }}
+    {{- include "common.resource-labels" . | indent 4 }}
   annotations:
     checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
 spec:
@@ -12,19 +12,27 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      {{- include "pod-labels" . | indent 6 }}
+      {{- include "common.pod-labels" . | indent 6 }}
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        {{- include "pod-labels" . | indent 8 }}
+        {{- include "common.pod-labels" . | indent 8 }}
     spec:
       securityContext:
-        seccompProfile:
-          type: RuntimeDefault
         runAsUser: 1000
         runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        seccompProfile:
+          type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
       automountServiceAccountToken: true
       containers:
         - image: 'ghcr.io/benphelps/homepage:{{ .Values.imageTag }}'
@@ -59,21 +67,26 @@ spec:
               name: icons
             - mountPath: /app/config/logs
               name: logs
+            - mountPath: /app/.next
+              name: cache
           securityContext:
-            readOnlyRootFilesystem : true
-            allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
             runAsUser: 1000
             runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
             seLinuxOptions:
               user: system_u
               role: system_r
               type: container_t
               level: s0:c829,c861
-            capabilities:
-              drop:
-                - ALL
           resources: {{ .Values.resources | toYaml | nindent 14 }}
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
@@ -87,3 +100,14 @@ spec:
             name: {{ .Release.Name }}-icons
         - name: logs
           emptyDir:
+        - name: cache
+          emptyDir:
+      initContainers:
+        - name: cache-prep
+          image: 'ghcr.io/benphelps/homepage:{{ .Values.imageTag }}'
+          command: [sh, -ec]
+          volumeMounts:
+            - mountPath: /.next
+              name: cache
+          args:
+            - cp -R /app/.next/* /.next

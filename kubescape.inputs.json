@@ -6,7 +6,9 @@
     "imageRepositoryAllowList": [
       "rancher/*",
       "ghcr.io/benphelps/*",
-      "pomerium/"
+      "pomerium/",
+      "cloudflare/*",
+      "library/*"
     ],
     "insecureCapabilities": [
       "SETPCAP",

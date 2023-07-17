@@ -4,14 +4,12 @@ cert-manager:
     enabled: true
   webhook:
     securePort: 10222
-    podAnnotations:
-      container.apparmor.security.beta.kubernetes.io/cert-manager: runtime/default
-      seccomp.security.alpha.kubernetes.io/pod: runtime/default
     resources:
       limits:
         cpu: 500m
         memory: 256Mi
       requests:
+        cpu: 100m
         memory: 128Mi
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -24,14 +22,12 @@ cert-manager:
         drop:
         - all
   cainjector:
-    podAnnotations:
-      container.apparmor.security.beta.kubernetes.io/cert-manager: runtime/default
-      seccomp.security.alpha.kubernetes.io/pod: runtime/default
     resources:
       limits:
         cpu: 500m
         memory: 256Mi
       requests:
+        cpu: 100m
         memory: 128Mi
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -48,6 +44,7 @@ cert-manager:
       cpu: 500m
       memory: 256Mi
     requests:
+      cpu: 100m
       memory: 128Mi
   containerSecurityContext:
     allowPrivilegeEscalation: false

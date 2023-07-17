@@ -1,16 +1,15 @@
 name: CI
 on:
-  push:
-
-env:
-  SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
+  pull_request:
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         environment: [lab, prod]
+    env:
+      SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -27,6 +26,9 @@ jobs:
       - name: Download helm chart dependencies
         run: yarn deps:all
 
+      - name: Validate values
+        run: yarn validate-values:all
+
       - name: Lint charts
         run: yarn lint:all ${{ matrix.environment }}
 
@@ -34,6 +36,27 @@ jobs:
         run: yarn render:all ${{ matrix.environment }}
 
       - name: Scan all charts for vulnerabilities
-        run: |         
-          yarn scan ${{ matrix.environment }} homepage -d
+        run: |
           yarn scan:all ${{ matrix.environment }}
+
+  e2e-lab-local:
+    uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
+    needs:
+      - validate
+    with:
+      environment: lab
+      client: local
+      gitref: refs/heads/feat/v1 # TBA: Switch to master
+    secrets:
+      sops_age_key: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
+
+  e2e-lab-remote:
+    uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
+    needs:
+      - validate
+    with:
+      environment: lab
+      client: remote
+      gitref: refs/heads/feat/v1 # TBA: Switch to master
+    secrets:
+      sops_age_key: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}

@@ -25,7 +25,7 @@
                 "reason": "Not applicable - we use the labels defined in C-0077"
             },
             {
-                "controlName": "CIS-4.1.6 Ensure that Service Account Tokens are only mounted where necessary",
+                "controlName": "Ensure that Service Account Tokens are only mounted where necessary",
                 "reason": "Homepage needs a service account token for auto discovery feature"
             },
             {
@@ -39,6 +39,10 @@
             {
                 "controlName": "Check if signature exists",
                 "reason": "3rd party image, adding signature is not worth the hassle"
+            },
+            {
+                "controlName": "Apply Security Context to Your Pods and Containers",
+                "reason": "Complying with this check requires explicity setting empty/default values which break argo cd sync"
             }
         ]
     }

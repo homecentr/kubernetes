@@ -56,13 +56,13 @@ program
     .action(async (environment) => {
         const allApps = getAllApps().filter(app => app.type == "helm")
 
-        await allApps.forEach(async (app) => {
+        for (const app of allApps) {
             const success = await app.lint(environment)
 
-            if(!success) {
+            if (!success) {
                 process.exitCode = 2
             }
-        })
+        }
     })
 
 program
@@ -86,13 +86,13 @@ program
     .action(async (environment) => {
         const allApps = getAllApps().filter(app => app.type == "helm")
 
-        await allApps.forEach(async (app) => {
+        for (const app of allApps) {
             const success = await app.render(environment)
 
-            if(!success) {
+            if (!success) {
                 process.exitCode = 2
             }
-        })
+        }
     })
 
 program
@@ -118,13 +118,13 @@ program
     .action(async (environment) => {
         const allApps = getAllApps()
 
-        await allApps.forEach(async (app) => {
+        for (const app of allApps) {
             const success = await app.scan(environment)
 
-            if(!success) {
+            if (!success) {
                 process.exitCode = 2
             }
-        })
+        }
     })
 
 program
@@ -144,13 +144,42 @@ program
         const allApps = getAllApps().filter(app => app.type == "helm")
         const processedDirectories = []
 
-        await allApps.forEach(async (app) => {
-            if (!processedDirectories.includes(app.getAppDirectory())) {
+        for (const app of allApps) {
+            const appDirectory = app.getAppDirectory()
+
+            if (!processedDirectories.includes(appDirectory)) {
                 await app.installDependencies()
 
-                processedDirectories.push(app.getAppDirectory())
+                processedDirectories.push(appDirectory)
             }
-        })
+        }
+    })
+
+program
+    .command("validate-values")
+    .addArgument(appNameArg)
+    .action(async (appName) => {
+        const app = getHelmAppByName(appName)
+
+        const success = await app.validateValues()
+
+        if (!success) {
+            process.exitCode = 2
+        }
+    })
+
+program
+    .command("validate-values:all")
+    .action(async () => {
+        const allApps = getAllApps().filter(app => app.type == "helm")
+
+        for (const app of allApps) {
+            const success = await app.validateValues()
+
+            if (!success) {
+                process.exitCode = 2
+            }
+        }
     })
 
 const argv = JSON.parse(process.env.npm_config_argv)

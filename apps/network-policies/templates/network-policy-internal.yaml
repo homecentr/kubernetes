@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: namespace-internal
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    # Allow talking to any pod in the namespace, the pod itself must accept it in its ingress rules
+    - to:
+      - namespaceSelector: {}
+        podSelector: {}

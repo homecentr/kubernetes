@@ -7,6 +7,8 @@ networkPolicy:
     - 1.0.0.1
 
 coredns:
+  customLabels:
+    homecentr.one/antiaffinity: dns
   tolerations:
     - key: homecentr.one/critical-only
       operator: Exists
@@ -34,10 +36,10 @@ coredns:
       preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 100
         podAffinityTerm:
-          topologyKey: dns-affinity
+          topologyKey: kubernetes.io/hostname
           labelSelector:
             matchExpressions:
-            - key: app.kubernetes.io/name
+            - key: homecentr.one/antiaffinity
               operator: In
               values:
               - dns
@@ -57,15 +59,6 @@ coredns:
           # Hardcoded records will be used for printers, idrac etc.
           configBlock: |-
             10.1.3.5  print.homecentr.one
-            fallthrough
-
-        - name: template
-          parameters: IN A homecentr.one
-          configBlock: |-
-            match "^pve\.homecentr\.one\.$"
-            answer "{{ .Name }} 60 IN A 10.1.2.17"
-            answer "{{ .Name }} 60 IN A 10.1.2.22"
-            answer "{{ .Name }} 60 IN A 10.1.2.26"
             fallthrough
 
         - name: k8s_gateway
