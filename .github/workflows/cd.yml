@@ -6,19 +6,17 @@ on:
 
 jobs:
   e2e-prod-local:
-    uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
+    uses: homecentr/e2e/.github/workflows/run-e2e.yml@master
     with:
       environment: prod
       client: local
-      gitref: refs/heads/feat/v1 # TBA: Switch to master
     secrets:
       sops_age_key: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
 
   e2e-prod-remote:
-    uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
+    uses: homecentr/e2e/.github/workflows/run-e2e.yml@master
     with:
       environment: prod
       client: remote
-      gitref: refs/heads/feat/v1 # TBA: Switch to master
     secrets:
       sops_age_key: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
