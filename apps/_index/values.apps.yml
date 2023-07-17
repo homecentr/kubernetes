@@ -110,16 +110,16 @@ applications:
   namespace: pomerium
   deleteProtection: false
 
-- name: pomerium
-  type: helm
-  syncWave: -59
-  namespace: pomerium
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
-  - values.yml
-  secretValueFiles:
-  - secrets.$env.yml
+# - name: pomerium
+#   type: helm
+#   syncWave: -59
+#   namespace: pomerium
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   - values.yml
+#   secretValueFiles:
+#   - secrets.$env.yml
 
 # - name: prometheus-crd
 #   type: directory
