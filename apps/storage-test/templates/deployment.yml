@@ -33,11 +33,11 @@ spec:
           level: s0:c829,c861
       automountServiceAccountToken: true
       containers:
-      - image: TBA
+      - image: zembutsu/docker-sample-nginx
         imagePullPolicy: IfNotPresent
         name: storage-test
         ports:
-        - containerPort: 8443
+        - containerPort: 80
           name: https
           protocol: TCP
         securityContext:
