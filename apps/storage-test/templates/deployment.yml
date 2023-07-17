@@ -70,7 +70,6 @@ spec:
           role: system_r
           type: container_t
           level: s0:c829,c861
-      serviceAccountName: pomerium-controller
       terminationGracePeriodSeconds: 10
       volumes:
       - name: data
