@@ -17,6 +17,8 @@ postgresql:
   primary:
     image:
       tag: 15.3.0-debian-11-r24
+    livenessProbe:
+      initialDelaySeconds: 120
     persistence:
       size: 10Gi
       storageClass: local-path-provisioner-services
