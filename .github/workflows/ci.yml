@@ -40,23 +40,21 @@ jobs:
           yarn scan:all ${{ matrix.environment }}
 
   e2e-lab-local:
-    uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
+    uses: homecentr/e2e/.github/workflows/run-e2e.yml@master
     needs:
       - validate
     with:
       environment: lab
       client: local
-      gitref: refs/heads/feat/v1 # TBA: Switch to master
     secrets:
       sops_age_key: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
 
   e2e-lab-remote:
-    uses: homecentr/e2e/.github/workflows/run-e2e.yml@feat/v1 # TBA: Switch to master
+    uses: homecentr/e2e/.github/workflows/run-e2e.yml@master
     needs:
       - validate
     with:
       environment: lab
       client: remote
-      gitref: refs/heads/feat/v1 # TBA: Switch to master
     secrets:
       sops_age_key: ${{ secrets.SOPS_AGE_PRIVATE_KEY }}
