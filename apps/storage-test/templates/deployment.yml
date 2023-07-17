@@ -10,6 +10,10 @@ spec:
       app.kubernetes.io/name: storage-test
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: storage-test
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       securityContext:
         runAsUser: 1000
