@@ -10,5 +10,5 @@ resources:
 
 volumes:
 - name: services
-  path: /mnt/gfs/k3s-services
+  path: /mnt/gfs/k8s-services
   reclaimPolicy: Retain
