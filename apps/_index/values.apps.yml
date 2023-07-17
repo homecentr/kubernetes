@@ -178,3 +178,8 @@ applications:
   - values.yml
   secretValueFiles:
   - secrets.$env.yml
+
+- name: storage-test
+  type: helm
+  namespace: apps
+  deleteProtection: false
