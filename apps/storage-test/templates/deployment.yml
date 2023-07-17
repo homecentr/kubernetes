@@ -60,6 +60,8 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: data
+        - mountPath: /var/cache
+          name: cache
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
@@ -71,6 +73,8 @@ spec:
           level: s0:c829,c861
       terminationGracePeriodSeconds: 10
       volumes:
+      - name: cache
+        emptyDir: {}
       - name: data
         persistentVolumeClaim:
           claimName: storage-test
