@@ -62,6 +62,8 @@ spec:
           name: data
         - mountPath: /var/cache/nginx
           name: cache
+        - mountPath: /var/run
+          name: run
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
@@ -74,6 +76,8 @@ spec:
       terminationGracePeriodSeconds: 10
       volumes:
       - name: cache
+        emptyDir: {}
+      - name: run
         emptyDir: {}
       - name: data
         persistentVolumeClaim:
