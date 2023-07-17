@@ -13,8 +13,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: network-policies-kube-system
   namespace: kube-system
@@ -22,8 +20,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: network-policies-pomerium
   namespace: pomerium
@@ -31,8 +27,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: network-policies-argo-cd
   namespace: argo-cd
@@ -40,8 +34,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: network-policies-cloudflare
   namespace: cloudflare
@@ -49,8 +41,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: metallb-crd
   namespace: metallb-system
