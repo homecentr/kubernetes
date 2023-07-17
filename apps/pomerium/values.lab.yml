@@ -20,7 +20,7 @@ postgresql:
     enabled: true
   primary:
     livenessProbe:
-      initialDelaySeconds: 600
+      initialDelaySeconds: 900
     persistence:
       size: 10Gi
       storageClass: local-path-provisioner-services
