@@ -168,3 +168,11 @@ applications:
   - values.yml
   secretValueFiles:
   - secrets.$env.yml
+
+- name: cyberchef
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
