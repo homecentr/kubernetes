@@ -29,7 +29,7 @@ spec:
 
     # Accept traffic from consumers
     - from:
-      {{- range $cidr := .Values.networkPolicy.consumerCidrs }} # ???
+      {{- range $cidr := .Values.networkPolicy.consumerCidrs }}
       - ipBlock:
           cidr: {{ $cidr }}
       {{- end }}
