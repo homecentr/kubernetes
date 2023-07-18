@@ -7,6 +7,13 @@ metadata:
     {{- include "common.resource-labels" . | indent 4 }}
   annotations:
     ingress.pomerium.io/allow_any_authenticated_user: 'true'
+
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: "The Cyber Swiss Army Knife"
+    gethomepage.dev/group: Development
+    gethomepage.dev/icon: cyberchef
+    gethomepage.dev/name: "CyberChef"
+    gethomepage.dev/href: "https://{{ .Values.hostname }}"
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}
