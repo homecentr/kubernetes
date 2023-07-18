@@ -8,7 +8,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      {{- include "common.pod-labels" . | indent 4 }}
+      {{- include "common.pod-labels" . | indent 6 }}
   policyTypes:
     - Ingress
     - Egress
