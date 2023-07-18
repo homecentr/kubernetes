@@ -37,26 +37,26 @@ spec:
           image: 'mpepping/cyberchef:{{ .Values.imageTag }}'
           imagePullPolicy: null
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
               name: http
               protocol: TCP
           # livenessProbe:
           #   failureThreshold: 3
           #   periodSeconds: 10
           #   tcpSocket:
-          #     port: 8080
+          #     port: 8000
           #   timeoutSeconds: 1
           # readinessProbe:
           #   failureThreshold: 3
           #   periodSeconds: 10
           #   tcpSocket:
-          #     port: 8080
+          #     port: 8000
           #   timeoutSeconds: 1
           # startupProbe:
           #   failureThreshold: 30
           #   periodSeconds: 5
           #   tcpSocket:
-          #     port: 8080
+          #     port: 8000
           #   timeoutSeconds: 1
           volumeMounts:
             - mountPath: /tmp
