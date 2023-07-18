@@ -1,4 +1,4 @@
-imageTag: 2023.5.1
+imageTag: 2023.7.1
 
 networkPolicy:
   cloudflare:
