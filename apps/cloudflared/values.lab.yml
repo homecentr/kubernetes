@@ -5,6 +5,7 @@ routes:
     - hostname: k8s-lab.homecentr.one
     - hostname: argocd-lab.homecentr.one
     - hostname: pve-lab.homecentr.one
+    - hostname: cyberchef-lab.homecentr.one
 
   external:
     - hostname: pve1-lab.homecentr.one

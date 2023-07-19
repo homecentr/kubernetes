@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "common-labels" . | indent 4 }}
+    {{- include "common.resource-labels" . | indent 4 }}
   name: pomerium
   namespace: {{ $.Release.Namespace }}
 spec:
@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "common-labels" . | indent 8 }}
+        {{- include "common.resource-labels" . | indent 8 }}
     spec:
       securityContext:
         runAsUser: 1000
