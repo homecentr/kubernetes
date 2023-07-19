@@ -1,1 +1,8 @@
 hostname: cyberchef-lab.homecentr.one
+resources:
+  requests:
+    cpu: 1m
+    memory: 1Mi
+  limits:
+    cpu: 1000m
+    memory: 256Mi
