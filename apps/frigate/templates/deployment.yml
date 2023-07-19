@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "common.pod-labels" . | indent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "common.pod-labels" . | indent 8 }}
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        seccompProfile:
+          type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
+      automountServiceAccountToken: false
+      containers:
+        - name: frigate
+          image: 'ghcr.io/blakeblackshear/frigate:{{ .Values.imageTag }}'
+          imagePullPolicy: null
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 5000
+            - name: rtmp
+              protocol: TCP
+              containerPort: 1935
+          # livenessProbe:
+          #   failureThreshold: 3
+          #   periodSeconds: 10
+          #   tcpSocket:
+          #     port: 8000
+          #   timeoutSeconds: 1
+          # readinessProbe:
+          #   failureThreshold: 3
+          #   periodSeconds: 10
+          #   tcpSocket:
+          #     port: 8000
+          #   timeoutSeconds: 1
+          # startupProbe:
+          #   failureThreshold: 30
+          #   periodSeconds: 5
+          #   tcpSocket:
+          #     port: 8000
+          #   timeoutSeconds: 1
+          volumeMounts:
+            - name: database-pvc
+              mountPath: "/db"
+            - name: media-pvc
+              mountPath: "/media/frigate"
+            - name: dshm
+              mountPath: /dev/shm
+            - name: tmp
+              mountPath: /tmp
+            - name: config-map
+              mountPath: "/config/config.yml"
+              subPath: frigate.yml
+              readOnly: true
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+            seLinuxOptions:
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
+          resources: {{ .Values.resources | toYaml | nindent 14 }}
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: {{ .Values.shmSize }}
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: {{ .Values.cacheSize }}
+        - name: database-pvc
+          persistentVolumeClaim:
+            claimName: frigate-database
+        - name: media-pvc
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}
+        - name: config-map
+          configMap:
+            name: {{ .Release.Name }}
+            defaultMode: 0444
+            items:
+            - key: frigate.yml
+              path: frigate.yml

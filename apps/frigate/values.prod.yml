@@ -1,0 +1,8 @@
+hostname: nvr.homecentr.one
+resources:
+  requests:
+    cpu: 1000m
+    memory: 1Gi
+  limits:
+    cpu: 3000m
+    memory: 8Gi

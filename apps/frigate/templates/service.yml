@@ -7,10 +7,12 @@ metadata:
     {{- include "common.resource-labels" . | indent 4 }}
 spec:
   ports:
-  - name: http
-    port: 8000
-    protocol: TCP
-    targetPort: http
+    - name: webui
+      protocol: TCP
+      port: 5000
+    - name: rtsp
+      protocol: TCP
+      port: 1935
   selector:
     {{- include "common.pod-labels" . | indent 4 }}
   type: ClusterIP

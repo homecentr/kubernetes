@@ -177,3 +177,19 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.yml
+
+- name: mosquitto
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
+
+- name: frigate
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
