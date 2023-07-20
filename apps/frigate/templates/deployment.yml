@@ -43,6 +43,9 @@ spec:
             - name: rtmp
               protocol: TCP
               containerPort: 1935
+          env:
+            - name: S6_READ_ONLY_ROOT
+              value: 1
           # livenessProbe:
           #   failureThreshold: 3
           #   periodSeconds: 10
@@ -70,6 +73,8 @@ spec:
               mountPath: /dev/shm
             - name: tmp
               mountPath: /tmp
+            - name: run
+              mountPath: /run
             - name: config-map
               mountPath: "/config/config.yml"
               subPath: frigate.yml
@@ -104,6 +109,8 @@ spec:
           emptyDir:
             medium: Memory
             sizeLimit: {{ .Values.cacheSize }}
+        - name: run
+          emptyDir: {}
         - name: database-pvc
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-database
