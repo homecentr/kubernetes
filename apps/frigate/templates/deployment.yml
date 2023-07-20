@@ -45,7 +45,7 @@ spec:
               containerPort: 1935
           env:
             - name: S6_READ_ONLY_ROOT
-              value: 1
+              value: "1"
           # livenessProbe:
           #   failureThreshold: 3
           #   periodSeconds: 10
