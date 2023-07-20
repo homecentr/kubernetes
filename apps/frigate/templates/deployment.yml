@@ -106,10 +106,10 @@ spec:
             sizeLimit: {{ .Values.cacheSize }}
         - name: database-pvc
           persistentVolumeClaim:
-            claimName: frigate-database
+            claimName: {{ .Release.Name }}-database
         - name: media-pvc
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}
+            claimName: {{ .Release.Name }}-media
         - name: config-map
           configMap:
             name: {{ .Release.Name }}

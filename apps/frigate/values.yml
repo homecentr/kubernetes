@@ -1,5 +1,7 @@
 imageTag: v10.5.2
-storageClass: local-path-provisioner-services
+storageClass:
+  database: local-path-provisioner-services
+  media: local-path-provisioner-nvr
 mqtt:
   serviceName: mosquitto
   namespace: apps
