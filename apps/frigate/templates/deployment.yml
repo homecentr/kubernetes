@@ -34,7 +34,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: frigate
-          image: zembutsu/docker-sample-nginx # 'ghcr.io/blakeblackshear/frigate:{{ .Values.imageTag }}'
+          image: 'ghcr.io/blakeblackshear/frigate:{{ .Values.imageTag }}'
           imagePullPolicy: null
           ports:
             - name: http
