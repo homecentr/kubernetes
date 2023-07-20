@@ -9,3 +9,6 @@ spec:
   storageClassName: {{ .Values.storageClass }}
   accessModes:
     - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi # Does not matter with local path provisioner
