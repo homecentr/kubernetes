@@ -63,7 +63,7 @@ spec:
           #     port: 8000
           #   timeoutSeconds: 1
           volumeMounts:
-            - name: state-pvc
+            - name: state
               mountPath: "/mosquitto"
             - name: config-map
               mountPath: "/mosquitto/config/mosquitto.conf"
