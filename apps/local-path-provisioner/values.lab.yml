@@ -12,3 +12,11 @@ volumes:
 - name: services
   path: /mnt/gfs/k8s-services
   reclaimPolicy: Retain
+
+- name: monitoring
+  path: /mnt/gfs/k8s-monitoring
+  reclaimPolicy: Retain
+
+- name: nvr
+  path: /mnt/gfs/k8s-nvr
+  reclaimPolicy: Retain
