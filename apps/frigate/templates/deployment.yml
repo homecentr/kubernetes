@@ -75,6 +75,8 @@ spec:
               mountPath: /tmp
             - name: run
               mountPath: /run
+            - name: dummy
+              mountPath: /var/cache/nginx
             - name: config-map
               mountPath: "/config/config.yml"
               subPath: frigate.yml
@@ -110,6 +112,8 @@ spec:
             medium: Memory
             sizeLimit: {{ .Values.cacheSize }}
         - name: run
+          emptyDir: {}
+        - name: dummy
           emptyDir: {}
         - name: database-pvc
           persistentVolumeClaim:
