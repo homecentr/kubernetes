@@ -20,7 +20,6 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: false
-        fsGroup: 1000
         fsGroupChangePolicy: Always
         seccompProfile:
           type: RuntimeDefault
