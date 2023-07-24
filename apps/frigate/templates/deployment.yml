@@ -73,8 +73,8 @@ spec:
               mountPath: /tmp
             - name: run
               mountPath: /run
-            - name: nginx
-              mountPath: /usr/local/nginx
+            - name: nginx-logs
+              mountPath: /usr/local/nginx/logs
             
 
             - name: config-map
