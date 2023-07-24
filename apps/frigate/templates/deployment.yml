@@ -79,6 +79,8 @@ spec:
               mountPath: /usr/local/nginx/client_body_temp
             - name: nginx-proxy-temp
               mountPath: /usr/local/nginx/proxy_temp
+            - name: nginx-fastcgi-temp
+              mountPath: /usr/local/nginx/fastcgi_temp
             
 
             - name: config-map
@@ -120,6 +122,8 @@ spec:
         - name: nginx-client-body-temp
           emptyDir: {}
         - name: nginx-proxy-temp
+          emptyDir: {}
+        - name: nginx-fastcgi-temp
           emptyDir: {}
 
         - name: database-pvc
