@@ -92,9 +92,9 @@ spec:
               subPath: frigate.yml
               readOnly: true
           securityContext:
-            # runAsNonRoot: false
+            runAsNonRoot: false
             readOnlyRootFilesystem : true
-            # procMount: Default
+            procMount: Default
             privileged: true
             # allowPrivilegeEscalation: false
             # capabilities:
@@ -133,7 +133,6 @@ spec:
           emptyDir: {}
         - name: nginx-scgi-temp
           emptyDir: {}
-
         - name: database-pvc
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-database
