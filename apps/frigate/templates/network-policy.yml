@@ -15,3 +15,8 @@ spec:
   ingress:
     {{- include "common.ingress-pomerium" (dict "port" 5000)  | nindent 4 }}
     {{- include "common.ingress-homepage-healthcheck" (dict "port" 5000) | nindent 4 }}
+  egress:
+    - to: # Cameras subnet
+        - ipBlock:
+            cidr: 10.1.6.0/24
+    # TODO: Limit to rstp port

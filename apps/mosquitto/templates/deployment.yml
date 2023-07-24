@@ -43,25 +43,16 @@ spec:
             - containerPort: 9001
               name: websockets
               protocol: TCP
-          # TODO: Probes
-          # livenessProbe:
-          #   failureThreshold: 3
-          #   periodSeconds: 10
-          #   tcpSocket:
-          #     port: 8000
-          #   timeoutSeconds: 1
-          # readinessProbe:
-          #   failureThreshold: 3
-          #   periodSeconds: 10
-          #   tcpSocket:
-          #     port: 8000
-          #   timeoutSeconds: 1
-          # startupProbe:
-          #   failureThreshold: 30
-          #   periodSeconds: 5
-          #   tcpSocket:
-          #     port: 8000
-          #   timeoutSeconds: 1
+          livenessProbe:
+            tcpSocket:
+              port: websockets
+            initialDelaySeconds: 5
+            periodSeconds: 1
+          readinessProbe:
+            tcpSocket:
+              port: websockets
+            initialDelaySeconds: 3
+            periodSeconds: 3
           volumeMounts:
             - name: state
               mountPath: "/mosquitto"

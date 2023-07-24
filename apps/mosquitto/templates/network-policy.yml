@@ -13,4 +13,11 @@ spec:
     - Ingress
     - Egress
   ingress:
-    # TODO: Allow 1883 from HomeAssistant and Frigate
+    - ports:
+        - protocol: TCP
+          port: 1883
+      from:
+        - podSelector:
+            matchLabels:  
+              app.kubernetes.io/name: frigate
+    
