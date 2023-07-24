@@ -73,11 +73,9 @@ spec:
               mountPath: /tmp
             - name: run
               mountPath: /run
+            - name: nginx-logs
+              mountPath: /usr/local/nginx/logs
             
-            - name: dummy
-              mountPath: /var/cache/nginx
-            - name: dummy2
-              mountPath: /var/run
 
             - name: config-map
               mountPath: "/config/config.yml"
@@ -113,12 +111,8 @@ spec:
             sizeLimit: {{ .Values.cacheSize }}
         - name: run
           emptyDir: {}
-        
-        - name: dummy
+        - name: nginx-logs
           emptyDir: {}
-        - name: dummy2
-          emptyDir: {}
-        
         - name: database-pvc
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-database
