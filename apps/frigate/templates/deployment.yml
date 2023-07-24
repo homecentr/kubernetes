@@ -77,6 +77,8 @@ spec:
               mountPath: /usr/local/nginx/logs
             - name: nginx-client-body-temp
               mountPath: /usr/local/nginx/client_body_temp
+            - name: nginx-proxy-temp
+              mountPath: /usr/local/nginx/proxy_temp
             
 
             - name: config-map
@@ -117,6 +119,9 @@ spec:
           emptyDir: {}
         - name: nginx-client-body-temp
           emptyDir: {}
+        - name: nginx-proxy-temp
+          emptyDir: {}
+
         - name: database-pvc
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-database
