@@ -83,6 +83,8 @@ spec:
               mountPath: /usr/local/nginx/fastcgi_temp
             - name: nginx-uwsgi-temp
               mountPath: /usr/local/nginx/uwsgi_temp
+            - name: nginx-scgi-temp
+              mountPath: /usr/local/nginx/scgi_temp
             
 
             - name: config-map
@@ -128,6 +130,8 @@ spec:
         - name: nginx-fastcgi-temp
           emptyDir: {}
         - name: nginx-uwsgi-temp
+          emptyDir: {}
+        - name: nginx-scgi-temp
           emptyDir: {}
 
         - name: database-pvc
