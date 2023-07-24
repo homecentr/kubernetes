@@ -20,15 +20,15 @@ spec:
     spec:
       securityContext:
         privileged: true # To allow using Coral USB
-        runAsNonRoot: false
-        fsGroupChangePolicy: Always
-        seccompProfile:
-          type: RuntimeDefault
-        seLinuxOptions:
-          user: system_u
-          role: system_r
-          type: container_t
-          level: s0:c829,c861
+        # runAsNonRoot: false
+        # fsGroupChangePolicy: Always
+        # seccompProfile:
+        #   type: RuntimeDefault
+        # seLinuxOptions:
+        #   user: system_u
+        #   role: system_r
+        #   type: container_t
+        #   level: s0:c829,c861
       automountServiceAccountToken: false
       containers:
         - name: frigate
@@ -84,21 +84,21 @@ spec:
               subPath: frigate.yml
               readOnly: true
           securityContext:
-            runAsNonRoot: false
+            # runAsNonRoot: false
             readOnlyRootFilesystem : true
-            procMount: Default
-            privileged: false
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-            seccompProfile:
-              type: RuntimeDefault
-            seLinuxOptions:
-              user: system_u
-              role: system_r
-              type: container_t
-              level: s0:c829,c861
+            # procMount: Default
+            privileged: true
+            # allowPrivilegeEscalation: false
+            # capabilities:
+            #   drop:
+            #     - ALL
+            # seccompProfile:
+            #   type: RuntimeDefault
+            # seLinuxOptions:
+            #   user: system_u
+            #   role: system_r
+            #   type: container_t
+            #   level: s0:c829,c861
           resources: {{ .Values.resources | toYaml | nindent 14 }}
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
