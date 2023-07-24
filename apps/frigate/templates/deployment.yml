@@ -111,7 +111,7 @@ spec:
             sizeLimit: {{ .Values.cacheSize }}
         - name: run
           emptyDir: {}
-        - name: nginx
+        - name: nginx-logs
           emptyDir: {}
         - name: database-pvc
           persistentVolumeClaim:
