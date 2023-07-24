@@ -140,8 +140,9 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
-  - values.$env.yml
+  - values.yml
   - values.config.yml
+  - values.$env.yml
 
 - name: kubernetes-dashboard
   type: helm
