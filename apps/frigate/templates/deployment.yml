@@ -46,24 +46,22 @@ spec:
               value: "1"
             - name: MPLCONFIGDIR
               value: /tmp/matplot
-          # livenessProbe:
-          #   failureThreshold: 3
-          #   periodSeconds: 10
-          #   tcpSocket:
-          #     port: 8000
-          #   timeoutSeconds: 1
-          # readinessProbe:
-          #   failureThreshold: 3
-          #   periodSeconds: 10
-          #   tcpSocket:
-          #     port: 8000
-          #   timeoutSeconds: 1
-          # startupProbe:
-          #   failureThreshold: 30
-          #   periodSeconds: 5
-          #   tcpSocket:
-          #     port: 8000
-          #   timeoutSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /api/version
+              port: http
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 1
+            initialDelaySeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /api/version
+              port: http
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 1
+            initialDelaySeconds: 60
           volumeMounts:
             - name: database-pvc
               mountPath: "/db"
