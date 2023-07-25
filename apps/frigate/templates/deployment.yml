@@ -87,7 +87,7 @@ spec:
               mountPath: /usr/local/nginx/scgi_temp
             
 
-            - name: config-map
+            - name: secret-config
               mountPath: "/config/config.yml"
               subPath: frigate.yml
               readOnly: true
@@ -95,7 +95,6 @@ spec:
             runAsNonRoot: false
             readOnlyRootFilesystem : true
             procMount: Default
-            privileged: true
             # allowPrivilegeEscalation: false
             # capabilities:
             #   drop:
@@ -140,8 +139,9 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-media
         - name: config-map
-          configMap:
-            name: {{ .Release.Name }}
+          secret:
+            secretName: {{ .Release.Name }}
+            optional: false
             defaultMode: 0444
             items:
             - key: frigate.yml
