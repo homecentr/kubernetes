@@ -63,12 +63,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Release.Name }}
-                  key: rstpUser
+                  key: rtspUser
             - name: FRIGATE_RTSP_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ .Release.Name }}
-                  key: rstpPassword
+                  key: rtspPassword
           livenessProbe:
             httpGet:
               path: /api/version
