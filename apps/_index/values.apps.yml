@@ -193,4 +193,5 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.yml
+  secretValueFiles:
   - secrets.$env.yml
