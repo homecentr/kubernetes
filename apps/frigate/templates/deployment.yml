@@ -161,9 +161,8 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-media
         - name: config
-          secret:
-            secretName: {{ .Release.Name }}
-            optional: false
+          configMap:
+            name: {{ .Release.Name }}
             defaultMode: 0444
             items:
             - key: frigate.yml
