@@ -138,7 +138,7 @@ spec:
         - name: media-pvc
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-media
-        - name: config-map
+        - name: service-config
           secret:
             secretName: {{ .Release.Name }}
             optional: false
