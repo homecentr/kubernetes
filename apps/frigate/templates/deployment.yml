@@ -21,7 +21,8 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - preference:
+          - weight: 1
+            preference:
               matchExpressions:
               - key: homecentr.one/tpu
                 operator: In
