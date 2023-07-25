@@ -19,7 +19,7 @@ spec:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
       securityContext:
-        privileged: true # To allow using Coral USB
+        # privileged: true # To allow using Coral USB
         # runAsNonRoot: false
         # fsGroupChangePolicy: Always
         # seccompProfile:
@@ -85,13 +85,12 @@ spec:
               mountPath: /usr/local/nginx/uwsgi_temp
             - name: nginx-scgi-temp
               mountPath: /usr/local/nginx/scgi_temp
-            
-
             - name: config
               mountPath: "/config/config.yml"
               subPath: frigate.yml
               readOnly: true
           securityContext:
+            privileged: true # To allow using Coral USB
             runAsNonRoot: false
             readOnlyRootFilesystem : true
             procMount: Default
