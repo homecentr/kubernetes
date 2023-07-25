@@ -33,7 +33,6 @@ spec:
                 values:
                 - "true"
       securityContext:
-        # privileged: true # To allow using Coral USB
         # runAsNonRoot: false
         # fsGroupChangePolicy: Always
         # seccompProfile:
@@ -60,6 +59,16 @@ spec:
               value: "1"
             - name: MPLCONFIGDIR
               value: /tmp/matplot
+            - name: FRIGATE_RTSP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: rstpUser
+            - name: FRIGATE_RTSP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: rstpPassword
           livenessProbe:
             httpGet:
               path: /api/version

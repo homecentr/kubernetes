@@ -6,3 +6,9 @@ resources:
   limits:
     cpu: '3'
     memory: 2Gi
+
+cameras:
+  - name: cam1
+    url: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@10.1.6.11:554/h265Preview_01_main
+    detectWidth: 1920
+    detectHeight: 1080
