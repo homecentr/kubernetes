@@ -44,6 +44,8 @@ spec:
           env:
             - name: S6_READ_ONLY_ROOT
               value: "1"
+            - name: MPLCONFIGDIR
+              value: /tmp/matplot
           # livenessProbe:
           #   failureThreshold: 3
           #   periodSeconds: 10
