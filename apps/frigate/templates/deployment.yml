@@ -18,6 +18,19 @@ spec:
       labels:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: homecentr.one/tpu
+                operator: In
+                values:
+                - "true"
+              - key: homecentr.one/gpu
+                operator: In
+                values:
+                - "true"
       securityContext:
         # privileged: true # To allow using Coral USB
         # runAsNonRoot: false
