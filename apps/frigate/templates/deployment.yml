@@ -18,6 +18,7 @@ spec:
       labels:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
+      # TODO: runtimeClassName: {{ .Values.gpu.nvidia.runtimeClassName }}
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -59,6 +60,10 @@ spec:
               value: "1"
             - name: MPLCONFIGDIR
               value: /tmp/matplot
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: "all"
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
             - name: FRIGATE_RTSP_USER
               valueFrom:
                 secretKeyRef:
@@ -86,6 +91,8 @@ spec:
             timeoutSeconds: 1
             initialDelaySeconds: 60
           volumeMounts:
+            - name: coral-dev
+              mountPath: {{ .Values.coralHostPath }}
             - name: database-pvc
               mountPath: "/db"
             - name: media-pvc
@@ -132,6 +139,9 @@ spec:
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       volumes:
+        - name: coral-dev
+          hostPath:
+            path: {{ .Values.coralHostPath }}
         - name: dshm
           emptyDir:
             medium: Memory

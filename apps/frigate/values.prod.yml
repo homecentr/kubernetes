@@ -6,6 +6,7 @@ resources:
   limits:
     cpu: 3000m
     memory: 8Gi
+    "nvidia.com/gpu": 1
 
 cameras:
   - name: cam1

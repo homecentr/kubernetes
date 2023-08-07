@@ -1,5 +1,7 @@
 imageTag: 0.12.1
 
+coralHostPath: /dev/bus/usb
+
 mqtt:
   serviceName: mosquitto
 

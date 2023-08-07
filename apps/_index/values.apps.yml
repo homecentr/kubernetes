@@ -42,6 +42,13 @@ applications:
   syncWave: -100
   deleteProtection: false
 
+- name: network-policies-nvidia
+  namespace: nvidia
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+
 - name: network-policies-apps
   namespace: apps
   path: apps/network-policies
@@ -84,6 +91,14 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
+
+- name: nvidia-device-plugin
+  type: helm
+  syncWave: -88
+  namespace: nvidia
+  deleteProtection: false
+  valueFiles:
+  - values.yml
 
 - name: cert-manager-crd
   type: raw
