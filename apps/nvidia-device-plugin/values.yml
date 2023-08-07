@@ -2,3 +2,5 @@ nvidia-device-plugin:
   runtimeClassName: nvidia
   config:
     name: nvidia-device-plugin
+  gfd:
+    enabled: true
