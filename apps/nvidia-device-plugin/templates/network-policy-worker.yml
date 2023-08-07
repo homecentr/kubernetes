@@ -9,6 +9,7 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: node-feature-discovery
+      role: worker
   ingress:
     # Accept traffic from all pods within the namespace
     - from:
