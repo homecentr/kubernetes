@@ -1,3 +1,4 @@
 nvidia-device-plugin:
+  runtimeClassName: nvidia
   config:
     name: nvidia-device-plugin
