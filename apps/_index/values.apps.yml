@@ -90,6 +90,7 @@ applications:
   namespace: kube-system
   deleteProtection: false
   valueFiles:
+  - values.yml
   - values.$env.yml
 
 - name: nvidia-device-plugin
