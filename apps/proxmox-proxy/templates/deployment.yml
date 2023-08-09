@@ -37,9 +37,7 @@ spec:
       automountServiceAccountToken: false
       # Allow running on any node
       tolerations:
-        - key: homecentr.one/critical-only
-          operator: Exists
-          effect: NoSchedule
+        {{- include "common.critical-only" . | indent 8 }}
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
