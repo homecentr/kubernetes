@@ -34,7 +34,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: mosquitto
-          image: 'eclipse-mosquitto:{{ .Values.imageTag }}'
+          image: 'library/eclipse-mosquitto:{{ .Values.imageTag }}'
           imagePullPolicy: null
           ports:
             - containerPort: 1883
