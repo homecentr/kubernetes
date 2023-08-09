@@ -23,6 +23,6 @@ postgresql:
       initialDelaySeconds: 120
     persistence:
       size: 10Gi
-      storageClass: local-path-provisioner-services
+      storageClass: local-path-provisioner-services-db
       accessModes:
         - ReadWriteMany

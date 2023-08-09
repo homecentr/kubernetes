@@ -7,10 +7,14 @@ metadata:
     {{- include "common.resource-labels" . | indent 4 }}
 spec:
   ports:
-  - name: http
-    port: 8000
+  - name: mqtt
+    port: 1883
     protocol: TCP
-    targetPort: http
+    targetPort: mqtt
+  - name: websockets
+    port: 9001
+    protocol: TCP
+    targetPort: websockets
   selector:
     {{- include "common.pod-labels" . | indent 4 }}
   type: ClusterIP

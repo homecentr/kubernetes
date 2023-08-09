@@ -1,6 +1,5 @@
 domain: homecentr.one
 hostname: homepage.homecentr.one
-imageTag: v0.6.3
 
 resources:
   requests:

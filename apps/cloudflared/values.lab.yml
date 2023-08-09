@@ -6,6 +6,7 @@ routes:
     - hostname: argocd-lab.homecentr.one
     - hostname: pve-lab.homecentr.one
     - hostname: cyberchef-lab.homecentr.one
+    - hostname: nvr-lab.homecentr.one
 
   external:
     - hostname: pve1-lab.homecentr.one

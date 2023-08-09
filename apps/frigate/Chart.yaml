@@ -1,0 +1,13 @@
+apiVersion: v2
+name: frigate
+version: 1.0.0
+
+dependencies:
+  - name: common
+    version: 1.0.0
+    repository: file://../common
+  
+  # - name: frigate
+  #   version: 7.0.1
+  #   repository: https://blakeblackshear.github.io/blakeshome-charts/
+    

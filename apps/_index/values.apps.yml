@@ -42,6 +42,20 @@ applications:
   syncWave: -100
   deleteProtection: false
 
+- name: network-policies-nvidia
+  namespace: nvidia
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+
+- name: network-policies-apps
+  namespace: apps
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+
 - name: metallb-crd
   namespace: metallb-system
   type: raw
@@ -76,7 +90,16 @@ applications:
   namespace: kube-system
   deleteProtection: false
   valueFiles:
+  - values.yml
   - values.$env.yml
+
+- name: nvidia-device-plugin
+  type: helm
+  syncWave: -88
+  namespace: nvidia
+  deleteProtection: false
+  valueFiles:
+  - values.yml
 
 - name: cert-manager-crd
   type: raw
@@ -140,8 +163,9 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
-  - values.$env.yml
+  - values.yml
   - values.config.yml
+  - values.$env.yml
 
 - name: kubernetes-dashboard
   type: helm
@@ -176,3 +200,21 @@ applications:
   valueFiles:
   - values.$env.yml
   - values.yml
+
+- name: mosquitto
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
+
+# - name: frigate
+#   type: helm
+#   namespace: apps
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   - values.yml
+#   secretValueFiles:
+#   - secrets.$env.yml

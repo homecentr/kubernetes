@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ $.Release.Namespace }}-worker
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: node-feature-discovery
+      role: worker
+  ingress:
+    # Accept traffic from all pods within the namespace
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: nvidia
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/name: node-feature-discovery
+    
+  policyTypes:
+  - Ingress
