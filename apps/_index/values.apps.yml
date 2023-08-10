@@ -206,9 +206,10 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
-  - secrets.$env.yml
   - values.$env.yml
   - values.yml
+  secretValueFiles:
+  - secrets.$env.yml
 
 - name: mosquitto
   type: helm
