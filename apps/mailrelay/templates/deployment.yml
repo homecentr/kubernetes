@@ -33,7 +33,7 @@ spec:
           role: system_r
           type: container_t
           level: s0:c829,c861
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       tolerations:
         {{- include "common.critical-only" . | indent 8 }}
       containers:
@@ -84,8 +84,6 @@ spec:
               level: s0:c829,c861
           resources: {{ .Values.resources | toYaml | nindent 14 }}
       dnsPolicy: ClusterFirst
-      enableServiceLinks: true
-      serviceAccountName: {{ .Release.Name }}
       volumes:
         - name: secret
           secret:
