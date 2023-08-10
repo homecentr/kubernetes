@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/secret.yml") $ | sha256sum }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "common.pod-labels" . | indent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "common.pod-labels" . | indent 8 }}
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        seccompProfile:
+          type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
+      automountServiceAccountToken: true
+      tolerations:
+        {{- include "common.critical-only" . | indent 8 }}
+      containers:
+        - image: 'ghcr.io/homecentr/mailrelay:{{ .Values.imageTag }}'
+          imagePullPolicy: null
+          name: mailrelay
+          ports:
+            - containerPort: 2525
+              name: smtp
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          startupProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: secret
+              mountPath: "/config/mailrelay.json"
+              subPath: config
+              readOnly: true
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+            seLinuxOptions:
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
+          resources: {{ .Values.resources | toYaml | nindent 14 }}
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      serviceAccountName: {{ .Release.Name }}
+      volumes:
+        - name: secret
+          secret:
+            name: {{ .Release.Name }}

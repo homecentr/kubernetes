@@ -201,6 +201,15 @@ applications:
   - values.$env.yml
   - values.yml
 
+- name: mailrelay
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - secrets.$env.yml
+  - values.$env.yml
+  - values.yml
+
 - name: mosquitto
   type: helm
   namespace: apps
