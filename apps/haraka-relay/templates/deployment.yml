@@ -37,9 +37,9 @@ spec:
       tolerations:
         {{- include "common.critical-only" . | indent 8 }}
       containers:
-        - image: 'ghcr.io/homecentr/mailrelay:{{ .Values.imageTag }}'
+        - image: 'ghcr.io/homecentr/haraka-relay:{{ .Values.imageTag }}'
           imagePullPolicy: null
-          name: mailrelay
+          name: haraka-relay
           ports:
             - containerPort: 2525
               name: smtp
@@ -60,10 +60,27 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
           volumeMounts:
-            - name: secret
-              mountPath: "/config/mailrelay.json"
-              subPath: config
-              readOnly: true
+            - auth_flat_file.ini
+            - relay_via_external.ini # secret
+            # tls cert
+            # hostname (smtp.homecentr.one)
+
+          - name: secret
+            mountPath: /haraka/config/relay_via_external.ini
+            subPath: relay_via_external.ini
+            readOnly: true
+          - name: secret
+            mountPath: /haraka/config/auth_flat_file.ini
+            subPath: auth_flat_file.ini
+            readOnly: true
+          - name: tls
+            mountPath: /haraka/config/tls_cert.pem
+            subPath: tls.crt
+            readOnly: true
+          - name: tls
+            mountPath: /haraka/config/tls_key.pem
+            subPath: tls.key
+            readOnly: true
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -88,4 +105,8 @@ spec:
         - name: secret
           secret:
             secretName: {{ .Release.Name }}
+            optional: false
+        - name: tls
+          secret:
+            secretName: {{ .Values.tlsCertSecretName }}
             optional: false

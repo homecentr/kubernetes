@@ -201,7 +201,7 @@ applications:
   - values.$env.yml
   - values.yml
 
-- name: mailrelay
+- name: haraka-relay
   type: helm
   namespace: apps
   deleteProtection: false
