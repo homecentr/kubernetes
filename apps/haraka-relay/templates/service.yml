@@ -17,4 +17,3 @@ spec:
   selector:
     {{- include "common.pod-labels" . | indent 4 }}
   type: LoadBalancer
-  externalTrafficPolicy: Local

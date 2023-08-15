@@ -44,6 +44,9 @@ spec:
             - containerPort: 2525
               name: smtp
               protocol: TCP
+            - containerPort: 9904
+              name: metrics
+              protocol: TCP
           livenessProbe:
             tcpSocket:
               port: 2525
