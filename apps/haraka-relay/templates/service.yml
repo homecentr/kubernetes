@@ -10,7 +10,7 @@ metadata:
     coredns.io/hostname: {{ .Values.hostname }}
 spec:
   ports:
-    - name: http
+    - name: smtp
       port: 25
       protocol: TCP
       targetPort: 25
