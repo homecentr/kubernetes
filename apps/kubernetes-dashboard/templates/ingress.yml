@@ -11,10 +11,11 @@ metadata:
     ingress.pomerium.io/allow_spdy: 'true'
     ingress.pomerium.io/kubernetes_service_account_token_secret: {{ .Values.dashboard.fullnameOverride }}-impersonate
 
-    ingress.pomerium.io/policy: |
-      allow:
-        and:
-          - claim/groups: '{{ .Values.groups.admin }}'
+    ingress.pomerium.io/allow_any_authenticated_user: true
+    # ingress.pomerium.io/policy: |
+    #   allow:
+    #     and:
+    #       - claim/groups: '{{ .Values.groups.admin }}'
 
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Kubernetes resource management
