@@ -19,6 +19,8 @@ spec:
     metadata:
       labels:
         {{- include "common.pod-labels" . | indent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/secret.yml") $ | sha256sum }}
     spec:
       securityContext:
         runAsUser: 1000
