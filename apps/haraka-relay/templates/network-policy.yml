@@ -20,6 +20,8 @@ spec:
       ports:
         - protocol: TCP
           port: 2525
+        - protocol: TCP
+          port: 9904
 
     - from:
       {{- range $cidr := .Values.allowedClients }}
@@ -29,5 +31,7 @@ spec:
       ports:
         - protocol: TCP
           port: 2525
+        - protocol: TCP
+          port: 9904
   egress:
     {{- include "common.egress-internet" . | indent 4 }}
