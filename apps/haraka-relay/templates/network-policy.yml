@@ -20,6 +20,6 @@ spec:
       {{- end }}
       ports:
         - protocol: TCP
-          port: 25
+          port: 2525
   egress:
     {{- include "common.egress-internet" . | indent 4 }}
