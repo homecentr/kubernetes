@@ -13,16 +13,6 @@ spec:
     - Ingress
     - Egress
   ingress:
-    # # Kubernetes API TODO: Specific IPs
-    # - from:
-    #     - ipBlock:
-    #         cidr: 10.1.8.0/24
-    #   ports:
-    #     - protocol: TCP
-    #       port: 2525
-    #     - protocol: TCP
-    #       port: 9904
-
     - from:
       {{- range $cidr := .Values.allowedClients }}
         - ipBlock:
@@ -31,7 +21,5 @@ spec:
       ports:
         - protocol: TCP
           port: 2525
-        - protocol: TCP
-          port: 9904
   egress:
     {{- include "common.egress-internet" . | indent 4 }}
