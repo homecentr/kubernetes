@@ -13,7 +13,7 @@ spec:
     - Ingress
     - Egress
   ingress:
-    # Kubernetes API
+    # Kubernetes API TODO: Specific IPs
     - from:
         - ipBlock:
             cidr: 10.1.8.0/24

@@ -1,5 +1,5 @@
 apiVersion: v2
-name: mailrelay
+name: haraka-relay
 version: 1.0.0
 
 dependencies:
