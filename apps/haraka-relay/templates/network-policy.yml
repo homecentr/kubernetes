@@ -13,6 +13,14 @@ spec:
     - Ingress
     - Egress
   ingress:
+    # Kubernetes API
+    - from:
+        - ipBlock:
+            cidr: 10.1.8.0/24
+      ports:
+        - protocol: TCP
+          port: 2525
+
     - from:
       {{- range $cidr := .Values.allowedClients }}
         - ipBlock:
