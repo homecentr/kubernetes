@@ -14,7 +14,7 @@ metadata:
     ingress.pomerium.io/policy: |
       allow:
         and:
-          - claim/groups: {{ .Values.groups.admin }}
+          - claim/groups: '{{ .Values.groups.admin }}'
 
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Kubernetes resource management
