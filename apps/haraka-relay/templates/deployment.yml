@@ -44,21 +44,21 @@ spec:
             - containerPort: 2525
               name: smtp
               protocol: TCP
-          # livenessProbe:
-          #   tcpSocket:
-          #     port: 2525
-          #   initialDelaySeconds: 15
-          #   periodSeconds: 20
-          # readinessProbe:
-          #   tcpSocket:
-          #     port: 2525
-          #   initialDelaySeconds: 15
-          #   periodSeconds: 20
-          # startupProbe:
-          #   tcpSocket:
-          #     port: 2525
-          #   initialDelaySeconds: 15
-          #   periodSeconds: 20
+          livenessProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          startupProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
           volumeMounts:
           - name: secret
             mountPath: /haraka/config/relay_via_external.ini
