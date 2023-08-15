@@ -21,7 +21,5 @@ spec:
       ports:
         - protocol: TCP
           port: 25
-        - protocol: TCP
-          port: 587
   egress:
     {{- include "common.egress-internet" . | indent 4 }}

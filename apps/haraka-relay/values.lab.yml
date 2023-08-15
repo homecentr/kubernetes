@@ -3,6 +3,7 @@ loadBalancerIp: 10.1.8.130
 
 allowedClients:
   - 10.1.3.250/32
+  - 10.1.3.0/24
 
 resources:
   limits:
