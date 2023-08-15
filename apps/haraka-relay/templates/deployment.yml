@@ -60,11 +60,6 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
           volumeMounts:
-            - auth_flat_file.ini
-            - relay_via_external.ini # secret
-            # tls cert
-            # hostname (smtp.homecentr.one)
-
           - name: secret
             mountPath: /haraka/config/relay_via_external.ini
             subPath: relay_via_external.ini
