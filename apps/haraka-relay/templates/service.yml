@@ -13,7 +13,7 @@ spec:
     - name: http
       port: 25
       protocol: TCP
-      targetPort: smtp
+      targetPort: 25
   selector:
     {{- include "common.pod-labels" . | indent 4 }}
   type: LoadBalancer
