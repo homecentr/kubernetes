@@ -2,14 +2,15 @@ hostname: smtp.homecentr.one
 loadBalancerIp: 10.1.2.130
 
 allowedClients:
-  - 10.1.3.5/32
-  - 10.1.2.211/32
-  - 10.1.2.212/32
+  - 10.1.3.250/32 # GitHub runner
+  - 10.1.3.5/32   # Printer
+  - 10.1.2.211/32 # iDRAC
+  - 10.1.2.212/32 # iDRAC
 
 resources:
   limits:
     cpu: 500m
     memory: 512Mi
   requests: 
-    cpu: 1m
+    cpu: 100m
     memory: 128Mi
