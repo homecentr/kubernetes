@@ -8,3 +8,6 @@ networkPolicy:
   consumerCidrs:
     - 10.1.2.0/24
     - 10.1.3.0/24
+
+groups:
+  admin: 64d004bd-9218-4fae-9919-0505ff5eeb8e
