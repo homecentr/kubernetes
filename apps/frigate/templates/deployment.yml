@@ -18,7 +18,9 @@ spec:
       labels:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
-      runtimeClassName: nvidia
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ .Values.runtimeClassName }}
+      {{- end }}
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

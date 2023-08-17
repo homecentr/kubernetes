@@ -1,4 +1,7 @@
 hostname: nvr.homecentr.one
+
+runtimeClassName: nvidia
+
 resources:
   requests:
     cpu: 1000m
