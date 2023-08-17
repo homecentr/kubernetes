@@ -219,12 +219,12 @@ applications:
   - values.$env.yml
   - values.yml
 
-# - name: frigate
-#   type: helm
-#   namespace: apps
-#   deleteProtection: false
-#   valueFiles:
-#   - values.$env.yml
-#   - values.yml
-#   secretValueFiles:
-#   - secrets.$env.yml
+- name: frigate
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
+  secretValueFiles:
+  - secrets.$env.yml
