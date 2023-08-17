@@ -30,8 +30,9 @@ spec:
                 values:
                 - "true"
               - key: nvidia.com/gpu.present
-                operator: Equals
-                value: true
+                operator: In
+                values:
+                - "true"
               
               # TODO: Remove the custom gpu tag via platform repository
       securityContext:
