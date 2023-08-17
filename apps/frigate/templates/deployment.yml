@@ -18,7 +18,7 @@ spec:
       labels:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
-      # TODO: runtimeClassName: {{ .Values.gpu.nvidia.runtimeClassName }}
+      runtimeClassName: nvidia
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -29,10 +29,11 @@ spec:
                 operator: In
                 values:
                 - "true"
-              - key: homecentr.one/gpu
-                operator: In
-                values:
-                - "true"
+              - key: nvidia.com/gpu.present
+                operator: Equals
+                value: true
+              
+              # TODO: Remove the custom gpu tag via platform repository
       securityContext:
         # runAsNonRoot: false
         # fsGroupChangePolicy: Always
