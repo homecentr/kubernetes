@@ -19,6 +19,7 @@ spec:
         podSelector:
           matchLabels:
             app.kubernetes.io/name: node-feature-discovery
+    - {}
   egress:
     - {}
   policyTypes:
