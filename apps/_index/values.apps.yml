@@ -48,6 +48,7 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
+  selfHeal: false
 
 - name: network-policies-apps
   namespace: apps
@@ -98,6 +99,7 @@ applications:
   syncWave: -88
   namespace: nvidia
   deleteProtection: false
+  selfHeal: false
   valueFiles:
   - values.yml
 
