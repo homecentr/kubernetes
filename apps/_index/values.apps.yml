@@ -42,13 +42,13 @@ applications:
   syncWave: -100
   deleteProtection: false
 
-- name: network-policies-nvidia
-  namespace: nvidia
-  path: apps/network-policies
-  type: helm
-  syncWave: -100
-  deleteProtection: false
-  selfHeal: false
+# - name: network-policies-nvidia
+#   namespace: nvidia
+#   path: apps/network-policies
+#   type: helm
+#   syncWave: -100
+#   deleteProtection: false
+#   selfHeal: false
 
 - name: network-policies-apps
   namespace: apps
