@@ -48,7 +48,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  selfHeal: false
 
 - name: network-policies-apps
   namespace: apps
