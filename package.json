@@ -21,7 +21,6 @@
   "devDependencies": {
     "commander": "^10.0.0",
     "cross-env": "^7.0.3",
-    "cypress": "^12.9.0",
     "js-yaml": "^4.1.0",
     "run-script-os": "^1.1.6",
     "sops-wrapper": "^1.0.0",
