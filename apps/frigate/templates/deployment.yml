@@ -35,8 +35,6 @@ spec:
                 operator: In
                 values:
                 - "true"
-              
-              # TODO: Remove the custom gpu tag via platform repository
       securityContext:
         # runAsNonRoot: false
         # fsGroupChangePolicy: Always
