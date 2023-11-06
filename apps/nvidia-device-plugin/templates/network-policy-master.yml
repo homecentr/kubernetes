@@ -12,17 +12,13 @@ spec:
       role: master
   ingress:
     # Accept traffic from all pods within the namespace
-    # - from:
-    #   - namespaceSelector:
-    #       matchLabels:
-    #         kubernetes.io/metadata.name: {{ $.Release.Namespace }}
-    #     podSelector:
-    #       matchLabels:
-    #         app.kubernetes.io/name: node-feature-discovery
-    - {}
-  egress:
-    - {}
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: {{ $.Release.Namespace }}
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/name: node-feature-discovery
     {{- include "common.egress-kubeapi" . | nindent 4 }}
   policyTypes:
   - Ingress
-  - Egress
