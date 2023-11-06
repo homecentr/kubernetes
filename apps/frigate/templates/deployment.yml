@@ -18,7 +18,9 @@ spec:
       labels:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
-      # TODO: runtimeClassName: {{ .Values.gpu.nvidia.runtimeClassName }}
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ .Values.runtimeClassName }}
+      {{- end }}
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -29,7 +31,7 @@ spec:
                 operator: In
                 values:
                 - "true"
-              - key: homecentr.one/gpu
+              - key: nvidia.com/gpu.present
                 operator: In
                 values:
                 - "true"
