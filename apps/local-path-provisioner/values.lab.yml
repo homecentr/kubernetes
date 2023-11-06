@@ -1,5 +1,3 @@
-imageVersion: v0.0.23
-
 resources:
   requests:
     cpu: 1m
@@ -7,8 +5,3 @@ resources:
   limits:
     cpu: 1
     memory: 512Mi
-
-volumes:
-- name: services
-  path: /mnt/gfs/k8s-services
-  reclaimPolicy: Retain

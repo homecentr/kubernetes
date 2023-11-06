@@ -1,0 +1,13 @@
+hostname: smtp-lab.homecentr.one
+loadBalancerIp: 10.1.8.130
+
+allowedClients:
+  - 10.1.8.224/27 # GitHub runners
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests: 
+    cpu: 1m
+    memory: 1Mi

@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "common.pod-labels" . | indent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "common.pod-labels" . | indent 8 }}
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        seccompProfile:
+          type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
+      automountServiceAccountToken: false
+      containers:
+        - name: mosquitto
+          image: 'library/eclipse-mosquitto:{{ .Values.imageTag }}'
+          imagePullPolicy: null
+          ports:
+            - containerPort: 1883
+              name: mqtt
+              protocol: TCP
+            - containerPort: 9001
+              name: websockets
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: websockets
+            initialDelaySeconds: 5
+            periodSeconds: 1
+          readinessProbe:
+            tcpSocket:
+              port: websockets
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          volumeMounts:
+            - name: state
+              mountPath: "/mosquitto"
+            - name: config-map
+              mountPath: "/mosquitto/config/mosquitto.conf"
+              subPath: mosquitto.conf
+              readOnly: true
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+            seLinuxOptions:
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
+          resources: {{ .Values.resources | toYaml | nindent 14 }}
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      volumes:
+        - name: state
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}
+        - name: config-map
+          configMap:
+            name: {{ .Release.Name }}
+            items:
+            - key: mosquitto.conf
+              path: mosquitto.conf

@@ -17,6 +17,7 @@ data:
         {{- range $ip := .Values.pveNodes }}
         server {{ $ip }}:{{ $.Values.port }};
         {{- end }}
+        keepalive 8;
       }
       
       server {
@@ -26,7 +27,16 @@ data:
         server_name _;
 
         location / {
+          proxy_set_header X-Real_IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header Host $http_host;
+          proxy_set_header X-NginX-Proxy true;
+
+          # This is necessary to pass the correct IP to be hashed
+          real_ip_header X-Real-IP;
+
           proxy_pass https://pve;
+          proxy_redirect off;
         }
 
         location /health {

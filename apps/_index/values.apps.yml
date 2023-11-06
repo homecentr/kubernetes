@@ -13,8 +13,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: network-policies-kube-system
   namespace: kube-system
@@ -22,8 +20,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: network-policies-pomerium
   namespace: pomerium
@@ -31,8 +27,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: network-policies-argo-cd
   namespace: argo-cd
@@ -40,8 +34,6 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
 
 - name: network-policies-cloudflare
   namespace: cloudflare
@@ -49,8 +41,20 @@ applications:
   type: helm
   syncWave: -100
   deleteProtection: false
-  valueFiles:
-  - values.$env.yml
+
+- name: network-policies-nvidia
+  namespace: nvidia
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+
+- name: network-policies-apps
+  namespace: apps
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
 
 - name: metallb-crd
   namespace: metallb-system
@@ -86,7 +90,16 @@ applications:
   namespace: kube-system
   deleteProtection: false
   valueFiles:
+  - values.yml
   - values.$env.yml
+
+- name: nvidia-device-plugin
+  type: helm
+  syncWave: -88
+  namespace: nvidia
+  deleteProtection: false
+  valueFiles:
+  - values.yml
 
 - name: cert-manager-crd
   type: raw
@@ -150,8 +163,9 @@ applications:
   namespace: apps
   deleteProtection: false
   valueFiles:
-  - values.$env.yml
+  - values.yml
   - values.config.yml
+  - values.$env.yml
 
 - name: kubernetes-dashboard
   type: helm
@@ -178,3 +192,39 @@ applications:
   - values.yml
   secretValueFiles:
   - secrets.$env.yml
+
+- name: cyberchef
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
+
+- name: haraka-relay
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
+  secretValueFiles:
+  - secrets.$env.yml
+
+- name: mosquitto
+  type: helm
+  namespace: apps
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  - values.yml
+
+# - name: frigate
+#   type: helm
+#   namespace: apps
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   - values.yml
+#   secretValueFiles:
+#   - secrets.$env.yml

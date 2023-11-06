@@ -49,16 +49,8 @@ config:
               href: https://dynadot.com
               
   services:
-    - App:
-        - My First Service:
-            href: http://test.$DOMAIN/
-            description: Homepage is awesome
-
-    - Tools:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
-
+    - Apps: []
+    - Development: []
     - Infrastructure: []
 
   widgets:

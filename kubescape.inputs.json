@@ -6,9 +6,11 @@
     "imageRepositoryAllowList": [
       "rancher/*",
       "ghcr.io/benphelps/*",
+      "ghcr.io/blakeblackshear/frigate*",
       "pomerium/",
       "cloudflare/*",
-      "library/*"
+      "library/*",
+      "mpepping/*"
     ],
     "insecureCapabilities": [
       "SETPCAP",

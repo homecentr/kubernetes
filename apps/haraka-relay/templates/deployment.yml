@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/secret.yml") $ | sha256sum }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "common.pod-labels" . | indent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "common.pod-labels" . | indent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/secret.yml") $ | sha256sum }}
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        seccompProfile:
+          type: RuntimeDefault
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: container_t
+          level: s0:c829,c861
+      automountServiceAccountToken: false
+      tolerations:
+        {{- include "common.critical-only" . | indent 8 }}
+      containers:
+        - image: 'ghcr.io/homecentr/haraka-relay:{{ .Values.imageTag }}'
+          imagePullPolicy: null
+          name: haraka-relay
+          ports:
+            - containerPort: 2525
+              name: smtp
+              protocol: TCP
+            - containerPort: 9904
+              name: metrics
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          startupProbe:
+            tcpSocket:
+              port: 2525
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+          - name: secret
+            mountPath: /haraka/config/relay_via_external.ini
+            subPath: relay_via_external.ini
+            readOnly: true
+          - name: secret
+            mountPath: /haraka/config/auth_flat_file.ini
+            subPath: auth_flat_file.ini
+            readOnly: true
+          - name: tls
+            mountPath: /haraka/config/tls_cert.pem
+            subPath: tls.crt
+            readOnly: true
+          - name: tls
+            mountPath: /haraka/config/tls_key.pem
+            subPath: tls.key
+            readOnly: true
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem : true
+            procMount: Default
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+            seLinuxOptions:
+              user: system_u
+              role: system_r
+              type: container_t
+              level: s0:c829,c861
+          resources: {{ .Values.resources | toYaml | nindent 14 }}
+      dnsPolicy: ClusterFirst
+      volumes:
+        - name: secret
+          secret:
+            secretName: {{ .Release.Name }}
+            optional: false
+        - name: tls
+          secret:
+            secretName: {{ .Values.tlsCertSecretName }}
+            optional: false
