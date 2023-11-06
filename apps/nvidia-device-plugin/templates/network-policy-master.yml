@@ -19,6 +19,8 @@ spec:
         podSelector:
           matchLabels:
             app.kubernetes.io/name: node-feature-discovery
+  egress:
     {{- include "common.egress-kubeapi" . | nindent 4 }}
   policyTypes:
   - Ingress
+  - Egress
