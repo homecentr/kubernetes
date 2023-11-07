@@ -35,7 +35,7 @@ spec:
           level: s0:c829,c861
       automountServiceAccountToken: true
       containers:
-        - image: 'ghcr.io/benphelps/homepage:{{ .Values.imageTag }}'
+        - image: 'ghcr.io/gethomepage/homepage:{{ .Values.imageTag }}'
           imagePullPolicy: null
           livenessProbe:
             failureThreshold: 3
@@ -104,7 +104,7 @@ spec:
           emptyDir:
       initContainers:
         - name: cache-prep
-          image: 'ghcr.io/benphelps/homepage:{{ .Values.imageTag }}'
+          image: 'ghcr.io/gethomepage/homepage:{{ .Values.imageTag }}'
           command: [sh, -ec]
           volumeMounts:
             - mountPath: /.next
