@@ -23,7 +23,7 @@ spec:
         # Accept internal traffic (?)
         - ipBlock:
             cidr: 172.16.0.0/16
-        {{- range $cidr := .Values.networkPolicy.consumerCidrs }}
+        {{- range $cidr := .Values.networkPolicy.externalIngressIpBlocks }}
         - ipBlock:
             cidr: {{ $cidr }}
         {{- end }}
