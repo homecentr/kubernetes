@@ -12,5 +12,18 @@ spec:
       app.kubernetes.io/instance: {{ $.Release.Namespace }}
   egress:
     {{- include "common.egress-kubeapi" . | nindent 4 }}
+    # Allow egress to all managed cluster pods across all namespaces
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            - key: cnpg.io/cluster
+              operator: Exists
+            - key: cnpg.io/podRole
+              operator: In
+              values:
+                - instance 
+      ports:
+        - protocol: TCP
+          port: 8000
   policyTypes:
   - Egress

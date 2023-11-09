@@ -8,10 +8,7 @@ spec:
   podSelector:
     matchExpressions:
       - key: cnpg.io/jobRole
-        operator: In
-        values:
-          - initdb
-          - join
+        operator: Exists
   policyTypes:
     - Egress
   egress:
