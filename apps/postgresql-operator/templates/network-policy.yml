@@ -16,12 +16,13 @@ spec:
     - to:
         - namespaceSelector: {}
           podSelector:
-            - key: cnpg.io/cluster
-              operator: Exists
-            - key: cnpg.io/podRole
-              operator: In
-              values:
-                - instance 
+            matchExpressions:
+              - key: cnpg.io/cluster
+                operator: Exists
+              - key: cnpg.io/podRole
+                operator: In
+                values:
+                  - instance 
       ports:
         - protocol: TCP
           port: 8000
