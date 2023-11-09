@@ -1,21 +1,21 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
-  name: {{ $.Release.Name }}
-spec:
-  instances: 2
+# apiVersion: postgresql.cnpg.io/v1
+# kind: Cluster
+# metadata:
+#   name: {{ $.Release.Name }}
+# spec:
+#   instances: 2
 
-  bootstrap:
-    initdb:
-      database: {{ .Values.postgresql.database }}
-      owner: {{ .Values.postgresql.username }}
-      secret:
-        name: {{ .Release.Name }}-postgresql-cluster
+#   bootstrap:
+#     initdb:
+#       database: {{ .Values.postgresql.database }}
+#       owner: {{ .Values.postgresql.username }}
+#       secret:
+#         name: {{ .Release.Name }}-postgresql-cluster
 
-  storage:
-    pvcTemplate:
-      accessModes: {{ .Values.postgresql.accessModes }} 
-      storageClassName: {{ .Values.postgresql.storageClass }}
-      resources:
-        requests:
-          storage: {{ .Values.postgresql.size }}
+#   storage:
+#     pvcTemplate:
+#       accessModes: {{ .Values.postgresql.accessModes }} 
+#       storageClassName: {{ .Values.postgresql.storageClass }}
+#       resources:
+#         requests:
+#           storage: {{ .Values.postgresql.size }}
