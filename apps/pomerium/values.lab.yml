@@ -19,17 +19,3 @@ postgresql:
   storageClass: local-path-provisioner-services-db
   accessModes:
     - ReadWriteMany
-
-
-  # image:
-  #   tag: 15.3.0-debian-11-r24
-  # volumePermissions:
-  #   enabled: true
-  # primary:
-  #   livenessProbe:
-  #     initialDelaySeconds: 900
-  #   persistence:
-  #     size: 10Gi
-  #     storageClass: local-path-provisioner-services-db
-  #     accessModes:
-  #       - ReadWriteMany
