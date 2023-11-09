@@ -7,6 +7,6 @@ metadata:
   labels:
     {{- include "common.resource-labels" $ | indent 4 }}
 provisioner: cluster.local/{{ $volume.name }}
-volumeBindingMode: {{ $volume.bindingMode | default "WaitForFirstConsumer" }}
+# volumeBindingMode: {{ $volume.bindingMode | default "WaitForFirstConsumer" }}
 reclaimPolicy: {{ $volume.reclaimPolicy | default "Retain" }}
 {{ end }}
