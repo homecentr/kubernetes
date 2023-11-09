@@ -1,15 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: postgresql-initdb
+  name: postgresql-jobs
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
 spec:
   podSelector:
-    matchLabels:
-      cnpg.io/jobRole: initdb
+    matchExpressions:
+      - key: cnpg.io/jobRole
+        operator: In
+        values:
+          - initdb
+          - join
   policyTypes:
     - Egress
   egress:
     {{- include "common.egress-kubeapi" . | indent 4 }}
-    
