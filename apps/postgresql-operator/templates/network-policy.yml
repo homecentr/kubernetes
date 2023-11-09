@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ $.Release.Namespace }}
+  name: {{ $.Release.Name }}
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
@@ -9,7 +9,7 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: cloudnative-pg
-      app.kubernetes.io/instance: {{ $.Release.Namespace }}
+      app.kubernetes.io/instance: {{ $.Release.Name }}
   ingress:
     # Accept webhooks from Kube API
     {{- include "common.ingress-kubeapi" (dict "port" 9443 "Values" $.Values)  | nindent 4 }}
