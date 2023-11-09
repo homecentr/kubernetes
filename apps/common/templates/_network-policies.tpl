@@ -34,6 +34,24 @@
           - 192.168.0.0/16
 {{- end }}
 
+{{- define "common.ingress-kubeapi" }}
+- from:
+  {{- range $node := .Values.networkPolicy.kubeApiNodes }}
+  - ipBlock:
+      cidr: {{ $node }}/32
+  {{- end }}
+  ports:
+    - protocol: {{ .protocol | default "TCP" }}
+      port: {{ .port }}
+
+- from:
+  - ipBlock:
+      cidr: {{ .Values.networkPolicy.kubeApiService }}/32
+  ports:
+    - protocol: {{ .protocol | default "TCP" }}
+      port: {{ .port }}
+{{- end }}
+
 {{- define "common.egress-kubeapi" }}
 - to:
   {{- range $node := .Values.networkPolicy.kubeApiNodes }}
@@ -59,25 +77,6 @@
 {{- end }}
 
 {{- define "common.egress-dns" }}
-- ports:
-  - protocol: TCP
-    port: 53
-  - protocol: UDP
-    port: 53
-  - protocol: TCP
-    port: 5353
-  - protocol: UDP
-    port: 5353
-  to:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-      podSelector:
-        matchLabels:
-          app.kubernetes.io/instance: kube-dns
-{{- end }}
-
-{{- define "common.pg-cluster-init" }}
 - ports:
   - protocol: TCP
     port: 53
