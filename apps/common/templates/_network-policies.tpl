@@ -36,7 +36,7 @@
 
 {{- define "common.ingress-kubeapi" }}
 - from:
-  {{- range $node := $.Values.networkPolicy.kubeApiNodes }}
+  {{- range $node := .Values.networkPolicy.kubeApiNodes }}
   - ipBlock:
       cidr: {{ $node }}/32
   {{- end }}
@@ -46,7 +46,7 @@
 
 - from:
   - ipBlock:
-      cidr: {{ $.Values.networkPolicy.kubeApiService }}/32
+      cidr: {{ .Values.networkPolicy.kubeApiService }}/32
   ports:
     - protocol: {{ .protocol | default "TCP" }}
       port: {{ .port }}
