@@ -1,0 +1,12 @@
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 1m
+    memory: 1Mi
+
+tolerations:
+  - key: homecentr.one/critical-only
+    operator: Exists
+    effect: NoSchedule
