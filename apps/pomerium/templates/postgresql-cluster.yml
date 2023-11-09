@@ -18,4 +18,4 @@ spec:
       storageClassName: {{ .Values.postgresql.storageClass }}
       resources:
         requests:
-          size: {{ .Values.postgresql.size }}
+          storage: {{ .Values.postgresql.size }}
