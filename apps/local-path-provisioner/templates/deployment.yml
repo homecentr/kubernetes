@@ -49,6 +49,8 @@ spec:
             - /etc/config/config.json
             - --configmap-name
             - local-path-provisioner-{{ $volume.name }}
+            - --provisioner-name
+            - cluster.local/{{ $volume.name }}
             - --service-account-name
             - local-path-provisioner
           volumeMounts:
