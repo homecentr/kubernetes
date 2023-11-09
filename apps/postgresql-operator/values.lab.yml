@@ -1,12 +1,13 @@
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 1m
-    memory: 1Mi
+cloudnative-pg:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 1m
+      memory: 1Mi
 
-tolerations:
-  - key: homecentr.one/critical-only
-    operator: Exists
-    effect: NoSchedule
+  tolerations:
+    - key: homecentr.one/critical-only
+      operator: Exists
+      effect: NoSchedule
