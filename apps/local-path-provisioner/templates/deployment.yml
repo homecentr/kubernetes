@@ -51,8 +51,6 @@ spec:
             - local-path-provisioner-{{ $volume.name }}
             - --service-account-name
             - local-path-provisioner
-            - --provisioner-name
-            - \"homecentr.one/{{ $volume.name }}\"
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config/
@@ -61,6 +59,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: PROVISIONER_NAME
+              value: homecentr.one/{{ $volume.name }}
           resources:
             {{- $.Values.resources | toYaml | nindent 12 }}
           securityContext:
