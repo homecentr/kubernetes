@@ -52,7 +52,7 @@ spec:
             - --service-account-name
             - local-path-provisioner
             - --provisioner-name
-            - homecentr.one/{{ $volume.name }}
+            - \"homecentr.one/{{ $volume.name }}\"
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config/
