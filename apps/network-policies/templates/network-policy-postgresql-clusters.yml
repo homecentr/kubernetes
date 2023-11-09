@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: postgresql-clusters
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  podSelector:
+    matchExpressions:
+      - key: cnpg.io/cluster
+        operator: Exists
+      - key: cnpg.io/podRole
+        operator: In
+        values:
+          - instance 
+  policyTypes:
+    - Ingress
+  ingress:
+    # Accept traffic from postgresql jobs in the same namespace
+    - ports:
+        - protocol: TCP
+          port: 5432
+      from:
+        - podSelector:
+            matchExpressions:
+              - key: cnpg.io/jobRole
+                operator: Exists
+  
+    # Accept traffic from operator in postgresql-system namespace
+    - ports:
+        - protocol: TCP
+          port: 8000
+      from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: postgresql-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: cloudnative-pg

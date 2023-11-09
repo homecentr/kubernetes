@@ -49,6 +49,13 @@ applications:
   syncWave: -100
   deleteProtection: false
 
+- name: network-policies-postgresql-system
+  namespace: postgresql-system
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+
 - name: network-policies-apps
   namespace: apps
   path: apps/network-policies
@@ -101,9 +108,29 @@ applications:
   valueFiles:
   - values.yml
 
+# - name: prometheus-crd
+#   type: directory
+#   syncWave: -87
+#   deleteProtection: false
+#   serverSideApply: true
+
+- name: postgresql-operator-crd
+  type: raw
+  syncWave: -85
+  namespace: postgresql-system
+  deleteProtection: false
+
+- name: postgresql-operator
+  type: helm
+  syncWave: -84
+  namespace: postgresql-system
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
 - name: cert-manager-crd
   type: raw
-  syncWave: -80
+  syncWave: -84
   namespace: cert-manager
   deleteProtection: false
 
@@ -130,15 +157,8 @@ applications:
   deleteProtection: false
   valueFiles:
   - values.$env.yml
-  - values.yml
   secretValueFiles:
   - secrets.$env.yml
-
-# - name: prometheus-crd
-#   type: directory
-#   syncWave: -50
-#   deleteProtection: false
-#   serverSideApply: true
 
 - name: dns-primary
   type: helm

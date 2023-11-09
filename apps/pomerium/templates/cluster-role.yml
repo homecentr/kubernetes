@@ -1,9 +1,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  name: {{ $.Release.Name }}-controller
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
-  name: pomerium-controller
 rules:
 - apiGroups:
   - ""
