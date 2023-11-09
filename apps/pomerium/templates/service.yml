@@ -24,7 +24,7 @@ metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: {{ .Release.Name }}
     metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIp }}
-  name: ${{ $.Release.Name }}-proxy
+  name: {{ $.Release.Name }}-proxy
   namespace: {{ $.Release.Namespace }}
 spec:
   ports:
