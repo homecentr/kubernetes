@@ -49,6 +49,13 @@ applications:
   syncWave: -100
   deleteProtection: false
 
+- name: network-policies-postgresql-system
+  namespace: postgresql-system
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+
 - name: network-policies-apps
   namespace: apps
   path: apps/network-policies
