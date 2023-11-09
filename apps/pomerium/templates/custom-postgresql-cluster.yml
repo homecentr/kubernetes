@@ -7,10 +7,10 @@ spec:
 
   bootstrap:
     initdb:
-      database: pomerium
-      owner: pomerium
+      database: {{ .Values.postgresql.database }}
+      owner: {{ .Values.postgresql.username }}
       secret:
-        name: {{ $.Release.Name }}-postgresql
+        name: {{ .Release.Name }}-postgresql-cluster
 
   storage:
     pvcTemplate:
