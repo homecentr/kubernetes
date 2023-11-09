@@ -3,6 +3,9 @@ name: postgresql-operator
 version: 1.0.0
 
 dependencies:
+  - name: common
+    version: 1.0.0
+    repository: file://../common
   - name: cloudnative-pg
     repository: https://cloudnative-pg.github.io/charts
     version: 0.19.1
