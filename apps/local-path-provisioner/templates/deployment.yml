@@ -49,6 +49,10 @@ spec:
             - /etc/config/config.json
             - --configmap-name
             - local-path-provisioner-{{ $volume.name }}
+            - --provisioner-name
+            - cluster.local/{{ $volume.name }}
+            - --service-acount-name
+            - local-path-provisioner
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config/
@@ -57,10 +61,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            - name: PROVISIONER_NAME
-              value: cluster.local/{{ $volume.name }}
-            - name: SERVICE_ACCOUNT_NAME
-              value: local-path-provisioner
           resources:
             {{- $.Values.resources | toYaml | nindent 12 }}
           securityContext:
