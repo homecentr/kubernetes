@@ -9,4 +9,4 @@ metadata:
 provisioner: cluster.local/{{ $volume.name }}
 # volumeBindingMode: {{ $volume.bindingMode | default "WaitForFirstConsumer" }}
 reclaimPolicy: {{ $volume.reclaimPolicy | default "Retain" }}
-{{ end }}
+{{ end }} 
