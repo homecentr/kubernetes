@@ -51,7 +51,7 @@ spec:
             - local-path-provisioner-{{ $volume.name }}
             - --provisioner-name
             - cluster.local/{{ $volume.name }}
-            - --service-acount-name
+            - --service-account-name
             - local-path-provisioner
           volumeMounts:
             - name: config-volume
