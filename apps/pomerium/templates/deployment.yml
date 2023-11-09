@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
-  name: pomerium
+  name: {{ $.Release.Name }}
   namespace: {{ $.Release.Namespace }}
 spec:
   replicas: {{ .Values.replicas | default 1 }}

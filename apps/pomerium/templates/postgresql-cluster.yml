@@ -1,0 +1,21 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ $.Release.Name }}
+spec:
+  instances: 2
+
+  bootstrap:
+    initdb:
+      database: pomerium
+      owner: pomerium
+      secret:
+        name: {{ $.Release.Name }}-postgresql
+
+  storage:
+    pvcTemplate:
+      accessModes: {{ .Values.postgresql.accessModes }} 
+      storageClassName: {{ .Values.postgresql.storageClass }}
+      resources:
+        requests:
+          size: {{ .Values.postgresql.size }}
