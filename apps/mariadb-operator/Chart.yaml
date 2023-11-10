@@ -9,4 +9,4 @@ dependencies:
 
   - name: mariadb-operator
     repository: https://mariadb-operator.github.io/mariadb-operator
-    version: 0.0.22
+    version: 0.22.0
