@@ -1,5 +1,7 @@
 {{- define "common.network-policy-postgresql-cluster" }}
-{{ $clusterName := $.Release.Name }}
+{{- $appPodSelector := .AppPodSelector }}
+{{- with .Root }}
+{{- $clusterName := .Release.Name }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -31,12 +33,17 @@ spec:
                 operator: In
                 values:
                   - {{ $clusterName }}
-          # Accept traffic from other cluster instances
+        # Accept traffic from other cluster instances
         - podSelector:
             matchLabels:
               cnpg.io/podRole: instance
               cnpg.io/cluster: {{ $clusterName }}
-  
+        
+        {{- if $appPodSelector }}
+        # Accept traffic from consuming app
+        - podSelector: {{ $appPodSelector | toYaml | nindent 12 }}
+        {{- end }}
+        
     # Accept traffic from operator in postgresql-system namespace
     - ports:
         - protocol: TCP
@@ -69,4 +76,5 @@ spec:
   egress:
     # Allow jobs to talk to Kube API
     {{- include "common.egress-kubeapi" . | indent 4 }}
+{{- end }}
 {{- end }}

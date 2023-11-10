@@ -1,1 +1,2 @@
-{{ include "common.network-policy-postgresql-cluster" . }}
+{{- $appPodSelector := (dict "matchLabels" (include "common.pod-labels" . | fromYaml)) }}
+{{ include "common.network-policy-postgresql-cluster" (dict "Root" . "AppPodSelector" $appPodSelector) }}
