@@ -1,0 +1,12 @@
+apiVersion: v2
+name: mariadb-operator
+version: 1.0.0
+
+dependencies:
+  - name: common
+    version: 1.0.0
+    repository: file://../common
+
+  - name: mariadb-operator
+    repository: https://mariadb-operator.github.io/mariadb-operator
+    version: v0.0.22

@@ -1,0 +1,10 @@
+mariadb-operator:
+  tolerations:
+    - key: homecentr.one/critical-only
+      operator: Exists
+      effect: NoSchedule
+  webhook:
+    tolerations:
+      - key: homecentr.one/critical-only
+        operator: Exists
+        effect: NoSchedule
