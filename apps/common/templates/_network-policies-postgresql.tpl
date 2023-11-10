@@ -8,15 +8,9 @@ metadata:
     {{- include "common.resource-labels" . | indent 4 }}
 spec:
   podSelector:
-    matchExpressions:
-      - key: cnpg.io/podRole
-        operator: In
-        values:
-          - instance
-      - key: cnpg.io/cluster
-        operator: In
-        values:
-          - {{ $clusterName }}
+    matchLabels:
+      cnpg.io/podRole: instance
+      cnpg.io/cluster: {{ $clusterName }}
   policyTypes:
     - Ingress
     - Egress
@@ -39,15 +33,9 @@ spec:
                   - {{ $clusterName }}
           # Accept traffic from other cluster instances
         - podSelector:
-            matchExpressions:
-              - key: cnpg.io/podRole
-                operator: In
-                values:
-                  - instance
-              - key: cnpg.io/cluster
-                operator: In
-                values:
-                  - {{ $clusterName }}
+            matchLabels:
+              cnpg.io/podRole: instance
+              cnpg.io/cluster: {{ $clusterName }}
   
     # Accept traffic from operator in postgresql-system namespace
     - ports:
