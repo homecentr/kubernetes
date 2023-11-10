@@ -132,6 +132,7 @@ applications:
   syncWave: -85
   namespace: mariadb-system
   deleteProtection: false
+  serverSideApply: true
 
 - name: postgresql-operator
   type: helm
