@@ -19,6 +19,10 @@ spec:
           - {{ $clusterName }}
   policyTypes:
     - Ingress
+    - Egress
+  egress:
+    # Allow cluster instances to talk to Kube API
+    {{- include "common.egress-kubeapi" . | indent 4 }}
   ingress:
     - ports:
         - protocol: TCP
