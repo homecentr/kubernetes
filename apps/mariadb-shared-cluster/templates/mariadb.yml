@@ -31,10 +31,10 @@ spec:
       gracefulShutdownTimeout: 5s
     recovery:
       enabled: true
-      clusterHealthyTimeout: 3m
-      clusterBootstrapTimeout: 10m
-      podRecoveryTimeout: 5m
-      podSyncTimeout: 5m
+      clusterHealthyTimeout: 3m0s
+      clusterBootstrapTimeout: 10m0s
+      podRecoveryTimeout: 5m0s
+      podSyncTimeout: 5m0s
     initContainer:
       image: ghcr.io/mariadb-operator/init:v0.0.6
     # Volume for Galera configuration files to be shared among pods
