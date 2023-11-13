@@ -19,6 +19,8 @@ spec:
     - ports:
         - protocol: TCP
           port: {{ $port }}
+        - protocol: TCP
+          port: 4567
       from:
         # Accept traffic from other cluster instances
         - podSelector:
