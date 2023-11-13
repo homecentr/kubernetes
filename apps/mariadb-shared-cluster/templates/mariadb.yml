@@ -1,0 +1,95 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: MariaDB
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  rootPasswordSecretKeyRef:
+    name: {{ .Release.Name }}
+    key: root-user-password
+
+  image: mariadb:11.0.3
+
+  port: 3306
+
+  replicas: 3
+
+  galera:
+    enabled: true
+    primary:
+      podIndex: 0
+      automaticFailover: true
+    sst: mariabackup
+    replicaThreads: 1
+    agent:
+      image: ghcr.io/mariadb-operator/agent:v0.0.3
+      port: 5555
+      kubernetesAuth:
+        enabled: true
+      gracefulShutdownTimeout: 5s
+    recovery:
+      enabled: true
+      clusterHealthyTimeout: 3m
+      clusterBootstrapTimeout: 10m
+      podRecoveryTimeout: 5m
+      podSyncTimeout: 5m
+    initContainer:
+      image: ghcr.io/mariadb-operator/init:v0.0.6
+    # Volume for Galera configuration files to be shared among pods
+    volumeClaimTemplate:
+      storageClassName: {{ .Values.persistence.galeraConfig.storageClassName }}
+      resources:
+        requests:
+          storage: {{ .Values.persistence.galeraConfig.requestSize }}
+      accessModes: {{ .Values.persistence.galeraConfig.accessModes | toYaml | nindent 6 }}
+
+  connection:
+    secretName: {{ .Release.Name }}-galera
+    secretTemplate:
+      key: dsn
+
+  primaryConnection:
+    secretName: {{ .Release.Name }}-galera-primary
+    secretTemplate:
+      key: dsn
+
+  secondaryConnection:
+    secretName: {{ .Release.Name }}-galera-secondary
+    secretTemplate:
+      key: dsn
+
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - topologyKey: "kubernetes.io/hostname"
+
+  tolerations:
+    - key: "mariadb.mmontes.io/ha"
+      operator: "Exists"
+      effect: "NoSchedule"
+
+  podDisruptionBudget:
+    maxUnavailable: 66%
+
+  updateStrategy:
+    type: RollingUpdate
+
+  myCnf: |
+    [mariadb]
+    bind-address=*
+    default_storage_engine=InnoDB
+    binlog_format=row
+    innodb_autoinc_lock_mode=2
+    max_allowed_packet=256M
+
+  resources: {{ .Values.resources | toYaml | nindent 4 }}
+
+  # Volume for database data
+  volumeClaimTemplate:
+    storageClassName: {{ .Values.persistence.data.storageClassName }}
+    resources:
+      requests:
+        storage: {{ .Values.persistence.data.requestSize }}
+    accessModes: {{ .Values.persistence.data.accessModes | toYaml | nindent 6 }}
