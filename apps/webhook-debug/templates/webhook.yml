@@ -21,9 +21,9 @@ webhooks:
           - CREATE
           - UPDATE
         apiGroups:
-          - postgresql.cnpg.io
+          - metallb.io
         apiVersions:
-          - v1
+          - v1beta1
         resources:
-          - scheduledbackups
+          - ipaddresspool
         scope: '*'
