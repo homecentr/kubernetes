@@ -15,6 +15,7 @@ spec:
     {{- include "common.ingress-kubeapi" (dict "port" 10250 "Values" $.Values)  | nindent 4 }}
 
     # Accept calls from operator
+    - {}
     - ports:
         - protocol: TCP
           port: 10250
