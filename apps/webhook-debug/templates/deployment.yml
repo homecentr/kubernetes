@@ -16,7 +16,7 @@ spec:
         {{- include "common.pod-labels" . | indent 8 }}
     spec:
       containers:
-        - image: 'docker-sample-nginx'
+        - image: 'zembutsu/docker-sample-nginx'
           imagePullPolicy: null
           name: nginx
           ports:
