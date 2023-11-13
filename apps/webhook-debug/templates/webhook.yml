@@ -15,6 +15,7 @@ webhooks:
     admissionReviewVersions:
       - v1
     reinvocationPolicy: Never
+    sideEffects: None
     rules:
       - operations:
           - CREATE
