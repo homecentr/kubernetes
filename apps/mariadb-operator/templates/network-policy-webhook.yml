@@ -18,6 +18,8 @@ spec:
     - ports:
         - protocol: TCP
           port: 10250
+        - protocol: TCP
+          port: 443
       from:
         - podSelector:
             matchLabels:
