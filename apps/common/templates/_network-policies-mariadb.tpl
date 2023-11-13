@@ -18,7 +18,7 @@ spec:
   ingress:
     - ports:
         - protocol: TCP
-          port: $port
+          port: {{ $port }}
       from:
         # Accept traffic from other cluster instances
         - podSelector:
