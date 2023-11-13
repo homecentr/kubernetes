@@ -27,7 +27,7 @@ spec:
       image: ghcr.io/mariadb-operator/agent:v0.0.3
       port: 5555
       kubernetesAuth:
-        enabled: true
+        enabled: false
       gracefulShutdownTimeout: 5s
     recovery:
       enabled: true
