@@ -1,3 +1,15 @@
+persistence:
+  data:
+    storageClassName: local-path-provisioner-services-db
+    requestSize: 1Mi # Ignored by gluster
+    accessModes:
+      - ReadWriteMany
+  galeraConfig:
+    storageClassName: local-path-provisioner-services
+    requestSize: 1Mi # Ignored by gluster
+    accessModes:
+      - ReadWriteMany
+
 resources:
   requests:
     cpu: 500m
