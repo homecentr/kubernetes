@@ -16,9 +16,6 @@ spec:
     - from:
       - ipBlock:
           cidr: 172.16.0.1/32
-      ports:
-        - protocol: TCP
-          port: 9443
     
   egress:
     {{- include "common.egress-kubeapi" . | nindent 4 }}
