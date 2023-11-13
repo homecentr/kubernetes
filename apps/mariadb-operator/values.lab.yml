@@ -4,6 +4,8 @@ mariadb-operator:
       operator: Exists
       effect: NoSchedule
   webhook:
+    certificate:
+      certManager: true
     tolerations:
       - key: homecentr.one/critical-only
         operator: Exists
