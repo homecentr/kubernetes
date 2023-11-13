@@ -13,7 +13,13 @@ spec:
   ingress:
     # Accept webhooks from Kube API
     {{- include "common.ingress-kubeapi" (dict "port" 9443 "Values" $.Values)  | nindent 4 }}
-    {{- include "common.ingress-kubeapi" (dict "port" 443 "Values" $.Values)  | nindent 4 }}
+    - from:
+      - ipBlock:
+          cidr: 172.16.0.1/32
+      ports:
+        - protocol: TCP
+          port: 9443
+    
   egress:
     {{- include "common.egress-kubeapi" . | nindent 4 }}
     # Allow egress to all managed cluster pods across all namespaces
