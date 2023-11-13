@@ -13,6 +13,16 @@ spec:
   ingress:
     # Accept webhooks from Kube API
     {{- include "common.ingress-kubeapi" (dict "port" 10250 "Values" $.Values)  | nindent 4 }}
+
+    # Accept calls from operator
+    - ports:
+        - protocol: TCP
+          port: 10250
+      from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: mariadb-operator
+              app.kubernetes.io/instance: {{ .Release.Name }}
   egress:
     {{- include "common.egress-kubeapi" . | nindent 4 }}
   policyTypes:
