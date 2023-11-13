@@ -16,12 +16,7 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - ports:
-        - protocol: TCP
-          port: {{ $port }}
-        - protocol: TCP
-          port: 4567
-      from:
+    - from:
         # Accept traffic from other cluster instances
         - podSelector:
             matchLabels:
