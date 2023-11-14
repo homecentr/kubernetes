@@ -33,8 +33,8 @@ spec:
       clusterBootstrapTimeout: 10m0s
       podRecoveryTimeout: 5m0s
       podSyncTimeout: 5m0s
-    initContainer:
-      image: ghcr.io/mariadb-operator/init:v0.0.6
+    # initContainer:
+    #   image: ghcr.io/mariadb-operator/init:v0.0.6
     # Volume for Galera configuration files to be shared among pods
     volumeClaimTemplate:
       storageClassName: {{ .Values.persistence.galeraConfig.storageClassName }}
