@@ -52,6 +52,16 @@
       port: {{ .port }}
 {{- end }}
 
+{{- define "common.ingress-kubeapi-webhook" }}
+- from:
+  - ipBlock:
+      cidr: {{ .Values.networkPolicy.kubeApiWebhookCaller }}/32
+  ports:
+    - protocol: {{ .protocol | default "TCP" }}
+      port: {{ .port }}
+{{- end }}
+
+
 {{- define "common.egress-kubeapi" }}
 - to:
   {{- range $node := .Values.networkPolicy.kubeApiNodes }}
