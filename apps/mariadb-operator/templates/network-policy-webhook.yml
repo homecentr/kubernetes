@@ -13,6 +13,7 @@ spec:
   ingress:
     # Accept webhooks from Kube API
     {{- include "common.ingress-kubeapi" (dict "port" 10250 "Values" $.Values)  | nindent 4 }}
+    {{- include "common.ingress-kubeapi-webhook" (dict "port" 10250 "Values" $.Values) | nindent 4 }}
 
     # Accept calls from operator
     - ports:
