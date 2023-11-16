@@ -1,0 +1,27 @@
+persistence:
+  data:
+    storageClassName: local-path-provisioner-services-db
+    requestSize: 1Mi # Ignored by gluster
+    accessModes:
+      - ReadWriteMany
+  backup:
+    storageClassName: local-path-provisioner-services
+    requestSize: 1Mi # Ignored by gluster
+    accessModes:
+      - ReadWriteMany
+
+resources:
+  requests:
+    cpu: 1000m
+    memory: 512Mi
+  limits:
+    cpu: 4000m
+    memory: 4096Mi
+
+backupResources:
+  requests:
+    cpu: 500m
+    memory: 256Mi
+  limits:
+    cpu: 2000m
+    memory: 1024Mi

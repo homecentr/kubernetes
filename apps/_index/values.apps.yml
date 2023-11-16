@@ -56,6 +56,13 @@ applications:
   syncWave: -100
   deleteProtection: false
 
+- name: network-policies-mariadb-system
+  namespace: mariadb-system
+  path: apps/network-policies
+  type: helm
+  syncWave: -100
+  deleteProtection: false
+
 - name: network-policies-apps
   namespace: apps
   path: apps/network-policies
@@ -120,10 +127,25 @@ applications:
   namespace: postgresql-system
   deleteProtection: false
 
+- name: mariadb-operator-crd
+  type: raw
+  syncWave: -85
+  namespace: mariadb-system
+  deleteProtection: false
+  serverSideApply: true
+
 - name: postgresql-operator
   type: helm
   syncWave: -84
   namespace: postgresql-system
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+
+- name: mariadb-operator
+  type: helm
+  syncWave: -84
+  namespace: mariadb-system
   deleteProtection: false
   valueFiles:
   - values.$env.yml
@@ -154,6 +176,16 @@ applications:
   type: helm
   syncWave: -59
   namespace: pomerium
+  deleteProtection: false
+  valueFiles:
+  - values.$env.yml
+  secretValueFiles:
+  - secrets.$env.yml
+
+- name: mariadb-shared-cluster
+  type: helm
+  syncWave: -58
+  namespace: apps
   deleteProtection: false
   valueFiles:
   - values.$env.yml
