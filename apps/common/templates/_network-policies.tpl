@@ -54,6 +54,10 @@
 
 {{- define "common.ingress-kubeapi-webhook" }}
 - from:
+  {{- range untilStep 0 255 1 }}
+    - ipBlock:
+        cidr: {{ $.Values.kubeApiWebhookCallers.subnetPrefix }}.{{ . }}.0/32
+  {{- end }}
   - ipBlock:
       cidr: {{ .Values.networkPolicy.kubeApiWebhookCaller }}/32
   ports:

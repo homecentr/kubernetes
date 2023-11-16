@@ -1,5 +1,5 @@
 networkPolicy:
-  kubeApiWebhookCaller: 172.16.0.0
+  kubeApiWebhookCallerSubnetsPrefix: 172.16.0.0
   kubeApiService: 172.17.0.1
   kubeApiNodes:
     - 10.1.8.21

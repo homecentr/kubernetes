@@ -13,40 +13,7 @@ spec:
   ingress:
     # Accept webhooks from Kube API
     {{- include "common.ingress-kubeapi" (dict "port" 10250 "Values" $.Values)  | nindent 4 }}
-    {{- include "common.ingress-kubeapi" (dict "port" 443 "Values" $.Values)  | nindent 4 }}
     {{- include "common.ingress-kubeapi-webhook" (dict "port" 10250 "Values" $.Values) | nindent 4 }}
-    {{- include "common.ingress-kubeapi-webhook" (dict "port" 443 "Values" $.Values) | nindent 4 }}
-
-    # - {} Worked
-    - ports:
-        - protocol: TCP
-          port: 10250
-      from:
-        #- podSelector: {}
-        - ipBlock:
-            cidr: 172.16.0.0/24
-        - ipBlock:
-            cidr: 172.16.1.0/24
-        - ipBlock:
-            cidr: 172.16.2.0/24
-        - ipBlock:
-            cidr: 172.16.4.0/24
-        - ipBlock:
-            cidr: 172.16.5.0/24
-        - ipBlock:
-            cidr: 172.16.6.0/24
-
-    # Argo CD ???
-    - ports:
-        - protocol: TCP
-          port: 10250
-        - protocol: TCP
-          port: 443
-      from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: argo-cd
-          podSelector: {}
 
     # Accept calls from operator
     - ports:
