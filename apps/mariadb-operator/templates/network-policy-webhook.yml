@@ -36,6 +36,7 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: argo-cd
+          podSelector: {}
 
     # Accept calls from operator
     - ports:
