@@ -4,7 +4,7 @@ persistence:
     requestSize: 1Mi # Ignored by gluster
     accessModes:
       - ReadWriteMany
-  galeraConfig:
+  backup:
     storageClassName: local-path-provisioner-services
     requestSize: 1Mi # Ignored by gluster
     accessModes:
@@ -16,4 +16,12 @@ resources:
     memory: 128Mi
   limits:
     cpu: 500m
+    memory: 512Mi
+
+backupResources:
+  requests:
+    cpu: 10m
+    memory: 128Mi
+  limits:
+    cpu: 2000m
     memory: 512Mi

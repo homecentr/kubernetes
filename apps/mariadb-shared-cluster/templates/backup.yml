@@ -1,0 +1,19 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: Backup
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  mariaDbRef:
+    name: {{ .Release.Name }}
+  schedule:
+    cron: "0 23 * * *"
+    suspend: false
+  maxRetentionDays: 30
+  storage:
+    persistentVolumeClaim:
+        storageClassName: {{ .Values.persistence.backup.storageClassName }}
+      resources:
+        requests:
+          storage: {{ .Values.persistence.backup.requestSize }}
+      accessModes: {{ .Values.persistence.backup.accessModes | toYaml | nindent 6 }}
+  resources: {{ .Values.backupResources | toYaml | nindent 4 }}
