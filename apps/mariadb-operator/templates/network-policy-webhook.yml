@@ -18,13 +18,13 @@ spec:
     {{- include "common.ingress-kubeapi-webhook" (dict "port" 443 "Values" $.Values) | nindent 4 }}
 
     # - {}
-    - ports:
-        - protocol: TCP
-          port: 10250
-      from:
-        #- podSelector: {}
-        - ipBlock:
-            cidr: 172.16.0.0/16
+    # - ports:
+    #     - protocol: TCP
+    #       port: 10250
+    #   from:
+    #     #- podSelector: {}
+    #     - ipBlock:
+    #         cidr: 172.16.0.0/16
 
     # Argo CD ???
     - ports:
