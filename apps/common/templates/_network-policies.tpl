@@ -58,8 +58,6 @@
     - ipBlock:
         cidr: {{ $.Values.networkPolicy.kubeApiWebhookSubnetPrefix }}.{{ . }}.0/32
   {{- end }}
-  - ipBlock:
-      cidr: {{ .Values.networkPolicy.kubeApiWebhookCaller }}/32
   ports:
     - protocol: {{ .protocol | default "TCP" }}
       port: {{ .port }}
