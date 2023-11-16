@@ -56,7 +56,7 @@
 - from:
   {{- range untilStep 0 255 1 }}
     - ipBlock:
-        cidr: {{ $.Values.kubeApiWebhookCallers.subnetPrefix }}.{{ . }}.0/32
+        cidr: {{ $.Values.networkPolicy.kubeApiWebhookSubnetPrefix }}.{{ . }}.0/32
   {{- end }}
   - ipBlock:
       cidr: {{ .Values.networkPolicy.kubeApiWebhookCaller }}/32
