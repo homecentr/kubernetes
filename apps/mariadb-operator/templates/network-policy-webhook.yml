@@ -24,6 +24,8 @@ spec:
       from:
         #- podSelector: {}
         - ipBlock:
+            cidr: 172.16.0.0/24
+        - ipBlock:
             cidr: 172.16.1.0/24
 
     # Argo CD ???
