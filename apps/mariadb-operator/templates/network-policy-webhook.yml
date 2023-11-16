@@ -17,6 +17,17 @@ spec:
     {{- include "common.ingress-kubeapi-webhook" (dict "port" 10250 "Values" $.Values) | nindent 4 }}
     {{- include "common.ingress-kubeapi-webhook" (dict "port" 443 "Values" $.Values) | nindent 4 }}
 
+    # Argo CD ???
+    - ports:
+        - protocol: TCP
+          port: 10250
+        - protocol: TCP
+          port: 443
+      from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: argo-cd
+
     # Accept calls from operator
     - ports:
         - protocol: TCP
