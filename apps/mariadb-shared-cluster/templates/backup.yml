@@ -11,7 +11,7 @@ spec:
   maxRetentionDays: 30
   storage:
     persistentVolumeClaim:
-        storageClassName: {{ .Values.persistence.backup.storageClassName }}
+      storageClassName: {{ .Values.persistence.backup.storageClassName }}
       resources:
         requests:
           storage: {{ .Values.persistence.backup.requestSize }}
