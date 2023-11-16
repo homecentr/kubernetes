@@ -271,11 +271,6 @@ applications:
   - values.$env.yml
   - values.yml
 
-# - name: webhook-debug
-#   type: helm
-#   namespace: apps
-#   deleteProtection: false
-
 # - name: frigate
 #   type: helm
 #   namespace: apps
