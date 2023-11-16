@@ -182,15 +182,15 @@ applications:
   secretValueFiles:
   - secrets.$env.yml
 
-- name: mariadb-shared-cluster
-  type: helm
-  syncWave: -58
-  namespace: apps
-  deleteProtection: false
-  valueFiles:
-  - values.$env.yml
-  secretValueFiles:
-  - secrets.$env.yml
+# - name: mariadb-shared-cluster
+#   type: helm
+#   syncWave: -58
+#   namespace: apps
+#   deleteProtection: false
+#   valueFiles:
+#   - values.$env.yml
+#   secretValueFiles:
+#   - secrets.$env.yml
 
 - name: dns-primary
   type: helm
