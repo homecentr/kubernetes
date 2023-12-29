@@ -1,1 +1,0 @@
-{{- include "common.network-policy-mariadb-cluster" (dict "Root" .) }}

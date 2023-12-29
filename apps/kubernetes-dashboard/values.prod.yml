@@ -1,5 +1,0 @@
-hostname: k8s.homecentr.one
-
-dashboard:
-  fullnameOverride: kubernetes-dashboard
-  nameOverride: kubernetes-dashboard
