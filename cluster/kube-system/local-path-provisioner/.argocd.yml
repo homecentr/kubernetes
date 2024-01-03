@@ -1,4 +1,4 @@
-releaseName: dummy
+name: dummy
 type: helm
 valueFiles:
   - values.$env.yml
