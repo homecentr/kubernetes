@@ -1,14 +1,10 @@
 {
   "releaseName": "dummy",
   "type": "helm",
-  "skipCrds": true,
   "valueFiles": [
     "values.$env.yml"
   ],
   "secretValueFiles": [
     "secrets.$env.yml"
-  ],
-  "selfHeal": true,
-  "serverSideApply": false,
-  "ignoreDifferences": []
+  ]
 }
