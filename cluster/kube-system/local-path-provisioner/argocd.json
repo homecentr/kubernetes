@@ -6,7 +6,7 @@
     "values.$env.yml"
   ],
   "secretValueFiles": [
-    "secret.$env.yml"
+    "secrets.$env.yml"
   ],
   "selfHeal": true,
   "serverSideApply": false,
