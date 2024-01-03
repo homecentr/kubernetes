@@ -1,0 +1,12 @@
+releaseName: dummy
+type: helm
+valueFiles:
+  - values.$env.yml
+secretValueFiles:
+  - secrets.$env.yml
+ignoreDifferences:
+  - group: "*"
+    kind: CustomResourceDefinition
+    jsonPointers:
+    - "/spec/conversion/webhook"
+    - "/spec/conversion/strategy"
