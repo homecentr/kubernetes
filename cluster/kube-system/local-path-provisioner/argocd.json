@@ -1,15 +1,12 @@
 {
+  "releaseName": "dummy",
+  "type": "helm",
+  "skipCrds": true,
   "valueFiles": [
-    "values.lab.yml"
-  ]
+    "values.$env.yml"
+  ],
+  "secretValueFiles": [
+    "secret.$env.yml"
+  ],
+  "selfHeal": true
 }
-
-
-// - name: local-path-provisioner
-// type: helm
-// syncWave: -89
-// namespace: kube-system
-// deleteProtection: false
-// valueFiles:
-// - values.yml
-// - values.$env.yml
