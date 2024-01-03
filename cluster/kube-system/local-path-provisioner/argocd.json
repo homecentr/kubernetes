@@ -1,0 +1,15 @@
+{
+  "valueFiles": [
+    "values.lab.yml"
+  ]
+}
+
+
+// - name: local-path-provisioner
+// type: helm
+// syncWave: -89
+// namespace: kube-system
+// deleteProtection: false
+// valueFiles:
+// - values.yml
+// - values.$env.yml
