@@ -1,9 +1,4 @@
 apiVersion: v2
-name: local-path-provisioner
+name: dummy
 version: 1.0.0
 appVersion: v0.0.23
-
-dependencies:
-  - name: common
-    version: 1.0.0
-    repository: file://../common
