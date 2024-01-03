@@ -8,5 +8,7 @@
   "secretValueFiles": [
     "secret.$env.yml"
   ],
-  "selfHeal": true
+  "selfHeal": true,
+  "serverSideApply": false,
+  "ignoreDifferences": []
 }
