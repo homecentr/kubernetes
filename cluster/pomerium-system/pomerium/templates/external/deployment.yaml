@@ -52,7 +52,7 @@ spec:
         - containerPort: 9090
           name: metrics
           protocol: TCP
-        resources: {{ $.Values.resources | toYaml | | nindent 10 }}
+        resources: {{ $.Values.resources | toYaml | nindent 10 }}
         affinity: {{ $.Values.affinity | toYaml | nindent 10 }}
         securityContext:
           allowPrivilegeEscalation: false
