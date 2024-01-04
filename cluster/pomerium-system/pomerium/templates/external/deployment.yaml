@@ -38,7 +38,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-        image: pomerium/ingress-controller:{{ image.tag }}
+        image: pomerium/ingress-controller:{{ $.Values.image.tag }}
         imagePullPolicy: Always
         name: pomerium
         ports:
