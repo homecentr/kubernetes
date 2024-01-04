@@ -1,0 +1,4 @@
+name: cloudnative-pg
+type: helm
+valueFiles:
+  - values.$env.yml
