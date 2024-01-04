@@ -52,13 +52,7 @@ spec:
         - containerPort: 9090
           name: metrics
           protocol: TCP
-        resources:
-          limits:
-            cpu: 5000m
-            memory: 1Gi
-          requests:
-            cpu: 300m
-            memory: 200Mi
+        resources: {{ $.Values.resources | toYaml | | nindent 10 }}
         affinity: {{ $.Values.affinity | toYaml | nindent 10 }}
         securityContext:
           allowPrivilegeEscalation: false
