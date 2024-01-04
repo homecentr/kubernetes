@@ -2,6 +2,9 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: {{ $.Release.Name }}-postgresql-cluster
+  labels:
+    app.kubernetes.io/name: pomerium
+    app.kubernetes.io/instance: {{ $.Release.Name }}
 spec:
   instances: 2
 

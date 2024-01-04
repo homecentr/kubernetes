@@ -1,0 +1,23 @@
+apiVersion: ingress.pomerium.io/v1
+kind: Pomerium
+metadata:
+  name: {{ $.Release.Name }}-global
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: pomerium
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+spec:
+  authenticate:
+    url: https://{{ .Values.hostname }}
+  certificates:
+    - {{ .Release.Namespace }}/{{ .Values.tlsCertificateName }}
+  identityProvider:
+    provider: azure
+    url: https://login.microsoftonline.com/{{ .Values.azuread.tenantId }}/v2.0
+    secret: {{ .Release.Namespace }}/{{ .Release.Name }}-azuread
+    requestParams:
+      prompt: ""
+  storage:
+    postgres:
+      secret: {{ .Release.Namespace }}/{{ .Release.Name }}-postgresql-connection
+  secrets: {{ .Release.Namespace }}/{{ .Release.Name }}-bootstrap

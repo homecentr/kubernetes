@@ -1,0 +1,17 @@
+# The ingress is added so that DNS picks up the hostname automatically
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $.Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  rules:
+  - host: {{ .Values.hostname | quote }}
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          backend:
+            service:
+              name: pomerium-proxy
+              port:
+                name: https
