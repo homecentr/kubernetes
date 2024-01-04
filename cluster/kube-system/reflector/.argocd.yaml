@@ -1,4 +1,0 @@
-name: reflector
-type: helm
-valuesFiles:
-  - values.yaml
