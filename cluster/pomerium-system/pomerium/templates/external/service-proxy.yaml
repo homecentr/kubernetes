@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/instance: {{ $.Release.Name }}
   name: {{ $.Release.Name }}-proxy
   namespace: {{ $.Release.Namespace }}
+  annotations:
+    kube-vip.io/loadbalancerIPs: {{ $.Values.loadBalancerIp }}
 spec:
   ports:
   - name: https
@@ -20,4 +22,3 @@ spec:
     app.kubernetes.io/name: pomerium
     app.kubernetes.io/instance: {{ $.Release.Name }}
   type: LoadBalancer
-  loadBalancerIp: {{ $.Values.loadBalancerIp }}
