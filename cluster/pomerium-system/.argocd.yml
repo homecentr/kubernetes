@@ -2,3 +2,5 @@ name: pomerium
 type: helm
 valueFiles:
   - values.$env.yml
+secretValueFiles:
+  - secrets.$env.yml
