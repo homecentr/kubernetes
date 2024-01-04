@@ -21,7 +21,7 @@ spec:
       containers:
       - args:
         - all-in-one
-        - --pomerium-config={{ $.Release.Name }}-global
+        - --pomerium-config=global
         - --update-status-from-service=$(POMERIUM_NAMESPACE)/pomerium-proxy
         - --metrics-bind-address=$(POD_IP):9090
         env:
