@@ -1,0 +1,4 @@
+name: pomerium-wildcard-cert
+type: helm
+secretValueFiles:
+  - secrets.$env.yml
