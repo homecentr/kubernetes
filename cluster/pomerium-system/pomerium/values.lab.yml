@@ -3,7 +3,8 @@ replicas: 2
 hostname: login-lab.homecentr.one
 tlsCertificateName: wildcard-homecentr-one
 loadBalancerIp: 10.1.8.132
-imageTag: 0-21-0
+image:
+  tag: 0-24-0
 
 resources:
   requests:
@@ -16,7 +17,8 @@ resources:
 postgresql:
   # New cluster
   size: 10Gi
-  storageClass: local-path-provisioner-services-db
+  storageClass: local-path-provisioner-services-db # TODO: Replace this with ZFS
   accessModes:
     - ReadWriteMany
+  # TODO: Add backup schedule via ZFS snapshots
   backupCronSchedule: "0 23 * * *"
