@@ -20,3 +20,4 @@ spec:
     app.kubernetes.io/name: pomerium
     app.kubernetes.io/instance: {{ $.Release.Name }}
   type: LoadBalancer
+  loadBalancerIp: {{ $.Values.loadBalancerIp }}
