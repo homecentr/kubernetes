@@ -1,0 +1,4 @@
+name: openebs
+type: helm
+valuesFiles:
+  - values.$env.yaml
