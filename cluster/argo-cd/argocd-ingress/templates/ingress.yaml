@@ -11,7 +11,7 @@ metadata:
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: argocd
     gethomepage.dev/name: "Argo CD"
-    gethomepage.dev/href: "https://{{ .Values.hostname }}"
+    gethomepage.dev/href: "https://{{ $.Values.hostname }}"
 spec:
   rules:
   - host: {{ .Values.hostname | quote }}

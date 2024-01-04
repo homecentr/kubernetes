@@ -1,4 +1,4 @@
 name: argocd-ingress
 type: helm
-valuesFiles:
+valueFiles:
   - values.$env.yaml
