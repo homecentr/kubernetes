@@ -1,4 +1,4 @@
-name: openebs
+name: cert-manager
 type: helm
 valuesFiles:
   - values.$env.yaml
