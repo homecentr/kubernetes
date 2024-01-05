@@ -1,1 +1,20 @@
 hostname: longhorn-lab.homecentr.one
+
+longhorn:
+  helmPreUpgradeCheckerJob:
+    enabled: false # Workaround for a bug in helm chart which creates a job but expects the service account to be already created
+  defaultSettings:
+    taintToleration: "CriticalAddonsOnly=true:NoSchedule"
+    priorityClass: system-node-critical
+  longhornManager:
+    tolerations:
+      - effect: NoSchedule
+        key: CriticalAddonsOnly
+        operator: Exists
+  longhornDriver:
+    tolerations:
+        - effect: NoSchedule
+          key: CriticalAddonsOnly
+          operator: Exists
+  persistence:
+    reclaimPolicy: Retain
