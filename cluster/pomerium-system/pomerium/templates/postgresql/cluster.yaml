@@ -6,7 +6,8 @@ metadata:
     app.kubernetes.io/name: pomerium
     app.kubernetes.io/instance: {{ $.Release.Name }}
 spec:
-  startDelay: 60
+  startDelay: 3600
+  initialDelaySeconds: 60
 
   instances: 2
 
