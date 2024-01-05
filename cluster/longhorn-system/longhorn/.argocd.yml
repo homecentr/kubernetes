@@ -1,0 +1,4 @@
+name: longhorn
+type: helm
+valueFiles:
+  - values.$env.yaml

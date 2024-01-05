@@ -61,6 +61,7 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp
+        # Added to allow OCSP stapling with read-only fs
         - mountPath: /.local
           name: local
       affinity: {{ $.Values.affinity | toYaml | nindent 10 }}
