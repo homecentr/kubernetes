@@ -19,5 +19,5 @@ spec:
       prompt: ""
   storage:
     postgres:
-      secret: {{ .Release.Namespace }}/{{ .Release.Name }}-postgresql-connection
+      secret: "{{ .Values.postgresql.username }}.{{ .Release.Name }}-postgresql-cluster.credentials.postgresql.acid.zalan.do"
   secrets: {{ .Release.Namespace }}/{{ .Release.Name }}-bootstrap
