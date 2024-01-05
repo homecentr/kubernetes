@@ -61,6 +61,8 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp
+        - mountPath: /.local
+          name: local
       affinity: {{ $.Values.affinity | toYaml | nindent 10 }}
       nodeSelector:
         kubernetes.io/os: linux
@@ -71,3 +73,5 @@ spec:
       volumes:
       - emptyDir: {}
         name: tmp
+      - emptyDir: {}
+        name: local
