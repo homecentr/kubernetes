@@ -1,36 +1,23 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
 metadata:
   name: {{ $.Release.Name }}-postgresql-cluster
   labels:
     app.kubernetes.io/name: pomerium
     app.kubernetes.io/instance: {{ $.Release.Name }}
 spec:
-  startDelay: 3600
-  initialDelaySeconds: 60
-
-  instances: 2
-
-  replicationSlots:
-    highAvailability:
-      enabled: true
-    updateInterval: 300
-
+  teamId: "acid"
+  volume:
+    size: 1Gi
+    storageClass: openebs-hostpath
+  numberOfInstances: 2
+  users:
+    pomerium:  # database owner
+    - pomerium
+    pomerium: []  # role for application foo
+  databases:
+    pomerium: pomerium  # dbname: owner
+  preparedDatabases:
+    bar: {}
   postgresql:
-    parameters:
-      max_slot_wal_keep_size: "1GB"
-
-  bootstrap:
-    initdb:
-      database: {{ .Values.postgresql.database }}
-      owner: {{ .Values.postgresql.username }}
-      secret:
-        name: {{ .Release.Name }}-postgresql-cluster
-
-  storage:
-    pvcTemplate:
-      #accessModes: {{ .Values.postgresql.accessModes }} 
-      storageClassName: openebs-hostpath
-      resources:
-        requests:
-          storage: 1Gi
+    version: "15"
