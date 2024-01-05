@@ -1,2 +1,2 @@
-name: postgres-operator
+name: postgres-operator-ui
 type: helm
