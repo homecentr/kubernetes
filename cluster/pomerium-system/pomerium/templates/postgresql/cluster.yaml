@@ -10,6 +10,15 @@ spec:
 
   instances: 2
 
+  replicationSlots:
+    highAvailability:
+      enabled: true
+    updateInterval: 300
+
+  postgresql:
+    parameters:
+      max_slot_wal_keep_size: "1GB"
+
   bootstrap:
     initdb:
       database: {{ .Values.postgresql.database }}
