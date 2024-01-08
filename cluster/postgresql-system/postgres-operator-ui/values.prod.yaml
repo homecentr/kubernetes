@@ -1,4 +1,7 @@
 postgres-operator-ui:
+  envs:
+    resourcesVisible: true
+
   ingress:
     enabled: true
     annotations:
