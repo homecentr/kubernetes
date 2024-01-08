@@ -1,2 +1,4 @@
 name: postgres-operator-ui
 type: helm
+valueFiles:
+  - values.$env.yml

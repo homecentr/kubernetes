@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $.Release.Name }}
+  annotations:
+    # TODO: Require admin group membership
+    ingress.pomerium.io/allow_any_authenticated_user: 'true'
+
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Postgresql operator
+    gethomepage.dev/group: Infrastructure
+    gethomepage.dev/icon: postgres
+    gethomepage.dev/name: "PostgreSQL Operator"
+    gethomepage.dev/href: "https://{{ $.Values.hostname }}"
+spec:
+  rules:
+  - host: {{ .Values.hostname | quote }}
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          backend:
+            service:
+              name: postgresql-operator-ui
+              port:
+                number: 80

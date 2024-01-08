@@ -1,0 +1,3 @@
+postgres-operator-ui:
+  ingress:
+    enable: false
