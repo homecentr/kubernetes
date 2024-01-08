@@ -1,0 +1,6 @@
+postgres-operator:
+  priorityClassName: system-cluster-critical
+  tolerations:
+    - effect: NoSchedule
+      key: CriticalAddonsOnly
+      operator: Exists
