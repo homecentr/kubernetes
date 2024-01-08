@@ -8,16 +8,14 @@ image:
 
 affinity:
   podAntiAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-    - weight: 100
-      podAffinityTerm:
-        topologyKey: kubernetes.io/hostname
-        labelSelector:
-          matchExpressions:
-          - key: homecentr.one/antiaffinity
-            operator: In
-            values:
-            - pomerium
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - topologyKey: kubernetes.io/hostname
+      labelSelector:
+        matchExpressions:
+        - key: homecentr.one/antiaffinity
+          operator: In
+          values:
+          - pomerium
 
 resources:
   requests:
