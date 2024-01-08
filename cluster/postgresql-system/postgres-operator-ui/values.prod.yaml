@@ -1,6 +1,6 @@
 postgres-operator-ui:
   ingress:
-    enable: true
+    enabled: true
     annotations:
       # TODO
       ingress.pomerium.io/allow_any_authenticated_user: 'true'
