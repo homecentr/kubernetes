@@ -10,6 +10,6 @@ postgres-operator-ui:
       gethomepage.dev/group: Infrastructure
       gethomepage.dev/icon: postgres
       gethomepage.dev/name: "PostgreSQL Operator"
-      gethomepage.dev/href: "https://postgresql-lab.homecentr.one"
+      gethomepage.dev/href: "https://postgresql.homecentr.one"
     hosts:
-      - host: postgresql-lab.homecentr.one
+      - host: postgresql.homecentr.one
