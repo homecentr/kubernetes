@@ -1,6 +1,7 @@
 postgres-operator-ui:
   envs:
     resourcesVisible: "True"
+    tagetNamespace: "*"
 
   ingress:
     enabled: true
