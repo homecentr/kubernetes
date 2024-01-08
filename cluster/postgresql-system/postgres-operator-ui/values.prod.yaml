@@ -13,3 +13,5 @@ postgres-operator-ui:
       gethomepage.dev/href: "https://postgresql.homecentr.one"
     hosts:
       - host: postgresql.homecentr.one
+        paths:
+          - /
