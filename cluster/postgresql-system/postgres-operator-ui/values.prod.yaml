@@ -1,6 +1,6 @@
 postgres-operator-ui:
   envs:
-    resourcesVisible: true
+    resourcesVisible: "True"
 
   ingress:
     enabled: true
