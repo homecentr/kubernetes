@@ -1,0 +1,4 @@
+name: global-network-policies
+type: helm
+valueFiles:
+  - values.$env.yaml
