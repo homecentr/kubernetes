@@ -1,0 +1,3 @@
+openebs:
+  zfs-localpv:
+    enabled: true
