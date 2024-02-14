@@ -2,3 +2,4 @@ name: openebs
 type: helm
 valueFiles:
   - values.yaml
+  - values.$env.yaml

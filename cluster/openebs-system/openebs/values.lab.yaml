@@ -1,0 +1,3 @@
+zfsStorageClasses:
+  - name: db
+    poolName: dpool
