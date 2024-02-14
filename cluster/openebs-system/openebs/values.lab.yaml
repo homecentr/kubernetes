@@ -1,3 +1,4 @@
 zfsStorageClasses:
   - name: db
     poolName: dpool
+    reclaimPolicy: Delete
