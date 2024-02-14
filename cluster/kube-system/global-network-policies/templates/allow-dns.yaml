@@ -1,0 +1,12 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: allow-kube-dns
+spec:
+  selector: all()
+  egress:
+    - action: Allow
+      destination:
+        services:
+          name: kube-dns
+          namespace: kube-system
