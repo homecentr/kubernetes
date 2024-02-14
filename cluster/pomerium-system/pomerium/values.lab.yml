@@ -28,8 +28,7 @@ resources:
 postgresql:
   # New cluster
   size: 10Gi
-  storageClass: local-path-provisioner-services-db # TODO: Replace this with ZFS
+  storageClass: openebs-zfs-db
   accessModes:
     - ReadWriteMany
-  # TODO: Add backup schedule via ZFS snapshots
   backupCronSchedule: "0 23 * * *"
