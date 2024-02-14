@@ -13,4 +13,5 @@ parameters:
   poolname: "{{ .poolName }}"
 provisioner: zfs.csi.openebs.io
 volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: {{ .reclaimPolicy | default("Retain") }}
 {{- end }}
