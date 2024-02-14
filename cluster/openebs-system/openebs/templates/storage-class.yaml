@@ -10,8 +10,8 @@ parameters:
   compression: "off"
   dedup: "off"
   fstype: "zfs"
-  poolname: "{{ .poolName }}"
+  poolname: {{ .poolName | quote }}
 provisioner: zfs.csi.openebs.io
 volumeBindingMode: WaitForFirstConsumer
-reclaimPolicy: {{ .reclaimPolicy | default("Retain") }}
+reclaimPolicy: {{ .reclaimPolicy | default "Retain" }}
 {{- end }}
