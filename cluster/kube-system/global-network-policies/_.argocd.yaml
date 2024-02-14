@@ -1,4 +1,5 @@
 name: global-network-policies
 type: helm
+syncWave: 10000 # Must be last
 valueFiles:
   - values.$env.yaml

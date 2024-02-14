@@ -1,0 +1,37 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: app.kubernetes.io/name == "pomerium" and argocd.argoproj.io/instance == "{{ .Release.Name }}"
+  ingress:
+    # Allow traffic from kube api
+    - action: Allow
+      source: 
+        services:
+          name: kubernetes
+          namespace: default
+    
+    # Allow internal component calls
+    - action: Allow
+      source:
+        selector: app.kubernetes.io/name == "pomerium" and argocd.argoproj.io/instance == "{{ .Release.Name }}"
+  egress:
+    # Allow kube api
+    - action: Allow
+      destination:
+        services:
+          name: kubernetes
+          namespace: default
+
+    # Allow calls to Postgresql cluster
+    - action: Allow
+      destination:
+        services:
+          name: "{{ .Release.Name }}-postgresql"
+
+    # Allow internal component calls
+    - action: Allow
+      destination:
+        selector: app.kubernetes.io/name == "pomerium" and argocd.argoproj.io/instance == "{{ .Release.Name }}"

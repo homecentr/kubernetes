@@ -1,0 +1,37 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-postgresql
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: cluster-name == "{{ $.Release.Name }}-postgresql-cluster"
+  ingress:
+    # Allow internal component calls
+    - action: Allow
+      source:
+        selector: cluster-name == "{{ $.Release.Name }}-postgresql-cluster"
+
+    # Allow traffic from pomerium
+    - action: Allow
+      source: 
+        services:
+          name: pomerium
+
+    # Allow traffic from controller
+    - action: Allow
+      source: 
+        services:
+          name: postgres-operator
+          namespace: postgresql-system
+  egress:
+    # Allow internal component calls
+    - action: Allow
+      destination:
+        selector: cluster-name == "{{ $.Release.Name }}-postgresql-cluster"
+
+    # Allow traffic to controller
+    - action: Allow
+      destination: 
+        services:
+          name: postgres-operator
+          namespace: postgresql-system

@@ -1,0 +1,31 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: app == "openebs" and release == "{{ .Release.Name }}"
+  ingress:
+    # Allow traffic from kube api
+    - action: Allow
+      source: 
+        services:
+          name: kubernetes
+          namespace: default
+    
+    # Allow internal component calls
+    - action: Allow
+      source:
+        selector: app == "openebs" and release == "{{ .Release.Name }}"
+  egress:
+    # Allow kube api
+    - action: Allow
+      destination:
+        services:
+          name: kubernetes
+          namespace: default
+
+    # Allow internal component calls
+    - action: Allow
+      destination:
+        selector: app == "openebs" and release == "{{ .Release.Name }}"

@@ -1,0 +1,14 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-ingress
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: app.kubernetes.io/part-of == "argocd" and app.kubernetes.io/instance == "{{ .Release.Name }}" and app.kubernetes.io/component == "server"
+  ingress:
+    # Allow traffic from ingress controller
+    - action: Allow
+      source: 
+        services:
+          name: pomerium
+          namespace: pomerium-system
