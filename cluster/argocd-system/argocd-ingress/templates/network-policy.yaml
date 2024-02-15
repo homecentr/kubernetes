@@ -4,12 +4,13 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app.kubernetes.io/part-of == "argocd" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  # Instance is not filtered because argo-cd is deployed by ansible so from this chart's point of view the instance is not predictable
+  selector: app.kubernetes.io/part-of == "argocd"
   ingress:
     # Allow internal component calls
     - action: Allow
       source:
-        selector: app.kubernetes.io/part-of == "argocd" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+        selector: app.kubernetes.io/part-of == "argocd"
   egress:
     # Allow kube api
     - action: Allow
@@ -28,4 +29,4 @@ spec:
     # Allow internal component calls
     - action: Allow
       destination:
-        selector: app.kubernetes.io/part-of == "argocd" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+        selector: app.kubernetes.io/part-of == "argocd"
