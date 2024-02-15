@@ -9,5 +9,7 @@ spec:
   - Egress
   ingress:
     - action: Log
+    - action: Allow
   egress:
     - action: Log
+    - action: Allow
