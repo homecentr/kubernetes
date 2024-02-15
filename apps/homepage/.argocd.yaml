@@ -1,4 +1,4 @@
-name: pve-proxy
+name: homepage
 type: helm
 valueFiles:
   - values.config.yaml
