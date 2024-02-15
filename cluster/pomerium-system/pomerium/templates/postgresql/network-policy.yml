@@ -14,7 +14,7 @@ spec:
     # Allow traffic from pomerium
     - action: Allow
       source: 
-        selector: app.kubernetes.io/name == "pomerium" and argocd.argoproj.io/instance == "{{ .Release.Name }}"
+        selector: app.kubernetes.io/name == "pomerium" and app.kubernetes.io/instance == "{{ .Release.Name }}"
 
     # Allow traffic from controller
     - action: Allow
