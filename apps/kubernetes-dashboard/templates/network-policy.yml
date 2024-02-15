@@ -1,0 +1,23 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  selector: app.kubernetes.io/name == "homepage" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  ingress:
+    # Allow traffic from pomerium
+    - action: Allow
+      source: 
+        selector: app.kubernetes.io/name == "pomerium"
+        namespaceSelector: projectcalico.org/name == "pomerium-system"
+  
+  egress:
+    # Allow kube api
+    - action: Allow
+      destination:
+        services:
+          name: kubernetes
+          namespace: default

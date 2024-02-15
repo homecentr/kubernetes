@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.dashboard.fullnameOverride }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+  annotations:
+    ingress.pomerium.io/tls_skip_verify: 'true'
+    ingress.pomerium.io/secure_upstream: 'true'
+    ingress.pomerium.io/allow_websockets: 'true'
+    ingress.pomerium.io/allow_spdy: 'true'
+    ingress.pomerium.io/kubernetes_service_account_token_secret: {{ .Values.dashboard.fullnameOverride }}-impersonate
+
+    ingress.pomerium.io/policy: |
+      allow:
+        and:
+          - claim/groups: '{{ .Values.groups.admin }}'
+
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Kubernetes resource management
+    gethomepage.dev/group: Infrastructure
+    gethomepage.dev/icon: kubernetes-dashboard
+    gethomepage.dev/name: "Kubernetes Dashboard"
+    gethomepage.dev/href: "https://{{ .Values.hostname }}"
+spec:
+  rules:
+  - host: {{ .Values.hostname | quote }}
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          backend:
+            service:
+              name: {{ .Values.dashboard.fullnameOverride }}
+              port:
+                name: https

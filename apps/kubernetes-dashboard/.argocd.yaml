@@ -1,0 +1,6 @@
+name: kubernetes-dashboard
+type: helm
+valueFiles:
+  - values.$env.yaml
+secretValueFiles:
+  - secrets.$env.yaml
