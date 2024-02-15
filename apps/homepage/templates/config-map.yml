@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+data:
+  bookmarks.yaml: {{- if .Values.config.bookmarks }} |
+{{- .Values.config.bookmarks | toYaml | replace "$DOMAIN" $.Values.domain | nindent 4}}
+{{- else }} ""
+{{- end }}
+  docker.yaml: {{- if .Values.config.docker }} |
+{{- .Values.config.docker | toYaml | replace "$DOMAIN" $.Values.domain | nindent 4 }}
+{{- else }} ""
+{{- end }}
+  kubernetes.yaml: {{- if .Values.config.kubernetes }} |
+{{- .Values.config.kubernetes | toYaml | replace "$DOMAIN" $.Values.domain | nindent 4 }}
+{{- else }} ""
+{{- end }}
+  services.yaml: {{- if .Values.config.services }} |
+{{- .Values.config.services | toYaml | replace "$DOMAIN" $.Values.domain | nindent 4 }}
+{{- else }} ""
+{{- end }}
+  settings.yaml: {{- if .Values.config.settings }} |
+{{- .Values.config.settings | toYaml | replace "$DOMAIN" .Values.domain | nindent 4 }}
+{{- else }} ""
+{{- end }}
+  widgets.yaml: {{- if .Values.config.widgets }} |
+{{- .Values.config.widgets | toYaml | replace "$DOMAIN" .Values.domain | nindent 4 }}
+{{- else }} ""
+{{- end }}

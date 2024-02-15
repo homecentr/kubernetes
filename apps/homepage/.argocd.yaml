@@ -1,0 +1,5 @@
+name: pve-proxy
+type: helm
+valueFiles:
+  - values.config.yaml
+  - values.$env.yaml
