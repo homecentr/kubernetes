@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app.kubernetes.io/name == "pomerium" and argocd.argoproj.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "pomerium" and app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     # Allow traffic from kube api
     - action: Allow
