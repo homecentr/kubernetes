@@ -20,48 +20,9 @@ spec:
         {{- end }}
   
   egress:
-    # Allow internet access
+    # Allow internet access for relay
     - action: Allow
       destination:
         notNets:
           - 10.0.0.0/8
           - 172.16.0.0/16
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: {{ .Release.Name }}
-  namespace: {{ $.Release.Namespace }}
-  labels:
-    {{- include "common.resource-labels" . | indent 4 }}
-spec:
-  podSelector:
-    matchLabels:
-      {{- include "common.pod-labels" . | indent 8 }}
-  policyTypes:
-    - Ingress
-    - Egress
-  ingress:
-    - from:
-      {{- range $cidr := .Values.allowedClients }}
-        - ipBlock:
-            cidr: {{ $cidr }}
-      {{- end }}
-      ports:
-        - protocol: TCP
-          port: 2525
-  egress:
-    {{- include "common.egress-internet" . | indent 4 }}
