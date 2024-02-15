@@ -1,14 +1,14 @@
-# apiVersion: crd.projectcalico.org/v1
-# kind: GlobalNetworkPolicy
-# metadata:
-#   name: allow-kube-dns
-# spec:
-#   selector: all()
-#   egress:
-#     - action: Allow
-#       destination:
-#         services:
-#           name: kube-dns
-#           namespace: kube-system
-#     # Temporary - allow all egress
-#     - action: Allow
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: allow-kube-dns
+spec:
+  selector: all()
+  egress:
+    - action: Allow
+      destination:
+        services:
+          name: kube-dns
+          namespace: kube-system
+    # Temporary - allow all egress
+    - action: Allow
