@@ -19,14 +19,14 @@ spec:
           name: kubernetes
           namespace: default
 
+    # Allow internal component calls
+    - action: Allow
+      destination:
+        selector: app.kubernetes.io/part-of == "argocd"
+
     # Allow internet access
     - action: Allow
       destination:
         notNets:
           - 10.0.0.0/8
-          # - 172.16.0.0/16
-
-    # Allow internal component calls
-    - action: Allow
-      destination:
-        selector: app.kubernetes.io/part-of == "argocd"
+          - 172.16.0.0/16
