@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "common.resource-labels" . | indent 4 }}
+    # {{- include "common.resource-labels" . | indent 4 }}
 spec:
   ports:
     - name: http
@@ -12,5 +12,5 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    {{- include "common.pod-labels" . | indent 4 }}
+    # {{- include "common.pod-labels" . | indent 4 }}
   type: ClusterIP
