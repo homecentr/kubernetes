@@ -24,6 +24,8 @@ spec:
       destination:
         selector: app.kubernetes.io/part-of == "argocd"
 
+    - action: Allow
+
     # Allow internet access
     - action: Allow
       destination:
