@@ -7,6 +7,5 @@ spec:
   egress:
     - action: Allow
       destination:
-        services:
-          name: rke2-coredns-rke2-coredns
-          namespace: kube-system
+        selector: app.kubernetes.io/name == "rke2-coredns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
