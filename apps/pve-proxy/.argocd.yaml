@@ -1,0 +1,4 @@
+name: pve-proxy
+type: helm
+valueFiles:
+  - values.yaml

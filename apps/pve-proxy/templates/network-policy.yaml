@@ -1,0 +1,23 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: app.kubernetes.io/name == "pve-proxy" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  ingress:
+    # Allow traffic from pomerium
+    - action: Allow
+      source: 
+        selector: app.kubernetes.io/name == "pomerium"
+        namespaceSelector: projectcalico.org/name == "pomerium-system"
+  egress:
+    # Allow traffic to pve nodes
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports: {{ .Values.port }}
+        nets:
+          {{- range .Values.pveNodes }}
+          - {{ . }}/32
+          {{- end }}
