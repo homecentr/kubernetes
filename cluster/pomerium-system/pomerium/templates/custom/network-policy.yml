@@ -50,3 +50,9 @@ spec:
     - action: Allow
       destination:
         selector: app.kubernetes.io/name == "pomerium" and argocd.argoproj.io/instance == "{{ .Release.Name }}"
+
+    # Allow calling any service to expose them via ingress
+    - action: Allow
+      destination:
+        selector: any()
+        namespaceSelector: projectcalico.org/name != "kube-system"
