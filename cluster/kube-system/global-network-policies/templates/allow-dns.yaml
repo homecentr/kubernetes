@@ -4,6 +4,8 @@ metadata:
   name: allow-kube-dns
 spec:
   selector: all()
+  ingress:
+    - action: Allow
   egress:
     - action: Allow
       destination:

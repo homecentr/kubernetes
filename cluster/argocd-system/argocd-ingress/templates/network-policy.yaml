@@ -6,13 +6,6 @@ metadata:
 spec:
   selector: app.kubernetes.io/part-of == "argocd" and app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    # Allow traffic from kube api
-    - action: Allow
-      source: 
-        services:
-          name: kubernetes
-          namespace: default
-    
     # Allow internal component calls
     - action: Allow
       source:
