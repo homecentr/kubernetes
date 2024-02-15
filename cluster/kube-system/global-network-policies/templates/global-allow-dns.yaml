@@ -3,7 +3,7 @@ kind: GlobalNetworkPolicy
 metadata:
   name: allow-kube-dns
 spec:
-  selector: all()
+  selector: projectcalico.org/namespace not in  {'kube-system', 'calico-system', 'calico-apiserver'}
   ingress:
     - action: Allow
   egress:
@@ -14,3 +14,5 @@ spec:
           namespace: kube-system
     # Temporary - allow all egress
     - action: Allow
+
+# We need another policy which will allow kube-dns ingress !!!
