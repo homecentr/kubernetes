@@ -38,7 +38,7 @@ spec:
     - action: Allow
       destination:
         services:
-          name: "{{ .Release.Name }}-postgresql"
+          name: "{{ .Release.Name }}-postgresql-cluster"
 
     # Allow internal component calls
     - action: Allow
