@@ -12,3 +12,5 @@ spec:
       source: 
         selector: app.kubernetes.io/name == "pomerium"
         namespaceSelector: projectcalico.org/name == "pomerium-system"
+  egress:
+    - action: Allow
