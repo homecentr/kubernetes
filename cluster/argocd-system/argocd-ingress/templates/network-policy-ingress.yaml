@@ -10,4 +10,4 @@ spec:
     - action: Allow
       source: 
         selector: app.kubernetes.io/name == "pomerium"
-        namespaceSelector: rojectcalico.org/name == "pomerium-system"
+        namespaceSelector: projectcalico.org/name == "pomerium-system"
