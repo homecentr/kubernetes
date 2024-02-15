@@ -34,6 +34,13 @@ spec:
       source:
         selector: app.kubernetes.io/name == "pomerium" and argocd.argoproj.io/instance == "{{ .Release.Name }}"
   egress:
+    # Allow internet access - required for OAuth integration
+    - action: Allow
+      destination:
+        notNets:
+          - 10.0.0.0/8
+          - 172.16.0.0/16
+
     # Allow kube api
     - action: Allow
       destination:
