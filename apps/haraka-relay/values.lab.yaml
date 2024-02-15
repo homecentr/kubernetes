@@ -1,0 +1,16 @@
+imageTag: 1.0.0
+tlsCertSecretName: wildcard-homecentr-one
+hostname: smtp-lab.homecentr.one
+loadBalancerIp: 10.1.8.130
+
+allowedClients:
+  - 10.1.8.9/32 # GitHub runners
+  - 10.1.3.0/24 # Temporary
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests: 
+    cpu: 1m
+    memory: 1Mi

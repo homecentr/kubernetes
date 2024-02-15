@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
 spec:
-  selector: app.kubernetes.io/name == "homepage" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "kubernetes-dashboard" and app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     # Allow traffic from pomerium
     - action: Allow

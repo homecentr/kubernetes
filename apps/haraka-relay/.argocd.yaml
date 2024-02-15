@@ -1,0 +1,6 @@
+name: haraka-relay
+type: helm
+valueFiles:
+  - values.$env.yaml
+secretValueFiles:
+  - secrets.$env.yaml
