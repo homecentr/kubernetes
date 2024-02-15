@@ -1,0 +1,80 @@
+forwarders:
+  - 1.1.1.1
+  - 1.0.0.1
+
+coredns:
+  customLabels:
+    homecentr.one/antiaffinity: dns
+  tolerations:
+    - key: homecentr.one/critical-only
+      operator: Exists
+      effect: NoSchedule
+  image:
+    repository: quay.io/oriedge/k8s_gateway
+    tag: v0.3.3
+  isClusterService: false
+  serviceType: LoadBalancer
+  serviceAccount:
+    create: true
+  rbac:
+    create: false
+  extraVolumes:
+    - name: node-hosts
+      hostPath:
+        path: /etc/hosts
+        type: File
+  extraVolumeMounts:
+    - name: node-hosts
+      mountPath: /etc/node-hosts
+      readOnly: true
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchExpressions:
+            - key: homecentr.one/antiaffinity
+              operator: In
+              values:
+              - dns
+  servers:
+    - port: 53
+      zones:
+        - zone: .
+      plugins:
+        - name: log
+        - name: errors
+        - name: health # Serves a /health endpoint on :8080, required for livenessProbe
+          configBlock: |-
+            lameduck 5s
+        - name: ready # Serves a /ready endpoint on :8181, required for readinessProbe
+        - name: hosts
+          parameters: /etc/node-hosts
+          # Hardcoded records will be used for printers, idrac etc.
+          configBlock: |-
+            10.1.2.128 dns1.homecentr.one
+            10.1.2.129 dns2.homecentr.one
+            10.1.3.5  print.homecentr.one
+            fallthrough
+
+        - name: k8s_gateway
+          parameters: homecentr.one
+
+        - name: forward
+          parameters: . tls://1.1.1.1 tls://1.0.0.1
+          configBlock: |-
+            tls_servername cloudflare-dns.com
+            max_concurrent 1000
+
+        # Serves a /metrics endpoint on :9153, required for serviceMonitor
+        - name: prometheus
+          parameters: 0.0.0.0:9153
+
+        - name: cache
+          parameters: 30
+
+        - name: loop
+        - name: reload
+        - name: loadbalance

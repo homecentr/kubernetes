@@ -1,0 +1,5 @@
+name: dns-secondary
+type: helm
+valueFiles:
+  - values.$env.secondary.yaml
+  - values.$env.yaml

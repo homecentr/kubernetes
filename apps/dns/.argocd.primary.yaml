@@ -1,0 +1,5 @@
+name: dns-primary
+type: helm
+valueFiles:
+  - values.$env.primary.yaml
+  - values.$env.yaml

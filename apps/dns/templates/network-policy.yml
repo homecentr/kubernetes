@@ -1,0 +1,28 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: app.kubernetes.io/name == "pve-proxy" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  ingress:
+    # Allow traffic from clients
+    - action: Allow
+      source:
+        nets:
+          - 10.1.3.0/24
+  egress:
+    # Forwarders
+    - action: Allow
+      destination:
+        nets:
+        {{- range .Values.forwarders }}
+        - {{ . }}/32
+        {{- end }}
+
+    # Allow kube api
+    - action: Allow
+      destination:
+        services:
+          name: kubernetes
+          namespace: default
