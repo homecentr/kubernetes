@@ -9,9 +9,8 @@ spec:
     # Allow traffic from pomerium
     - action: Allow
       source: 
-        services:
-          name: pomerium
-          namespace: pomerium-system
+        selector: app.kubernetes.io/name == "pomerium"
+        namespaceSelector: projectcalico.org/name == "pomerium-system"
   egress:
     # Allow traffic to postgresql operator
     - action: Allow

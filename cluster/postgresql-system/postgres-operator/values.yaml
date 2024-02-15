@@ -4,3 +4,7 @@ postgres-operator:
     - effect: NoSchedule
       key: CriticalAddonsOnly
       operator: Exists
+
+  configKubernetes:
+    cluster_labels:
+      app.kubernetes.io/name: postgres-operator

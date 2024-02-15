@@ -18,10 +18,9 @@ spec:
 
     # Allow traffic from controller
     - action: Allow
-      source: 
-        services:
-          name: postgres-operator
-          namespace: postgresql-system
+      source:
+        selector: app.kubernetes.io/name == "postgres-operator"
+        namespaceSelector: projectcalico.org/name == "postgresql-system"
   egress:
     # Allow internal component calls
     - action: Allow
