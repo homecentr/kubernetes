@@ -3,5 +3,5 @@ coredns:
   nameOverride: dns
   service:
     annotations:
-      metallb.universe.tf/loadBalancerIPs: 10.1.8.129
+      kube-vip.io/loadbalancerIPs: 10.1.8.129
   
