@@ -16,7 +16,8 @@ spec:
     - action: Allow
       protocol: TCP
       destination:
-        ports: {{ .Values.port }}
+        ports: 
+          - {{ .Values.port }}
         nets:
           {{- range .Values.pveNodes }}
           - {{ . }}/32
