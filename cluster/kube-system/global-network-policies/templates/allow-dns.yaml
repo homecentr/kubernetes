@@ -8,5 +8,5 @@ spec:
     - action: Allow
       destination:
         services:
-          name: kube-dns
+          name: rke2-coredns-rke2-coredns
           namespace: kube-system
