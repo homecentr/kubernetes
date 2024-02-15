@@ -9,6 +9,5 @@ spec:
     # Allow traffic from ingress controller
     - action: Allow
       source: 
-        services:
-          name: pomerium
-          namespace: pomerium-system
+        selector: app.kubernetes.io/name == "pomerium"
+        namespaceSelector: rojectcalico.org/name == "pomerium-system"

@@ -9,9 +9,11 @@ spec:
     # Allow traffic from kube api
     - action: Allow
       source: 
-        services:
-          name: kubernetes
-          namespace: default
+        nets:
+          - 10.1.8.11/32
+          - 10.1.8.12/32
+          - 10.1.8.13/32
+          - 172.17.0.1/32
     
     # Allow internal component calls
     - action: Allow
