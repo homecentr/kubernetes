@@ -4,19 +4,14 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app.kubernetes.io/name == "postgres-operator" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "postgres-operator" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    # Allow traffic from kube api
-    - action: Allow
-      source: 
-        services:
-          name: kubernetes
-          namespace: default
+    {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
 
     # Allow traffic from clusters
     - action: Allow
       source:
-        selector: has(cluster-name)
+        selector: application == 'spilo' && has(cluster-name)
 
     # Allow traffic from UI
     - action: Allow
@@ -24,14 +19,9 @@ spec:
         services:
           name: postgres-operator-ui
   egress:
-    # Allow traffic to kube api
-    - action: Allow
-      destination:
-        services:
-          name: kubernetes
-          namespace: default
+    {{- include "egress.allow-kubernetes-api" . | indent 4 }}
 
     # Allow traffic to postgresql clusters
     - action: Allow
       destination: 
-        selector: has(cluster-name)
+        selector: application == 'spilo' && has(cluster-name)

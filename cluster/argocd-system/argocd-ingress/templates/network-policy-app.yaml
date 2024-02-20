@@ -1,17 +1,16 @@
 apiVersion: crd.projectcalico.org/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Release.Name }}-app
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app == "cert-manager" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  # Instance is not filtered because argo-cd is deployed by ansible so from this chart's point of view the instance is not predictable
+  selector: app.kubernetes.io/part-of == 'argocd'
   ingress:
-    {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
-    
     # Allow internal component calls
     - action: Allow
       source:
-        selector: app == "cert-manager" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+        selector: app.kubernetes.io/part-of == 'argocd'
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
     {{- include "egress.allow-internet" . | indent 4 }}
@@ -19,4 +18,4 @@ spec:
     # Allow internal component calls
     - action: Allow
       destination:
-        selector: app == "cert-manager" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+        selector: app.kubernetes.io/part-of == 'argocd'

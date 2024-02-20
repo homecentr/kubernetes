@@ -6,28 +6,16 @@ metadata:
 spec:
   selector: app == "openebs" and release == "{{ .Release.Name }}"
   ingress:
-    # Allow traffic from kube api
-    - action: Allow
-      source: 
-        nets:
-          - 10.1.8.11/32
-          - 10.1.8.12/32
-          - 10.1.8.13/32
-          - 172.17.0.1/32
+    {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
     
     # Allow internal component calls
     - action: Allow
       source:
-        selector: app == "openebs" and release == "{{ .Release.Name }}"
+        selector: app == "openebs" && release == "{{ .Release.Name }}"
   egress:
-    # Allow kube api
-    - action: Allow
-      destination:
-        services:
-          name: kubernetes
-          namespace: default
+    {{- include "egress.allow-kubernetes-api" . | indent 4 }}
 
     # Allow internal component calls
     - action: Allow
       destination:
-        selector: app == "openebs" and release == "{{ .Release.Name }}"
+        selector: app == "openebs" && release == "{{ .Release.Name }}"

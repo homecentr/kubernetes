@@ -4,13 +4,9 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app.kubernetes.io/name == "postgres-operator-ui" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "postgres-operator-ui" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    # Allow traffic from pomerium
-    - action: Allow
-      source: 
-        selector: app.kubernetes.io/name == "pomerium"
-        namespaceSelector: projectcalico.org/name == "pomerium-system"
+    {{- include "ingress.allow-pomerium-proxy" . | indent 4 }}
   egress:
     # Allow traffic to postgresql operator
     - action: Allow
