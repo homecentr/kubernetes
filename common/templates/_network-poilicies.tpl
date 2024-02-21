@@ -24,7 +24,7 @@
 
 {{- define "ingress.allow-pomerium-proxy" }}
 - action: Allow
-  destination:
+  source:
     services:
       name: pomerium-proxy
       namespace: pomerium-system
