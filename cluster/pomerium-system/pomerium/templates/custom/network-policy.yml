@@ -4,14 +4,14 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app.kubernetes.io/name == "pomerium" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "pomerium" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
     
     # Allow internal component calls
     - action: Allow
       source:
-        selector: app.kubernetes.io/name == "pomerium" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+        selector: app.kubernetes.io/name == "pomerium" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
     {{- include "egress.allow-internet" . | indent 4 }} # required for OAuth flows
@@ -24,7 +24,7 @@ spec:
     # Allow internal component calls
     - action: Allow
       destination:
-        selector: app.kubernetes.io/name == "pomerium" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+        selector: app.kubernetes.io/name == "pomerium" && app.kubernetes.io/instance == "{{ .Release.Name }}"
 
     # Allow calling services to expose them via ingress
     - action: Allow
