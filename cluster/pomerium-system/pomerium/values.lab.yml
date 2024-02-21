@@ -3,6 +3,11 @@ replicas: 2
 hostname: login-lab.homecentr.one
 tlsCertificateName: wildcard-homecentr-one
 loadBalancerIp: 10.1.8.132
+
+allowedClients:
+  - 10.1.3.0/24
+  - 10.1.8.9/32 # e2e tests
+
 image:
   tag: 0-24-0
 

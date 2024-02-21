@@ -12,6 +12,15 @@ spec:
     - action: Allow
       source:
         selector: app.kubernetes.io/name == "pomerium" && app.kubernetes.io/instance == "{{ .Release.Name }}"
+
+    # Allow client traffic
+    - action: Allow
+      source:
+        nets:
+        {{- range .Values.allowedClients }}
+        - {{ . }}
+        {{- end }}
+
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
     {{- include "egress.allow-internet" . | indent 4 }} # required for OAuth flows
