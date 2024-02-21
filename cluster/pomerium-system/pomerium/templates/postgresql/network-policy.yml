@@ -7,6 +7,6 @@ spec:
   selector: {{- include "calico-selector.postgresql-cluster" (.Release.Name + "-postgresql-cluster") }}
   ingress:
     {{- include "ingress.allow-postgresql-mandatory" . | indent 4 }}
-    {{- include "ingress.allow-postgresql-from-app" ("app.kubernetes.io/name == 'pomerium' and app.kubernetes.io/instance == '"+ .Release.Name +"'") | indent 4 }}
+    {{- include "ingress.allow-postgresql-from-app" ("app.kubernetes.io/name == 'pomerium' and app.kubernetes.io/instance == '" .Release.Name "'") | indent 4 }}
   egress:
     {{- include "egress.allow-postgresql-mandatory" . | indent 4 }}
