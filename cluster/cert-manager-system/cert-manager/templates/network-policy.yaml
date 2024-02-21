@@ -4,14 +4,14 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app == "cert-manager" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app == "cert-manager" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
     
     # Allow internal component calls
     - action: Allow
       source:
-        selector: app == "cert-manager" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+        selector: app == "cert-manager" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
     {{- include "egress.allow-internet" . | indent 4 }}
@@ -19,4 +19,4 @@ spec:
     # Allow internal component calls
     - action: Allow
       destination:
-        selector: app == "cert-manager" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+        selector: app == "cert-manager" && app.kubernetes.io/instance == "{{ .Release.Name }}"
