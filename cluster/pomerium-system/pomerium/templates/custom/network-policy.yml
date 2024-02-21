@@ -7,7 +7,6 @@ spec:
   selector: app.kubernetes.io/name == "pomerium" and app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
-    {{- include "ingress.allow-internet" . | indent 4 }}
     
     # Allow internal component calls
     - action: Allow
@@ -15,12 +14,13 @@ spec:
         selector: app.kubernetes.io/name == "pomerium" and app.kubernetes.io/instance == "{{ .Release.Name }}"
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
-    {{- include "ingress.allow-kubernetes-api" . | indent 4 }} # required for OAuth flows
+    {{- include "egress.allow-internet" . | indent 4 }} # required for OAuth flows
 
     # Allow calls to Postgresql cluster
     - action: Allow
       destination:
-        selector: {{- include "calico-selector.postgresql-cluster" (.Release.Name + '-postgresql-cluster') }}
+        {{- $clusterName := print .Release.Name "-postgresql-cluster" }}
+        selector: {{- include "calico-selector.postgresql-cluster" $clusterName }}
 
     # Allow internal component calls
     - action: Allow
