@@ -21,6 +21,7 @@ spec:
         {{- range .Values.allowedClients }}
         - {{ . }}
         {{- end }}
+        - 10.1.8.0/24
 
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
