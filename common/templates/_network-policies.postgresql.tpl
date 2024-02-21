@@ -1,4 +1,4 @@
-{{- define "calico-selector.postgresql-cluster" }}
+{{- define "calico-selector.postgresql-cluster" -}}
 application == 'spilo' && cluster-name == '{{ . }}'
 {{- end }}
 
@@ -6,7 +6,7 @@ application == 'spilo' && cluster-name == '{{ . }}'
 # Allow internal component calls
 - action: Allow
   source:
-    selector: {{ include "calico-selector.postgresql-cluster" .clusterName }}
+    selector: {{ include "calico-selector.postgresql-cluster" . }}
 
 # Allow traffic from operator
 - action: Allow
@@ -20,7 +20,7 @@ application == 'spilo' && cluster-name == '{{ . }}'
 # Allow internal component calls
 - action: Allow
   destination:
-    selector: {{ include "calico-selector.postgresql-cluster" .clusterName }}
+    selector: {{ include "calico-selector.postgresql-cluster" . }}
 
 # Allow traffic to operator
 - action: Allow

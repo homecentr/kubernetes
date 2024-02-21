@@ -4,11 +4,11 @@ metadata:
   name: {{ .Release.Name }}-postgresql
   namespace: {{ .Release.Namespace }}
 spec:
-  {{- $clusterName := printf "%s-postgresql-cluster" .Release.Name -}}
-  selector: {{- include "calico-selector.postgresql-cluster" $clusterName }}
+  {{- $clusterName := printf "%s-postgresql-cluster" .Release.Name }}
+  selector: {{ include "calico-selector.postgresql-cluster" $clusterName }}
   ingress:
     {{- include "ingress.allow-postgresql-mandatory" . | indent 4 }}
-    {{- $appSelector := printf "app.kubernetes.io/name == 'pomerium' and app.kubernetes.io/instance == '%s'" $.Release.Name }}
+    {{- $appSelector := printf "app.kubernetes.io/name == 'pomerium' && app.kubernetes.io/instance == '%s'" $.Release.Name }}
     {{- include "ingress.allow-postgresql-from-app" $appSelector | indent 4 }}
   egress:
     {{- include "egress.allow-postgresql-mandatory" . | indent 4 }}
