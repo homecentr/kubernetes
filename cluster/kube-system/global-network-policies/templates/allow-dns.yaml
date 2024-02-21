@@ -1,11 +1,11 @@
-# apiVersion: crd.projectcalico.org/v1
-# kind: GlobalNetworkPolicy
-# metadata:
-#   name: allow-kube-dns
-# spec:
-#   selector: projectcalico.org/namespace not in  {'kube-system', 'calico-system', 'calico-apiserver'}
-#   egress:
-#     - action: Allow
-#       destination:
-#         selector: app.kubernetes.io/name == "rke2-coredns"
-#         namespaceSelector: projectcalico.org/name == "kube-system"
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: allow-kube-dns
+spec:
+  selector: projectcalico.org/namespace not in  {'kube-system', 'calico-system', 'calico-apiserver'}
+  egress:
+    - action: Allow
+      destination:
+        selector: app.kubernetes.io/name == "rke2-coredns"
+        namespaceSelector: projectcalico.org/name == "kube-system"

@@ -19,3 +19,9 @@ spec:
     - action: Allow
       destination:
         selector: app.kubernetes.io/part-of == 'argocd'
+
+    # Explicitly allow access to DNS to bypass circular dependency
+    - action: Allow
+      destination:
+        selector: app.kubernetes.io/name == "rke2-coredns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
