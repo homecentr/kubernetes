@@ -19,7 +19,7 @@ spec:
     # Allow calls to Postgresql cluster
     - action: Allow
       destination:
-        selector: {{- include "calico-selector.postgresql-cluster" (printf "%s-postgresql-cluster" .Release.Name) }}
+        selector: {{ include "calico-selector.postgresql-cluster" (printf "%s-postgresql-cluster" .Release.Name) }}
 
     # Allow internal component calls
     - action: Allow

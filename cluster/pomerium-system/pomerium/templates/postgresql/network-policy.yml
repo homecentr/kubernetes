@@ -1,7 +1,15 @@
+{{- $clusterName := printf "%s-postgresql-cluster" .Release.Name }}
+{{- $appSelector := printf "app.kubernetes.io/name == 'pomerium' && app.kubernetes.io/instance == '%s'" $.Release.Name }}
 apiVersion: crd.projectcalico.org/v1
 kind: NetworkPolicy
 metadata:
   name: {{ .Release.Name }}-postgresql
   namespace: {{ .Release.Namespace }}
-spec: {}
+spec:
+  selector: {{ include "calico-selector.postgresql-cluster" $clusterName }} 
+  ingress:
+    {{- include "ingress.allow-postgresql-mandatory" $clusterName | indent 4 }}
+    {{- include "ingress.allow-postgresql-from-app" $appSelector | indent 4 }}
+  egress:
+    {{- include "egress.allow-postgresql-mandatory" $clusterName | indent 4 }}
   
