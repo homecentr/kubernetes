@@ -1,7 +1,7 @@
 apiVersion: crd.projectcalico.org/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ .Release.Name }}-app
+  name: argocd-app
   namespace: {{ .Release.Namespace }}
 spec:
   # Instance is not filtered because argo-cd is deployed by ansible so from this chart's point of view the instance is not predictable
