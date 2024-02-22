@@ -30,3 +30,4 @@ data:
 {{- .Values.config.widgets | toYaml | replace "$DOMAIN" .Values.domain | nindent 4 }}
 {{- else }} ""
 {{- end }}
+  custom.css: ""
