@@ -12,6 +12,15 @@
     services:
       name: kubernetes
       namespace: default
+- action: Allow
+  protocol: TCP
+  destination:
+    ports:
+      - 6443
+    nets:
+      - 10.1.8.11/32
+      - 10.1.8.12/32
+      - 10.1.8.13/32
 {{- end }}
 
 {{- define "ingress.allow-kubernetes-api" }}
