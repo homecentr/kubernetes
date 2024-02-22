@@ -25,11 +25,10 @@
 {{- define "ingress.allow-pomerium-proxy" }}
 - action: Allow
   protocol: TCP
+  metadata:
+    port: {{ . }}
   source:
     services:
       name: pomerium-proxy
       namespace: pomerium-system
-  destination:
-    ports:
-      - {{ . }}
 {{- end }}
