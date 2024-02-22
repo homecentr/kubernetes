@@ -6,8 +6,6 @@ metadata:
 spec:
   selector: app.kubernetes.io/name == "pomerium" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    - action: Log
-    - action: Allow
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
     
     # Allow internal component calls
