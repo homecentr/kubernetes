@@ -6,9 +6,6 @@ metadata:
 spec:
   selector: app.kubernetes.io/name == "dns" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    - action: Log
-    # - action: Allow
-
     # Allow client traffic
     - action: Allow
       source:
@@ -17,9 +14,6 @@ spec:
         - {{ . }}
         {{- end }}
   egress:
-    - action: Log
-    # - action: Allow
-    
     # Forwarders
     - action: Allow
       destination:
