@@ -12,6 +12,7 @@ spec:
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
   
   egress:
+    - action: Log
     {{- include "egress.allow-internet" . | indent 4 }}
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
 
