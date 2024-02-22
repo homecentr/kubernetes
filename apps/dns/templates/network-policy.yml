@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app.kubernetes.io/name == "dns" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "dns" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     # Allow client traffic
     - action: Allow
