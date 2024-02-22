@@ -28,6 +28,9 @@ application == 'spilo' && cluster-name == '{{ . }}'
     services:
       name: postgres-operator
       namespace: postgresql-system
+
+# Allow traffic to Kubernetes API to list endpoints of other replicas
+{{- include "egress.allow-kubernetes-api" }}
 {{- end }}
 
 {{- define "ingress.allow-postgresql-from-app" }}

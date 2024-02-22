@@ -35,6 +35,12 @@ spec:
       destination:
         selector: {{ include "calico-selector.postgresql-cluster" (printf "%s-postgresql-cluster" .Release.Name) }}
 
+    - action: Allow
+      destination:
+        services:
+          name: pomerium-postgresql-cluster
+          namespace: pomerium-system
+
     # Allow internal component calls
     - action: Allow
       destination:

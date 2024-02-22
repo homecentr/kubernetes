@@ -10,6 +10,11 @@ spec:
   ingress:
     {{- include "ingress.allow-postgresql-mandatory" $clusterName | indent 4 }}
     {{- include "ingress.allow-postgresql-from-app" $appSelector | indent 4 }}
+    - action: Allow
+      source:
+        services:
+          name: pomerium-proxy
+          namespace: pomerium-system
   egress:
     {{- include "egress.allow-postgresql-mandatory" $clusterName | indent 4 }}
   
