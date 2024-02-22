@@ -26,7 +26,8 @@
 - action: Allow
   protocol: TCP
   metadata:
-    port: {{ . }}
+    annotations:
+      port: {{ . }}
   source:
     services:
       name: pomerium-proxy
