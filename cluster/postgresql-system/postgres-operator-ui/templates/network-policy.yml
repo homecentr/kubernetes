@@ -8,6 +8,8 @@ spec:
   ingress:
     {{- include "ingress.allow-pomerium-proxy" . | indent 4 }}
   egress:
+    {{- include "egress.allow-kubernetes-api" . | indent 4 }}
+    
     # Allow traffic to postgresql operator
     - action: Allow
       destination: 
