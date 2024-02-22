@@ -30,3 +30,11 @@ rules:
     verbs:
       - get
       - list
+  - apiGroups:
+      - traefik.io
+    resources:
+      - ingressroutes
+    verbs:
+      - get
+      - list
+      - watch
