@@ -19,6 +19,7 @@ rules:
       - networking.k8s.io
     resources:
       - ingresses
+      - customresourcedefinitions
     verbs:
       - get
       - list
