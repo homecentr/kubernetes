@@ -18,6 +18,7 @@ spec:
       source: 
         services:
           name: postgres-operator-ui
+          namespace: postgresql-system
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
 

@@ -13,3 +13,4 @@ spec:
       destination: 
         services:
           name: postgres-operator
+          namespace: postgresql-system
