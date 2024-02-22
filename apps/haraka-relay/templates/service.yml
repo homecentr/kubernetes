@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
   annotations:
-    metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIp }}
+    kube-vip.io/loadbalancerIPs: {{ .Values.loadBalancerIp }}
     coredns.io/hostname: {{ .Values.hostname }}
 spec:
   ports:

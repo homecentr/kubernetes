@@ -1,7 +1,7 @@
 imageTag: 1.0.0
 tlsCertSecretName: wildcard-homecentr-one
 hostname: smtp.homecentr.one
-loadBalancerIp: 10.1.2.130
+loadBalancerIp: 10.1.2.131
 
 allowedClients:
   - 10.1.8.9/32 # GitHub runners

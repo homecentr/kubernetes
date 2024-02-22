@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
 spec:
-  selector: app.kubernetes.io/name == "haraka-relay" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "haraka-relay" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     # Allow traffic from clients
     - action: Allow
