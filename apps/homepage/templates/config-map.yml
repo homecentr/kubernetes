@@ -30,4 +30,6 @@ data:
 {{- .Values.config.widgets | toYaml | replace "$DOMAIN" .Values.domain | nindent 4 }}
 {{- else }} ""
 {{- end }}
+  # Some custom.css/js must be present to prevent homepage from trying to copy over the default file which fails on read-only fs
   custom.css: ""
+  custom.js: ""
