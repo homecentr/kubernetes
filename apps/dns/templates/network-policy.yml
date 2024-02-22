@@ -16,6 +16,8 @@ spec:
         - {{ . }}
         {{- end }}
   egress:
+    - action: Log
+    - action: Allow
     # Forwarders
     - action: Allow
       destination:
