@@ -16,4 +16,5 @@ spec:
           namespace: pomerium-system
       destination:
         ports:
-          - "server"
+          #- "server"
+          - "8080"
