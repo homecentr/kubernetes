@@ -8,7 +8,7 @@ metadata:
 spec:
   selector: app.kubernetes.io/name == "homepage" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    {{- include "ingress.allow-pomerium-proxy" 3000 | indent 4 }}
+    {{- include "ingress.allow-pomerium-proxy" (dict "port" "http") | indent 4 }}
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
   
   egress:
