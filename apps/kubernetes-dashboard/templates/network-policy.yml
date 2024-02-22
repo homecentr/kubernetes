@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
 spec:
-  selector: app.kubernetes.io/name == "kubernetes-dashboard" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "kubernetes-dashboard" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     {{- include "ingress.allow-pomerium-proxy" . | indent 4 }}
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
