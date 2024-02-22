@@ -28,4 +28,7 @@
     services:
       name: pomerium-proxy
       namespace: pomerium-system
+  destination:
+    ports:
+      - {{ . }}
 {{- end }}

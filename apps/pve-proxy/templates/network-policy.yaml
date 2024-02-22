@@ -6,7 +6,7 @@ metadata:
 spec:
   selector: app.kubernetes.io/name == "pve-proxy" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    {{- include "ingress.allow-pomerium-proxy" . | indent 4 }}
+    {{- include "ingress.allow-pomerium-proxy" 80 | indent 4 }}
   egress:
     # Allow traffic to pve nodes
     - action: Allow

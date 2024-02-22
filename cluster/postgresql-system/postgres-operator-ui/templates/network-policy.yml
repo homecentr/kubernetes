@@ -6,7 +6,7 @@ metadata:
 spec:
   selector: app.kubernetes.io/name == "postgres-operator-ui" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    {{- include "ingress.allow-pomerium-proxy" . | indent 4 }}
+    {{- include "ingress.allow-pomerium-proxy" 8081 | indent 4 }}
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
     

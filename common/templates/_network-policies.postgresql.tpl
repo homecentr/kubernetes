@@ -38,5 +38,7 @@ application == 'spilo' && cluster-name == '{{ . }}'
 - action: Allow
   source:
     selector: {{ . }}
-  # TODO: Ports
+  destination:
+    ports:
+      - 5432
 {{- end }}
