@@ -30,24 +30,19 @@ rules:
     verbs:
       - get
       - list
-  
-  
-  
   - apiGroups:
       - apiextensions.k8s.io
     resources:
-      - customresourcedefinitions
       - customresourcedefinitions/status
     verbs:
       - get
       - list
       - watch  
   - apiGroups:
-      - traefik.io
       - traefik.containo.us
+      - traefik.io
     resources:
       - ingressroutes
     verbs:
       - get
       - list
-      - watch
