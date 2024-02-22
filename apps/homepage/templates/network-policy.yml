@@ -12,11 +12,5 @@ spec:
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
   
   egress:
-    - action: Log
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
-
-    # Allow traffic to other services for healthchecks
-    - action: Allow
-      destination:
-        selector: all()
-        namespaceSelector: projectcalico.org/name in { 'apps', 'argocd-system', 'postgresql-system' }
+    {{- include "egress.allow-internet" . | indent 4 }}
