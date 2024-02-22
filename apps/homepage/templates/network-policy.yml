@@ -6,31 +6,17 @@ metadata:
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
 spec:
-  selector: app.kubernetes.io/name == "homepage" and app.kubernetes.io/instance == "{{ .Release.Name }}"
+  selector: app.kubernetes.io/name == "homepage" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    # Allow traffic from pomerium
-    - action: Allow
-      source: 
-        selector: app.kubernetes.io/name == "pomerium"
-        namespaceSelector: projectcalico.org/name == "pomerium-system"
+    {{- include "ingress.allow-pomerium-proxy" . | indent 4 }}
+    {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
   
   egress:
-    # Allow internet access
-    - action: Allow
-      destination:
-        notNets:
-          - 10.0.0.0/8
-          - 172.16.0.0/16
-    
-    # Allow kube api
-    - action: Allow
-      destination:
-        services:
-          name: kubernetes
-          namespace: default
+    {{- include "egress.allow-internet" . | indent 4 }}
+    {{- include "egress.allow-kubernetes-api" . | indent 4 }}
 
     # Allow traffic to other services for healthchecks
     - action: Allow
       destination:
-        selector: any()
-        namespaceSelector: projectcalico.org/name == "apps" or projectcalico.org/name == "argocd-system" or projectcalico.org/name == "postgresql-system"
+        selector: all()
+        namespaceSelector: projectcalico.org/name in { 'apps', 'argocd-system', 'postgresql-system' }
