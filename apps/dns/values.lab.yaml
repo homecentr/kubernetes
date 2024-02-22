@@ -17,6 +17,8 @@ coredns:
     repository: quay.io/oriedge/k8s_gateway
     tag: v0.3.3
   isClusterService: false
+  service:
+    externalTrafficPolicy: local
   serviceType: LoadBalancer
   serviceAccount:
     create: true

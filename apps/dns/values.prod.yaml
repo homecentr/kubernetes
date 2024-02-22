@@ -15,8 +15,10 @@ coredns:
       effect: NoSchedule
   image:
     repository: quay.io/oriedge/k8s_gateway
-    tag: v0.3.3
+    tag: v0.4.0
   isClusterService: false
+  service:
+    externalTrafficPolicy: local
   serviceType: LoadBalancer
   serviceAccount:
     create: true
