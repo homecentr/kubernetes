@@ -1,5 +1,6 @@
 name: pomerium
 type: helm
+selfHeal: false
 valueFiles:
   - values.$env.yml
 secretValueFiles:
