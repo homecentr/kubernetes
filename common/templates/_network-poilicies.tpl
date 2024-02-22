@@ -24,6 +24,7 @@
 
 {{- define "ingress.allow-pomerium-proxy" }}
 - action: Allow
+  protocol: TCP
   source:
     services:
       name: pomerium-proxy
