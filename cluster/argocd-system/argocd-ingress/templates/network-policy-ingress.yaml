@@ -7,4 +7,4 @@ spec:
   # Instance is not filtered because argo-cd is deployed by ansible so from this chart's point of view the instance is not predictable
   selector: app.kubernetes.io/name == 'argocd-server'
   ingress:
-    {{- include "ingress.allow-pomerium-proxy" 8080 | indent 4 }}
+    {{- include "ingress.allow-pomerium-proxy" "server" | indent 4 }}
