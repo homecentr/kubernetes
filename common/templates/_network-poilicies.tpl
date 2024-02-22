@@ -24,10 +24,10 @@
 
 {{- define "ingress.allow-pomerium-proxy" }}
 - action: Allow
-  protocol: TCP
+  protocol: {{ .protocol | default "TCP" }}
   metadata:
     annotations:
-      port: {{ . }}
+      port: {{ .port }}
   source:
     services:
       name: pomerium-proxy
