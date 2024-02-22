@@ -18,7 +18,7 @@ coredns:
     tag: v0.3.3
   isClusterService: false
   service:
-    externalTrafficPolicy: local
+    externalTrafficPolicy: Local
   serviceType: LoadBalancer
   serviceAccount:
     create: true
