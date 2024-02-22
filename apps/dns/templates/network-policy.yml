@@ -6,11 +6,13 @@ metadata:
 spec:
   selector: app.kubernetes.io/name == "dns" and app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
-    # Allow traffic from clients
+    # Allow client traffic
     - action: Allow
       source:
         nets:
-          - 10.1.3.0/24
+        {{- range .Values.allowedClients }}
+        - {{ . }}
+        {{- end }}
   egress:
     # Forwarders
     - action: Allow
@@ -20,9 +22,4 @@ spec:
         - {{ . }}/32
         {{- end }}
 
-    # Allow kube api
-    - action: Allow
-      destination:
-        services:
-          name: kubernetes
-          namespace: default
+    {{- include "egress.allow-kubernetes-api" . | indent 4 }}
