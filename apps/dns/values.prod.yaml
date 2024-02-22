@@ -10,7 +10,7 @@ coredns:
   customLabels:
     homecentr.one/antiaffinity: dns
   tolerations:
-    - key: homecentr.one/critical-only
+    - key: CriticalAddonsOnly
       operator: Exists
       effect: NoSchedule
   image:
