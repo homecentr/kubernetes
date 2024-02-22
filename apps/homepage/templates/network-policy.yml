@@ -13,7 +13,6 @@ spec:
   
   egress:
     - action: Log
-    {{- include "egress.allow-internet" . | indent 4 }}
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
 
     # Allow traffic to other services for healthchecks
