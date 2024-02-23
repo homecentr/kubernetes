@@ -3,8 +3,10 @@ kind: Ingress
 metadata:
   name: {{ $.Release.Name }}
   annotations:
-    # TODO: Require admin group membership
-    ingress.pomerium.io/allow_any_authenticated_user: 'true'
+    ingress.pomerium.io/policy: |
+      allow:
+        and:
+          - claim/groups: '{{ .Values.groups.admin }}'
 
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Distributed storage management
