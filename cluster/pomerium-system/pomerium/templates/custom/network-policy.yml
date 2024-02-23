@@ -9,6 +9,7 @@ spec:
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
 
     # TODO: Remove
+    - action: Log
     - action: Allow
     
     # Allow internal component calls
