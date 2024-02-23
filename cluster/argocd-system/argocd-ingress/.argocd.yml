@@ -1,5 +1,4 @@
 name: argocd-ingress
 type: helm
-selfHeal: true
 valueFiles:
   - values.$env.yaml

@@ -1,6 +1,5 @@
 name: global-network-policies
 type: helm
 syncWave: 10000 # Must be last
-selfHeal: true
 valueFiles:
   - values.$env.yaml

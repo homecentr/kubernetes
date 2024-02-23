@@ -3,4 +3,4 @@ type: helm
 valueFiles:
   - values.yaml
   - values.$env.yaml
-  - ../../globals/values.$env.yaml
+  - ../../../globals/values.$env.yaml
