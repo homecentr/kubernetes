@@ -8,9 +8,7 @@ metadata:
 spec:
   selector: {{ include "calico-selector.postgresql-cluster" $clusterName }} 
   ingress:
-    - action: Allow
     {{- include "ingress.allow-postgresql-mandatory" $clusterName | indent 4 }}
     {{- include "ingress.allow-postgresql-from-app" $appSelector | indent 4 }}
   egress:
-    - action: Allow
     {{- include "egress.allow-postgresql-mandatory" $clusterName | indent 4 }}
