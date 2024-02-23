@@ -4,19 +4,19 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app.kubernetes.io/name == 'longhorn' # TODO: Instance
+  selector: app.kubernetes.io/name == 'longhorn' && app.kubernetes.io/instance == '{{ .Release.Name }}'
   ingress:  
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
     
     # Allow internal component calls
     - action: Allow
       source:
-        selector: app.kubernetes.io/name == "longhorn" # TBD
+        selector: app.kubernetes.io/name == 'longhorn' && app.kubernetes.io/instance == '{{ .Release.Name }}'
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
     
     # Allow internal component calls
     - action: Allow
       destination:
-        selector: app.kubernetes.io/name == "longhorn" # TBD
+        selector: app.kubernetes.io/name == 'longhorn' && app.kubernetes.io/instance == '{{ .Release.Name }}'
     
