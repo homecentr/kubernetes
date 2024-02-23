@@ -1,7 +1,4 @@
 longhorn:
-  networkPolicies:
-     # Longhorn requires many components so it's more reliable to leave the policies up to the helm chart maintainers
-    enabled: true
   helmPreUpgradeCheckerJob:
     enabled: false # Workaround for a bug in helm chart which creates a job but expects the service account to be already created
   defaultSettings:

@@ -1,0 +1,20 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-ingress
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: all() # Applies to all pods in the namespace
+  ingress:  
+    # Internal component calls
+    - action: Allow
+      source:
+        selector: all() # Any in the same namespace
+
+  egress:
+    {{- include "egress.allow-kubernetes-api" . | indent 4 }}
+
+    # Internal component calls
+    - action: Allow
+      destination:
+        selector: all() # Any in the same namespace
