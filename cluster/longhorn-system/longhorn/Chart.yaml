@@ -6,3 +6,7 @@ dependencies:
   - name: longhorn
     repository: https://charts.longhorn.io
     version: 1.5.3
+
+  - name: common
+    version: 1.0.0
+    repository: file://../../../common
