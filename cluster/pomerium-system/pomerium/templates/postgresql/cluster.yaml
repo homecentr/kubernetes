@@ -8,16 +8,14 @@ metadata:
 spec:
   teamId: "acid"
   volume:
-    size: 1Gi
+    size: {{ .Values.databaseVolumeSize }}
     storageClass: openebs-hostpath
   numberOfInstances: 2
   users:
     pomerium:  # database owner
     - pomerium
-    pomerium: []  # role for application foo
+    pomerium: []
   databases:
     pomerium: pomerium  # dbname: owner
-  preparedDatabases:
-    bar: {}
   postgresql:
     version: "15"
