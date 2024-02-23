@@ -1,7 +1,7 @@
 cert-manager:
   installCRDs: false
   networkPolicy:
-    enabled: true
+    enabled: false
   startupapicheck:
     name: cert-manager # to override the app.kubernetes.io/name label
   webhook:

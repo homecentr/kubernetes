@@ -1,8 +1,11 @@
 cert-manager:
   installCRDs: false
   networkPolicy:
-    enabled: true
+    enabled: false
+  startupapicheck:
+    name: cert-manager # to override the app.kubernetes.io/name label
   webhook:
+    name: cert-manager # to override the app.kubernetes.io/name label
     securePort: 10222
     resources:
       limits:
@@ -22,6 +25,7 @@ cert-manager:
         drop:
         - all
   cainjector:
+    name: cert-manager # to override the app.kubernetes.io/name label
     resources:
       limits:
         cpu: 500m
