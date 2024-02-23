@@ -22,4 +22,5 @@ spec:
     app.kubernetes.io/name: pomerium
     app.kubernetes.io/instance: {{ $.Release.Name }}
   type: LoadBalancer
-  externalTrafficPolicy: Local
+#  TODO: uncomment
+#  externalTrafficPolicy: Local

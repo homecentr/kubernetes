@@ -7,6 +7,9 @@ spec:
   selector: app.kubernetes.io/name == "pomerium" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
+
+    # TODO: Remove
+    - action: Allow
     
     # Allow internal component calls
     - action: Allow
