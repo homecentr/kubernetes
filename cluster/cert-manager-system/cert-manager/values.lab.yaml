@@ -2,6 +2,8 @@ cert-manager:
   installCRDs: false
   networkPolicy:
     enabled: true
+  startupapicheck:
+    name: cert-manager # to override the app.kubernetes.io/name label
   webhook:
     name: cert-manager # to override the app.kubernetes.io/name label
     securePort: 10222
