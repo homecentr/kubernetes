@@ -1,0 +1,22 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: app.kubernetes.io/name == 'longhorn' # TODO: Instance
+  ingress:  
+    {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
+    
+    # Allow internal component calls
+    - action: Allow
+      source:
+        selector: app.kubernetes.io/name == "longhorn" # TBD
+  egress:
+    {{- include "egress.allow-kubernetes-api" . | indent 4 }}
+    
+    # Allow internal component calls
+    - action: Allow
+      destination:
+        selector: app.kubernetes.io/name == "longhorn" # TBD
+    

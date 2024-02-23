@@ -1,0 +1,9 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-ingress
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector: app.kubernetes.io/name == 'longhorn' # TODO: Instance
+  ingress:  
+    {{- include "ingress.allow-pomerium-proxy" (dict "port" "8000") | indent 4 }}
