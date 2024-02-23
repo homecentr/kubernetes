@@ -6,4 +6,4 @@ metadata:
 spec:
   selector: app.kubernetes.io/name == 'longhorn' && app.kubernetes.io/instance == '{{ .Release.Name }}' && app == 'longhorn-ui'
   ingress:  
-    {{- include "ingress.allow-pomerium-proxy" (dict "port" "8000") | indent 4 }}
+    {{- include "ingress.allow-pomerium-proxy" (dict "port" "http") | indent 4 }}
