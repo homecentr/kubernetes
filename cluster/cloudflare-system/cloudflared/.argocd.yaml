@@ -4,4 +4,4 @@ valuesFiles:
   - values.$env.yaml
   - value.yaml
 secretValueFiles:
-- secrets.$env.yml
+- secrets.$env.yaml
