@@ -1,0 +1,7 @@
+name: cloudflared
+type: helm
+valuesFiles:
+  - values.$env.yaml
+  - value.yaml
+secretValueFiles:
+- secrets.$env.yml

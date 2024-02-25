@@ -1,0 +1,44 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+    destinations: cloudflare
+spec:
+  selector: app.kubernetes.io/name == 'cloudflared' && app.kubernetes.io/instance == '{{ .Release.Name }}'
+  egress:
+    # Allow traffic to Cloudflare
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: destinations == 'cloudflare' && app.kubernetes.io/instance == '{{ .Release.Name }}'
+        ports:
+          - 443
+          - 7844
+
+    - action: Allow
+      protocol: UDP
+      destination:
+        selector: destinations == 'cloudflare' && app.kubernetes.io/instance == '{{ .Release.Name }}'
+        ports:
+          - 7844
+
+    # Allow traffic to pomerium proxy to expose http based services
+    - action: Allow
+      destination:
+        services:
+          name: pomerium-proxy
+          namespace: pomerium-system
+
+    # Allow traffic to out-of-cluster services
+    {{- range $route := .Values.routes.external }}
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports:
+          - {{ $route.port }}
+        nets:
+          - {{ $route.backendIp }}/32
+    {{- end }}

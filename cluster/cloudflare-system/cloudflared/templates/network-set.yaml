@@ -1,0 +1,12 @@
+apiVersion: projectcalico.org/v3
+kind: NetworkSet
+metadata:
+  name: cloudflare
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "common.resource-labels" . | indent 4 }}
+spec:
+  nets:
+    {{- range $cidr := .Values.networkPolicy.cloudflare }}
+    - {{ $cidr }}
+    {{- end }}
