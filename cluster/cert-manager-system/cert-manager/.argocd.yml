@@ -1,4 +1,4 @@
 name: cert-manager
 type: helm
-valuesFiles:
+valueFiles:
   - values.$env.yaml
