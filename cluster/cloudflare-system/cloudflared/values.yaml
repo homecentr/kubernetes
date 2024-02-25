@@ -1,4 +1,4 @@
-imageTag: 2023.10.0
+imageTag: 2024.2.1
 
 networkPolicy:
   cloudflare:
