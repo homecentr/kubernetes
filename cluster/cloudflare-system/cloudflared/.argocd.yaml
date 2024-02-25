@@ -2,6 +2,6 @@ name: cloudflared
 type: helm
 valuesFiles:
   - values.$env.yaml
-  - value.yaml
+  - values.yaml
 secretValueFiles:
 - secrets.$env.yaml
