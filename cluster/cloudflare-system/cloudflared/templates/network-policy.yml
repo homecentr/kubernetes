@@ -31,14 +31,3 @@ spec:
         services:
           name: pomerium-proxy
           namespace: pomerium-system
-
-    # Allow traffic to out-of-cluster services
-    {{- range $route := .Values.routes.external }}
-    - action: Allow
-      protocol: TCP
-      destination:
-        ports:
-          - {{ $route.port }}
-        nets:
-          - {{ $route.backendIp }}/32
-    {{- end }}
