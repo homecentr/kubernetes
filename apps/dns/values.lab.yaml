@@ -19,7 +19,8 @@ coredns:
     tag: v0.4.0
   isClusterService: false
   service:
-    externalTrafficPolicy: Local # TODO: Enable this when kube-vip bug is resolved
+    #externalTrafficPolicy: Local # TODO: Enable this when kube-vip bug is resolved
+    externalTrafficPolicy: Cluster
   serviceType: LoadBalancer
   serviceAccount:
     create: true
