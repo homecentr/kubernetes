@@ -1,2 +1,4 @@
 name: nvidia-device-plugin
 type: helm
+valueFiles:
+  - values.yaml

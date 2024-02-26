@@ -2,11 +2,14 @@ apiVersion: v2
 name: nvidia-device-plugin
 version: 1.0.0
 
+# TODO: Should be deployed ONLY to GPU nodes
+# TODO: How to pass through GPU ???
+
 dependencies:
   - name: common
     version: 1.0.0
     repository: file://../../../common
-    
+
   - name: nvidia-device-plugin
     repository: https://nvidia.github.io/k8s-device-plugin
-    version: v0.14.1
+    version: v0.14.4
