@@ -1,4 +1,5 @@
 hostname: cyberchef-lab.homecentr.one
+storageSize: 500Mi
 resources:
   requests:
     cpu: 1m
