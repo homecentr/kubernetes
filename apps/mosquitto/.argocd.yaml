@@ -1,0 +1,5 @@
+name: mosquitto
+type: helm
+valueFiles:
+  - values.$env.yaml
+  - values.yaml
