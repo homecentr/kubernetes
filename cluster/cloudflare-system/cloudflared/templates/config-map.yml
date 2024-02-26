@@ -14,7 +14,7 @@ data:
           # Kubernetes services
           {{ range .Values.routes.kubernetes }}
           - hostname: {{ .hostname }}
-            service: https://pomerium-proxy.pomerium.svc.cluster.local:443
+            service: https://pomerium-proxy.pomerium-system.svc.cluster.local:443
             originRequest:
               noTLSVerify: true
           {{- end }}
