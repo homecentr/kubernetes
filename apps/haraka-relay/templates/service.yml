@@ -17,4 +17,4 @@ spec:
   selector:
     {{- include "common.pod-labels" . | indent 4 }}
   type: LoadBalancer
-  externalTrafficPolicy: Local
+  externalTrafficPolicy: Cluster # Local TODO: Remove this when kube-vip bug is fixed
