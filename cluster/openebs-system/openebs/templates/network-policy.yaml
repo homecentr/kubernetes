@@ -4,18 +4,19 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  selector: app == "openebs" && release == "{{ .Release.Name }}"
+  # app label not used in filter because zfs component's pods do not have it
+  selector: release == "{{ .Release.Name }}"
   ingress:
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
     
     # Allow internal component calls
     - action: Allow
       source:
-        selector: app == "openebs" && release == "{{ .Release.Name }}"
+        selector: release == "{{ .Release.Name }}"
   egress:
     {{- include "egress.allow-kubernetes-api" . | indent 4 }}
 
     # Allow internal component calls
     - action: Allow
       destination:
-        selector: app == "openebs" && release == "{{ .Release.Name }}"
+        selector: release == "{{ .Release.Name }}"
