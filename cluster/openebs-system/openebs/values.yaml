@@ -1,3 +1,7 @@
 openebs:
   zfs-localpv:
     enabled: true
+    analytics: false
+
+  analytics:
+    enabled: false
