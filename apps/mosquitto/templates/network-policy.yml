@@ -8,6 +8,9 @@ metadata:
 spec:
   selector: app.kubernetes.io/name == "mosquitto" && app.kubernetes.io/instance == "{{ .Release.Name }}"
   ingress:
+    # TODO: Remove
+    - action: Allow
+
     # Allow traffic from Frigate
     - action: Allow
       protocol: TCP

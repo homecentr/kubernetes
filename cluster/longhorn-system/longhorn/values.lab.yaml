@@ -1,1 +1,41 @@
 hostname: longhorn-lab.homecentr.one
+
+nodes:
+  - name: pve1
+    allowScheduling: true
+    tags: []
+    disks: 
+      data:
+        allowScheduling: true
+        diskType: filesystem
+        evictionRequested: false
+        path: /longhorn/data
+        tags: []
+      nvr:
+        allowScheduling: true
+        diskType: filesystem
+        evictionRequested: false
+        path: /longhorn/nvr
+        tags: []
+
+  - name: pve2
+    allowScheduling: true
+    tags: []
+    disks: 
+      data:
+        allowScheduling: true
+        diskType: filesystem
+        evictionRequested: false
+        path: /longhorn/data
+        tags: []
+      nvr:
+        allowScheduling: true
+        diskType: filesystem
+        evictionRequested: false
+        path: /longhorn/nvr
+        tags: []
+
+  - name: pve2
+    allowScheduling: true
+    tags: []
+    disks: {}

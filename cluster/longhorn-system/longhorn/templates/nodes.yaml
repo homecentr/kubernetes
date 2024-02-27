@@ -1,0 +1,11 @@
+{{ range $node := .Values.nodes }}
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: {{ $node.name | quote }}
+  namespace: {{ $.Release.Namespace | quote }}
+spec:
+  name: {{ $node.name | quote }}
+  allowScheduling: {{ $node.allowScheduling }}
+  disks: {{ $node.disks | toYaml | nindent 4 }}
+  tags: {{ $node.tags | toYaml | nindent 4 }}
