@@ -12,9 +12,12 @@ spec:
     storageClass: {{ .Values.database.storageClass }}
   numberOfInstances: 2
   users:
-    pomerium:
-      - createdb
+    pomerium:  # database owner
+    - pomerium
+    pomerium: []  # role for application foo
   databases:
     pomerium: pomerium  # dbname: owner
+  preparedDatabases:
+    bar: {}
   postgresql:
     version: "15"
