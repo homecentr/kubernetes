@@ -17,7 +17,5 @@ spec:
     pomerium: []  # role for application foo
   databases:
     pomerium: pomerium  # dbname: owner
-  preparedDatabases:
-    bar: {}
   postgresql:
     version: "15"
