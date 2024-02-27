@@ -7,6 +7,12 @@ spec:
   selector: all() # Applies to all pods in the namespace
   ingress:  
     - action: Log
+
+    - action: Allow
+      source:
+        nets:
+          - 172.16.2.0/32
+          
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
 
     # Internal component calls
