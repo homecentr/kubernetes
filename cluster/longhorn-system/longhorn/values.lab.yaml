@@ -3,10 +3,12 @@ hostname: longhorn-lab.homecentr.one
 storageClasses:
   - name: longhorn-nvr
     reclaimPolicy: Retain
+    numberOfReplicas: 2
     diskTags:
       - nvr
   - name: longhorn-data
     reclaimPolicy: Retain
+    numberOfReplicas: 2
     diskTags:
       - data
 

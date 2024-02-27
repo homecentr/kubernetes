@@ -8,7 +8,7 @@ provisioner: driver.longhorn.io
 parameters:
   dataLocality: {{ $class.dataLocality | default "best-effort" }}
   fsType: ext4
-  numberOfReplicas: {{ $class.numberOfReplicas | default(2) }}
+  numberOfReplicas: {{ $class.numberOfReplicas }}
   staleReplicaTimeout: '30'
   diskSelector: {{ join "," $class.tags }}
 reclaimPolicy: {{ $class.reclaimPolicy | quote }}
