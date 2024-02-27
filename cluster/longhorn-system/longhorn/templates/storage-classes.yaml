@@ -1,0 +1,17 @@
+{{- range $class := .Values.storageClasses }}
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ $class.name | quote }}
+provisioner: driver.longhorn.io
+parameters:
+  dataLocality: {{ $class.dataLocality | default("best-effort") }}
+  fsType: ext4
+  numberOfReplicas: {{ $class.numberOfReplicas | default(2) }}
+  staleReplicaTimeout: '30'
+  diskSelector: {{ join "," $class.tags }}
+reclaimPolicy: {{ $class.reclaimPolicy | quote }}
+allowVolumeExpansion: {{ $class.allowVolumeExpansion | default(true) }}
+volumeBindingMode: {{ $class.volumeBindingMode | default("Immediate") | quote }}
+{{- end }}

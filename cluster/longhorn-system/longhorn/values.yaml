@@ -16,3 +16,4 @@ longhorn:
           operator: Exists
   persistence:
     reclaimPolicy: Retain
+    defaultClass: false

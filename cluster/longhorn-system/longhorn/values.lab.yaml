@@ -1,5 +1,15 @@
 hostname: longhorn-lab.homecentr.one
 
+storageClasses:
+  - name: longhorn-nvr
+    reclaimPolicy: Retain
+    diskTags:
+      - nvr
+  - name: longhorn-data
+    reclaimPolicy: Retain
+    diskTags:
+      - data
+
 nodes:
   - name: pve1
     allowScheduling: true
