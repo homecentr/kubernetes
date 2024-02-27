@@ -10,13 +10,15 @@ nodes:
         diskType: filesystem
         evictionRequested: false
         path: /longhorn/data
-        tags: []
+        tags:
+          - data
       nvr:
         allowScheduling: true
         diskType: filesystem
         evictionRequested: false
         path: /longhorn/nvr
-        tags: []
+        tags:
+          - nvr
 
   - name: pve2
     allowScheduling: true
@@ -27,13 +29,15 @@ nodes:
         diskType: filesystem
         evictionRequested: false
         path: /longhorn/data
-        tags: []
+        tags:
+          - data
       nvr:
         allowScheduling: true
         diskType: filesystem
         evictionRequested: false
         path: /longhorn/nvr
-        tags: []
+        tags:
+          - nvr
 
   - name: pve3
     allowScheduling: true
