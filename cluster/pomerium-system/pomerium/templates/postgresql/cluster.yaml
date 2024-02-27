@@ -12,7 +12,8 @@ spec:
     storageClass: {{ .Values.database.storageClass }}
   numberOfInstances: 2
   users:
-    pomerium: []
+    pomerium:
+      - createdb
   databases:
     pomerium: pomerium  # dbname: owner
   postgresql:
