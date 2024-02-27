@@ -3,7 +3,9 @@ replicas: 2
 hostname: login-lab.homecentr.one
 tlsCertificateName: wildcard-homecentr-one
 loadBalancerIp: 10.1.8.132
-databaseVolumeSize: 2Gi
+database:
+  volumeSize: 10Gi
+  storageClass: openebs-zfs-db
 
 allowedClients:
   - 10.1.3.0/24
@@ -30,11 +32,3 @@ resources:
   limits:
     cpu: 500m
     memory: 512Mi
-
-postgresql:
-  # New cluster
-  size: 10Gi
-  storageClass: openebs-zfs-db
-  accessModes:
-    - ReadWriteMany
-  backupCronSchedule: "0 23 * * *"

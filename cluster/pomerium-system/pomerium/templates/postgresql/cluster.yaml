@@ -8,8 +8,8 @@ metadata:
 spec:
   teamId: "acid" # team id is a part of the connection secret name, do not change unless changing both places
   volume:
-    size: {{ .Values.databaseVolumeSize }}
-    storageClass: openebs-hostpath
+    size: {{ .Values.database.volumeSize }}
+    storageClass: {{ .Values.database.storageClass }}
   numberOfInstances: 2
   users:
     pomerium:  # database owner
