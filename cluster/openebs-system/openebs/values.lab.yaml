@@ -1,4 +1,4 @@
 zfsStorageClasses:
   - name: db
-    poolName: dpool
+    poolName: dpool/openebs/db
     reclaimPolicy: Delete
