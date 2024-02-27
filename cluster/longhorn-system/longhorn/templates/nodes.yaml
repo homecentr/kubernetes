@@ -1,4 +1,5 @@
-{{ range $node := .Values.nodes }}
+{{- range $node := .Values.nodes }}
+---
 apiVersion: longhorn.io/v1beta2
 kind: Node
 metadata:
@@ -9,3 +10,4 @@ spec:
   allowScheduling: {{ $node.allowScheduling }}
   disks: {{ $node.disks | toYaml | nindent 4 }}
   tags: {{ $node.tags | toYaml | nindent 4 }}
+{{- end }}
