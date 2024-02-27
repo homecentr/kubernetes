@@ -4,7 +4,7 @@ hostname: login-lab.homecentr.one
 tlsCertificateName: wildcard-homecentr-one
 loadBalancerIp: 10.1.8.132
 database:
-  volumeSize: 10Gi
+  volumeSize: 1Gi
   storageClass: openebs-zfs-db
 
 allowedClients:
