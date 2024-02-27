@@ -12,8 +12,6 @@ spec:
     storageClass: {{ .Values.database.storageClass }}
   numberOfInstances: 2
   users:
-    pomerium:  # database owner
-    - pomerium
     pomerium: []
   databases:
     pomerium: pomerium  # dbname: owner
