@@ -10,7 +10,7 @@ parameters:
   fsType: ext4
   numberOfReplicas: {{ $class.numberOfReplicas | quote }}
   staleReplicaTimeout: '30'
-  diskSelector: {{ join "," $class.tags | quote }}
+  diskSelector: {{ join "," $class.diskTags | quote }}
 reclaimPolicy: {{ $class.reclaimPolicy | quote }}
 allowVolumeExpansion: {{ $class.allowVolumeExpansion | default true }}
 volumeBindingMode: {{ $class.volumeBindingMode | default "Immediate" | quote }}
