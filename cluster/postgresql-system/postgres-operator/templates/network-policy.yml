@@ -12,6 +12,7 @@ spec:
     - action: Allow
       source:
         selector: application == 'spilo' && has(cluster-name)
+        namespaceSelector: projectcalico.org/name == "kube-system"
 
     # Allow traffic from UI
     - action: Allow
@@ -26,3 +27,4 @@ spec:
     - action: Allow
       destination: 
         selector: application == 'spilo' && has(cluster-name)
+        namespaceSelector: projectcalico.org/name == "kube-system"
