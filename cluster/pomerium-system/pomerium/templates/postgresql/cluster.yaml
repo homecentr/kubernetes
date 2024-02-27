@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: pomerium
     app.kubernetes.io/instance: {{ $.Release.Name }}
 spec:
-  teamId: "{{ $.Release.Name }}"
+  teamId: "acid" # team id is a part of the connection secret name, do not change unless changing both places
   volume:
     size: {{ .Values.databaseVolumeSize }}
     storageClass: openebs-hostpath
