@@ -8,9 +8,9 @@ provisioner: driver.longhorn.io
 parameters:
   dataLocality: {{ $class.dataLocality | default "best-effort" }}
   fsType: ext4
-  numberOfReplicas: {{ $class.numberOfReplicas }}
+  numberOfReplicas: {{ $class.numberOfReplicas | quote }}
   staleReplicaTimeout: '30'
-  diskSelector: {{ join "," $class.tags }}
+  diskSelector: {{ join "," $class.tags | quote }}
 reclaimPolicy: {{ $class.reclaimPolicy | quote }}
 allowVolumeExpansion: {{ $class.allowVolumeExpansion | default true }}
 volumeBindingMode: {{ $class.volumeBindingMode | default "Immediate" | quote }}
