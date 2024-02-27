@@ -6,6 +6,7 @@ metadata:
 spec:
   selector: all() # Applies to all pods in the namespace
   ingress:  
+    - action: Log
     {{- include "ingress.allow-kubernetes-api" . | indent 4 }}
 
     # Internal component calls
