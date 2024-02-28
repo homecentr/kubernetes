@@ -52,6 +52,6 @@ nodes:
           - nvr
 
   - name: pve3
-    allowScheduling: true
+    allowScheduling: false
     tags: []
     disks: {}
