@@ -5,6 +5,8 @@ metadata:
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "common.resource-labels" . | indent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -17,6 +19,8 @@ spec:
     metadata:
       labels:
         {{- include "common.pod-labels" . | indent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config-map.yml") $ | sha256sum }}
     spec:
       securityContext:
         runAsUser: 1000
