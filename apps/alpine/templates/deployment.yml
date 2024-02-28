@@ -24,7 +24,7 @@ spec:
           command:
             - /bin/sh
             - "-c"
-            - "sleep 60m
+            - "sleep 60m"
           imagePullPolicy: null
           volumeMounts:
             - name: data
